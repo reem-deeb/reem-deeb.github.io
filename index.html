@@ -6,13 +6,25 @@
 <title>Reem Deeb — UI/UX &amp; Graphic Designer</title>
 <meta name="description" content="Reem Deeb — UI/UX & Graphic Designer crafting memorable brand identities and functional user interfaces.">
 <script>
-  // Flag JS + intro state before first paint so nothing flashes before the intro runs.
-  document.documentElement.classList.add('js');
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro');
+  // Before first paint: pick the language (saved choice, else browser language), set direction,
+  // and flag the intro state so nothing flashes before it runs.
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('langY'); } catch (e) {}
+    // English by default; German / Arabic only when the visitor picks them.
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang;
+    h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    // Switching language reloads the page; skip the intro and fade back in instead.
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('intro');
+  })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Inter:wght@400;500;600;700;800;900&family=Michroma&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600;700;800;900&family=Michroma&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1b1b1b;
@@ -24,9 +36,10 @@
     --white: #ffffff;
     --gut: max(6vw, calc((100vw - 1350px) / 2));
     --radius: 28px;
+    /* Latin fonts first; Arabic glyphs fall through to IBM Plex Sans Arabic. */
     --f-logo: 'Michroma', 'Inter', sans-serif;
-    --f-head: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    --f-body: 'Andika', 'Inter', sans-serif;
+    --f-head: 'Inter', 'IBM Plex Sans Arabic', 'Helvetica Neue', Arial, sans-serif;
+    --f-body: 'Andika', 'IBM Plex Sans Arabic', 'Inter', sans-serif;
     --f-script: 'Playfair Display', Georgia, serif;
     --ease: cubic-bezier(.19, 1, .22, 1);
   }
@@ -141,6 +154,33 @@
   .nav a.is-active::before { transform: scale(1); opacity: 1; }
   .nav a:not(.is-active):hover { color: var(--orange); }
 
+  /* ---------- Language switcher ---------- */
+  .lang {
+    position: fixed; top: 46px; right: var(--gut); z-index: 61; display: flex; gap: 2px; padding: 4px;
+    border-radius: 999px; background: rgba(255, 255, 255, .28); border: 1px solid rgba(255, 255, 255, .55);
+    backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  }
+  .lang button {
+    min-width: 40px; padding: 9px 11px; border-radius: 999px;
+    font: 600 12px/1 var(--f-head); letter-spacing: .06em; color: #2a2a2a;
+    transition: background .4s var(--ease), color .4s var(--ease);
+  }
+  .lang button[lang="ar"] { letter-spacing: 0; font-size: 13px; }
+  .lang button:hover { color: var(--orange); }
+  .lang button[aria-pressed="true"] { background: #1b1b1b; color: #fff; }
+  .lang button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  html.intro .lang { visibility: hidden; }
+
+  /* Language switch reloads the page: fade out, then fade back in without the intro. */
+  body.is-leaving { opacity: 0; transition: opacity .35s ease; }
+  html.lang-switch body { animation: langIn .6s ease both; }
+  @keyframes langIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Arabic: no letter-spacing (it breaks letter joining) and room for diacritics in word masks. */
+  html[lang="ar"] [data-i18n], html[lang="ar"] [data-i18n] * { letter-spacing: 0 !important; }
+  html[lang="ar"] .w { padding-block: .2em .28em; margin-block: -.2em -.28em; }
+  html[lang="ar"] .pt-desc, html[lang="ar"] .ph-stat p { line-height: 1.85; }
+
   /* ---------- Panels (stacking) ---------- */
   .panel { position: relative; }
   .panel-inner { position: relative; overflow: hidden; will-change: transform; }
@@ -218,20 +258,20 @@
     min-height: 100vh; padding-block: 72px 80px;
   }
   .ph-col { position: relative; padding: 0 28px; display: flex; flex-direction: column; }
-  .ph-col:first-child { padding-left: 0; }
-  .ph-rule { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: #8e7d70; transform-origin: 50% 0; }
+  .ph-col:first-child { padding-inline-start: 0; }
+  .ph-rule { position: absolute; inset-inline-start: 0; top: 0; bottom: 0; width: 1px; background: #8e7d70; transform-origin: 50% 0; }
   .ph-plus { position: absolute; top: 0; width: 18px; height: 18px; }
   .ph-plus::before, .ph-plus::after { content: ''; position: absolute; background: var(--ink); }
   .ph-plus::before { left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -.75px; }
   .ph-plus::after { top: 0; bottom: 0; left: 50%; width: 1.5px; margin-left: -.75px; }
-  .ph-plus.l { left: 28px; } .ph-plus.r { right: 28px; }
+  .ph-plus.l { inset-inline-start: 28px; } .ph-plus.r { inset-inline-end: 28px; }
   .ph-label { margin: 0; font: 700 15px/1.2 var(--f-body); letter-spacing: .04em; text-transform: uppercase; }
   .ph-quote {
-    margin: auto 0; padding-right: 8%;
+    margin: auto 0; padding-inline-end: 8%;
     font: 400 clamp(18px, 1.35vw, 26px)/1.25 var(--f-body); text-transform: uppercase; letter-spacing: .01em;
   }
-  .ph-quote .q { font: 700 1.9em/0 var(--f-script); color: var(--tan); vertical-align: -.32em; margin-right: .12em; }
-  .ph-stat { margin-top: auto; margin-bottom: 14%; padding-left: 12%; }
+  .ph-quote .q { font: 700 1.9em/0 var(--f-script); color: var(--tan); vertical-align: -.32em; margin-inline-end: .12em; }
+  .ph-stat { margin-top: auto; margin-bottom: 14%; padding-inline-start: 12%; }
   .ph-stat strong { display: block; font: 700 clamp(26px, 1.9vw, 36px)/1.1 var(--f-body); }
   .ph-stat em { display: block; font-style: normal; font-size: 15px; margin-bottom: 22px; }
   .ph-stat p { margin: 0; max-width: 250px; font-size: 14px; line-height: 1.6; color: #3b3b3b; }
@@ -265,16 +305,54 @@
   .wh-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-block: 40px; }
   .eyebrow { margin: 0 0 14px; font: 500 12px/1 var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); }
   .wh-title { margin: 0; font: 400 clamp(40px, 4.4vw, 84px)/1 var(--f-body); letter-spacing: -.01em; }
-  .wh-count { font: 500 .32em/1 var(--f-head); color: var(--orange); vertical-align: top; margin-left: .3em; display: inline-block; }
+  .wh-count { font: 500 .32em/1 var(--f-head); color: var(--orange); vertical-align: top; margin-inline-start: .3em; display: inline-block; }
   .wh-note { max-width: 340px; margin: 0; color: rgba(255,255,255,.6); font-size: 15px; }
-  .tabs-bar { background: var(--char); display: flex; justify-content: center; }
-  .tabs { position: relative; display: flex; gap: 8px; }
-  .tab {
-    padding: 22px 18px; font: 500 14px/1 var(--f-body); letter-spacing: .06em; text-transform: uppercase;
-    color: rgba(255,255,255,.45); transition: color .4s var(--ease);
+  /* Segmented control: a white pill slides behind the active category. */
+  .tabs-bar {
+    background: var(--char); display: flex; flex-direction: column; align-items: center; gap: 14px;
+    padding: 28px var(--gut) 32px;
   }
-  .tab[aria-selected="true"], .tab:hover { color: #fff; }
-  .tab-ind { position: absolute; left: 0; bottom: 14px; height: 2px; width: 0; background: var(--orange); border-radius: 2px; }
+  .tabs-hint { margin: 0; font: 500 12px/1 var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+  .tabs {
+    position: relative; display: flex; padding: 6px; border-radius: 999px;
+    background: #2e2e2e; border: 1px solid rgba(255,255,255,.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .tab {
+    position: relative; z-index: 1; display: flex; align-items: center; gap: 10px;
+    padding: 15px 28px; border-radius: 999px;
+    font: 600 15px/1 var(--f-head); letter-spacing: .05em; text-transform: uppercase;
+    color: rgba(255,255,255,.7); transition: color .45s var(--ease);
+  }
+  .tab:hover { color: #fff; }
+  .tab[aria-selected="true"] { color: #141414; }
+  .tab:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .tab-ico { width: 18px; height: 18px; flex: none; }
+  .tab-count {
+    min-width: 26px; padding: 4px 7px; border-radius: 999px; text-align: center;
+    font: 700 11px/1 var(--f-head); letter-spacing: .02em;
+    background: rgba(255,255,255,.14); color: inherit; transition: background .45s var(--ease), color .45s var(--ease);
+  }
+  .tab[aria-selected="true"] .tab-count { background: var(--orange); color: #fff; }
+  .tab-ind {
+    position: absolute; z-index: 0; top: 6px; bottom: 6px; left: 0; width: 0; border-radius: 999px;
+    background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  }
+  .tabs-dock {
+    position: fixed; left: 50%; bottom: 28px; z-index: 59; display: flex; gap: 4px; padding: 5px;
+    border-radius: 999px; background: rgba(18, 18, 18, .8); border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    visibility: hidden; will-change: transform; /* position / scale / visibility driven by GSAP */
+  }
+  .tabs-dock button {
+    display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px;
+    font: 600 12px/1 var(--f-head); letter-spacing: .05em; text-transform: uppercase; color: rgba(255,255,255,.75);
+    transition: background .45s var(--ease), color .45s var(--ease);
+  }
+  .tabs-dock button:hover { color: #fff; }
+  .tabs-dock button[aria-pressed="true"] { background: #fff; color: #141414; }
+  .tabs-dock button[aria-pressed="true"] .tab-count { background: var(--orange); color: #fff; }
+  .tabs-dock button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 
   /* ---------- Projects ---------- */
   .project .panel-inner { background: var(--bg); min-height: 100vh; }
@@ -325,21 +403,16 @@
   .fb-boundless { background: radial-gradient(ellipse 80% 60% at 75% 10%, #2bf5b0 0, #0f6b4e 35%, #06140f 70%, #020504 100%); }
   .fb-boundless .fb-label { font: 400 clamp(28px, 3.6vw, 64px)/1.2 var(--f-logo); letter-spacing: .25em; }
 
-  /* UI/UX fallback: a mini browser window */
-  .fb-ui { background: radial-gradient(ellipse at 30% 0%, color-mix(in srgb, var(--bg) 55%, #fff), var(--bg) 70%); display: grid; place-items: center; }
-  .ui-win {
-    width: min(78%, 980px); aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #f6f5f2;
-    box-shadow: 0 40px 80px rgba(0,0,0,.35); display: flex; flex-direction: column;
-  }
-  .ui-bar { height: 7%; min-height: 18px; background: #e8e6e1; display: flex; align-items: center; gap: 6px; padding-left: 14px; }
-  .ui-bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9c5bd; }
-  .ui-body { flex: 1; display: flex; }
-  .ui-side { width: 20%; background: var(--bg); opacity: .9; }
-  .ui-main { flex: 1; padding: 4%; display: flex; flex-direction: column; gap: 4%; }
-  .ui-main b { display: block; height: 6%; width: 50%; background: #dad6ce; border-radius: 6px; }
-  .ui-main b.s { width: 32%; background: #e6e2db; }
-  .ui-cards { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4%; }
-  .ui-cards span { background: #fff; border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,.06); border-top: 4px solid var(--bg); }
+  /* Generic fallback tinted from the card colour, shown only if an image fails to load. */
+  .fb-plain { background: radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--bg) 65%, #fff), var(--bg) 70%); }
+
+  /* ---------- More work ---------- */
+  .more-work .panel-inner { background: #181818; min-height: 78vh; display: flex; align-items: center; }
+  .mw-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: 96px; }
+  .mw-title { margin: 0; max-width: 14ch; font: 400 clamp(44px, 5vw, 96px)/1.02 var(--f-body); letter-spacing: -.01em; }
+  .mw-text { margin: 22px 0 40px; max-width: 460px; font-size: 17px; color: rgba(255,255,255,.65); }
+  .btn-lg { padding: 22px 36px; gap: 14px; font-size: 15px; background: var(--orange); }
+  .btn-lg .arrow { width: 14px; height: 14px; }
 
   /* ---------- Contact ---------- */
   .contact .panel-inner { background: var(--char); min-height: 100vh; display: flex; flex-direction: column; }
@@ -392,6 +465,11 @@
     :root { --gut: 6vw; --radius: 20px; }
     .nav { top: auto; bottom: 20px; }
     .nav a { padding: 11px 13px; font-size: 11px; }
+    .lang { top: 24px; }
+    .lang button { min-width: 34px; padding: 8px 9px; font-size: 11px; }
+    .tab { padding: 13px 18px; font-size: 13px; gap: 8px; }
+    .tab-ico { display: none; }
+    .tabs-dock { display: none; } /* no stacking on phones, so the header tabs are never covered */
     .hero-logo { top: 32px; }
     .hero-headline { --fs: min(21vw, 15vh); top: 20vh; }
     .hero-bio { left: var(--gut); right: auto; bottom: 120px; }
@@ -419,22 +497,34 @@
 <div class="progress" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"><span>View</span></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="view">View</span></div>
 
 <div class="preloader" aria-hidden="true">
-  <div class="pl-mask pl-top"><span class="pl-item">Designer — Germany</span></div>
-  <div class="pl-mask pl-name"><span class="pl-item">REEM DEEB<small>Portfolio &copy; 2026</small></span></div>
-  <div class="pl-mask pl-count"><span class="pl-item" id="plCount">000</span></div>
+  <div class="pl-mask pl-top"><span class="pl-item" data-i18n="pl.tag">Designer — Germany</span></div>
+  <div class="pl-mask pl-name" dir="ltr"><span class="pl-item">REEM DEEB<small data-i18n="pl.sub">Portfolio &copy; 2026</small></span></div>
+  <div class="pl-mask pl-count" dir="ltr"><span class="pl-item" id="plCount">000</span></div>
 </div>
 
 <header class="nav" aria-label="Main">
   <nav class="nav-pill">
-    <a href="#home" data-magnetic class="is-active"><span>Home</span></a>
-    <a href="#about" data-magnetic><span>About</span></a>
-    <a href="#work" data-magnetic><span>Portfolio</span></a>
-    <a href="#contact" data-magnetic><span>Contact</span></a>
+    <a href="#home" data-magnetic class="is-active"><span data-i18n="nav.home">Home</span></a>
+    <a href="#about" data-magnetic><span data-i18n="nav.about">About</span></a>
+    <a href="#work" data-magnetic><span data-i18n="nav.work">Portfolio</span></a>
+    <a href="#contact" data-magnetic><span data-i18n="nav.contact">Contact</span></a>
   </nav>
 </header>
+
+<div class="lang" role="group" aria-label="Language">
+  <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+  <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+  <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+</div>
+
+<!-- Floating category switch, shown while scrolling through the project cards (the header tabs get covered). -->
+<div class="tabs-dock" role="group" aria-label="Choose a category" data-i18n-aria="tabs.hint">
+  <button type="button" data-dock="branding" aria-pressed="true"><span data-i18n="tabs.branding">Branding</span><span class="tab-count">04</span></button>
+  <button type="button" data-dock="uiux" aria-pressed="false"><span>UI/UX</span><span class="tab-count">04</span></button>
+</div>
 
 <main>
 
@@ -445,13 +535,13 @@
         <div class="hero-zoom">
           <div class="hero-par">
             <div class="media-fb"></div>
-            <img src="assets/hero.jpg" width="1862" height="1107" fetchpriority="high" alt="Reem Deeb standing on a train platform" onerror="this.style.display='none'">
+            <img src="assets/Branding/hero.jpg" width="1862" height="1107" fetchpriority="high" alt="Reem Deeb standing on a train platform" onerror="this.style.display='none'">
           </div>
         </div>
       </div>
       <div class="hero-ui">
-        <a class="hero-logo" href="#home" data-split-chars>REEM DEEB</a>
-        <h1 class="hero-headline" aria-label="Designer">
+        <a class="hero-logo" href="#home" dir="ltr" data-split-chars>REEM DEEB</a>
+        <h1 class="hero-headline" dir="ltr" aria-label="Designer" data-i18n-aria="hero.aria">
           <span class="hl"><span class="hl-in">De</span></span>
           <span class="hl"><span class="hl-in">Sig</span></span>
           <span class="hl"><span class="hl-in">N</span></span>
@@ -459,8 +549,8 @@
           <span class="hero-square" aria-hidden="true"></span>
           <span class="hero-script" aria-hidden="true">Reem Deeb</span>
         </h1>
-        <p class="hero-bio" data-split-hero>UI/UX &amp; Graphic Designer with +5 years of expertise in crafting memorable brand identities and functional user interfaces</p>
-        <div class="hero-scroll"><i></i>Scroll to explore</div>
+        <p class="hero-bio" data-split-hero data-i18n="hero.bio">UI/UX &amp; Graphic Designer with +5 years of expertise in crafting memorable brand identities and functional user interfaces</p>
+        <div class="hero-scroll"><i></i><span data-i18n="hero.scroll">Scroll to explore</span></div>
       </div>
     </div>
   </section>
@@ -470,26 +560,26 @@
     <div class="panel-inner">
       <div class="container ph-grid">
         <div class="ph-col">
-          <p class="ph-label" data-split>The Philosophy</p>
-          <p class="ph-quote" data-scrub-words><span class="q">&ldquo;</span>I craft seamless digital experiences and distinct brand identities that strategically connect businesses with their audience</p>
+          <p class="ph-label" data-split data-i18n="ph.label">The Philosophy</p>
+          <p class="ph-quote" data-scrub-words><span class="q">&ldquo;</span><span data-i18n="ph.quote">I craft seamless digital experiences and distinct brand identities that strategically connect businesses with their audience</span></p>
         </div>
         <div class="ph-col">
           <span class="ph-rule"></span>
           <span class="ph-plus l"></span><span class="ph-plus r"></span>
           <div class="ph-stat" data-fade>
-            <strong>+<span data-count="5">0</span> Years</strong>
-            <em>in Visual Branding</em>
-            <p>Delivering tailor-made visual identities and brand ecosystems that stand out in crowded markets.</p>
+            <strong>+<span data-count="5">0</span> <span data-i18n="ph.years">Years</span></strong>
+            <em data-i18n="ph.in">in Visual Branding</em>
+            <p data-i18n="ph.stat">Delivering tailor-made visual identities and brand ecosystems that stand out in crowded markets.</p>
           </div>
         </div>
         <div class="ph-col">
           <span class="ph-rule"></span>
-          <h2 class="ph-title" data-split>Brands that leave an impression</h2>
+          <h2 class="ph-title" data-split data-i18n="ph.title">Brands that leave an impression</h2>
           <div class="ph-shape">
             <div class="ph-reveal">
               <div class="ph-img">
                 <div class="media-fb"></div>
-                <img src="assets/philosophy.jpg" width="388" height="518" alt="Silhouette walking in front of an orange sun" onerror="this.style.display='none'">
+                <img src="assets/Branding/philosophy.jpg" width="388" height="518" alt="Silhouette walking in front of an orange sun" onerror="this.style.display='none'">
               </div>
             </div>
           </div>
@@ -502,7 +592,7 @@
   <section id="work">
     <div class="panel work-head" data-panel>
       <div class="panel-inner">
-        <div class="marquee" aria-hidden="true">
+        <div class="marquee" dir="ltr" aria-hidden="true">
           <div class="marquee-track">
             <span>Branding <b>&bull;</b> Visual Identity <b>&bull;</b> UI/UX Design <b>&bull;</b> Brand Strategy <b>&bull;</b></span>
             <span>Branding <b>&bull;</b> Visual Identity <b>&bull;</b> UI/UX Design <b>&bull;</b> Brand Strategy <b>&bull;</b></span>
@@ -510,40 +600,47 @@
         </div>
         <div class="container wh-row">
           <div>
-            <p class="eyebrow">Portfolio</p>
-            <h2 class="wh-title" data-split>Selected Work <span class="wh-count" id="whCount">(04)</span></h2>
+            <p class="eyebrow" data-i18n="wh.eyebrow">Portfolio</p>
+            <h2 class="wh-title" data-split><span data-i18n="wh.title">Selected Work</span> <span class="wh-count" id="whCount">(04)</span></h2>
           </div>
-          <p class="wh-note" data-fade>Brand identities and digital products — built with clarity, character, and an eye for detail.</p>
+          <p class="wh-note" data-fade data-i18n="wh.note">Brand identities and digital products — built with clarity, character, and an eye for detail.</p>
         </div>
         <div class="tabs-bar">
-          <div class="tabs" role="tablist" aria-label="Project categories">
-            <button class="tab" role="tab" aria-selected="true" data-tab="branding" data-magnetic>Branding</button>
-            <button class="tab" role="tab" aria-selected="false" data-tab="uiux" data-magnetic>UI/UX</button>
+          <p class="tabs-hint" id="tabsHint" data-i18n="tabs.hint">Choose a category</p>
+          <div class="tabs" role="tablist" aria-labelledby="tabsHint">
             <span class="tab-ind" aria-hidden="true"></span>
+            <button class="tab" type="button" role="tab" id="tab-branding" aria-controls="group-branding" aria-selected="true" data-tab="branding">
+              <svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M12 22a10 10 0 1 1 10-10c0 2.2-1.8 3-3.5 3H17a2 2 0 0 0-1.6 3.2A2 2 0 0 1 12 22Z"/></svg>
+              <span data-i18n="tabs.branding">Branding</span><span class="tab-count">04</span>
+            </button>
+            <button class="tab" type="button" role="tab" id="tab-uiux" aria-controls="group-uiux" aria-selected="false" tabindex="-1" data-tab="uiux">
+              <svg class="tab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4M2 9h20"/></svg>
+              <span>UI/UX</span><span class="tab-count">04</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="group" data-group="branding" role="tabpanel">
+    <div class="group" data-group="branding" id="group-branding" role="tabpanel" aria-labelledby="tab-branding">
       <article class="panel project" style="--bg:#2f3f33" data-panel>
         <div class="panel-inner">
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">01 / 04</span><span class="chip">Branding</span></div>
+                <div class="pt-index"><span class="chip">01 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Yamor</h3>
-                <p class="pt-sub" data-fade>Logo &amp; Brand Identity for Event Planning Agency</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <p class="pt-sub" data-fade data-i18n="yamor.sub">Logo &amp; Brand Identity for Event Planning Agency</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>YAMOR is a luxury event planning brand dedicated to elevating celebrations and crafting unforgettable, high-end experiences. The visual identity is built around a concept of understated luxury, combining sophisticated typography (Aboreto &amp; Ancizar Sans), a refined organic color palette (Sage Green, Burgundy, Terracotta, Blush, and Ivory), and elegant botanical details.</p>
+              <p class="pt-desc" data-fade data-i18n="yamor.desc">YAMOR is a luxury event planning brand dedicated to elevating celebrations and crafting unforgettable, high-end experiences. The visual identity is built around a concept of understated luxury, combining sophisticated typography (Aboreto &amp; Ancizar Sans), a refined organic color palette (Sage Green, Burgundy, Terracotta, Blush, and Ivory), and elegant botanical details.</p>
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View YAMOR project">
               <div class="media fb-yamor"><div class="media-scale">
                 <div class="fb-label">Yamor</div>
-                <img src="assets/yamor.jpg" width="1351" height="661" alt="YAMOR brand identity on a tablet" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/yamor.jpg" width="1351" height="661" alt="YAMOR brand identity on a tablet" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -555,19 +652,19 @@
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">02 / 04</span><span class="chip">Branding</span></div>
+                <div class="pt-index"><span class="chip">02 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Bloom &amp; Beyond</h3>
-                <p class="pt-sub" data-fade>Logo &amp; Brand Identity for Architecture &amp; Interior Design Studio</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <p class="pt-sub" data-fade data-i18n="bloom.sub">Logo &amp; Brand Identity for Architecture &amp; Interior Design Studio</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>Bloom and Beyond is an interior design and execution company based in Dubai. It brings client visions of beautiful, functional design to life. The team provides a comprehensive and thoughtful process that promises to deliver an exceptional interior design.</p>
+              <p class="pt-desc" data-fade data-i18n="bloom.desc">Bloom and Beyond is an interior design and execution company based in Dubai. It brings client visions of beautiful, functional design to life. The team provides a comprehensive and thoughtful process that promises to deliver an exceptional interior design.</p>
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Bloom &amp; Beyond project">
               <div class="media fb-bloom"><div class="media-scale">
                 <div class="fb-label">Bloom &amp; Beyond</div>
-                <img src="assets/bloom.jpg" width="1361" height="661" alt="Bloom &amp; Beyond logo on a sunlit interior wall" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/bloom.jpg" width="1361" height="661" alt="Bloom &amp; Beyond logo on a sunlit interior wall" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -579,19 +676,19 @@
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">03 / 04</span><span class="chip">Branding</span></div>
+                <div class="pt-index"><span class="chip">03 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Oona Tech</h3>
-                <p class="pt-sub" data-fade>Logo &amp; Brand Identity for a Tech Company</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <p class="pt-sub" data-fade data-i18n="oona.sub">Logo &amp; Brand Identity for a Tech Company</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>OONA-TECH is a team of specialists dedicated to building customized tech products for modern businesses. I developed a sleek logo and digital brand identity featuring futuristic typography and a space-inspired aesthetic that reflects innovation, momentum, and high-tech expertise.</p>
+              <p class="pt-desc" data-fade data-i18n="oona.desc">OONA-TECH is a team of specialists dedicated to building customized tech products for modern businesses. I developed a sleek logo and digital brand identity featuring futuristic typography and a space-inspired aesthetic that reflects innovation, momentum, and high-tech expertise.</p>
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View OONA TECH project">
               <div class="media fb-oona"><div class="media-scale">
                 <div class="fb-label">OONA</div>
-                <img src="assets/oona.jpg" width="1363" height="661" alt="OONA logo over violet abstract imagery" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/oona.jpg" width="1363" height="661" alt="OONA logo over violet abstract imagery" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -603,19 +700,19 @@
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">04 / 04</span><span class="chip">Branding</span></div>
+                <div class="pt-index"><span class="chip">04 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Boundless Box</h3>
-                <p class="pt-sub" data-fade>Logo &amp; Brand Identity for 3ds Max Tutorials</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <p class="pt-sub" data-fade data-i18n="boundless.sub">Logo &amp; Brand Identity for 3ds Max Tutorials</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>A bold and dynamic logo design created for a social media channel dedicated to 3ds Max tutorials, 3D modeling, and rendering tips. The branding combines high-tech geometric shapes with vibrant lighting elements to give the channel a modern, authoritative, and engaging presence across YouTube, Instagram, and TikTok.</p>
+              <p class="pt-desc" data-fade data-i18n="boundless.desc">A bold and dynamic logo design created for a social media channel dedicated to 3ds Max tutorials, 3D modeling, and rendering tips. The branding combines high-tech geometric shapes with vibrant lighting elements to give the channel a modern, authoritative, and engaging presence across YouTube, Instagram, and TikTok.</p>
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Boundless Box project">
               <div class="media fb-boundless"><div class="media-scale">
                 <div class="fb-label">Boundless<br>Box</div>
-                <img src="assets/boundless.jpg" width="1363" height="661" alt="Boundless Box logo with green light streaks" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/boundless.jpg" width="1363" height="661" alt="Boundless Box logo with green light streaks" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -623,78 +720,112 @@
       </article>
     </div>
 
-    <div class="group" data-group="uiux" role="tabpanel" hidden>
-      <article class="panel project" style="--bg:#26344f" data-panel>
+    <div class="group" data-group="uiux" id="group-uiux" role="tabpanel" aria-labelledby="tab-uiux" hidden>
+      <article class="panel project" style="--bg:#6c6cf2" data-panel>
         <div class="panel-inner">
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">01 / 03</span><span class="chip">Business Software</span></div>
-                <h3 class="pt-title" data-split>HILTES Interface System</h3>
-                <p class="pt-sub" data-fade>UI design for a German business management platform</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <div class="pt-index"><span class="chip">01 / 04</span><span class="chip">UI/UX</span></div>
+                <h3 class="pt-title" data-split>INTERNET.com</h3>
+                <p class="pt-sub" data-fade data-i18n="internet.sub">Brand Identity &amp; Web Interface</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>Ongoing UI work on a German business management platform — including a size management module with dual interaction patterns and a mobile point-of-sale customer registration wizard with inline validation and progress tracking.</p>
+              <p class="pt-desc" data-fade data-i18n="internet.desc">Visual identity and UI showcase for INTERNET.com, a service empowering users with clean, memorable digital addresses. The logo design combines fluid geometric shapes with bold typography to convey seamless connectivity, accessibility, and modern professionalism across both digital and UI application.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View HILTES project">
-              <div class="media fb-ui"><div class="media-scale">
-                <div class="fb-label"><div class="ui-win"><div class="ui-bar"><i></i><i></i><i></i></div><div class="ui-body"><div class="ui-side"></div><div class="ui-main"><b></b><b class="s"></b><div class="ui-cards"><span></span><span></span><span></span></div></div></div></div></div>
-                <img src="assets/hiltes.jpg" alt="HILTES interface screens" loading="lazy" onerror="this.style.display='none'">
+            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View INTERNET.com project">
+              <div class="media fb-plain"><div class="media-scale">
+                <img src="assets/UI-UX/internet.jpg" width="1363" height="661" alt="INTERNET.com logo next to a laptop showing the website" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
         </div>
       </article>
 
-      <article class="panel project" style="--bg:#6b3a3a" data-panel>
+      <article class="panel project" style="--bg:#c79762" data-panel>
         <div class="panel-inner">
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">02 / 03</span><span class="chip">Accessibility &amp; Forms</span></div>
-                <h3 class="pt-title" data-split>Bilingual Support Application</h3>
-                <p class="pt-sub" data-fade>English / Arabic application wizard for a humanitarian association</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <div class="pt-index"><span class="chip">02 / 04</span><span class="chip">UI/UX</span></div>
+                <h3 class="pt-title" data-split data-i18n="realestate.title">Luxury Real Estate Landing Pages</h3>
+                <p class="pt-sub" data-fade data-i18n="realestate.sub">Landing Pages UI Design</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>A three-step wizard for a humanitarian association's support application, with a full English/Arabic toggle, right-to-left support, a live case-file sidebar, and drag-and-drop file upload.</p>
+              <p class="pt-desc" data-fade data-i18n="realestate.desc">Designed a collection of high-converting landing pages tailored for luxury real estate developments in Dubai (including Palm Jumeirah, Downtown Dubai, and Dubai Marina). The designs prioritize clean visual hierarchy, sophisticated layout structures, and seamless call-to-action sections (such as brochure downloads and unit inquiries) to provide a premium user experience for prospective buyers.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Bilingual Support Application project">
-              <div class="media fb-ui"><div class="media-scale">
-                <div class="fb-label"><div class="ui-win"><div class="ui-bar"><i></i><i></i><i></i></div><div class="ui-body"><div class="ui-main"><b></b><b class="s"></b><div class="ui-cards"><span></span><span></span><span></span></div></div><div class="ui-side"></div></div></div></div>
-                <img src="assets/bilingual.jpg" alt="Bilingual support application screens" loading="lazy" onerror="this.style.display='none'">
+            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Luxury Real Estate Landing Pages project">
+              <div class="media fb-plain"><div class="media-scale">
+                <img src="assets/UI-UX/realestate.jpg" width="1361" height="661" alt="Collage of luxury real estate landing page designs" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
         </div>
       </article>
 
-      <article class="panel project" style="--bg:#4a4170" data-panel>
+      <article class="panel project" style="--bg:#55a8ae" data-panel>
         <div class="panel-inner">
           <div class="container project-wrap">
             <div class="project-top">
               <div>
-                <div class="pt-index"><span class="chip">03 / 03</span><span class="chip">Corporate</span></div>
-                <h3 class="pt-title" data-split>Careers Page Redesign</h3>
-                <p class="pt-sub" data-fade>German-language careers page concept</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>See project
+                <div class="pt-index"><span class="chip">03 / 04</span><span class="chip">UI/UX</span></div>
+                <h3 class="pt-title" data-split>Promote</h3>
+                <p class="pt-sub" data-fade data-i18n="promote.sub">Influencer Marketing Platform &amp; Business Dashboard</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
-              <p class="pt-desc" data-fade>A German-language careers page mockup with a benefits card grid, award highlights, an empty-state for open roles with email signup, and a clear contact call to action.</p>
+              <p class="pt-desc" data-fade data-i18n="promote.desc">PROMOTE is an end-to-end influencer marketing ecosystem. The platform features a mobile app that allows bloggers and content creators to discover local restaurants, apply for marketing campaigns, and manage bookings. It also includes a web-based Business Portal dashboard for owners to publish promotions, review influencer applications, and manage campaign schedules seamlessly.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Careers Page Redesign project">
-              <div class="media fb-ui"><div class="media-scale">
-                <div class="fb-label"><div class="ui-win"><div class="ui-bar"><i></i><i></i><i></i></div><div class="ui-body"><div class="ui-main"><b></b><b class="s"></b><div class="ui-cards"><span></span><span></span><span></span></div></div></div></div></div>
-                <img src="assets/careers.jpg" alt="Careers page redesign screens" loading="lazy" onerror="this.style.display='none'">
+            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View PROMOTE project">
+              <div class="media fb-plain"><div class="media-scale">
+                <img src="assets/UI-UX/promote.jpg" width="1361" height="661" alt="PROMOTE business dashboard on a laptop and mobile app screens" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
         </div>
       </article>
+
+      <article class="panel project" style="--bg:#13261c" data-panel>
+        <div class="panel-inner">
+          <div class="container project-wrap">
+            <div class="project-top">
+              <div>
+                <div class="pt-index"><span class="chip">04 / 04</span><span class="chip">UI/UX</span></div>
+                <h3 class="pt-title" data-split data-i18n="coupons.title">Coupons App</h3>
+                <p class="pt-sub" data-fade data-i18n="coupons.sub">UI/UX Design &amp; Branding</p>
+                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                  <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
+                </a>
+              </div>
+              <p class="pt-desc" data-fade data-i18n="coupons.desc">Coupons App is a mobile application designed to help users easily discover, collect, and redeem discount deals and promo codes. I crafted a clean, user-friendly UI/UX design with a vibrant visual identity, focusing on seamless navigation from browsing categories to redeeming offers.</p>
+            </div>
+            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Coupons App project">
+              <div class="media fb-plain"><div class="media-scale">
+                <img src="assets/UI-UX/coupons.jpg" width="1361" height="661" alt="Coupons App screens on two phones" loading="lazy" onerror="this.style.display='none'">
+              </div></div>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- MORE WORK -->
+    <div class="panel more-work" data-panel>
+      <div class="panel-inner">
+        <div class="container mw-wrap">
+          <p class="eyebrow" data-i18n="more.eyebrow">More work</p>
+          <h2 class="mw-title" data-split data-i18n="more.title">There's more where that came from.</h2>
+          <p class="mw-text" data-fade data-i18n="more.text">Explore my full portfolio of branding and UI/UX projects on Behance.</p>
+          <a class="btn-pill btn-lg" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="more.cta">View all projects</span>
+            <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -702,16 +833,16 @@
   <footer class="panel contact" id="contact" data-panel>
     <div class="panel-inner">
       <div class="container contact-wrap">
-        <p class="ct-label" data-fade>Contact</p>
-        <h2 class="ct-title" data-split>Thirsty for more?<br>Reach out.</h2>
+        <p class="ct-label" data-fade data-i18n="ct.label">Contact</p>
+        <h2 class="ct-title" data-split data-i18n="ct.title">Thirsty for more?<br>Reach out.</h2>
         <div class="ct-links" data-fade>
-          <a class="ct-link" href="mailto:r.deeb@hiltes.com" data-magnetic>r.deeb@hiltes.com
+          <a class="ct-link" href="mailto:reem.deeb.96@outlook.com" dir="ltr" data-magnetic>reem.deeb.96@outlook.com
             <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span></a>
-          <a class="ct-link" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic>Behance
+          <a class="ct-link" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" dir="ltr" data-magnetic>Behance
             <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span></a>
         </div>
 
-        <p class="wordmark" aria-label="Reem Deeb" data-split-chars>REEM DEEB</p>
+        <p class="wordmark" dir="ltr" aria-label="Reem Deeb" data-split-chars>REEM DEEB</p>
 
         <div class="socials">
           <a class="social" href="https://www.instagram.com/reem.deeb.96/" target="_blank" rel="noopener">
@@ -725,14 +856,145 @@
         </div>
 
         <div class="ct-bottom">
-          <span>&copy; 2026 Reem Deeb</span>
-          <a href="#home" data-to-top>Back to top &uarr;</a>
+          <span dir="ltr">&copy; 2026 Reem Deeb</span>
+          <a href="#home" data-to-top data-i18n="ct.top">Back to top &uarr;</a>
         </div>
       </div>
     </div>
   </footer>
 
 </main>
+
+<script>
+  /* ---------- Translations (EN is the markup; DE / AR replace it before any text is split) ---------- */
+  (() => {
+    const I18N = {
+      de: {
+        title: 'Reem Deeb — UI/UX- &amp; Grafikdesignerin',
+        view: 'Ansehen',
+        'pl.tag': 'Designerin — Deutschland',
+        'pl.sub': 'Portfolio &copy; 2026',
+        'nav.home': 'Start', 'nav.about': 'Über mich', 'nav.work': 'Portfolio', 'nav.contact': 'Kontakt',
+        'hero.aria': 'Designerin',
+        'hero.bio': 'UI/UX- &amp; Grafikdesignerin mit über 5 Jahren Erfahrung in der Gestaltung einprägsamer Markenidentitäten und funktionaler Benutzeroberflächen',
+        'hero.scroll': 'Scrollen &amp; entdecken',
+        'ph.label': 'Die Philosophie',
+        'ph.quote': 'Ich gestalte nahtlose digitale Erlebnisse und unverwechselbare Markenidentitäten, die Unternehmen strategisch mit ihrer Zielgruppe verbinden',
+        'ph.years': 'Jahre',
+        'ph.in': 'im Visual Branding',
+        'ph.stat': 'Maßgeschneiderte visuelle Identitäten und Markenwelten, die sich in umkämpften Märkten abheben.',
+        'ph.title': 'Marken, die Eindruck hinterlassen',
+        'wh.eyebrow': 'Portfolio',
+        'wh.title': 'Ausgewählte Arbeiten',
+        'wh.note': 'Markenidentitäten und digitale Produkte – gestaltet mit Klarheit, Charakter und Liebe zum Detail.',
+        'tabs.hint': 'Kategorie wählen',
+        'tabs.branding': 'Branding',
+        see: 'Projekt ansehen',
+        'yamor.sub': 'Logo &amp; Markenidentität für eine Eventagentur',
+        'yamor.desc': 'YAMOR ist eine luxuriöse Eventplanungsmarke, die Feiern auf ein neues Niveau hebt und unvergessliche, exklusive Erlebnisse schafft. Die visuelle Identität basiert auf dem Konzept des zurückhaltenden Luxus und verbindet anspruchsvolle Typografie (Aboreto &amp; Ancizar Sans), eine edle, organische Farbpalette (Salbeigrün, Burgunder, Terrakotta, Blush und Elfenbein) und elegante botanische Details.',
+        'bloom.sub': 'Logo &amp; Markenidentität für ein Architektur- und Interior-Design-Studio',
+        'bloom.desc': 'Bloom and Beyond ist ein Unternehmen für Innenarchitektur und Ausführung mit Sitz in Dubai. Es verwirklicht die Visionen seiner Kunden von schönem, funktionalem Design. Das Team bietet einen umfassenden, durchdachten Prozess, der ein außergewöhnliches Interior Design verspricht.',
+        'oona.sub': 'Logo &amp; Markenidentität für ein Technologieunternehmen',
+        'oona.desc': 'OONA-TECH ist ein Team von Spezialisten, das maßgeschneiderte Tech-Produkte für moderne Unternehmen entwickelt. Ich habe ein elegantes Logo und eine digitale Markenidentität mit futuristischer Typografie und einer vom Weltraum inspirierten Ästhetik entworfen, die Innovation, Dynamik und technologische Expertise widerspiegelt.',
+        'boundless.sub': 'Logo &amp; Markenidentität für 3ds-Max-Tutorials',
+        'boundless.desc': 'Ein kraftvolles, dynamisches Logo für einen Social-Media-Kanal rund um 3ds-Max-Tutorials, 3D-Modellierung und Rendering-Tipps. Das Branding verbindet geometrische High-Tech-Formen mit leuchtenden Lichtelementen und verleiht dem Kanal einen modernen, kompetenten und ansprechenden Auftritt auf YouTube, Instagram und TikTok.',
+        'internet.sub': 'Markenidentität &amp; Web-Interface',
+        'internet.desc': 'Visuelle Identität und UI-Showcase für INTERNET.com – einen Service, der Nutzern klare, einprägsame digitale Adressen ermöglicht. Das Logo verbindet fließende geometrische Formen mit kräftiger Typografie und vermittelt nahtlose Konnektivität, Zugänglichkeit und moderne Professionalität – digital wie in der Benutzeroberfläche.',
+        'realestate.title': 'Landingpages für Luxusimmobilien',
+        'realestate.sub': 'UI-Design für Landingpages',
+        'realestate.desc': 'Eine Reihe konversionsstarker Landingpages für Luxusimmobilienprojekte in Dubai (u. a. Palm Jumeirah, Downtown Dubai und Dubai Marina). Die Designs setzen auf eine klare visuelle Hierarchie, anspruchsvolle Layouts und nahtlose Call-to-Action-Bereiche (etwa Broschüren-Downloads und Anfragen zu Einheiten), um Kaufinteressenten ein erstklassiges Nutzererlebnis zu bieten.',
+        'promote.sub': 'Influencer-Marketing-Plattform &amp; Business-Dashboard',
+        'promote.desc': 'PROMOTE ist ein durchgängiges Ökosystem für Influencer-Marketing. Die Plattform umfasst eine mobile App, mit der Blogger und Content Creators lokale Restaurants entdecken, sich für Marketingkampagnen bewerben und Buchungen verwalten können. Dazu kommt ein webbasiertes Business-Portal, in dem Inhaber Aktionen veröffentlichen, Bewerbungen von Influencern prüfen und Kampagnenpläne mühelos verwalten.',
+        'coupons.title': 'Coupons App',
+        'coupons.sub': 'UI/UX-Design &amp; Branding',
+        'coupons.desc': 'Die Coupons App ist eine mobile Anwendung, mit der Nutzer Rabattangebote und Promo-Codes ganz einfach entdecken, sammeln und einlösen können. Ich habe ein klares, benutzerfreundliches UI/UX-Design mit einer lebendigen visuellen Identität entwickelt – mit Fokus auf eine nahtlose Navigation vom Stöbern in Kategorien bis zum Einlösen von Angeboten.',
+        'more.eyebrow': 'Weitere Arbeiten',
+        'more.title': 'Das ist noch nicht alles.',
+        'more.text': 'Entdecken Sie mein vollständiges Portfolio mit Branding- und UI/UX-Projekten auf Behance.',
+        'more.cta': 'Alle Projekte ansehen',
+        'ct.label': 'Kontakt',
+        'ct.title': 'Lust auf mehr?<br>Melden Sie sich.',
+        'ct.top': 'Nach oben &uarr;'
+      },
+      ar: {
+        title: 'ريم ديب — مصممة واجهات وتجربة مستخدم ومصممة جرافيك',
+        view: 'عرض',
+        'pl.tag': 'مصممة — ألمانيا',
+        'pl.sub': 'معرض الأعمال &copy; 2026',
+        'nav.home': 'الرئيسية', 'nav.about': 'نبذة عني', 'nav.work': 'أعمالي', 'nav.contact': 'تواصل',
+        'hero.aria': 'مصممة',
+        'hero.bio': 'مصممة واجهات وتجربة مستخدم ومصممة جرافيك بخبرة تزيد على 5 سنوات في ابتكار هويات تجارية لا تُنسى وواجهات استخدام عملية',
+        'hero.scroll': 'مرّر للاستكشاف',
+        'ph.label': 'فلسفتي',
+        'ph.quote': 'أصمّم تجارب رقمية سلسة وهويات تجارية مميزة تربط الشركات بجمهورها بشكل استراتيجي',
+        'ph.years': 'سنوات',
+        'ph.in': 'في الهوية البصرية',
+        'ph.stat': 'هويات بصرية ومنظومات تجارية مصمّمة خصيصاً لتتميّز في الأسواق المزدحمة.',
+        'ph.title': 'علامات تجارية تترك أثراً',
+        'wh.eyebrow': 'معرض الأعمال',
+        'wh.title': 'أعمال مختارة',
+        'wh.note': 'هويات تجارية ومنتجات رقمية — مصمّمة بوضوح وشخصية واهتمام بالتفاصيل.',
+        'tabs.hint': 'اختر الفئة',
+        'tabs.branding': 'الهوية البصرية',
+        see: 'عرض المشروع',
+        'yamor.sub': 'شعار وهوية تجارية لوكالة تنظيم فعاليات',
+        'yamor.desc': 'يامور علامة فاخرة لتنظيم الفعاليات، تهدف إلى الارتقاء بالمناسبات وصناعة تجارب راقية لا تُنسى. بُنيت الهوية البصرية على مفهوم الفخامة الهادئة، فجمعت بين طباعة أنيقة (Aboreto و Ancizar Sans)، ولوحة ألوان عضوية راقية (الأخضر المريمي، والعنابي، والتيراكوتا، والوردي الناعم، والعاجي)، وتفاصيل نباتية أنيقة.',
+        'bloom.sub': 'شعار وهوية تجارية لاستوديو هندسة معمارية وتصميم داخلي',
+        'bloom.desc': 'بلوم آند بيوند شركة للتصميم الداخلي والتنفيذ مقرّها دبي، تحوّل رؤى عملائها إلى تصاميم جميلة وعملية. يقدّم فريقها منهجية شاملة ومدروسة تضمن تصميماً داخلياً استثنائياً.',
+        'oona.sub': 'شعار وهوية تجارية لشركة تقنية',
+        'oona.desc': 'أونا تك فريق من المتخصصين في بناء منتجات تقنية مخصّصة للشركات الحديثة. صمّمتُ شعاراً أنيقاً وهوية رقمية تعتمد طباعة مستقبلية وجمالية مستوحاة من الفضاء، تعكس الابتكار والزخم والخبرة التقنية العالية.',
+        'boundless.sub': 'شعار وهوية تجارية لقناة دروس 3ds Max',
+        'boundless.desc': 'شعار جريء وديناميكي لقناة على وسائل التواصل الاجتماعي متخصّصة في دروس 3ds Max والنمذجة ثلاثية الأبعاد ونصائح الإظهار. تمزج الهوية بين أشكال هندسية تقنية وعناصر إضاءة نابضة، لتمنح القناة حضوراً عصرياً وموثوقاً وجذاباً على يوتيوب وإنستغرام وتيك توك.',
+        'internet.sub': 'هوية تجارية وواجهة ويب',
+        'internet.desc': 'هوية بصرية وعرض لواجهة المستخدم لموقع INTERNET.com، وهي خدمة تمنح المستخدمين عناوين رقمية واضحة وسهلة التذكّر. يجمع الشعار بين أشكال هندسية انسيابية وطباعة جريئة ليعبّر عن الاتصال السلس وسهولة الوصول والاحترافية العصرية في الاستخدامات الرقمية وواجهات المستخدم.',
+        'realestate.title': 'صفحات هبوط للعقارات الفاخرة',
+        'realestate.sub': 'تصميم واجهات صفحات الهبوط',
+        'realestate.desc': 'صمّمتُ مجموعة من صفحات الهبوط عالية التحويل لمشاريع عقارية فاخرة في دبي (منها نخلة جميرا ووسط مدينة دبي ودبي مارينا). تركّز التصاميم على تسلسل بصري واضح وتخطيطات راقية وأقسام دعوة لاتخاذ إجراء سلسة (مثل تحميل الكتيّبات والاستفسار عن الوحدات) لتقديم تجربة استخدام مميزة للمشترين المحتملين.',
+        'promote.sub': 'منصة تسويق عبر المؤثرين ولوحة تحكم للأعمال',
+        'promote.desc': 'بروموت منظومة متكاملة للتسويق عبر المؤثرين. تضم المنصة تطبيقاً للهاتف يتيح للمدوّنين وصنّاع المحتوى اكتشاف المطاعم المحلية والتقديم على الحملات التسويقية وإدارة الحجوزات، إلى جانب بوابة أعمال على الويب يستطيع أصحاب المطاعم من خلالها نشر العروض ومراجعة طلبات المؤثرين وإدارة جداول الحملات بسهولة.',
+        'coupons.title': 'تطبيق الكوبونات',
+        'coupons.sub': 'تصميم واجهات وتجربة المستخدم وهوية تجارية',
+        'coupons.desc': 'تطبيق الكوبونات تطبيق للهاتف المحمول يساعد المستخدمين على اكتشاف عروض الخصم والرموز الترويجية وجمعها واستخدامها بسهولة. صمّمتُ واجهة وتجربة استخدام واضحة وسهلة بهوية بصرية نابضة بالحياة، مع التركيز على تنقّل سلس من تصفّح الفئات إلى الاستفادة من العروض.',
+        'more.eyebrow': 'المزيد من الأعمال',
+        'more.title': 'وهناك المزيد.',
+        'more.text': 'اكتشف معرض أعمالي الكامل في الهوية البصرية وتصميم الواجهات على Behance.',
+        'more.cta': 'عرض جميع المشاريع',
+        'ct.label': 'تواصل',
+        'ct.title': 'تريد المزيد؟<br>تواصل معي.',
+        'ct.top': 'العودة للأعلى &uarr;'
+      }
+    };
+
+    const html = document.documentElement;
+    const lang = html.lang;
+    const dict = I18N[lang];
+    if (dict) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = dict[el.dataset.i18n];
+        if (v != null) el.innerHTML = v;
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const v = dict[el.dataset.i18nAria];
+        if (v != null) el.setAttribute('aria-label', v);
+      });
+      const t = document.createElement('textarea'); t.innerHTML = dict.title; document.title = t.value;
+    }
+
+    document.querySelectorAll('.lang button').forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.lang === lang);
+      btn.addEventListener('click', () => {
+        if (btn.dataset.lang === lang) return;
+        try {
+          localStorage.setItem('lang', btn.dataset.lang);
+          // Remember where we were so the reload lands in the same spot without replaying the intro.
+          sessionStorage.setItem('langY', String(Math.round(window.scrollY)));
+        } catch (e) {}
+        document.body.classList.add('is-leaving');
+        setTimeout(() => location.reload(), 350);
+      });
+    });
+  })();
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -823,6 +1085,27 @@
   fitWordmark();
   if (window.ResizeObserver) new ResizeObserver(fitWordmark).observe($('.wordmark').parentElement);
 
+  /* ---------- Language-switch reload: restore tab + scroll position ---------- */
+  let switchY = null, savedTab = null;
+  try {
+    switchY = sessionStorage.getItem('langY'); sessionStorage.removeItem('langY');
+    savedTab = sessionStorage.getItem('tab');
+  } catch (e) {}
+  function updateCount(group) {
+    $('#whCount').textContent = `(${String($$('[data-panel]', group).length).padStart(2, '0')})`;
+  }
+  // Must run before the stack is built, so the right group's panels get pinned.
+  if (switchY !== null && savedTab && $(`.group[data-group="${savedTab}"]`)) {
+    $$('.tab').forEach(t => { const on = t.dataset.tab === savedTab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    $$('.group').forEach(g => { g.hidden = g.dataset.group !== savedTab; });
+    updateCount($(`.group[data-group="${savedTab}"]`));
+  }
+  const restoreScroll = () => {
+    if (switchY === null) return;
+    const y = +switchY; switchY = null;
+    if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
+  };
+
   /* ---------- Reduced motion: static page, plain anchors ---------- */
   if (reduce) {
     $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
@@ -830,12 +1113,15 @@
       e.preventDefault(); scrollToEl(t);
     }));
     setupTabs();
+    restoreScroll();
     return;
   }
 
   /* ---------- Intro: preloader -> hero grows from a small card ---------- */
   const isMobile = () => innerWidth < 768;
   function intro() {
+    // Language switch reload: no preloader, everything is already in place.
+    if (html.classList.contains('lang-switch')) { $('.preloader')?.remove(); return; }
     const countEl = $('#plCount');
     const count = { v: 0 };
     if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
@@ -847,6 +1133,7 @@
     gsap.set(bioWords, { yPercent: 110 });
     gsap.set('.hero-scroll', { autoAlpha: 0, y: 20 });
     gsap.set('.nav', { y: isMobile() ? 40 : -40, autoAlpha: 0, filter: 'blur(8px)' });
+    gsap.set('.lang', { y: -40, autoAlpha: 0, filter: 'blur(8px)' }); // always at the top, even on mobile
     gsap.set('.pl-item', { yPercent: 110 });
 
     const heroImg = $('.hero-media img');
@@ -879,7 +1166,7 @@
       .to('.hero-square', { scale: 1, rotate: 0, duration: 1, ease: 'back.out(2.2)' }, 3.65)
       .fromTo('.hero-script', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' }, 3.5)
       .to('.hero-logo .c', { yPercent: 0, duration: 1.1, stagger: .03 }, 3.3)
-      .to('.nav', { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 1.3 }, 3.35)
+      .to('.nav, .lang', { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 1.3 }, 3.35)
       .to(bioWords, { yPercent: 0, duration: 1.1, stagger: .018 }, 3.55)
       .to('.hero-scroll', { autoAlpha: 1, y: 0, duration: 1 }, 3.9)
       .add(() => {
@@ -1004,8 +1291,10 @@
     });
 
     // Footer wordmark: characters rise one after another.
-    gsap.from('.wordmark .c', { yPercent: 105, ease: 'none', stagger: .06,
-      scrollTrigger: { trigger: '.wordmark', start: 'top 98%', end: 'bottom 75%', scrub: 1 } });
+    // Timed (not scrubbed): a scrubbed end point can sit past the bottom of the page on some
+    // screen sizes, leaving the last letters stuck behind the social buttons.
+    gsap.from('.wordmark .c', { yPercent: 105, duration: 1.3, ease: 'expo.out', stagger: .06,
+      scrollTrigger: { trigger: '.wordmark', start: 'top 92%', toggleActions: 'play none none reverse' } });
     gsap.from('.social', { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: .08,
       scrollTrigger: { trigger: '.socials', start: 'top 95%' } });
 
@@ -1034,29 +1323,96 @@
   function setupTabs() {
     const tabs = $$('.tab');
     const ind = $('.tab-ind');
+    const active = () => $('.tab[aria-selected="true"]');
+    // The white pill covers the whole active tab (offsetLeft is physical, so this also works in RTL).
     const moveInd = (tab, instant) => {
-      const props = { x: tab.offsetLeft + 12, width: tab.offsetWidth - 24 };
+      const props = { x: tab.offsetLeft, width: tab.offsetWidth };
       instant ? gsap.set(ind, props) : gsap.to(ind, { ...props, duration: .7, ease: 'expo.out' });
     };
-    moveInd(tabs[0], true);
-    window.addEventListener('resize', () => moveInd($('.tab[aria-selected="true"]'), true));
+    moveInd(active(), true);
+    // Re-measure when the labels change width (web fonts loading, resize).
+    if (window.ResizeObserver) new ResizeObserver(() => moveInd(active(), true)).observe($('.tabs'));
+    else window.addEventListener('resize', () => moveInd(active(), true));
+
+    // Arrow keys move between tabs (WAI-ARIA tabs pattern).
+    $('.tabs').addEventListener('keydown', e => {
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      const rtl = html.dir === 'rtl';
+      let n = i;
+      if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
+      else n = (i + ((e.key === 'ArrowRight') !== rtl ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[n].focus();
+      tabs[n].click();
+    });
+
+    // Floating dock mirrors the header tabs and is visible only while project cards are on screen.
+    const dock = $('.tabs-dock');
+    const dockBtns = $$('[data-dock]');
+    const syncDock = name => dockBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.dock === name));
+    dockBtns.forEach(b => b.addEventListener('click', () => $(`.tab[data-tab="${b.dataset.dock}"]`).click()));
+    syncDock(active().dataset.tab);
+    // As the first card rises to cover the header, the toggle detaches and glides, shrinking,
+    // from its spot in the header down into the floating dock (scrubbed, so it reverses on scroll up).
+    // It then slides away once the "More work" panel arrives.
+    const headTabs = $('.tabs');
+    const ease = gsap.parseEase('power2.inOut');
+    let dockSTs = [];
+    const placeDock = p => {
+      const from = headTabs.getBoundingClientRect(); // live: the header may still be scrolling
+      const w = dock.offsetWidth, h = dock.offsetHeight;
+      const restCy = innerHeight - 28 - h / 2;
+      const e = ease(p);
+      gsap.set(dock, {
+        xPercent: -50,
+        x: (from.left + from.width / 2 - html.clientWidth / 2) * (1 - e), // clientWidth: excludes the scrollbar, like left: 50%
+        y: (from.top + from.height / 2 - restCy) * (1 - e),
+        scale: gsap.utils.interpolate(from.width / w, 1, e),
+        autoAlpha: p > 0 ? 1 : 0
+      });
+      headTabs.style.visibility = p > 0 ? 'hidden' : '';
+    };
+    const buildDock = () => {
+      dockSTs.forEach(s => s.kill()); dockSTs = [];
+      headTabs.style.visibility = '';
+      gsap.set(dock, { autoAlpha: 0, yPercent: 0 });
+      if (innerWidth < 768) return; // phones: no stacking, header tabs are never covered
+      dockSTs.push(ScrollTrigger.create({
+        trigger: $('.group:not([hidden]) [data-panel]'), start: 'top bottom', end: 'top 45%',
+        onUpdate: s => placeDock(s.progress),
+        onLeaveBack: () => placeDock(0),
+        onLeave: () => placeDock(1)
+      }));
+      dockSTs.push(ScrollTrigger.create({
+        trigger: '.more-work', start: 'top 75%',
+        onEnter: () => gsap.to(dock, { yPercent: 180, autoAlpha: 0, duration: .6, ease: 'expo.in', overwrite: 'auto' }),
+        onLeaveBack: () => gsap.to(dock, { yPercent: 0, autoAlpha: 1, duration: .8, ease: 'expo.out', overwrite: 'auto' })
+      }));
+    };
+    buildDock();
+    window.addEventListener('resize', () => { clearTimeout(buildDock.t); buildDock.t = setTimeout(() => { buildDock(); ScrollTrigger.refresh(); }, 200); });
 
     tabs.forEach(tab => tab.addEventListener('click', () => {
       if (tab.getAttribute('aria-selected') === 'true') return;
-      tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
+      tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
       moveInd(tab);
+      syncDock(tab.dataset.tab);
+      try { sessionStorage.setItem('tab', tab.dataset.tab); } catch (e) {}
       const show = $(`.group[data-group="${tab.dataset.tab}"]`);
       const hide = $(`.group:not([data-group="${tab.dataset.tab}"])`);
-      const n = $$('[data-panel]', show).length;
-      $('#whCount').textContent = `(${String(n).padStart(2, '0')})`;
+      updateCount(show);
 
       const swap = () => {
         hide.hidden = true; show.hidden = false;
-        if (reduce) return;
+        if (reduce) { buildDock(); ScrollTrigger.refresh(); return; }
         buildStack();
+        buildDock();
         ScrollTrigger.refresh();
         // Land on the portfolio header so the new set slides in from the top of the stack.
-        const headY = absTop($('.work-head'));
+        // +1px: landing exactly on the pin start wouldn't fire the "hide the covered panel" trigger.
+        const headY = absTop($('.work-head')) + 1;
         if (lenis) lenis.scrollTo(headY, { immediate: true, force: true }); else window.scrollTo(0, headY);
         const first = $('[data-panel]', show);
         gsap.fromTo($$('.pt-index, .pt-title .wi, .pt-sub, .btn-pill, .pt-desc', first),
@@ -1080,7 +1436,7 @@
       const shouldHide = !isMobile() && direction === 1 && scroll > 300;
       if (shouldHide !== hidden) {
         hidden = shouldHide;
-        gsap.to(navEl, { yPercent: hidden ? -180 : 0, duration: .8, ease: 'expo.out' });
+        gsap.to([navEl, $('.lang')], { yPercent: hidden ? -180 : 0, duration: .8, ease: 'expo.out' });
       }
     });
     ['#home', '#about', '#work', '#contact'].forEach(id => {
@@ -1138,7 +1494,7 @@
   nav();
   cursor();
 
-  const refresh = () => { fitWordmark(); ScrollTrigger.refresh(); };
+  const refresh = () => { fitWordmark(); ScrollTrigger.refresh(); restoreScroll(); };
   document.fonts && document.fonts.ready.then(refresh);
   window.addEventListener('load', refresh);
   // A tab that starts hidden (0×0) may never fire matchMedia changes; refresh once it becomes visible.
