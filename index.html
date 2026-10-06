@@ -173,6 +173,28 @@
 
   /* Language switch reloads the page: fade out, then fade back in without the intro. */
   body.is-leaving { opacity: 0; transition: opacity .35s ease; }
+  /* Curtain used when opening a case study */
+  .page-wipe { position: fixed; inset: 0; z-index: 100; pointer-events: none; background: var(--wipe, #111); clip-path: inset(100% 0% 0% 0%); }
+  /* Back-to-top button: progress ring + arrow that slides up on hover */
+  .to-top {
+    position: fixed; inset-inline-end: var(--gut); bottom: 28px; z-index: 62; width: 56px; height: 56px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff; background: rgba(20, 20, 20, .72);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    opacity: 0; transform: translateY(24px) scale(.8); pointer-events: none;
+    transition: opacity .5s ease, transform .7s var(--ease), background .4s var(--ease);
+  }
+  .to-top.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { background: var(--orange); }
+  .to-top:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .tt-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .tt-ring circle { fill: none; stroke: rgba(255,255,255,.18); stroke-width: 2; }
+  .tt-ring .tt-bar { stroke: var(--orange); stroke-linecap: round; stroke-dasharray: 163.36; stroke-dashoffset: 163.36; transition: stroke .4s; }
+  .to-top:hover .tt-bar { stroke: #fff; }
+  .tt-arrow { position: relative; width: 16px; height: 16px; overflow: hidden; }
+  .tt-arrow svg { position: absolute; inset: 0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .6s var(--ease); }
+  .tt-arrow svg + svg { transform: translateY(130%); }
+  .to-top:hover .tt-arrow svg:first-child { transform: translateY(-130%); }
+  .to-top:hover .tt-arrow svg + svg { transform: none; }
   html.lang-switch body { animation: langIn .6s ease both; }
   @keyframes langIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -470,6 +492,7 @@
     .tab { padding: 13px 18px; font-size: 13px; gap: 8px; }
     .tab-ico { display: none; }
     .tabs-dock { display: none; } /* no stacking on phones, so the header tabs are never covered */
+    .to-top { width: 50px; height: 50px; bottom: 84px; } /* sits above the bottom nav on phones */
     .hero-logo { top: 32px; }
     .hero-headline { --fs: min(21vw, 15vh); top: 20vh; }
     .hero-bio { left: var(--gut); right: auto; bottom: 120px; }
@@ -482,7 +505,10 @@
     .ph-col:nth-child(3) { flex-direction: column; }
     .ph-col:nth-child(3) .ph-shape { width: 100%; }
     .project-top { grid-template-columns: 1fr; }
-    .project-media { height: 56vh; }
+    /* Show the whole wide mockup instead of a zoomed-in crop of it. */
+    .project-media { height: auto; aspect-ratio: 1361 / 661; }
+    .project-wrap { padding-block: 48px 40px; }
+    .project .panel-inner { min-height: 0; } /* no stacking on phones, so no need to fill the screen */
     .wh-row { flex-direction: column; align-items: flex-start; }
     .socials { grid-template-columns: 1fr 1fr; gap: 10px; }
     .contact-wrap { padding-bottom: 110px; }
@@ -495,6 +521,11 @@
 <body>
 
 <div class="progress" aria-hidden="true"></div>
+<div class="page-wipe" aria-hidden="true"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"></div>
 <div class="cursor-ring" aria-hidden="true"><span data-i18n="view">View</span></div>
@@ -579,7 +610,7 @@
             <div class="ph-reveal">
               <div class="ph-img">
                 <div class="media-fb"></div>
-                <img src="assets/Branding/philosophy.jpg" width="388" height="518" alt="Silhouette walking in front of an orange sun" onerror="this.style.display='none'">
+                <img src="assets/Branding/philosophy.jpg" srcset="assets/Branding/philosophy-m.jpg 900w, assets/Branding/philosophy.jpg 1164w" sizes="(max-width: 767px) 92vw, (max-width: 1024px) 40vw, 28vw" width="1164" height="1552" decoding="async" alt="Silhouette walking in front of an orange sun" onerror="this.style.display='none'">
               </div>
             </div>
           </div>
@@ -631,16 +662,16 @@
                 <div class="pt-index"><span class="chip">01 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Yamor</h3>
                 <p class="pt-sub" data-fade data-i18n="yamor.sub">Logo &amp; Brand Identity for Event Planning Agency</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/yamor.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="yamor.desc">YAMOR is a luxury event planning brand dedicated to elevating celebrations and crafting unforgettable, high-end experiences. The visual identity is built around a concept of understated luxury, combining sophisticated typography (Aboreto &amp; Ancizar Sans), a refined organic color palette (Sage Green, Burgundy, Terracotta, Blush, and Ivory), and elegant botanical details.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View YAMOR project">
+            <a class="project-media" href="projects/yamor.html" data-transition data-cursor="view" aria-label="View YAMOR project">
               <div class="media fb-yamor"><div class="media-scale">
                 <div class="fb-label">Yamor</div>
-                <img src="assets/Branding/yamor.jpg" width="1351" height="661" alt="YAMOR brand identity on a tablet" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/yamor.jpg" srcset="assets/Branding/yamor-m.jpg 900w, assets/Branding/yamor.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1351" height="661" alt="YAMOR brand identity on a tablet" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -655,16 +686,16 @@
                 <div class="pt-index"><span class="chip">02 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Bloom &amp; Beyond</h3>
                 <p class="pt-sub" data-fade data-i18n="bloom.sub">Logo &amp; Brand Identity for Architecture &amp; Interior Design Studio</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/bloom.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="bloom.desc">Bloom and Beyond is an interior design and execution company based in Dubai. It brings client visions of beautiful, functional design to life. The team provides a comprehensive and thoughtful process that promises to deliver an exceptional interior design.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Bloom &amp; Beyond project">
+            <a class="project-media" href="projects/bloom.html" data-transition data-cursor="view" aria-label="View Bloom &amp; Beyond project">
               <div class="media fb-bloom"><div class="media-scale">
                 <div class="fb-label">Bloom &amp; Beyond</div>
-                <img src="assets/Branding/bloom.jpg" width="1361" height="661" alt="Bloom &amp; Beyond logo on a sunlit interior wall" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/bloom.jpg" srcset="assets/Branding/bloom-m.jpg 900w, assets/Branding/bloom.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="Bloom &amp; Beyond logo on a sunlit interior wall" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -688,7 +719,7 @@
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View OONA TECH project">
               <div class="media fb-oona"><div class="media-scale">
                 <div class="fb-label">OONA</div>
-                <img src="assets/Branding/oona.jpg" width="1363" height="661" alt="OONA logo over violet abstract imagery" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/oona.jpg" srcset="assets/Branding/oona-m.jpg 900w, assets/Branding/oona.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1363" height="661" alt="OONA logo over violet abstract imagery" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -703,16 +734,16 @@
                 <div class="pt-index"><span class="chip">04 / 04</span><span class="chip" data-i18n="tabs.branding">Branding</span></div>
                 <h3 class="pt-title" data-split>Boundless Box</h3>
                 <p class="pt-sub" data-fade data-i18n="boundless.sub">Logo &amp; Brand Identity for 3ds Max Tutorials</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/boundless.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="boundless.desc">A bold and dynamic logo design created for a social media channel dedicated to 3ds Max tutorials, 3D modeling, and rendering tips. The branding combines high-tech geometric shapes with vibrant lighting elements to give the channel a modern, authoritative, and engaging presence across YouTube, Instagram, and TikTok.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Boundless Box project">
+            <a class="project-media" href="projects/boundless.html" data-transition data-cursor="view" aria-label="View Boundless Box project">
               <div class="media fb-boundless"><div class="media-scale">
                 <div class="fb-label">Boundless<br>Box</div>
-                <img src="assets/Branding/boundless.jpg" width="1363" height="661" alt="Boundless Box logo with green light streaks" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/Branding/boundless.jpg" srcset="assets/Branding/boundless-m.jpg 900w, assets/Branding/boundless.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1363" height="661" alt="Boundless Box logo with green light streaks" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -737,7 +768,7 @@
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View INTERNET.com project">
               <div class="media fb-plain"><div class="media-scale">
-                <img src="assets/UI-UX/internet.jpg" width="1363" height="661" alt="INTERNET.com logo next to a laptop showing the website" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/UI-UX/internet.jpg" srcset="assets/UI-UX/internet-m.jpg 900w, assets/UI-UX/internet.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1363" height="661" alt="INTERNET.com logo next to a laptop showing the website" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -760,7 +791,7 @@
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Luxury Real Estate Landing Pages project">
               <div class="media fb-plain"><div class="media-scale">
-                <img src="assets/UI-UX/realestate.jpg" width="1361" height="661" alt="Collage of luxury real estate landing page designs" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/UI-UX/realestate.jpg" srcset="assets/UI-UX/realestate-m.jpg 900w, assets/UI-UX/realestate.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="Collage of luxury real estate landing page designs" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -783,7 +814,7 @@
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View PROMOTE project">
               <div class="media fb-plain"><div class="media-scale">
-                <img src="assets/UI-UX/promote.jpg" width="1361" height="661" alt="PROMOTE business dashboard on a laptop and mobile app screens" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/UI-UX/promote.jpg" srcset="assets/UI-UX/promote-m.jpg 900w, assets/UI-UX/promote.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="PROMOTE business dashboard on a laptop and mobile app screens" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -806,7 +837,7 @@
             </div>
             <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Coupons App project">
               <div class="media fb-plain"><div class="media-scale">
-                <img src="assets/UI-UX/coupons.jpg" width="1361" height="661" alt="Coupons App screens on two phones" loading="lazy" onerror="this.style.display='none'">
+                <img src="assets/UI-UX/coupons.jpg" srcset="assets/UI-UX/coupons-m.jpg 900w, assets/UI-UX/coupons.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="Coupons App screens on two phones" loading="lazy" onerror="this.style.display='none'">
               </div></div>
             </a>
           </div>
@@ -914,7 +945,8 @@
         'more.cta': 'Alle Projekte ansehen',
         'ct.label': 'Kontakt',
         'ct.title': 'Lust auf mehr?<br>Melden Sie sich.',
-        'ct.top': 'Nach oben &uarr;'
+        'ct.top': 'Nach oben &uarr;',
+        toTop: 'Nach oben'
       },
       ar: {
         title: 'ريم ديب — مصممة واجهات وتجربة مستخدم ومصممة جرافيك',
@@ -961,7 +993,8 @@
         'more.cta': 'عرض جميع المشاريع',
         'ct.label': 'تواصل',
         'ct.title': 'تريد المزيد؟<br>تواصل معي.',
-        'ct.top': 'العودة للأعلى &uarr;'
+        'ct.top': 'العودة للأعلى &uarr;',
+        toTop: 'العودة للأعلى'
       }
     };
 
@@ -1106,12 +1139,53 @@
     if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
   };
 
+  /* ---------- Page transition to a case study: the card's colour fills the screen ---------- */
+  function setupTransitions() {
+    const wipe = $('.page-wipe');
+    $$('a[data-transition]').forEach(a => a.addEventListener('click', e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      // Remember where we were, so "All work" on the case study brings you back to this card.
+      try { sessionStorage.setItem('homeY', String(Math.round(window.scrollY))); } catch (err) {}
+      if (reduce) { location.href = a.href; return; }
+      const card = a.closest('.project');
+      wipe.style.setProperty('--wipe', card ? getComputedStyle(card).getPropertyValue('--bg').trim() : '#111');
+      if (lenis) lenis.stop();
+      gsap.fromTo(wipe, { clipPath: 'inset(100% 0% 0% 0%)' }, {
+        clipPath: 'inset(0% 0% 0% 0%)', duration: .9, ease: 'expo.inOut',
+        onComplete: () => { location.href = a.href; }
+      });
+    }));
+    // Back/forward cache: lift the curtain again if the browser restores this page.
+    window.addEventListener('pageshow', e => {
+      if (!e.persisted) return;
+      gsap.set(wipe, { clipPath: 'inset(100% 0% 0% 0%)' });
+      if (lenis) lenis.start();
+    });
+  }
+
+  /* ---------- Back-to-top button: appears after the hero, its ring fills with scroll progress ---------- */
+  function setupToTop() {
+    const btn = $('.to-top'), bar = $('.tt-bar', btn), len = 2 * Math.PI * 26;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      bar.style.strokeDashoffset = String(len * (1 - p));
+      btn.classList.toggle('is-on', window.scrollY > innerHeight * .8);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    btn.addEventListener('click', () => scrollToEl($('#home')));
+  }
+
   /* ---------- Reduced motion: static page, plain anchors ---------- */
   if (reduce) {
     $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href')); if (!t) return;
       e.preventDefault(); scrollToEl(t);
     }));
+    setupTransitions();
+    setupToTop();
     setupTabs();
     restoreScroll();
     return;
@@ -1252,9 +1326,11 @@
         scrollTrigger: { trigger: el, start: 'top 90%' } });
     });
 
-    // Quote: words fill in as you scroll.
+    // Quote: each word turns from soft beige, through the orange accent, to solid black as you scroll.
     $$('[data-scrub-words]').forEach(el => {
-      gsap.fromTo($$('.wi', el), { opacity: .14 }, { opacity: 1, stagger: .1, ease: 'none',
+      const words = $$('.wi', el);
+      gsap.set(words, { color: '#d8c5b4' });
+      gsap.to(words, { keyframes: { color: ['#d8c5b4', '#e8792b', '#111111'] }, stagger: .1, ease: 'none',
         scrollTrigger: { trigger: el, start: 'top 85%', end: 'bottom 45%', scrub: true } });
     });
 
@@ -1278,7 +1354,8 @@
     $$('.project-media').forEach(m => {
       gsap.fromTo(m, { clipPath: 'inset(12% 8% 0% 8% round 24px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
         scrollTrigger: { trigger: m, start: 'top bottom', end: 'top 30%', scrub: true } });
-      gsap.fromTo($('.media-scale', m), { scale: 1.25 }, { scale: 1, ease: 'none',
+      // Gentler zoom on phones, where the image is shown at its natural size.
+      gsap.fromTo($('.media-scale', m), { scale: () => innerWidth < 768 ? 1.08 : 1.25 }, { scale: 1, ease: 'none',
         scrollTrigger: { trigger: m, start: 'top bottom', end: 'bottom 40%', scrub: true } });
     });
     $$('.pt-index').forEach(el => {
@@ -1493,6 +1570,8 @@
   setupTabs();
   nav();
   cursor();
+  setupTransitions();
+  setupToTop();
 
   const refresh = () => { fitWordmark(); ScrollTrigger.refresh(); restoreScroll(); };
   document.fonts && document.fonts.ready.then(refresh);

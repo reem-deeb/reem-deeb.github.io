@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAMOR — Brand Identity · Reem Deeb</title>
+<meta name="description" content="YAMOR Events brand identity by Reem Deeb: logo, brandmarks, colour palette, typography, illustrations, pattern, stationery and social media.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Ancizar+Sans:wght@300;400;500;600;700&family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Marcellus&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #f3ebe2; --fg: #2c3c33; --muted: #a8968a; --accent: #c3592b;
+    --f-brand: 'Aboreto', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Ancizar Sans', 'Andika', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .06em;
+  }
+  /* Overlay on the hero photo so the title and details stand out */
+  .c-hero-media::after {
+    background:
+      linear-gradient(0deg, rgba(22, 31, 26, .92) 0%, rgba(22, 31, 26, .6) 38%, rgba(22, 31, 26, .25) 70%, rgba(22, 31, 26, .45) 100%),
+      rgba(22, 31, 26, .28);
+  }
+  .spec.aboreto .spec-glyph, .spec.aboreto .spec-alpha { font-family: 'Aboreto', serif; }
+  .spec.ancizar .spec-glyph, .spec.ancizar .spec-alpha, .spec.ancizar .spec-weights { font-family: 'Ancizar Sans', sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#2f3f33" aria-hidden="true"><span>YAMOR</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Yamor/web/section1.jpg" srcset="../assets/Yamor/web/section1-m.jpg 1000w, ../assets/Yamor/web/section1.jpg 2400w" sizes="100vw" width="2400" height="1650" fetchpriority="high" alt="Candlelit garden lounge with a curved ivory sofa and green velvet chairs, styled for a luxury event">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Brand identity &amp; guidelines</p>
+      <h1 class="c-title" dir="ltr" data-chars>Yamor</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>YAMOR Events</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Luxury event planning</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, brand guidelines</dd></div>
+        <div><dt data-i18n="l.scope">Scope</dt><dd data-i18n="m.scope">Print, stationery &amp; social media</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">More than planning — we craft moments into masterpieces.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">YAMOR is a luxury event planning brand dedicated to elevating celebrations and crafting unforgettable, high-end experiences. The identity is built around understated luxury: sophisticated typography, a refined organic palette and elegant botanical details that carry from the logo to every invitation, card and post.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo &amp; brandmarks</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour palette</span><span>02</span></li>
+        <li><span data-i18n="li3">Typography</span><span>03</span></li>
+        <li><span data-i18n="li4">Illustrations &amp; pattern</span><span>04</span></li>
+        <li><span data-i18n="li5">Stationery &amp; social media</span><span>05</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/Yamor/web/1.jpg" srcset="../assets/Yamor/web/1-m.jpg 1000w, ../assets/Yamor/web/1.jpg 2400w" sizes="88vw" width="2400" height="1354" loading="lazy" alt="YAMOR brand guidelines cover: logo over sage green with palm leaf shadows">
+    </figure>
+  </section>
+
+  <!-- 01 LOGO -->
+  <section class="c-section container" id="logo">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Logo</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">A custom logotype drawn from the brand name itself. Sweeping, leaf-like strokes on the Y and the Ō give the letters a botanical lightness, so the mark reads clearly and directly conveys the brand’s identity and values.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Yamor/web/4.jpg" srcset="../assets/Yamor/web/4-m.jpg 1000w, ../assets/Yamor/web/4.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR primary logo">
+      <figcaption data-i18n="cap.primary">Primary logo</figcaption>
+    </figure>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4">
+        <img src="../assets/Yamor/web/6.jpg" srcset="../assets/Yamor/web/6-m.jpg 1000w, ../assets/Yamor/web/6.jpg 2400w" sizes="(max-width: 767px) 88vw, 43vw" width="2400" height="1375" loading="lazy" alt="Clear space construction grid around the YAMOR logo">
+        <figcaption data-i18n="cap.clear">Clear space</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal data-speed="-4">
+        <img src="../assets/Yamor/web/53.jpg" srcset="../assets/Yamor/web/53-m.jpg 1000w, ../assets/Yamor/web/53.jpg 2400w" sizes="(max-width: 767px) 88vw, 43vw" width="2400" height="1375" loading="lazy" alt="Horizontal and vertical YAMOR logo variations">
+        <figcaption data-i18n="cap.variations">Logo variations</figcaption>
+      </figure>
+    </div>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Clear space</h3><p data-i18n="n1.p">A minimum clear space — equal to the height of the letter X — is kept on all sides, so no other element interferes with the logo’s readability and it always stands out.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">Usage rules</h3><p data-i18n="n2.p">The logo is never rotated, stretched, given gradients or shadows, or set in colours outside the palette — keeping every application consistent.</p></div>
+    </div>
+    <figure class="c-fig c-full" data-reveal style="margin-top: clamp(40px, 6vh, 72px)">
+      <img src="../assets/Yamor/web/7.jpg" srcset="../assets/Yamor/web/7-m.jpg 1000w, ../assets/Yamor/web/7.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="Examples of incorrect logo usage">
+      <figcaption data-i18n="cap.rules">Usage rules</figcaption>
+    </figure>
+  </section>
+
+  <!-- 02 COLOUR -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Colour Palette</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">Five tones drawn from candlelit tables, deep wine and fresh greenery. Sage Green leads, Burgundy and Terracotta add warmth, and Blush and Ivory keep everything soft and luminous.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette" role="list" aria-label="Colour palette">
+      <button class="swatch" role="listitem" type="button" data-hex="#2C3C33" style="--c:#2c3c33"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Sage Green</b><small dir="ltr">#2C3C33<br>RGB 44 · 60 · 51<br>CMYK 73 · 55 · 70 · 55</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#720B0A" style="--c:#720b0a"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Burgundy</b><small dir="ltr">#720B0A<br>RGB 114 · 11 · 10<br>CMYK 31 · 100 · 100 · 44</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#C3592B" style="--c:#c3592b"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Terracotta</b><small dir="ltr">#C3592B<br>RGB 195 · 89 · 43<br>CMYK 17 · 77 · 99 · 5</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#EDC8B5" style="--c:#edc8b5; --t:#2c3c33"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Blush</b><small dir="ltr">#EDC8B5<br>RGB 237 · 200 · 181<br>CMYK 5 · 23 · 25 · 0</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#F0E0D0" style="--c:#f0e0d0; --t:#2c3c33"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c5">Ivory</b><small dir="ltr">#F0E0D0<br>RGB 240 · 224 · 208<br>CMYK 4 · 11 · 16 · 0</small></button>
+    </div>
+  </section>
+
+  <!-- Logo on every palette colour: pinned horizontal gallery, background follows the slide -->
+  <section class="c-hscroll" style="background:#2c3c33; color:#f0e0d0">
+    <div class="h-inner">
+      <div class="container h-head">
+        <h2 class="ch-title" data-split data-i18n="h.title">One mark, every mood</h2>
+        <span class="h-count" dir="ltr">01 / 06</span>
+      </div>
+      <div class="h-track">
+        <div class="h-slide" data-color="#2c3c33" data-ink="#f0e0d0"><figure class="c-fig"><img src="../assets/Yamor/web/10.jpg" srcset="../assets/Yamor/web/10-m.jpg 1000w, ../assets/Yamor/web/10.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in ivory on sage green"></figure><p data-i18n="s1">Ivory on Sage</p></div>
+        <div class="h-slide" data-color="#720b0a" data-ink="#f0e0d0"><figure class="c-fig"><img src="../assets/Yamor/web/11.jpg" srcset="../assets/Yamor/web/11-m.jpg 1000w, ../assets/Yamor/web/11.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in ivory on burgundy"></figure><p data-i18n="s2">Ivory on Burgundy</p></div>
+        <div class="h-slide" data-color="#c3592b" data-ink="#fff"><figure class="c-fig"><img src="../assets/Yamor/web/12.jpg" srcset="../assets/Yamor/web/12-m.jpg 1000w, ../assets/Yamor/web/12.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in ivory on terracotta"></figure><p data-i18n="s3">Ivory on Terracotta</p></div>
+        <div class="h-slide" data-color="#edc8b5" data-ink="#2c3c33"><figure class="c-fig"><img src="../assets/Yamor/web/13.jpg" srcset="../assets/Yamor/web/13-m.jpg 1000w, ../assets/Yamor/web/13.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in sage on blush"></figure><p data-i18n="s4">Sage on Blush</p></div>
+        <div class="h-slide" data-color="#f0e0d0" data-ink="#2c3c33"><figure class="c-fig"><img src="../assets/Yamor/web/14.jpg" srcset="../assets/Yamor/web/14-m.jpg 1000w, ../assets/Yamor/web/14.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in sage on ivory"></figure><p data-i18n="s5">Sage on Ivory</p></div>
+        <div class="h-slide" data-color="#1f2b24" data-ink="#e2c48a"><figure class="c-fig"><img src="../assets/Yamor/web/15.jpg" srcset="../assets/Yamor/web/15-m.jpg 1000w, ../assets/Yamor/web/15.jpg 2400w" sizes="(max-width: 767px) 88vw, 64vw" width="2400" height="1375" loading="lazy" alt="YAMOR logo in gold foil on sage green"></figure><p data-i18n="s6">Gold foil on Sage</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 BRANDMARKS -->
+  <section class="c-section container" id="marks">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Brandmarks</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Beyond the logotype, two marks extend the identity to every size and surface.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Yamor/web/17.jpg" srcset="../assets/Yamor/web/17-m.jpg 1000w, ../assets/Yamor/web/17.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR brand submark and primary icon">
+    </figure>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n3.h">Brand submark</h3><p data-i18n="n3.p">An artistic seal and decorative element for premium print — wax seals, business cards, packaging and subtle watermarks. Its intricate details are reserved for larger sizes.</p></div>
+      <div data-fade><h3 data-i18n="n4.h">Primary icon</h3><p data-i18n="n4.p">A minimal Y for small and digital spaces such as favicons, apps and social profile pictures, ensuring maximum clarity and instant recognition.</p></div>
+    </div>
+  </section>
+
+  <!-- 04 TYPOGRAPHY -->
+  <section class="c-section container" id="type">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Typography</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">A pairing of artistic display capitals and a versatile sans-serif — one for presence, one for clarity.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-type">
+      <div class="spec aboreto" style="--spec-bg:#2c3c33; --spec-fg:#f0e0d0">
+        <span class="spec-name" data-i18n="sp1.name">Aboreto — Primary</span>
+        <p class="spec-glyph" dir="ltr">AB</p>
+        <p class="spec-alpha" dir="ltr">ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789</p>
+        <p class="spec-desc" data-i18n="sp1.desc">An artistic, all-caps typeface with refined, light strokes that embody understated luxury. Reserved for the logotype, headlines, premium event names and key brand statements.</p>
+      </div>
+      <div class="spec ancizar" style="--spec-bg:#720b0a; --spec-fg:#f0e0d0">
+        <span class="spec-name" data-i18n="sp2.name">Ancizar Sans — Secondary</span>
+        <p class="spec-glyph" dir="ltr">Aa</p>
+        <div class="spec-weights" dir="ltr"><span style="font-weight:300">Light</span><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:600">SemiBold</span><span style="font-weight:700">Bold</span></div>
+        <p class="spec-desc" data-i18n="sp2.desc">A complete range of weights for subheadings, body text, event details and editorial layouts, ensuring maximum legibility.</p>
+      </div>
+    </div>
+    <div class="c-type-line" aria-hidden="true"><span data-i18n="statement">More than planning — we craft moments into masterpieces.</span></div>
+    <figure class="c-fig c-full" data-reveal style="margin-top: clamp(40px, 6vh, 72px)">
+      <img src="../assets/Yamor/web/21.jpg" srcset="../assets/Yamor/web/21-m.jpg 1000w, ../assets/Yamor/web/21.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="Font usage hierarchy example">
+      <figcaption data-i18n="cap.type">Typography in use</figcaption>
+    </figure>
+  </section>
+
+  <!-- 05 ILLUSTRATIONS & PATTERN (page turns sage green) -->
+  <section class="c-section container" id="illustrations" data-theme-bg="#2c3c33" data-theme-fg="#f0e0d0">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">05</span>
+      <h2 class="ch-title" data-split data-i18n="ch5.title">Illustrations &amp; Pattern</h2>
+      <p class="ch-text" data-fade data-i18n="ch5.text">A hand-drawn line illustration set — toasting glasses, candles, florals and fruit — brings warmth and a personal touch, while monogram patterns wrap cards, packaging and backgrounds.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Yamor/web/23.jpg" srcset="../assets/Yamor/web/23-m.jpg 1000w, ../assets/Yamor/web/23.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="Line illustrations of hands toasting with glasses">
+      <figcaption data-i18n="cap.toast">Celebration</figcaption>
+    </figure>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal>
+        <img src="../assets/Yamor/web/26.jpg" srcset="../assets/Yamor/web/26-m.jpg 1000w, ../assets/Yamor/web/26.jpg 2400w" sizes="(max-width: 767px) 88vw, 43vw" width="2400" height="1375" loading="lazy" alt="YAMOR wordmark pattern in blush and sage">
+        <figcaption data-i18n="cap.pattern1">Wordmark pattern</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal>
+        <img src="../assets/Yamor/web/27.jpg" srcset="../assets/Yamor/web/27-m.jpg 1000w, ../assets/Yamor/web/27.jpg 2400w" sizes="(max-width: 767px) 88vw, 43vw" width="2400" height="1375" loading="lazy" alt="YAMOR monogram pattern">
+        <figcaption data-i18n="cap.pattern2">Monogram pattern</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 06 APPLICATIONS: stacked cards -->
+  <section class="c-section container" id="applications">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">06</span>
+      <h2 class="ch-title" data-split data-i18n="ch6.title">Applications</h2>
+      <p class="ch-text" data-fade data-i18n="ch6.text">From thank-you cards and stationery to a curated Instagram presence, every touchpoint carries the same quiet elegance.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-stack">
+      <div class="stack-card"><div class="label"><span data-i18n="a1">Thank-you cards</span><span dir="ltr">01</span></div><figure class="c-fig"><img src="../assets/Yamor/web/29.jpg" srcset="../assets/Yamor/web/29-m.jpg 1000w, ../assets/Yamor/web/29.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR thank-you cards with ribbon"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a1">Thank-you cards</span><span dir="ltr">02</span></div><figure class="c-fig"><img src="../assets/Yamor/web/30.jpg" srcset="../assets/Yamor/web/30-m.jpg 1000w, ../assets/Yamor/web/30.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR thank-you card front and back"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a3">Business cards</span><span dir="ltr">03</span></div><figure class="c-fig"><img src="../assets/Yamor/web/31.jpg" srcset="../assets/Yamor/web/31-m.jpg 1000w, ../assets/Yamor/web/31.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR business cards"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a4">Corporate stationery</span><span dir="ltr">04</span></div><figure class="c-fig"><img src="../assets/Yamor/web/33.jpg" srcset="../assets/Yamor/web/33-m.jpg 1000w, ../assets/Yamor/web/33.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR corporate stationery set"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a6">Instagram profile</span><span dir="ltr">05</span></div><figure class="c-fig"><img src="../assets/Yamor/web/36.jpg" srcset="../assets/Yamor/web/36-m.jpg 1000w, ../assets/Yamor/web/36.jpg 2400w" sizes="88vw" width="2400" height="1375" loading="lazy" alt="YAMOR Instagram profile layout"></figure></div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="c-quote plain" aria-label="Thanks for watching">
+    <img src="../assets/Yamor/web/37.jpg" srcset="../assets/Yamor/web/37-m.jpg 1000w, ../assets/Yamor/web/37.jpg 2400w" sizes="100vw" width="2400" height="1354" loading="lazy" alt="Closing slide: thanks for watching, over sage green and palm leaves">
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="bloom.html" data-transition data-wipe="#b5a48b" data-wipe-label="Bloom &amp; Beyond" style="--f-next:'Marcellus', serif">
+      <span class="next-title" dir="ltr">Bloom &amp; Beyond</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Bloom/web/1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'YAMOR — Markenidentität · Reem Deeb',
+      kicker: 'Markenidentität &amp; Guidelines',
+      'm.industry': 'Luxus-Eventplanung', 'm.services': 'Logo, visuelle Identität, Brand Guidelines',
+      'l.scope': 'Umfang', 'm.scope': 'Print, Geschäftsausstattung &amp; Social Media',
+      statement: 'Mehr als Planung – wir machen aus Momenten Meisterwerke.',
+      lead: 'YAMOR ist eine luxuriöse Eventplanungsmarke, die Feiern auf ein neues Niveau hebt und unvergessliche, exklusive Erlebnisse schafft. Die Identität basiert auf zurückhaltendem Luxus: anspruchsvolle Typografie, eine edle, organische Farbpalette und elegante botanische Details – vom Logo bis zu jeder Einladung, Karte und jedem Post.',
+      li1: 'Logo &amp; Markenzeichen', li2: 'Farbpalette', li3: 'Typografie', li4: 'Illustrationen &amp; Muster', li5: 'Geschäftsausstattung &amp; Social Media',
+      'ch1.title': 'Das Logo',
+      'ch1.text': 'Ein individuelles Logo, entwickelt aus dem Markennamen selbst. Geschwungene, blattartige Linien an Y und Ō verleihen den Buchstaben botanische Leichtigkeit – das Zeichen ist klar lesbar und vermittelt unmittelbar Identität und Werte der Marke.',
+      'cap.primary': 'Primäres Logo', 'cap.clear': 'Schutzzone', 'cap.variations': 'Logovarianten', 'cap.rules': 'Anwendungsregeln',
+      'n1.h': 'Schutzzone', 'n1.p': 'Rund um das Logo bleibt eine Schutzzone in der Höhe des Buchstabens X frei, damit kein anderes Element die Lesbarkeit stört und das Logo stets hervorsticht.',
+      'n2.h': 'Anwendungsregeln', 'n2.p': 'Das Logo wird nie gedreht, verzerrt, mit Verläufen oder Schatten versehen oder in Farben außerhalb der Palette gesetzt – so bleibt jede Anwendung konsistent.',
+      'ch2.title': 'Farbpalette',
+      'ch2.text': 'Fünf Töne, inspiriert von Kerzenlicht, tiefem Wein und frischem Grün. Salbeigrün führt, Burgunder und Terrakotta bringen Wärme, Blush und Elfenbein halten alles sanft und strahlend.',
+      c1: 'Salbeigrün', c2: 'Burgunder', c3: 'Terrakotta', c4: 'Blush', c5: 'Elfenbein',
+      'h.title': 'Ein Zeichen, jede Stimmung',
+      s1: 'Elfenbein auf Salbei', s2: 'Elfenbein auf Burgunder', s3: 'Elfenbein auf Terrakotta', s4: 'Salbei auf Blush', s5: 'Salbei auf Elfenbein', s6: 'Goldfolie auf Salbei',
+      'ch3.title': 'Markenzeichen', 'ch3.text': 'Über das Logo hinaus erweitern zwei Zeichen die Identität auf jede Größe und Oberfläche.',
+      'n3.h': 'Submark', 'n3.p': 'Ein künstlerisches Siegel und dekoratives Element für hochwertige Drucksachen – Wachssiegel, Visitenkarten, Verpackungen und dezente Wasserzeichen. Seine feinen Details sind größeren Formaten vorbehalten.',
+      'n4.h': 'Primäres Icon', 'n4.p': 'Ein minimalistisches Y für kleine und digitale Flächen wie Favicons, Apps und Profilbilder – für maximale Klarheit und sofortige Wiedererkennung.',
+      'ch4.title': 'Typografie', 'ch4.text': 'Ein Zusammenspiel aus künstlerischen Versalien und einer vielseitigen Sans-Serif – eine für Präsenz, eine für Klarheit.',
+      'sp1.name': 'Aboreto — Primär', 'sp1.desc': 'Eine künstlerische Versalschrift mit feinen, leichten Strichen, die zurückhaltenden Luxus verkörpert. Vorbehalten für Logo, Headlines, exklusive Eventnamen und zentrale Markenaussagen.',
+      'sp2.name': 'Ancizar Sans — Sekundär', 'sp2.desc': 'Ein vollständiges Schnittspektrum für Subheadlines, Fließtext, Eventdetails und editoriale Layouts – für maximale Lesbarkeit.',
+      'cap.type': 'Typografie im Einsatz',
+      'ch5.title': 'Illustrationen &amp; Muster', 'ch5.text': 'Ein handgezeichnetes Linien-Set – anstoßende Gläser, Kerzen, Blumen und Früchte – bringt Wärme und eine persönliche Note, während Monogramm-Muster Karten, Verpackungen und Hintergründe umhüllen.',
+      'cap.toast': 'Feier', 'cap.table': 'Tafel &amp; Blumen', 'cap.pattern1': 'Wortmarken-Muster', 'cap.pattern2': 'Monogramm-Muster',
+      'ch6.title': 'Anwendungen', 'ch6.text': 'Von Dankeskarten und Geschäftsausstattung bis zum kuratierten Instagram-Auftritt trägt jeder Kontaktpunkt dieselbe stille Eleganz.',
+      a1: 'Dankeskarten', a3: 'Visitenkarten', a4: 'Geschäftsausstattung', a5: 'Instagram-Feed', a6: 'Instagram-Profil',
+      quote: 'Momente, zu Meisterwerken gemacht.'
+    },
+    ar: {
+      title: 'يامور — هوية تجارية · ريم ديب',
+      kicker: 'هوية تجارية ودليل استخدام',
+      'm.industry': 'تنظيم الفعاليات الفاخرة', 'm.services': 'شعار، هوية بصرية، دليل الهوية',
+      'l.scope': 'النطاق', 'm.scope': 'مطبوعات، قرطاسية ووسائل تواصل اجتماعي',
+      statement: 'أكثر من مجرد تنظيم — نحوّل اللحظات إلى تحف فنية.',
+      lead: 'يامور علامة فاخرة لتنظيم الفعاليات، تهدف إلى الارتقاء بالمناسبات وصناعة تجارب راقية لا تُنسى. بُنيت الهوية على مفهوم الفخامة الهادئة: طباعة أنيقة، ولوحة ألوان عضوية راقية، وتفاصيل نباتية رقيقة تمتد من الشعار إلى كل دعوة وبطاقة ومنشور.',
+      li1: 'الشعار والعلامات', li2: 'لوحة الألوان', li3: 'الخطوط', li4: 'الرسومات والنقوش', li5: 'القرطاسية ووسائل التواصل',
+      'ch1.title': 'الشعار',
+      'ch1.text': 'شعار نصي مخصّص مستوحى من اسم العلامة نفسه. تمنح الخطوط المنحنية الشبيهة بالأوراق على حرفي Y و Ō خفة نباتية، فيُقرأ الشعار بوضوح ويعبّر مباشرة عن هوية العلامة وقيمها.',
+      'cap.primary': 'الشعار الأساسي', 'cap.clear': 'المساحة الآمنة', 'cap.variations': 'نسخ الشعار', 'cap.rules': 'قواعد الاستخدام',
+      'n1.h': 'المساحة الآمنة', 'n1.p': 'تُترك حول الشعار مساحة آمنة تساوي ارتفاع الحرف X من جميع الجهات، حتى لا يعيق أي عنصر آخر وضوحه ويبقى بارزاً دائماً.',
+      'n2.h': 'قواعد الاستخدام', 'n2.p': 'لا يُدار الشعار ولا يُمطّ، ولا تُضاف إليه تدرجات أو ظلال، ولا يُستخدم بألوان خارج اللوحة — ليبقى كل تطبيق متّسقاً.',
+      'ch2.title': 'لوحة الألوان',
+      'ch2.text': 'خمس درجات مستوحاة من موائد الشموع والنبيذ العميق والخضرة النضرة. يتصدّر الأخضر المريمي، ويضيف العنابي والتيراكوتا الدفء، بينما يحافظ الوردي الناعم والعاجي على النعومة والإشراق.',
+      c1: 'أخضر مريمي', c2: 'عنابي', c3: 'تيراكوتا', c4: 'وردي ناعم', c5: 'عاجي',
+      'h.title': 'علامة واحدة، لكل مزاج',
+      s1: 'عاجي على الأخضر', s2: 'عاجي على العنابي', s3: 'عاجي على التيراكوتا', s4: 'أخضر على الوردي', s5: 'أخضر على العاجي', s6: 'ذهبي على الأخضر',
+      'ch3.title': 'العلامات المساندة', 'ch3.text': 'إلى جانب الشعار النصي، توسّع علامتان الهوية لتناسب كل حجم وسطح.',
+      'n3.h': 'العلامة الفرعية', 'n3.p': 'ختم فني وعنصر زخرفي للمطبوعات الفاخرة — أختام الشمع وبطاقات العمل والتغليف والعلامات المائية الخفيفة. تفاصيله الدقيقة مخصّصة للأحجام الكبيرة.',
+      'n4.h': 'الأيقونة الأساسية', 'n4.p': 'حرف Y بسيط للمساحات الصغيرة والرقمية مثل أيقونات المواقع والتطبيقات وصور الحسابات، لضمان أقصى وضوح وتعرّف فوري.',
+      'ch4.title': 'الخطوط', 'ch4.text': 'ثنائية من الأحرف الكبيرة الفنية وخط بلا تذييل متعدد الاستخدامات — أحدهما للحضور والآخر للوضوح.',
+      'sp1.name': 'Aboreto — الخط الأساسي', 'sp1.desc': 'خط فني بأحرف كبيرة وضربات رقيقة خفيفة يجسّد الفخامة الهادئة. يُستخدم للشعار والعناوين الرئيسية وأسماء الفعاليات الفاخرة والعبارات الأساسية للعلامة.',
+      'sp2.name': 'Ancizar Sans — الخط الثانوي', 'sp2.desc': 'مجموعة كاملة من الأوزان للعناوين الفرعية والنصوص وتفاصيل الفعاليات والتخطيطات التحريرية، لضمان أقصى درجات الوضوح.',
+      'cap.type': 'الخطوط قيد الاستخدام',
+      'ch5.title': 'الرسومات والنقوش', 'ch5.text': 'مجموعة رسومات خطية مرسومة يدوياً — كؤوس تتلاقى وشموع وزهور وفواكه — تضفي دفئاً ولمسة شخصية، بينما تغلّف نقوش المونوغرام البطاقات والتغليف والخلفيات.',
+      'cap.toast': 'احتفال', 'cap.table': 'المائدة والزهور', 'cap.pattern1': 'نقش الشعار', 'cap.pattern2': 'نقش المونوغرام',
+      'ch6.title': 'التطبيقات', 'ch6.text': 'من بطاقات الشكر والقرطاسية إلى حضور منسّق على إنستغرام، تحمل كل نقطة تواصل الأناقة الهادئة نفسها.',
+      a1: 'بطاقات شكر', a3: 'بطاقات عمل', a4: 'القرطاسية', a5: 'منشورات إنستغرام', a6: 'حساب إنستغرام',
+      quote: 'لحظات، صيغت تحفاً فنية.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

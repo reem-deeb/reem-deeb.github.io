@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom &amp; Beyond — Brand Identity · Reem Deeb</title>
+<meta name="description" content="Bloom & Beyond brand identity by Reem Deeb: monogram logo, monochrome palette, typography, signage, stationery and merchandise for a Dubai interior design studio.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Marcellus&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #eeece8; --fg: #141414; --muted: #9b928a; --accent: #8a7a63;
+    --f-brand: 'Marcellus', 'IBM Plex Sans Arabic', serif;
+    --title-track: .03em;
+  }
+  .c-title { font-size: clamp(48px, 8.2vw, 168px); }
+  /* Warm overlay on the light interior photo so the white title and details stand out */
+  .c-hero-media::after {
+    background:
+      linear-gradient(0deg, rgba(38, 31, 25, .9) 0%, rgba(38, 31, 25, .55) 40%, rgba(38, 31, 25, .18) 72%, rgba(38, 31, 25, .38) 100%),
+      rgba(38, 31, 25, .22);
+  }
+  .c-palette.duo-tone { height: clamp(260px, 42vh, 420px); }
+  .swatch.light { box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+  .spec.marcellus .spec-glyph, .spec.marcellus .spec-alpha { font-family: 'Marcellus', serif; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#b5a48b" aria-hidden="true"><span>Bloom &amp; Beyond</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Bloom/web/section1.jpg" srcset="../assets/Bloom/web/section1-m.jpg 1000w, ../assets/Bloom/web/section1.jpg 2400w" sizes="100vw" width="2400" height="1513" fetchpriority="high" alt="Serene cream interior with arched alcoves, a sculptural armchair and dried flowers">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; brand identity</p>
+      <h1 class="c-title" dir="ltr" data-chars>Bloom &amp; Beyond</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Bloom &amp; Beyond</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Architecture &amp; interior design</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, stationery</dd></div>
+        <div><dt data-i18n="ui.location">Location</dt><dd data-i18n="m.location">Dubai, UAE</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Beauty — and everything beyond it.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Bloom &amp; Beyond is an interior design and execution company based in Dubai. It brings clients’ visions of beautiful, functional spaces to life through a comprehensive and thoughtful process that promises an exceptional result. The identity had to feel as considered as the interiors themselves: calm, refined and timeless.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo &amp; monogram</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour &amp; typography</span><span>02</span></li>
+        <li><span data-i18n="li3">Signage</span><span>03</span></li>
+        <li><span data-i18n="li4">Stationery &amp; merchandise</span><span>04</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/Bloom/web/1.jpg" srcset="../assets/Bloom/web/1-m.jpg 1000w, ../assets/Bloom/web/1.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond logo on a warm yellow living room wall">
+    </figure>
+  </section>
+
+  <!-- 01 LOGO -->
+  <section class="c-section container" id="logo">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Monogram</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The name carries a beautiful meaning: the studio’s work is not limited to beauty, but goes beyond it — to quality craftsmanship and attention to detail. The monogram expresses exactly that, combining two letters B, one set behind the other.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Bloom/web/3.jpg" srcset="../assets/Bloom/web/3-m.jpg 1000w, ../assets/Bloom/web/3.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond monogram concept with explanation">
+      <figcaption data-i18n="cap.concept">Monogram concept</figcaption>
+    </figure>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4">
+        <img src="../assets/Bloom/web/4.jpg" srcset="../assets/Bloom/web/4-m.jpg 1000w, ../assets/Bloom/web/4.jpg 1920w" sizes="(max-width: 767px) 88vw, 43vw" width="1920" height="1271" loading="lazy" alt="Logo construction lines, colours and Marcellus typeface">
+        <figcaption data-i18n="cap.construction">Construction</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal data-speed="-4">
+        <img src="../assets/Bloom/web/2.jpg" srcset="../assets/Bloom/web/2-m.jpg 1000w, ../assets/Bloom/web/2.jpg 1920w" sizes="(max-width: 767px) 88vw, 43vw" width="1920" height="1271" loading="lazy" alt="About the company presentation slide next to an interior">
+        <figcaption data-i18n="cap.about">The studio</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 COLOUR & TYPE -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Colour &amp; Type</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">A strictly monochrome palette lets the interiors take centre stage, paired with Marcellus — a flared, classical serif inspired by Roman inscriptions.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette duo-tone" role="list" aria-label="Colour palette">
+      <button class="swatch" role="listitem" type="button" data-hex="#111111" style="--c:#111111"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Onyx</b><small dir="ltr">#111111<br>RGB 17 · 17 · 17</small></button>
+      <button class="swatch light" role="listitem" type="button" data-hex="#FFFFFF" style="--c:#ffffff; --t:#111"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">White</b><small dir="ltr">#FFFFFF<br>RGB 255 · 255 · 255</small></button>
+    </div>
+    <div class="c-type" style="margin-top: clamp(20px, 3vw, 40px)">
+      <div class="spec marcellus" style="--spec-bg:#111; --spec-fg:#f4f2ee">
+        <span class="spec-name" data-i18n="sp1.name">Marcellus — Primary</span>
+        <p class="spec-glyph" dir="ltr">Bb</p>
+        <p class="spec-alpha" dir="ltr">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz</p>
+        <p class="spec-desc" data-i18n="sp1.desc">Its flared strokes and generous proportions give the wordmark a timeless, architectural elegance that sits naturally beside the monogram.</p>
+      </div>
+      <figure class="c-fig" data-reveal>
+        <img src="../assets/Bloom/web/5.jpg" srcset="../assets/Bloom/web/5-m.jpg 1000w, ../assets/Bloom/web/5.jpg 1920w" sizes="(max-width: 1024px) 88vw, 43vw" width="1920" height="1271" loading="lazy" alt="Logo in black on white and white on black">
+        <figcaption data-i18n="cap.versions">Positive &amp; negative</figcaption>
+      </figure>
+    </div>
+    <div class="c-type-line" aria-hidden="true"><span dir="ltr">Bloom &amp; Beyond — Bloom &amp; Beyond</span></div>
+  </section>
+
+  <!-- SIGNAGE: full-bleed statement -->
+  <section class="c-quote">
+    <img src="../assets/Bloom/web/6.jpg" srcset="../assets/Bloom/web/6-m.jpg 1000w, ../assets/Bloom/web/6.jpg 1920w" sizes="100vw" width="1920" height="1271" loading="lazy" alt="Dimensional Bloom &amp; Beyond sign on a reception wall">
+    <p data-split data-i18n="quote">Designed for the space it lives in.</p>
+  </section>
+
+  <!-- 03 APPLICATIONS (page turns black) -->
+  <section class="c-section container" id="applications" data-theme-bg="#111111" data-theme-fg="#efede9">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Applications</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">From business cards and letterheads to merchandise and social media, the monogram travels with the same quiet confidence.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-stack">
+      <div class="stack-card"><div class="label"><span data-i18n="a1">Business cards</span><span dir="ltr">01</span></div><figure class="c-fig"><img src="../assets/Bloom/web/7.jpg" srcset="../assets/Bloom/web/7-m.jpg 1000w, ../assets/Bloom/web/7.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond business cards"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a2">Stationery</span><span dir="ltr">02</span></div><figure class="c-fig"><img src="../assets/Bloom/web/8.jpg" srcset="../assets/Bloom/web/8-m.jpg 1000w, ../assets/Bloom/web/8.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond stationery set"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a3">Merchandise</span><span dir="ltr">03</span></div><figure class="c-fig"><img src="../assets/Bloom/web/9.jpg" srcset="../assets/Bloom/web/9-m.jpg 1000w, ../assets/Bloom/web/9.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond T-shirt and mugs"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="a4">Social media</span><span dir="ltr">04</span></div><figure class="c-fig"><img src="../assets/Bloom/web/10.jpg" srcset="../assets/Bloom/web/10-m.jpg 1000w, ../assets/Bloom/web/10.jpg 1920w" sizes="88vw" width="1920" height="1271" loading="lazy" alt="Bloom &amp; Beyond Facebook page on a tablet"></figure></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="boundless.html" data-transition data-wipe="#2f6f5c" data-wipe-label="Boundless Box" style="--f-next:'Michroma', sans-serif">
+      <span class="next-title" dir="ltr" style="font-size: clamp(40px, 7.5vw, 140px)">Boundless Box</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Boundless/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Bloom &amp; Beyond — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Markenidentität',
+      'm.industry': 'Architektur &amp; Innenarchitektur', 'm.services': 'Logo, visuelle Identität, Geschäftsausstattung', 'm.location': 'Dubai, VAE',
+      statement: 'Schönheit – und alles, was darüber hinausgeht.',
+      lead: 'Bloom &amp; Beyond ist ein Unternehmen für Innenarchitektur und Ausführung mit Sitz in Dubai. Es verwirklicht die Visionen seiner Kunden von schönen, funktionalen Räumen – mit einem umfassenden, durchdachten Prozess, der ein außergewöhnliches Ergebnis verspricht. Die Identität sollte sich so bewusst gestaltet anfühlen wie die Räume selbst: ruhig, edel und zeitlos.',
+      li1: 'Logo &amp; Monogramm', li2: 'Farbe &amp; Typografie', li3: 'Beschilderung', li4: 'Geschäftsausstattung &amp; Merchandise',
+      'ch1.title': 'Das Monogramm',
+      'ch1.text': 'Der Name trägt eine schöne Bedeutung: Die Arbeit des Studios endet nicht bei der Schönheit, sondern geht darüber hinaus – zu hochwertiger Handwerkskunst und Liebe zum Detail. Genau das drückt das Monogramm aus: zwei Buchstaben B, der eine hinter dem anderen.',
+      'cap.concept': 'Monogramm-Konzept', 'cap.construction': 'Konstruktion', 'cap.about': 'Das Studio',
+      'ch2.title': 'Farbe &amp; Schrift',
+      'ch2.text': 'Eine streng monochrome Palette rückt die Räume in den Mittelpunkt – kombiniert mit Marcellus, einer klassischen Serifenschrift nach dem Vorbild römischer Inschriften.',
+      c1: 'Onyx', c2: 'Weiß',
+      'sp1.name': 'Marcellus — Primär', 'sp1.desc': 'Ihre ausgestellten Striche und großzügigen Proportionen verleihen der Wortmarke eine zeitlose, architektonische Eleganz, die sich natürlich neben das Monogramm fügt.',
+      'cap.versions': 'Positiv &amp; negativ',
+      quote: 'Gestaltet für den Raum, in dem sie lebt.',
+      'ch3.title': 'Anwendungen', 'ch3.text': 'Von Visitenkarten und Briefpapier bis zu Merchandise und Social Media – das Monogramm tritt überall mit derselben ruhigen Selbstverständlichkeit auf.',
+      a1: 'Visitenkarten', a2: 'Geschäftsausstattung', a3: 'Merchandise', a4: 'Social Media'
+    },
+    ar: {
+      title: 'بلوم آند بيوند — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية تجارية',
+      'm.industry': 'هندسة معمارية وتصميم داخلي', 'm.services': 'شعار، هوية بصرية، قرطاسية', 'm.location': 'دبي، الإمارات',
+      statement: 'الجمال — وكل ما يتجاوزه.',
+      lead: 'بلوم آند بيوند شركة للتصميم الداخلي والتنفيذ مقرّها دبي، تحوّل رؤى عملائها إلى مساحات جميلة وعملية من خلال منهجية شاملة ومدروسة تضمن نتيجة استثنائية. كان على الهوية أن تبدو مدروسة بقدر المساحات نفسها: هادئة وراقية وخالدة.',
+      li1: 'الشعار والمونوغرام', li2: 'الألوان والخطوط', li3: 'اللافتات', li4: 'القرطاسية والمنتجات',
+      'ch1.title': 'المونوغرام',
+      'ch1.text': 'يحمل الاسم معنى جميلاً: عمل الاستوديو لا يقتصر على الجمال، بل يتجاوزه إلى جودة التنفيذ والاهتمام بالتفاصيل. وهذا تماماً ما يعبّر عنه المونوغرام، إذ يجمع حرفين B أحدهما خلف الآخر.',
+      'cap.concept': 'فكرة المونوغرام', 'cap.construction': 'البناء الهندسي', 'cap.about': 'الاستوديو',
+      'ch2.title': 'الألوان والخطوط',
+      'ch2.text': 'لوحة ألوان أحادية صارمة تترك الصدارة للمساحات الداخلية، مع خط Marcellus — خط كلاسيكي بتذييل مستوحى من النقوش الرومانية.',
+      c1: 'أسود', c2: 'أبيض',
+      'sp1.name': 'Marcellus — الخط الأساسي', 'sp1.desc': 'تمنح ضرباته المتّسعة ونسبه السخيّة الشعار النصي أناقة معمارية خالدة تنسجم بطبيعية مع المونوغرام.',
+      'cap.versions': 'النسخة الفاتحة والداكنة',
+      quote: 'صُمّم للمكان الذي يعيش فيه.',
+      'ch3.title': 'التطبيقات', 'ch3.text': 'من بطاقات العمل والأوراق الرسمية إلى المنتجات ووسائل التواصل الاجتماعي، يرافق المونوغرام كل تطبيق بالثقة الهادئة نفسها.',
+      a1: 'بطاقات عمل', a2: 'القرطاسية', a3: 'منتجات', a4: 'وسائل التواصل'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

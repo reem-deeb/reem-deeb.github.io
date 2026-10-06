@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boundless Box — Brand Identity · Reem Deeb</title>
+<meta name="description" content="Boundless Box brand identity by Reem Deeb: logo, variations, colour palette, typography and social media for an architecture and 3ds Max tutorial channel.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #0f1110; --fg: #efefef; --muted: #6d7a75; --accent: #34f5c6;
+    --f-brand: 'Michroma', 'IBM Plex Sans Arabic', sans-serif;
+    --f-body: 'Source Sans 3', 'Andika', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .02em; --ch-transform: none;
+  }
+  /* Two-line title like the logo: BOUNDLESS with BOX aligned to its end */
+  .c-title.two { display: inline-flex; flex-direction: column; align-items: flex-end; font-size: clamp(44px, 8.4vw, 168px); line-height: 1; }
+  .c-title.two > span { display: block; }
+
+  /* Arched interiors beside the brand notes */
+  .arches { display: grid; grid-template-columns: 1fr .82fr .78fr; gap: clamp(20px, 3vw, 48px); align-items: start; }
+  .arch-copy { display: flex; flex-direction: column; gap: 40px; padding-top: 4vh; }
+  .arch-note h3 { margin: 0 0 10px; font: 400 18px/1.3 var(--f-brand); color: var(--accent); }
+  .arch-note p { margin: 0; font-size: 17px; line-height: 1.7; color: rgba(239,239,239,.82); max-width: 42ch; }
+  .arch { position: relative; margin: 0; }
+  .arch img { width: 100%; height: auto; }
+  .arch + .arch { margin-top: clamp(80px, 16vh, 200px); }
+
+  /* The open box + slogan */
+  .c-slogan { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .open-box { width: clamp(140px, 18vw, 240px); height: auto; margin-bottom: clamp(32px, 6vh, 64px); overflow: visible; }
+  .open-box line { stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; fill: none; }
+  .open-box .box-face { fill: var(--accent); transform-origin: 132px 118px; }
+  .slogan { margin: 0; max-width: 16ch; font: 400 clamp(36px, 6vw, 108px)/1.1 var(--f-brand); }
+  .c-type.single { grid-template-columns: 1fr; }
+  .c-type.single .spec { min-height: 360px; }
+  @media (max-width: 767px) {
+    .c-title.two { font-size: 15vw; }
+    .arches { grid-template-columns: 1fr 1fr; }
+    .arch-copy { grid-column: 1 / -1; padding-top: 0; }
+    .arch + .arch { margin-top: 48px; }
+  }
+  .c-statement { font-size: clamp(30px, 4vw, 72px); line-height: 1.15; max-width: 18ch; }
+  .ch-title { font-size: clamp(30px, 3.4vw, 62px); }
+  .ch-num { -webkit-text-stroke-color: rgba(52, 245, 198, .45); }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.2) 100%); }
+  .spec.source .spec-glyph, .spec.source .spec-alpha { font-family: 'Source Sans 3', sans-serif; }
+  .spec.source .spec-glyph { font-style: italic; font-weight: 400; }
+  .c-fig.center { max-width: 960px; margin-inline: auto; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#2f6f5c" aria-hidden="true"><span>Boundless Box</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero" style="--hero-pos: 50% 35%">
+    <div class="c-hero-media">
+      <img src="../assets/Boundless/web/hero.jpg" srcset="../assets/Boundless/web/hero-m.jpg 1000w, ../assets/Boundless/web/hero.jpg 1920w" sizes="100vw" width="1920" height="1872" fetchpriority="high" alt="Glowing mint green light streaks on black">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; personal brand</p>
+      <h1 class="c-title two" dir="ltr" aria-label="Boundless Box"><span data-chars>Boundless</span><span data-chars>Box</span></h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Boundless Box</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Architecture &amp; 3D education</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, social media</dd></div>
+        <div><dt data-i18n="l.platforms">Platforms</dt><dd>YouTube, Instagram, TikTok</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">A channel for ideas without limits.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Boundless Box is a tutorial channel about architecture — videos on engineering software like 3ds Max, essential tips and a gallery of the best designs. The identity combines high-tech geometric shapes with vibrant light to give the channel a modern, authoritative and engaging presence across YouTube, Instagram and TikTok.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo concept</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour &amp; typography</span><span>02</span></li>
+        <li><span data-i18n="li3">Brand statement</span><span>03</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 01 LOGO -->
+  <section class="c-section container" id="logo">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">A box with open corners</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">A personal brand for a channel that teaches architecture and 3D visualisation, built around one simple, open shape.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="arches">
+      <div class="arch-copy">
+        <div class="arch-note" data-fade>
+          <h3 data-i18n="n1.h">The name</h3>
+          <p data-i18n="n1.p">Chosen to express the idea of unlimited ideas, especially in the architectural field: learning, sharing and designing without limits.</p>
+        </div>
+        <div class="arch-note" data-fade>
+          <h3 data-i18n="n2.h">The mark</h3>
+          <p data-i18n="n2.p">A box whose corners are left open, a visual sign of distinctive ideas that live outside the box. One face is filled with light, like a model coming to life in the viewport.</p>
+        </div>
+      </div>
+      <figure class="arch" data-arch data-speed="-6">
+        <img src="../assets/Boundless/web/arch-kitchen.png" width="530" height="875" loading="lazy" alt="Warm wooden kitchen interior framed in a mint arch">
+      </figure>
+      <figure class="arch" data-arch data-speed="6">
+        <img src="../assets/Boundless/web/arch-dining.png" width="490" height="848" loading="lazy" alt="Dining room interior framed in a mint arch, with a video play icon">
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 COLOUR & TYPE -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Light on dark</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">Two luminous mints glow against near-black, like light tracing the edges of a 3D model, while a soft grey keeps text calm and readable.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette" role="list" aria-label="Colour palette" style="height: clamp(300px, 50vh, 500px)">
+      <button class="swatch" role="listitem" type="button" data-hex="#34F5C6" style="--c:#34f5c6; --t:#0f1110"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Mint</b><small dir="ltr">#34F5C6<br>RGB 52 · 245 · 198</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#21D0B3" style="--c:#21d0b3; --t:#0f1110"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Teal</b><small dir="ltr">#21D0B3<br>RGB 33 · 208 · 179</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#EFEFEF" style="--c:#efefef; --t:#0f1110"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Light Grey</b><small dir="ltr">#EFEFEF<br>RGB 239 · 239 · 239</small></button>
+    </div>
+    <div class="c-type single" style="margin-top: clamp(20px, 3vw, 40px)">
+      <div class="spec source" style="--spec-bg:#1b1f1d; --spec-fg:#efefef">
+        <span class="spec-name" data-i18n="sp1.name">Source Sans — Typeface</span>
+        <p class="spec-glyph" dir="ltr" style="color:#34f5c6">Aa</p>
+        <p class="spec-alpha" dir="ltr"><i>Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</i></p>
+        <p class="spec-desc" data-i18n="sp1.desc">A clean, highly legible sans-serif, used in regular and italic cuts so tutorial titles and captions stay easy to read on every screen.</p>
+      </div>
+    </div>
+    <div class="c-type-line" aria-hidden="true"><span dir="ltr">Boundless Box — Think outside the box</span></div>
+  </section>
+
+  <!-- 03 STATEMENT: the open box draws itself, then the slogan fills in -->
+  <section class="c-section container c-slogan" id="statement">
+    <svg class="open-box" viewBox="0 0 200 200" aria-hidden="true">
+      <polygon class="box-face" points="165,65 100,100 100,170 165,135"/>
+      <g class="box-lines" data-draw>
+        <line x1="109.1" y1="34.9" x2="155.9" y2="60.1"/><line x1="155.9" y1="69.9" x2="109.1" y2="95.1"/>
+        <line x1="90.9" y1="95.1" x2="44.1" y2="69.9"/><line x1="44.1" y1="60.1" x2="90.9" y2="34.9"/>
+        <line x1="165" y1="74.8" x2="165" y2="125.2"/><line x1="100" y1="109.8" x2="100" y2="160.2"/>
+        <line x1="35" y1="74.8" x2="35" y2="125.2"/><line x1="155.9" y1="139.9" x2="109.1" y2="165.1"/>
+        <line x1="90.9" y1="165.1" x2="44.1" y2="139.9"/>
+      </g>
+    </svg>
+    <p class="slogan" data-fill data-i18n="slogan">Think outside the box. And do it.</p>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="yamor.html" data-transition data-wipe="#2f3f33" data-wipe-label="YAMOR" style="--f-next:'Aboreto', serif">
+      <span class="next-title" dir="ltr">Yamor</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Yamor/web/1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Boundless Box — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Personal Brand',
+      'm.industry': 'Architektur &amp; 3D-Bildung', 'm.services': 'Logo, visuelle Identität, Social Media', 'l.platforms': 'Plattformen',
+      statement: 'Ein Kanal für grenzenlose Ideen.',
+      slogan: 'Denk über den Tellerrand hinaus. Und tu es.',
+      lead: 'Boundless Box ist ein Tutorial-Kanal rund um Architektur – Videos zu Software wie 3ds Max, wichtige Tipps und eine Galerie der besten Entwürfe. Die Identität verbindet geometrische High-Tech-Formen mit leuchtendem Licht und verleiht dem Kanal einen modernen, kompetenten und ansprechenden Auftritt auf YouTube, Instagram und TikTok.',
+      li1: 'Logokonzept', li2: 'Farbe &amp; Typografie', li3: 'Markenbotschaft',
+      'ch1.title': 'Eine Box mit offenen Ecken',
+      'ch1.text': 'Eine Personal Brand für einen Kanal, der Architektur und 3D-Visualisierung vermittelt – aufgebaut auf einer einfachen, offenen Form.',
+      'n1.h': 'Der Name', 'n1.p': 'Gewählt, um die Idee grenzenloser Ideen auszudrücken, besonders in der Architektur: lernen, teilen und gestalten ohne Grenzen.',
+      'n2.h': 'Das Zeichen', 'n2.p': 'Eine Box mit offenen Ecken – ein visuelles Zeichen für außergewöhnliche Ideen jenseits der Box. Eine Fläche ist mit Licht gefüllt, wie ein Modell, das im Viewport zum Leben erwacht.',
+      'ch2.title': 'Licht auf Dunkel',
+      'ch2.text': 'Zwei leuchtende Minttöne strahlen vor fast schwarzem Grund, wie Licht an den Kanten eines 3D-Modells, während ein sanftes Grau Texte ruhig und lesbar hält.',
+      c1: 'Mint', c2: 'Petrol', c3: 'Hellgrau',
+      'sp1.name': 'Source Sans — Schrift', 'sp1.desc': 'Eine klare, sehr gut lesbare Sans-Serif in Regular und Kursiv, damit Tutorial-Titel und Untertitel auf jedem Bildschirm leicht lesbar bleiben.',
+    },
+    ar: {
+      title: 'باوندلس بوكس — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية شخصية',
+      'm.industry': 'العمارة وتعليم التصميم ثلاثي الأبعاد', 'm.services': 'شعار، هوية بصرية، وسائل تواصل', 'l.platforms': 'المنصات',
+      statement: 'قناة لأفكار بلا حدود.',
+      slogan: 'فكّر خارج الصندوق. ثم افعلها.',
+      lead: 'باوندلس بوكس قناة تعليمية عن العمارة — فيديوهات حول برامج هندسية مثل 3ds Max، ونصائح مهمة، ومعرض لأفضل التصاميم. تمزج الهوية بين أشكال هندسية تقنية وضوء نابض، لتمنح القناة حضوراً عصرياً وموثوقاً وجذاباً على يوتيوب وإنستغرام وتيك توك.',
+      li1: 'فكرة الشعار', li2: 'الألوان والخطوط', li3: 'رسالة العلامة',
+      'ch1.title': 'صندوق بزوايا مفتوحة',
+      'ch1.text': 'هوية شخصية لقناة تعلّم العمارة والتصوّر ثلاثي الأبعاد، مبنية حول شكل واحد بسيط ومفتوح.',
+      'n1.h': 'الاسم', 'n1.p': 'اختير ليعبّر عن فكرة الأفكار غير المحدودة، خاصة في المجال المعماري: التعلّم والمشاركة والتصميم بلا حدود.',
+      'n2.h': 'العلامة', 'n2.p': 'صندوق تُركت زواياه مفتوحة، علامة بصرية على أفكار مميزة تعيش خارج الصندوق. وأحد وجوهه مملوء بالضوء، كنموذج يدبّ فيه الحياة على الشاشة.',
+      'ch2.title': 'ضوء على العتمة',
+      'ch2.text': 'درجتان من النعناعي المضيء تتوهّجان على خلفية شبه سوداء، كضوء يرسم حواف نموذج ثلاثي الأبعاد، بينما يحافظ الرمادي الناعم على هدوء النص ووضوحه.',
+      c1: 'نعناعي', c2: 'فيروزي', c3: 'رمادي فاتح',
+      'sp1.name': 'Source Sans — الخط', 'sp1.desc': 'خط واضح وسهل القراءة بلا تذييل، يُستخدم بوزنيه العادي والمائل لتبقى عناوين الدروس والتعليقات سهلة القراءة على كل الشاشات.',
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>
