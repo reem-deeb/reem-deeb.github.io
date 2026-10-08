@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTERNET.com — Brand Identity &amp; Web Interface · Reem Deeb</title>
+<meta name="description" content="INTERNET.com brand identity and web interface by Reem Deeb: logo, landing page, onboarding flow and account dashboard.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Andika:wght@400;700&family=Cormorant+Garamond:wght@500&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f6f5ff; --fg: #1b1940; --muted: #9a95c9; --accent: #6d4df2;
+    --f-brand: 'Alfa Slab One', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Poppins', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: 0; --ch-transform: none;
+    --hero-grad: linear-gradient(120deg, #3f8cff 0%, #6d4df2 55%, #9b3df0 100%);
+  }
+  .c-title { text-transform: none; font-size: clamp(56px, 11vw, 200px); }
+  .c-statement, .ch-title { letter-spacing: 0; }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(20, 12, 60, .55) 0%, rgba(20, 12, 60, 0) 55%); }
+  .ch-num { -webkit-text-stroke-color: rgba(109, 77, 242, .4); }
+  .grad-text { background: linear-gradient(90deg, #3f8cff, #9b3df0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  /* Logo panel */
+  .id-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
+  .logo-panel { position: relative; overflow: hidden; display: grid; place-items: center; aspect-ratio: 16 / 10; border-radius: var(--radius); background: var(--hero-grad); }
+  .logo-panel img { width: 70%; height: auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,.2)); }
+  .logo-panel .orb { position: absolute; border-radius: 50%; filter: blur(50px); opacity: .7; }
+  .id-notes { display: flex; flex-direction: column; gap: 34px; }
+  .id-notes h3 { margin: 0 0 8px; font: 400 22px/1.2 var(--f-brand); color: var(--accent); }
+  .id-notes p { margin: 0; font-size: 15px; line-height: 1.7; color: color-mix(in srgb, var(--page-fg) 78%, transparent); }
+  .ui-tilt.duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 44px); }
+  @media (max-width: 767px) { .id-grid, .ui-tilt.duo { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#6c6cf2" aria-hidden="true"><span>INTERNET.com</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO: animated gradient (no photo) with the logo -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <div class="hero-art" aria-hidden="true">
+        <span class="orb"></span><span class="orb"></span><span class="orb"></span>
+      </div>
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Brand identity &amp; web interface</p>
+      <h1 class="c-title" dir="ltr" data-chars>INTERNET.com</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>INTERNET.com</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Digital identity &amp; email</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Brand identity, landing page, product UI</dd></div>
+        <div><dt data-i18n="l.platform">Platform</dt><dd data-i18n="m.platform">Web</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Own your digital identity.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">INTERNET.com helps people claim a clean, memorable email address — no numbers, no compromises. I designed the visual identity and the complete web experience: a landing page that sells the idea, a four-step onboarding that gets users to their new address in minutes, and a calm account dashboard for everything that comes after.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Brand identity</span><span>01</span></li>
+        <li><span data-i18n="li2">Landing page</span><span>02</span></li>
+        <li><span data-i18n="li3">Onboarding flow</span><span>03</span></li>
+        <li><span data-i18n="li4">Account dashboard</span><span>04</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="4">0</b><span data-i18n="st1">steps from “who are you?” to a working inbox</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="1">0</b><span data-i18n="st2">minute to connect the new address to Gmail, Outlook or Apple Mail</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="50" data-suffix="%">0</b><span data-i18n="st3">of the first year’s fee donated to charity, built into the story</span></div>
+    </div>
+  </section>
+
+  <!-- 01 IDENTITY -->
+  <section class="c-section container" id="identity">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">A name that connects</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The logo combines fluid geometric shapes with bold typography to convey seamless connectivity, accessibility and modern professionalism — on the web and inside the product.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="id-grid">
+      <div class="logo-panel" data-reveal data-cursor="view">
+        <span class="orb" style="width:40%;height:60%;left:-5%;top:-15%;background:#38bdf8"></span>
+        <span class="orb" style="width:35%;height:55%;right:-5%;bottom:-20%;background:#c084fc"></span>
+        <img src="../assets/Internet/web/logo.png" width="478" height="164" alt="INTERNET.com logo">
+      </div>
+      <div class="id-notes">
+        <div data-fade><h3 data-i18n="n1.h">A line that connects</h3><p data-i18n="n1.p">One fluid stroke runs from the @ across the wordmark to the dot of “.com” — a simple picture of seamless connectivity.</p></div>
+        <div data-fade><h3 data-i18n="n2.h">Bold, friendly type</h3><p data-i18n="n2.p">Chunky slab letterforms keep the brand confident and approachable, while a blue-to-violet gradient gives it a modern, digital glow.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 LANDING PAGE: the full page scrolls inside the browser while the section stays pinned -->
+  <section class="ui-scrollshot" data-scrollshot id="landing">
+    <div class="container ss-wrap">
+      <div class="ss-copy">
+        <p class="eyebrow" data-i18n="ch2.eyebrow">02 — Landing page</p>
+        <h2 class="ch-title" data-split data-i18n="ch2.title">One page, one promise</h2>
+        <ol class="ss-marks">
+          <li data-at="0"><b data-i18n="s1.b">Own your digital identity</b><span data-i18n="s1.p">A bold promise and a single clear action: find your perfect email.</span></li>
+          <li data-at=".22"><b data-i18n="s2.b">The benefits</b><span data-i18n="s2.p">Privacy first, works with the apps you already use, and an asset for the future.</span></li>
+          <li data-at=".48"><b data-i18n="s3.b">A purchase to feel good about</b><span data-i18n="s3.p">Half of the first year’s fee goes to charity, turning a purchase into impact.</span></li>
+          <li data-at=".7"><b data-i18n="s4.b">Final call to action</b><span data-i18n="s4.p">A gentle nudge: the best names don’t stay available for long.</span></li>
+          <li data-at=".9"><b data-i18n="s5.b">Footer &amp; newsletter</b><span data-i18n="s5.p">Navigation, newsletter sign-up and social links, kept light.</span></li>
+        </ol>
+      </div>
+      <div class="browser" data-cursor="view">
+        <div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com</span></div>
+        <div class="browser-view ss-view">
+          <img src="../assets/Internet/web/home.jpg" srcset="../assets/Internet/web/home-m.jpg 800w, ../assets/Internet/web/home.jpg 1400w" sizes="(max-width: 767px) 92vw, 55vw" width="1400" height="3598" loading="lazy" alt="INTERNET.com landing page, full length">
+        </div>
+        <span class="ui-thumb" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ONBOARDING: pinned horizontal gallery, the background shifts with each step -->
+  <section class="c-hscroll" style="background:#ece9ff; color:#1b1940">
+    <div class="h-inner">
+      <div class="container h-head">
+        <h2 class="ch-title" data-split data-i18n="h.title">Four steps to a new address</h2>
+        <span class="h-count" dir="ltr">01 / 04</span>
+      </div>
+      <div class="h-track">
+        <div class="h-slide" data-color="#ece9ff" data-ink="#1b1940"><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/start</span></div><img src="../assets/Internet/web/1.jpg" srcset="../assets/Internet/web/1-m.jpg 1000w, ../assets/Internet/web/1.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1006" loading="lazy" alt="Step 1: enter your first and last name"></figure><p data-i18n="h1">01 — Tell us your name</p></div>
+        <div class="h-slide" data-color="#e2eeff" data-ink="#1b1940"><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/choose</span></div><img src="../assets/Internet/web/2.jpg" srcset="../assets/Internet/web/2-m.jpg 1000w, ../assets/Internet/web/2.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1006" loading="lazy" alt="Step 2: choose from suggested email addresses"></figure><p data-i18n="h2">02 — Pick your address</p></div>
+        <div class="h-slide" data-color="#f2e8ff" data-ink="#1b1940"><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/ready</span></div><img src="../assets/Internet/web/4.jpg" srcset="../assets/Internet/web/4-m.jpg 1000w, ../assets/Internet/web/4.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1006" loading="lazy" alt="Step 3: your new email is ready, choose your email app"></figure><p data-i18n="h3">03 — Connect your favourite app</p></div>
+        <div class="h-slide" data-color="#5b3fe0" data-ink="#ffffff"><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/setup/gmail</span></div><img src="../assets/Internet/web/5.jpg" srcset="../assets/Internet/web/5-m.jpg 1000w, ../assets/Internet/web/5.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1006" loading="lazy" alt="Step 4: setup instructions for Gmail"></figure><p data-i18n="h4">04 — Follow the setup guide</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 DASHBOARD -->
+  <section class="c-section container" id="dashboard">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Calm after the sign-up</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">Signing back in takes one screen. The dashboard greets users by name, reminds them of the good their purchase did, and keeps every task — exporting emails, billing, passwords and support — one tap away.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ui-tilt duo">
+      <figure class="c-fig browser" data-tilt><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/login</span></div><img src="../assets/Internet/web/dashboard-1.jpg" srcset="../assets/Internet/web/dashboard-1-m.jpg 1000w, ../assets/Internet/web/dashboard-1.jpg 1800w" sizes="(max-width: 767px) 88vw, 44vw" width="1800" height="1270" loading="lazy" alt="Welcome back sign-in screen"></figure>
+      <figure class="c-fig browser" data-tilt><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">internet.com/account</span></div><img src="../assets/Internet/web/dashboard.jpg" srcset="../assets/Internet/web/dashboard-m.jpg 1000w, ../assets/Internet/web/dashboard.jpg 1800w" sizes="(max-width: 767px) 88vw, 44vw" width="1800" height="1270" loading="lazy" alt="Account dashboard with quick actions"></figure>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="realestate.html" data-transition data-wipe="#c79762" data-wipe-label="Real Estate" style="--f-next:'Cormorant Garamond', serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-size: clamp(48px, 9vw, 170px)">Luxury Real Estate</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Realstate/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'INTERNET.com — Markenidentität &amp; Web-Interface · Reem Deeb',
+      kicker: 'Markenidentität &amp; Web-Interface',
+      'm.industry': 'Digitale Identität &amp; E-Mail', 'm.services': 'Markenidentität, Landingpage, Produkt-UI', 'l.platform': 'Plattform', 'm.platform': 'Web',
+      statement: 'Gestalte deine digitale Identität selbst.',
+      lead: 'INTERNET.com hilft Menschen, sich eine klare, einprägsame E-Mail-Adresse zu sichern – ohne Zahlen, ohne Kompromisse. Ich habe die visuelle Identität und das gesamte Web-Erlebnis gestaltet: eine Landingpage, die die Idee verkauft, ein Onboarding in vier Schritten, das Nutzer in wenigen Minuten zu ihrer neuen Adresse führt, und ein ruhiges Konto-Dashboard für alles, was danach kommt.',
+      li1: 'Markenidentität', li2: 'Landingpage', li3: 'Onboarding-Flow', li4: 'Konto-Dashboard',
+      st1: 'Schritte von „Wer bist du?“ bis zum funktionierenden Postfach', st2: 'Minute, um die neue Adresse mit Gmail, Outlook oder Apple Mail zu verbinden', st3: 'der Gebühr im ersten Jahr gehen an wohltätige Zwecke – Teil der Geschichte',
+      'ch1.title': 'Ein Name, der verbindet', 'ch1.text': 'Das Logo verbindet fließende geometrische Formen mit kräftiger Typografie und vermittelt nahtlose Konnektivität, Zugänglichkeit und moderne Professionalität – im Web wie im Produkt.',
+      'n1.h': 'Eine verbindende Linie', 'n1.p': 'Ein fließender Strich führt vom @ über die Wortmarke bis zum Punkt von „.com“ – ein einfaches Bild für nahtlose Verbindung.',
+      'n2.h': 'Kräftige, freundliche Schrift', 'n2.p': 'Markante Slab-Buchstaben machen die Marke selbstbewusst und nahbar, ein Blau-Violett-Verlauf verleiht ihr ein modernes, digitales Leuchten.',
+      'ch2.eyebrow': '02 — Landingpage', 'ch2.title': 'Eine Seite, ein Versprechen',
+      's1.b': 'Gestalte deine digitale Identität', 's1.p': 'Ein starkes Versprechen und eine klare Aktion: finde deine perfekte E-Mail.',
+      's2.b': 'Die Vorteile', 's2.p': 'Datenschutz zuerst, funktioniert mit den Apps, die du schon nutzt, und eine Investition in die Zukunft.',
+      's3.b': 'Ein Kauf mit gutem Gefühl', 's3.p': 'Die Hälfte der Gebühr im ersten Jahr geht an wohltätige Zwecke – aus einem Kauf wird Wirkung.',
+      's4.b': 'Finaler Call-to-Action', 's4.p': 'Ein sanfter Anstoß: Die besten Namen bleiben nicht lange verfügbar.',
+      's5.b': 'Footer &amp; Newsletter', 's5.p': 'Navigation, Newsletter-Anmeldung und Social Links – bewusst leicht gehalten.',
+      'h.title': 'Vier Schritte zur neuen Adresse',
+      h1: '01 — Namen eingeben', h2: '02 — Adresse wählen', h3: '03 — Lieblings-App verbinden', h4: '04 — Einrichtungsanleitung folgen',
+      'ch4.title': 'Ruhe nach der Anmeldung', 'ch4.text': 'Die erneute Anmeldung braucht nur einen Bildschirm. Das Dashboard begrüßt Nutzer mit Namen, erinnert an das Gute, das ihr Kauf bewirkt hat, und hält jede Aufgabe – E-Mails exportieren, Abrechnung, Passwörter und Support – nur einen Tipp entfernt.'
+    },
+    ar: {
+      title: 'INTERNET.com — هوية تجارية وواجهة ويب · ريم ديب',
+      kicker: 'هوية تجارية وواجهة ويب',
+      'm.industry': 'الهوية الرقمية والبريد الإلكتروني', 'm.services': 'هوية تجارية، صفحة هبوط، واجهة المنتج', 'l.platform': 'المنصة', 'm.platform': 'الويب',
+      statement: 'امتلك هويتك الرقمية.',
+      lead: 'يساعد INTERNET.com الناس على امتلاك عنوان بريد إلكتروني واضح وسهل التذكّر — بلا أرقام وبلا تنازلات. صمّمتُ الهوية البصرية وتجربة الويب كاملة: صفحة هبوط تقدّم الفكرة، ورحلة تسجيل من أربع خطوات توصل المستخدم إلى عنوانه الجديد خلال دقائق، ولوحة حساب هادئة لكل ما يأتي بعد ذلك.',
+      li1: 'الهوية التجارية', li2: 'صفحة الهبوط', li3: 'رحلة التسجيل', li4: 'لوحة الحساب',
+      st1: 'خطوات من «من أنت؟» إلى بريد يعمل', st2: 'دقيقة لربط العنوان الجديد بـ Gmail أو Outlook أو Apple Mail', st3: 'من رسوم السنة الأولى تذهب للأعمال الخيرية، جزء من القصة',
+      'ch1.title': 'اسم يصل بين الناس', 'ch1.text': 'يجمع الشعار بين أشكال هندسية انسيابية وطباعة جريئة ليعبّر عن الاتصال السلس وسهولة الوصول والاحترافية العصرية — على الويب وداخل المنتج.',
+      'n1.h': 'خط يصل', 'n1.p': 'ضربة انسيابية واحدة تمتد من @ عبر الشعار النصي حتى نقطة «.com» — صورة بسيطة للاتصال السلس.',
+      'n2.h': 'خط جريء وودود', 'n2.p': 'أحرف سميكة بتذييل تمنح العلامة ثقة وقرباً، بينما يضفي التدرّج من الأزرق إلى البنفسجي توهّجاً رقمياً عصرياً.',
+      'ch2.eyebrow': '02 — صفحة الهبوط', 'ch2.title': 'صفحة واحدة، ووعد واحد',
+      's1.b': 'امتلك هويتك الرقمية', 's1.p': 'وعد جريء وإجراء واحد واضح: اعثر على بريدك المثالي.',
+      's2.b': 'المزايا', 's2.p': 'الخصوصية أولاً، ويعمل مع التطبيقات التي تستخدمها، واستثمار للمستقبل.',
+      's3.b': 'عملية شراء تشعر بالرضا عنها', 's3.p': 'نصف رسوم السنة الأولى تذهب للأعمال الخيرية، فيتحوّل الشراء إلى أثر.',
+      's4.b': 'الدعوة الأخيرة لاتخاذ إجراء', 's4.p': 'تنبيه لطيف: أفضل الأسماء لا تبقى متاحة طويلاً.',
+      's5.b': 'التذييل والنشرة البريدية', 's5.p': 'التنقّل والاشتراك في النشرة وروابط التواصل، بخفّة.',
+      'h.title': 'أربع خطوات إلى عنوان جديد',
+      h1: '01 — أخبرنا باسمك', h2: '02 — اختر عنوانك', h3: '03 — اربط تطبيقك المفضّل', h4: '04 — اتّبع دليل الإعداد',
+      'ch4.title': 'هدوء بعد التسجيل', 'ch4.text': 'تسجيل الدخول مجدداً يحتاج شاشة واحدة. ترحّب اللوحة بالمستخدم باسمه، وتذكّره بالخير الذي صنعه شراؤه، وتُبقي كل مهمة — تصدير الرسائل والفواتير وكلمات المرور والدعم — على بُعد نقرة.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

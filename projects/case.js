@@ -62,7 +62,7 @@
       // Back to the homepage: land on the project you came from, without replaying the intro.
       try {
         sessionStorage.setItem('langY', sessionStorage.getItem('homeY') || '0');
-        sessionStorage.setItem('tab', 'branding');
+        sessionStorage.setItem('tab', a.dataset.tab || 'branding');
       } catch (err) {}
     }
     leave(a.href, a.dataset.wipe, a.dataset.wipeLabel);
@@ -101,6 +101,7 @@
   var lenis = null;
   if (!reduce && window.Lenis) {
     lenis = new Lenis({ duration: 1.15, easing: x => Math.min(1, 1.001 - Math.pow(2, -10 * x)), smoothWheel: true });
+    window.__lenis = lenis; // shared with ui.js (UI/UX case studies)
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -156,10 +157,15 @@
     const bg = last ? last.dataset.themeBg : base.bg, fg = last ? (last.dataset.themeFg || base.fg) : base.fg;
     gsap.to(document.body, { '--page-bg': bg, '--page-fg': fg, duration: .9, ease: 'power2.out', overwrite: 'auto' });
   };
-  themed.forEach(s => ScrollTrigger.create({
-    trigger: s, start: 'top 55%', end: 'bottom 45%',
-    onToggle: st => { st.isActive ? activeThemes.add(s) : activeThemes.delete(s); applyTheme(); }
-  }));
+  // A themed section switches on when it arrives and off when the next section arrives. Two separate
+  // triggers (each measured on its own element) also cover the extra scroll length of pinned sections.
+  themed.forEach(s => {
+    const on = () => { activeThemes.add(s); applyTheme(); }, off = () => { activeThemes.delete(s); applyTheme(); };
+    const next = s.nextElementSibling;
+    ScrollTrigger.create({ trigger: s, start: 'top 55%', onEnter: on, onLeaveBack: off });
+    if (next) ScrollTrigger.create({ trigger: next, start: 'top 55%', onEnter: off, onLeaveBack: on });
+    else ScrollTrigger.create({ trigger: s, start: 'bottom 45%', onEnter: off, onLeaveBack: on });
+  });
 
   /* ---------- Arrival: curtain lifts, hero settles, title rises ---------- */
   const titleChars = $$('.c-title .c');
@@ -171,11 +177,11 @@
     if (lenis) lenis.stop();
     gsap.set(titleChars, { yPercent: 110 });
     gsap.set('.c-kicker, .c-meta > div, .case-nav > *', { y: 30, autoAlpha: 0 });
-    gsap.set('.c-hero-media img', { scale: 1.35 });
+    gsap.set('.c-hero-media > *', { scale: 1.35 });
     const tl = gsap.timeline({ delay: .1, onComplete: () => { if (lenis) lenis.start(); } });
     tl.to(wipe, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.25, ease: 'expo.inOut' }, 0)
       .add(() => html.classList.remove('entering'), 1.3)
-      .to('.c-hero-media img', { scale: 1, duration: 2.2, ease: 'expo.out' }, .35)
+      .to('.c-hero-media > *', { scale: 1, duration: 2.2, ease: 'expo.out' }, .35)
       .to(titleChars, { yPercent: 0, duration: 1.3, ease: 'expo.out', stagger: .045 }, .7)
       .to('.c-kicker', { y: 0, autoAlpha: 1, duration: 1, ease: 'expo.out' }, .9)
       .to('.c-meta > div', { y: 0, autoAlpha: 1, duration: 1.1, ease: 'expo.out', stagger: .08 }, 1)
@@ -187,7 +193,7 @@
     clipPath: 'inset(7% 5% 7% 5% round 32px)', ease: 'none',
     scrollTrigger: { trigger: '.c-hero', start: 'top top', end: 'bottom top', scrub: true }
   });
-  gsap.to('.c-hero-media img', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.c-hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.to('.c-hero-media > *', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.c-hero', start: 'top top', end: 'bottom top', scrub: true } });
   gsap.to('.c-hero-ui', { y: -120, autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: '.c-hero', start: 'top top', end: '60% top', scrub: true } });
 
   /* ---------- Text reveals ---------- */
@@ -282,9 +288,9 @@
       gsap.to(track, {
         x: () => (rtl ? dist() : -dist()), ease: 'none',
         scrollTrigger: {
-          // refreshPriority: measured before everything else, since its pin adds scroll length
-          // that every later trigger (themes, parallax) has to account for.
-          trigger: sec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, refreshPriority: 1,
+          // refreshPriority: pinned sections are measured top-to-bottom before everything else, since
+          // each pin adds scroll length that later triggers (themes, parallax, other pins) depend on.
+          trigger: sec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, refreshPriority: 100 - $$('.c-hscroll, [data-scrollshot], [data-viewer], [data-flow]').indexOf(sec),
           onUpdate: s => { setSlide(Math.round(s.progress * (slides.length - 1))); shape(); },
           onRefresh: shape
         }
@@ -366,6 +372,7 @@
 
   const refresh = () => {
     fitTitle();
+    ScrollTrigger.sort(); // apply refreshPriority: pinned sections measured top-to-bottom first
     ScrollTrigger.refresh();
     if (caseY !== null) { const y = +caseY; caseY = null; lenis ? lenis.scrollTo(y, { immediate: true, force: true }) : scrollTo(0, y); }
   };

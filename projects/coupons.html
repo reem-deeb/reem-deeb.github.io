@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coupons App — UI/UX Design &amp; Branding · Reem Deeb</title>
+<meta name="description" content="Coupons App by Reem Deeb: branding, mobile UI/UX, seller version and admin dashboard for a loyalty and discount app.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #0e1712; --fg: #eef5ef; --muted: #6f8a78; --accent: #1bac4b;
+    --f-brand: 'Montserrat', 'IBM Plex Sans Arabic', sans-serif;
+    --f-body: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .14em; --ch-transform: none;
+  }
+  .c-title { font-weight: 600; }
+  .c-statement, .ch-title { font-weight: 600; letter-spacing: .01em; }
+  .ch-num { -webkit-text-stroke-color: rgba(27, 172, 75, .45); }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(8, 22, 13, .9) 0%, rgba(8, 22, 13, .45) 42%, rgba(8, 22, 13, .1) 72%, rgba(8, 22, 13, .35) 100%); }
+  .duo-raw { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(20px, 4vw, 60px); align-items: center; margin-top: clamp(56px, 9vh, 110px); }
+  .duo-raw.single { grid-template-columns: minmax(0, 620px); justify-content: center; }
+  .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 36px); }
+  .brand-grid .ui-panel { display: grid; place-items: center; min-height: 380px; }
+  .brand-grid .ui-panel img { max-width: 74%; height: auto; }
+  .flow-step h3 { font-weight: 600; }
+  @media (max-width: 767px) { .duo-raw, .brand-grid { grid-template-columns: 1fr; } .brand-grid .ui-panel { min-height: 260px; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#13261c" aria-hidden="true"><span>Coupons</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Coupons/web/hero.jpg" srcset="../assets/Coupons/web/hero-m.jpg 1000w, ../assets/Coupons/web/hero.jpg 2400w" sizes="100vw" width="2400" height="1623" fetchpriority="high" alt="Smiling shopper with bags looking at her phone">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Mobile app UI/UX &amp; branding</p>
+      <h1 class="c-title" dir="ltr" data-chars>Coupons</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Coupons App</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Retail &amp; loyalty</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Branding, app UI/UX, admin dashboard</dd></div>
+        <div><dt data-i18n="l.platforms">Platforms</dt><dd data-i18n="m.platforms">iOS, Android &amp; Web</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Enjoy more. Save more.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Coupons App helps people discover, collect and redeem discount deals and promo codes from the stores they love. I created the brand and a clean, user-friendly UI/UX with a vibrant identity, focused on seamless navigation from browsing categories to redeeming offers — plus a seller version for stamping coupons in store and an admin dashboard to run it all.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Process</span><span>01</span></li>
+        <li><span data-i18n="li2">Brand</span><span>02</span></li>
+        <li><span data-i18n="li3">The app</span><span>03</span></li>
+        <li><span data-i18n="li4">Seller &amp; admin</span><span>04</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="3">0</b><span data-i18n="st1">connected products: customer app, seller app and admin dashboard</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="6">0</b><span data-i18n="st2">project phases, from analysis to final presentation</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="10" data-suffix="th">0</b><span data-i18n="st3">coffee on the house: the stamp card at the heart of the app</span></div>
+    </div>
+    <div class="duo-raw single">
+      <figure class="ui-raw" data-speed="5"><img src="../assets/Coupons/web/phones.png" width="825" height="1001" loading="lazy" alt="Login and home screens on two phones over a green circle"></figure>
+    </div>
+  </section>
+
+  <!-- 01 PROCESS -->
+  <section class="c-section container" id="process">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">From research to release</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The project ran in six phases. Mapping every function first meant the wireframes — and later the interface — had a clear structure to grow into.</p>
+      <span class="ch-line"></span>
+    </header>
+    <ol class="ui-steps">
+      <li data-fade><b data-i18n="p1.b">Analysis</b><span data-i18n="p1.s">Goals, users and competitors</span></li>
+      <li data-fade><b data-i18n="p2.b">Interviews &amp; structure</b><span data-i18n="p2.s">User needs into an app map</span></li>
+      <li data-fade><b data-i18n="p3.b">Prototyping</b><span data-i18n="p3.s">Low-fidelity wireframes</span></li>
+      <li data-fade><b data-i18n="p4.b">Design system</b><span data-i18n="p4.s">Colours, type, icons, components</span></li>
+      <li data-fade><b data-i18n="p5.b">Interface design</b><span data-i18n="p5.s">Every screen, high fidelity</span></li>
+      <li data-fade><b data-i18n="p6.b">Presentation</b><span data-i18n="p6.s">Mockups and hand-off</span></li>
+    </ol>
+    <figure class="ui-raw" data-reveal><img src="../assets/Coupons/web/timeline.png" width="1525" height="637" loading="lazy" alt="Project timeline across six phases"></figure>
+    <div class="c-duo offset" style="margin-top: clamp(30px, 5vh, 60px)">
+      <figure class="ui-raw" data-fade><img src="../assets/Coupons/web/functional-map.png" width="1306" height="717" loading="lazy" alt="Functional map of the app's screens and flows"><figcaption class="eyebrow" style="margin-top:14px" data-i18n="cap.map">Functional map</figcaption></figure>
+      <figure class="ui-raw" data-fade><img src="../assets/Coupons/web/wireframes.png" width="1523" height="1231" loading="lazy" alt="Wireframes turning into final screens"><figcaption class="eyebrow" style="margin-top:14px" data-i18n="cap.wire">Wireframes to final screens</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 02 BRAND -->
+  <section class="c-section container" id="brand">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">A bag full of savings</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">The mark blends a shopping bag with a price tag and a cart, in a fresh green that reads as “save” at a glance. A warm yellow highlights rewards and stamps.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="brand-grid">
+      <div class="ui-panel" data-reveal data-cursor="view"><img src="../assets/Coupons/web/logo.png" width="559" height="559" loading="lazy" alt="Coupons logo: Enjoy more. Save more."></div>
+      <div class="ui-panel" data-reveal><img src="../assets/Coupons/web/icons.png" width="590" height="270" loading="lazy" alt="Coupons app icons"></div>
+    </div>
+    <div class="c-palette" role="list" aria-label="Colour palette" style="height: clamp(240px, 38vh, 380px); margin-top: clamp(16px, 2.4vw, 36px)">
+      <button class="swatch" role="listitem" type="button" data-hex="#1BAC4B" style="--c:#1bac4b"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Coupon Green</b><small dir="ltr">#1BAC4B</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#EFEFEF" style="--c:#efefef; --t:#0e1712"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Soft White</b><small dir="ltr">#EFEFEF</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#FFC313" style="--c:#ffc313; --t:#0e1712"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Reward Yellow</b><small dir="ltr">#FFC313</small></button>
+    </div>
+  </section>
+
+  <!-- 03 THE APP: pinned flow of ready-made mockups -->
+  <section class="ui-flow" data-flow id="app">
+    <div class="container flow-wrap">
+      <div>
+        <p class="eyebrow" data-i18n="ch3.eyebrow">03 — The app</p>
+        <h2 class="ch-title" data-split data-i18n="ch3.title" style="margin-bottom: clamp(24px, 4vh, 44px)">Collect, track, redeem</h2>
+        <div class="flow-steps">
+          <span class="flow-rail" aria-hidden="true"><i></i></span>
+          <ol class="flow-list">
+            <li class="flow-step is-on"><small data-i18n="f1.k">Step 01</small><h3 data-i18n="f1.h">Sign in</h3><p data-i18n="f1.p">A dark, focused entry screen with the brand front and centre — and account creation one tap away.</p>
+              <div class="flow-inline raw"><img src="../assets/Coupons/web/login.png" width="500" height="933" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f2.k">Step 02</small><h3 data-i18n="f2.h">Your coupons</h3><p data-i18n="f2.p">Stamp cards show progress at a glance — “buy 9 coffees, get the 10th free” — with categories and the latest offers right below.</p>
+              <div class="flow-inline raw"><img src="../assets/Coupons/web/home.png" width="500" height="933" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f3.k">Step 03</small><h3 data-i18n="f3.h">Explore a store</h3><p data-i18n="f3.p">Every store has a profile with its social links, current offers and the coupons you are collecting there.</p>
+              <div class="flow-inline raw"><img src="../assets/Coupons/web/store.png" width="500" height="933" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f4.k">Step 04</small><h3 data-i18n="f4.h">Redeem an offer</h3><p data-i18n="f4.p">Offer pages put the deal, its deadline and related offers in one clear view, ready to redeem.</p>
+              <div class="flow-inline raw"><img src="../assets/Coupons/web/offer.png" width="500" height="891" loading="lazy" alt=""></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="flow-device raw" aria-hidden="true">
+        <span class="flow-glow"></span>
+        <img class="flow-shot is-on" src="../assets/Coupons/web/login.png" width="500" height="933" alt="">
+        <img class="flow-shot" src="../assets/Coupons/web/home.png" width="500" height="933" alt="">
+        <img class="flow-shot" src="../assets/Coupons/web/store.png" width="500" height="933" alt="">
+        <img class="flow-shot" src="../assets/Coupons/web/offer.png" width="500" height="891" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SELLER & ADMIN -->
+  <section class="c-section container" id="admin">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Behind the counter</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">A seller version lets staff scan a customer’s QR code and stamp their card in seconds, while the admin dashboard manages stores, offers and coupons, with live numbers at a glance.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ui-tilt"><figure class="ui-raw" data-tilt><img src="../assets/Coupons/web/seller.png" width="2065" height="983" loading="lazy" alt="Seller version: current offers, offer details, QR scan and profile"></figure></div>
+    <div class="ui-tilt ui-trio" style="margin-top: clamp(40px, 7vh, 80px)">
+      <figure class="ui-raw" data-tilt><img src="../assets/Coupons/web/admin-1.png" width="960" height="571" loading="lazy" alt="Admin dashboard: stores"></figure>
+      <figure class="ui-raw" data-tilt><img src="../assets/Coupons/web/admin-2.png" width="1015" height="571" loading="lazy" alt="Admin dashboard: statistics and latest coupons"></figure>
+      <figure class="ui-raw" data-tilt><img src="../assets/Coupons/web/admin-3.png" width="1015" height="571" loading="lazy" alt="Admin dashboard: offers"></figure>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="internet.html" data-transition data-wipe="#6c6cf2" data-wipe-label="INTERNET.com" style="--f-next:'Alfa Slab One', serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-size: clamp(44px, 8.5vw, 160px)">INTERNET.com</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Internet/web/1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Coupons App — UI/UX-Design &amp; Branding · Reem Deeb',
+      kicker: 'App-UI/UX &amp; Branding',
+      'm.industry': 'Handel &amp; Kundenbindung', 'm.services': 'Branding, App-UI/UX, Admin-Dashboard', 'l.platforms': 'Plattformen', 'm.platforms': 'iOS, Android &amp; Web',
+      statement: 'Mehr genießen. Mehr sparen.',
+      lead: 'Die Coupons App hilft Menschen, Rabattangebote und Promo-Codes ihrer Lieblingsgeschäfte zu entdecken, zu sammeln und einzulösen. Ich habe die Marke und ein klares, benutzerfreundliches UI/UX mit lebendiger Identität gestaltet – mit Fokus auf nahtlose Navigation vom Stöbern in Kategorien bis zum Einlösen –, dazu eine Händler-Version zum Abstempeln im Geschäft und ein Admin-Dashboard, das alles steuert.',
+      li1: 'Prozess', li2: 'Marke', li3: 'Die App', li4: 'Händler &amp; Admin',
+      st1: 'verbundene Produkte: Kunden-App, Händler-App und Admin-Dashboard', st2: 'Projektphasen, von der Analyse bis zur Präsentation', st3: 'Kaffee aufs Haus: die Stempelkarte als Herz der App',
+      'ch1.title': 'Von der Recherche zum Release', 'ch1.text': 'Das Projekt lief in sechs Phasen. Weil zuerst jede Funktion kartiert wurde, hatten die Wireframes – und später das Interface – eine klare Struktur, in die sie hineinwachsen konnten.',
+      'p1.b': 'Analyse', 'p1.s': 'Ziele, Nutzer und Wettbewerb', 'p2.b': 'Interviews &amp; Struktur', 'p2.s': 'Nutzerbedürfnisse als App-Map', 'p3.b': 'Prototyping', 'p3.s': 'Low-Fidelity-Wireframes',
+      'p4.b': 'Designsystem', 'p4.s': 'Farben, Schrift, Icons, Komponenten', 'p5.b': 'Interface-Design', 'p5.s': 'Jeder Screen in High Fidelity', 'p6.b': 'Präsentation', 'p6.s': 'Mockups und Übergabe',
+      'cap.map': 'Funktionslandkarte', 'cap.wire': 'Von Wireframes zu finalen Screens',
+      'ch2.title': 'Eine Tasche voller Ersparnisse', 'ch2.text': 'Das Zeichen verbindet Einkaufstasche, Preisschild und Wagen in einem frischen Grün, das auf einen Blick „sparen“ sagt. Ein warmes Gelb hebt Belohnungen und Stempel hervor.',
+      c1: 'Coupon-Grün', c2: 'Sanftes Weiß', c3: 'Belohnungs-Gelb',
+      'ch3.eyebrow': '03 — Die App', 'ch3.title': 'Sammeln, verfolgen, einlösen',
+      'f1.k': 'Schritt 01', 'f1.h': 'Anmelden', 'f1.p': 'Ein dunkler, fokussierter Einstieg mit der Marke im Mittelpunkt – und das Konto nur einen Tipp entfernt.',
+      'f2.k': 'Schritt 02', 'f2.h': 'Deine Coupons', 'f2.p': 'Stempelkarten zeigen den Fortschritt auf einen Blick – „9 Kaffees kaufen, der 10. ist gratis“ – mit Kategorien und den neuesten Angeboten darunter.',
+      'f3.k': 'Schritt 03', 'f3.h': 'Ein Geschäft entdecken', 'f3.p': 'Jedes Geschäft hat ein Profil mit Social Links, aktuellen Angeboten und den Coupons, die du dort sammelst.',
+      'f4.k': 'Schritt 04', 'f4.h': 'Ein Angebot einlösen', 'f4.p': 'Angebotsseiten zeigen Deal, Frist und ähnliche Angebote in einer klaren Ansicht – bereit zum Einlösen.',
+      'ch4.title': 'Hinter der Theke', 'ch4.text': 'Eine Händler-Version lässt das Personal den QR-Code scannen und die Karte in Sekunden abstempeln, während das Admin-Dashboard Geschäfte, Angebote und Coupons mit Live-Zahlen verwaltet.'
+    },
+    ar: {
+      title: 'تطبيق الكوبونات — تصميم واجهات وتجربة المستخدم وهوية · ريم ديب',
+      kicker: 'تصميم واجهات التطبيق والهوية',
+      'm.industry': 'التجزئة وبرامج الولاء', 'm.services': 'هوية، تصميم التطبيق، لوحة تحكم', 'l.platforms': 'المنصات', 'm.platforms': 'iOS وأندرويد والويب',
+      statement: 'استمتع أكثر. ووفّر أكثر.',
+      lead: 'يساعد تطبيق الكوبونات الناس على اكتشاف عروض الخصم والرموز الترويجية من متاجرهم المفضّلة وجمعها واستخدامها. صمّمتُ الهوية وواجهة وتجربة استخدام واضحة وسهلة بهوية نابضة، مع التركيز على تنقّل سلس من تصفّح الفئات إلى الاستفادة من العروض — إلى جانب نسخة للبائع لختم الكوبونات في المتجر ولوحة تحكم لإدارة كل شيء.',
+      li1: 'المنهجية', li2: 'الهوية', li3: 'التطبيق', li4: 'البائع والإدارة',
+      st1: 'منتجات متّصلة: تطبيق العميل وتطبيق البائع ولوحة التحكم', st2: 'مراحل للمشروع، من التحليل إلى العرض النهائي', st3: 'قهوة مجانية: بطاقة الأختام في قلب التطبيق',
+      'ch1.title': 'من البحث إلى الإطلاق', 'ch1.text': 'سار المشروع على ست مراحل. ولأن كل وظيفة رُسمت أولاً، امتلكت المخططات — ثم الواجهة — بنية واضحة تنمو داخلها.',
+      'p1.b': 'التحليل', 'p1.s': 'الأهداف والمستخدمون والمنافسون', 'p2.b': 'المقابلات والبنية', 'p2.s': 'احتياجات المستخدم في خريطة للتطبيق', 'p3.b': 'النماذج الأولية', 'p3.s': 'مخططات أولية',
+      'p4.b': 'نظام التصميم', 'p4.s': 'الألوان والخطوط والأيقونات والمكوّنات', 'p5.b': 'تصميم الواجهات', 'p5.s': 'كل شاشة بدقة عالية', 'p6.b': 'العرض', 'p6.s': 'نماذج العرض والتسليم',
+      'cap.map': 'الخريطة الوظيفية', 'cap.wire': 'من المخططات إلى الشاشات النهائية',
+      'ch2.title': 'حقيبة مليئة بالتوفير', 'ch2.text': 'يمزج الشعار بين حقيبة التسوّق وبطاقة السعر والعربة، بلون أخضر منعش يعني «التوفير» من النظرة الأولى، ويبرز الأصفر الدافئ المكافآت والأختام.',
+      c1: 'أخضر الكوبون', c2: 'أبيض ناعم', c3: 'أصفر المكافأة',
+      'ch3.eyebrow': '03 — التطبيق', 'ch3.title': 'اجمع، تابع، استفد',
+      'f1.k': 'الخطوة 01', 'f1.h': 'تسجيل الدخول', 'f1.p': 'شاشة دخول داكنة ومركّزة تتصدّرها العلامة — وإنشاء الحساب على بُعد نقرة.',
+      'f2.k': 'الخطوة 02', 'f2.h': 'كوبوناتك', 'f2.p': 'تُظهر بطاقات الأختام تقدّمك بلمحة — «اشترِ 9 أكواب قهوة واحصل على العاشر مجاناً» — مع الفئات وأحدث العروض تحتها.',
+      'f3.k': 'الخطوة 03', 'f3.h': 'استكشف متجراً', 'f3.p': 'لكل متجر صفحة تضم روابط التواصل والعروض الحالية والكوبونات التي تجمعها فيه.',
+      'f4.k': 'الخطوة 04', 'f4.h': 'استفد من عرض', 'f4.p': 'تجمع صفحة العرض الصفقة وموعد انتهائها والعروض المشابهة في عرض واضح، جاهزة للاستخدام.',
+      'ch4.title': 'خلف الطاولة', 'ch4.text': 'تتيح نسخة البائع للموظفين مسح رمز QR الخاص بالعميل وختم بطاقته خلال ثوانٍ، بينما تدير لوحة التحكم المتاجر والعروض والكوبونات مع أرقام مباشرة بلمحة.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

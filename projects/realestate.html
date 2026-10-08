@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Real Estate Landing Pages — UI Design · Reem Deeb</title>
+<meta name="description" content="Five high-converting landing pages for luxury real estate developments in Dubai, designed by Reem Deeb.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f3eee7; --fg: #1c1b19; --muted: #a59a8d; --accent: #b8874f;
+    --f-brand: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .01em; --ch-transform: none;
+  }
+  .c-title { text-transform: none; font-weight: 500; }
+  .c-hero-media::after {
+    background: linear-gradient(0deg, rgba(24, 18, 12, .88) 0%, rgba(24, 18, 12, .45) 42%, rgba(24, 18, 12, .1) 72%, rgba(24, 18, 12, .35) 100%);
+  }
+  .c-statement { max-width: 22ch; }
+  .ch-title { font-weight: 500; }
+  /* Close-up crops of the long pages */
+  .crops { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 36px); }
+  .crop { margin: 0; }
+  .crop .c-fig { aspect-ratio: 4 / 5; }
+  .crop .c-fig img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% var(--y, 0%); }
+  .crop h3 { margin: 22px 0 8px; font: 500 clamp(22px, 1.8vw, 30px)/1.15 var(--f-brand); }
+  .crop p { margin: 0; font-size: 15px; line-height: 1.65; color: color-mix(in srgb, var(--page-fg) 75%, transparent); }
+  @media (max-width: 767px) { .crops { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#c79762" aria-hidden="true"><span>Real Estate</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Realstate/web/hero.jpg" srcset="../assets/Realstate/web/hero-m.jpg 1000w, ../assets/Realstate/web/hero.jpg 2400w" sizes="100vw" width="2400" height="1623" fetchpriority="high" alt="Cliffside villa with an infinity pool at sunset">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Landing pages · UI design</p>
+      <h1 class="c-title" data-chars data-i18n="htitle">Luxury Real Estate</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd data-i18n="m.client">Dubai developers</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Luxury real estate</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Landing page UI design</dd></div>
+        <div><dt data-i18n="l.scope">Scope</dt><dd data-i18n="m.scope">5 landing pages</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Designed to turn a first scroll into a viewing request.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">A collection of high-converting landing pages for luxury developments in Dubai — including Palm Jumeirah, Downtown Dubai and Dubai Marina. Each page pairs editorial imagery with a clear visual hierarchy, sophisticated layouts and seamless calls to action, from brochure downloads to unit enquiries, so prospective buyers feel the premium from the very first scroll.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">The collection</span><span>01</span></li>
+        <li><span data-i18n="li2">Every page, in full</span><span>02</span></li>
+        <li><span data-i18n="li3">Built to convert</span><span>03</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="5">0</b><span data-i18n="st1">landing pages, each with its own personality</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="39" data-suffix="k">0</b><span data-i18n="st2">pixels of scroll designed, section by section</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="3">0</b><span data-i18n="st3">conversion points on every page: brochure, enquiry, consultation</span></div>
+    </div>
+  </section>
+
+  <!-- 01 THE COLLECTION: the five pages drift past like a mood wall -->
+  <section class="c-section container" id="collection">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The collection</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">Five developments, five personalities — one design language of generous imagery, refined serif typography and calm, confident spacing.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ui-wall-wrap"><div class="ui-wall" aria-label="All five landing pages">
+      <figure class="wall-col" data-drift="22"><img src="../assets/Realstate/web/page-1-m.jpg" width="600" height="3657" loading="lazy" alt="LUMENA landing page"><figcaption dir="ltr">Lumena</figcaption></figure>
+      <figure class="wall-col" data-drift="-26"><img src="../assets/Realstate/web/page-2-m.jpg" width="600" height="3515" loading="lazy" alt="Marasi Bay landing page"><figcaption dir="ltr">Marasi Bay</figcaption></figure>
+      <figure class="wall-col" data-drift="34"><img src="../assets/Realstate/web/page-3-m.jpg" width="600" height="2880" loading="lazy" alt="PASSO landing page"><figcaption dir="ltr">Passo</figcaption></figure>
+      <figure class="wall-col" data-drift="-18"><img src="../assets/Realstate/web/page-4-m.jpg" width="600" height="3458" loading="lazy" alt="The Biltmore landing page"><figcaption dir="ltr">The Biltmore</figcaption></figure>
+      <figure class="wall-col" data-drift="28"><img src="../assets/Realstate/web/page-5-m.jpg" width="600" height="2767" loading="lazy" alt="H&amp;H Development landing page"><figcaption dir="ltr">H&amp;H</figcaption></figure>
+    </div></div>
+  </section>
+
+  <!-- 02 EVERY PAGE IN FULL: pinned browser, each page scrolls through, then the next one takes over -->
+  <section class="ui-viewer" data-viewer data-theme-bg="#1d1c1a" data-theme-fg="#f3eee7">
+    <div class="container vw-wrap">
+      <div class="vw-side">
+        <p class="eyebrow" data-i18n="ch2.eyebrow">02 — Every page, in full</p>
+        <h2 class="ch-title" data-split data-i18n="ch2.title">Scroll through the sites</h2>
+        <div class="vw-tabs" role="tablist" aria-label="Landing pages">
+          <button class="vw-tab" type="button" role="tab" aria-selected="true" data-url="lumena-residences.ae" dir="ltr"><small>01</small> Lumena</button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="marasi-bay.ae" dir="ltr"><small>02</small> Marasi Bay</button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="passo-palmjumeirah.ae" dir="ltr"><small>03</small> Passo</button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="biltmore-sufouh.ae" dir="ltr"><small>04</small> The Biltmore</button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="hh-development.ae" dir="ltr"><small>05</small> H&amp;H Development</button>
+        </div>
+        <div class="vw-info">
+          <div class="vw-page-info is-on">
+            <h3 dir="ltr">Lumena Residences</h3>
+            <p data-i18n="p1">A future-forward tower in Business Bay. The page leads with the key figures, then walks buyers through features, amenities and the tower programme before closing with a consultation form.</p>
+            <ul class="vw-facts" dir="ltr"><li>561,100 sq.ft GSA</li><li>99 units</li><li>81 offices</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 dir="ltr">Marasi Bay</h3>
+            <p data-i18n="p2">A rare collection of waterfront masterpieces. An editorial rhythm of image-led chapters introduces each residence, the Marina Yacht Club and an exceptional culinary ensemble.</p>
+            <ul class="vw-facts" dir="ltr"><li>Waterfront</li><li>Yacht club</li><li>Dining &amp; lifestyle</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 dir="ltr">Passo by Beyond</h3>
+            <p data-i18n="p3">Beachfront living on the West Crescent of Palm Jumeirah. Sweeping views, project highlights and a soft coastal palette lead naturally to brochure downloads and consultation requests.</p>
+            <ul class="vw-facts" dir="ltr"><li>625 residences</li><li>60/40 plan</li><li>Q3 2029</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 dir="ltr">The Biltmore Residences</h3>
+            <p data-i18n="p4">Branded residences in Al Sufouh, presented like a hotel lookbook — the Signature and Atmosphere collections and penthouse living, each with a direct path to enquire.</p>
+            <ul class="vw-facts" dir="ltr"><li>40/60 plan</li><li>From AED 5.5M</li><li>Q4 2025</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 dir="ltr">H&amp;H Development</h3>
+            <p data-i18n="p5">A developer portfolio that brings flagship projects — Baccarat Hotel &amp; Residences, Four Seasons Private Residences DIFC and Aurora Villas — together in one confident brand story.</p>
+            <ul class="vw-facts" dir="ltr"><li>Since 2007</li><li>USD 8B ongoing</li><li>3 flagships</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="browser vw-browser" data-cursor="view">
+        <div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">lumena-residences.ae</span></div>
+        <div class="browser-view vw-view">
+          <img class="vw-shot is-on" src="../assets/Realstate/web/page-1.jpg" srcset="../assets/Realstate/web/page-1-m.jpg 600w, ../assets/Realstate/web/page-1.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="7313" alt="LUMENA Residences landing page, full length">
+          <img class="vw-shot" src="../assets/Realstate/web/page-2.jpg" srcset="../assets/Realstate/web/page-2-m.jpg 600w, ../assets/Realstate/web/page-2.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="7030" loading="lazy" alt="Marasi Bay landing page, full length">
+          <img class="vw-shot" src="../assets/Realstate/web/page-3.jpg" srcset="../assets/Realstate/web/page-3-m.jpg 600w, ../assets/Realstate/web/page-3.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="5759" loading="lazy" alt="PASSO by Beyond landing page, full length">
+          <img class="vw-shot" src="../assets/Realstate/web/page-4.jpg" srcset="../assets/Realstate/web/page-4-m.jpg 600w, ../assets/Realstate/web/page-4.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="6916" loading="lazy" alt="The Biltmore Residences landing page, full length">
+          <img class="vw-shot" src="../assets/Realstate/web/page-5.jpg" srcset="../assets/Realstate/web/page-5-m.jpg 600w, ../assets/Realstate/web/page-5.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="5533" loading="lazy" alt="H&amp;H Development landing page, full length">
+        </div>
+        <span class="ui-thumb" aria-hidden="true"><i></i></span>
+      </div>
+      <div aria-hidden="true">
+        <div class="vw-mini">
+          <img class="is-on" src="../assets/Realstate/web/page-1-m.jpg" alt=""><img src="../assets/Realstate/web/page-2-m.jpg" alt=""><img src="../assets/Realstate/web/page-3-m.jpg" alt=""><img src="../assets/Realstate/web/page-4-m.jpg" alt=""><img src="../assets/Realstate/web/page-5-m.jpg" alt="">
+          <span class="vw-mini-frame"></span>
+        </div>
+        <div class="vw-count" dir="ltr"><b>01</b><span>/ 05</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 BUILT TO CONVERT: close-ups cropped from the pages -->
+  <section class="c-section container" id="convert">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Built to convert</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Beautiful pages are only half the brief. Every layout guides buyers towards one next step, without ever feeling like a sales pitch.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="crops">
+      <figure class="crop" data-fade>
+        <div class="c-fig" data-reveal style="--y: 13%"><img src="../assets/Realstate/web/page-1.jpg" width="1200" height="7313" loading="lazy" alt="Key figures band on the LUMENA page"></div>
+        <h3 data-i18n="c1.h">Clear visual hierarchy</h3>
+        <p data-i18n="c1.p">The figures buyers ask for first — size, units, payment plan, handover — sit right under the hero, in large, quiet numerals.</p>
+      </figure>
+      <figure class="crop" data-fade>
+        <div class="c-fig" data-reveal style="--y: 47%"><img src="../assets/Realstate/web/page-3.jpg" width="1200" height="5759" loading="lazy" alt="Project highlights section on the PASSO page"></div>
+        <h3 data-i18n="c2.h">Sophisticated layouts</h3>
+        <p data-i18n="c2.p">Editorial grids mix full-bleed photography with offset image clusters, so long pages keep their rhythm and never feel repetitive.</p>
+      </figure>
+      <figure class="crop" data-fade>
+        <div class="c-fig" data-reveal style="--y: 96%"><img src="../assets/Realstate/web/page-5.jpg" width="1200" height="5533" loading="lazy" alt="Consultation form at the end of the H&amp;H page"></div>
+        <h3 data-i18n="c3.h">Seamless calls to action</h3>
+        <p data-i18n="c3.p">Brochure downloads and “request available units” links recur along the page, and every journey ends in a short, elegant consultation form.</p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="promote.html" data-transition data-wipe="#55a8ae" data-wipe-label="PROMOTE" style="--f-next:'Michroma', sans-serif">
+      <span class="next-title" dir="ltr" style="font-size: clamp(48px, 9vw, 170px)">Promote</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Prompts/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Landingpages für Luxusimmobilien — UI-Design · Reem Deeb',
+      kicker: 'Landingpages · UI-Design', htitle: 'Luxusimmobilien',
+      'm.client': 'Bauträger in Dubai', 'm.industry': 'Luxusimmobilien', 'm.services': 'UI-Design für Landingpages', 'l.scope': 'Umfang', 'm.scope': '5 Landingpages',
+      statement: 'Gestaltet, um aus dem ersten Scrollen eine Besichtigungsanfrage zu machen.',
+      lead: 'Eine Reihe konversionsstarker Landingpages für Luxusprojekte in Dubai – u. a. Palm Jumeirah, Downtown Dubai und Dubai Marina. Jede Seite verbindet editoriale Bildsprache mit einer klaren visuellen Hierarchie, anspruchsvollen Layouts und nahtlosen Call-to-Actions – vom Broschüren-Download bis zur Anfrage einzelner Einheiten –, damit Kaufinteressenten den Premiumanspruch vom ersten Scrollen an spüren.',
+      li1: 'Die Kollektion', li2: 'Jede Seite in voller Länge', li3: 'Gemacht für Conversion',
+      st1: 'Landingpages, jede mit eigenem Charakter', st2: 'Pixel Scrollstrecke, Abschnitt für Abschnitt gestaltet', st3: 'Conversion-Punkte auf jeder Seite: Broschüre, Anfrage, Beratung',
+      'ch1.title': 'Die Kollektion', 'ch1.text': 'Fünf Projekte, fünf Persönlichkeiten – eine Designsprache aus großzügigen Bildern, edler Serifentypografie und ruhigen, selbstbewussten Abständen.',
+      'ch2.eyebrow': '02 — Jede Seite in voller Länge', 'ch2.title': 'Durch die Seiten scrollen',
+      p1: 'Ein zukunftsweisender Tower in Business Bay. Die Seite beginnt mit den wichtigsten Kennzahlen und führt dann durch Ausstattung, Annehmlichkeiten und das Tower-Programm bis zum Beratungsformular.',
+      p2: 'Eine seltene Kollektion von Meisterwerken am Wasser. Ein editorialer Rhythmus aus bildstarken Kapiteln stellt jede Residenz, den Marina Yacht Club und ein außergewöhnliches kulinarisches Ensemble vor.',
+      p3: 'Wohnen am Strand auf dem West Crescent der Palm Jumeirah. Weite Ausblicke, Projekthighlights und eine sanfte Küstenpalette führen ganz natürlich zu Broschüren-Downloads und Beratungsanfragen.',
+      p4: 'Markenresidenzen in Al Sufouh, präsentiert wie ein Hotel-Lookbook – die Signature- und Atmosphere-Kollektionen und Penthouse-Wohnen, jeweils mit direktem Weg zur Anfrage.',
+      p5: 'Ein Bauträger-Portfolio, das Flaggschiffprojekte – Baccarat Hotel &amp; Residences, Four Seasons Private Residences DIFC und Aurora Villas – zu einer selbstbewussten Markengeschichte vereint.',
+      'ch3.title': 'Gemacht für Conversion', 'ch3.text': 'Schöne Seiten sind nur die Hälfte der Aufgabe. Jedes Layout führt Käufer zu genau einem nächsten Schritt – ohne je wie ein Verkaufsgespräch zu wirken.',
+      'c1.h': 'Klare visuelle Hierarchie', 'c1.p': 'Die Zahlen, nach denen Käufer zuerst fragen – Fläche, Einheiten, Zahlungsplan, Übergabe – stehen direkt unter dem Hero, in großen, ruhigen Ziffern.',
+      'c2.h': 'Anspruchsvolle Layouts', 'c2.p': 'Editoriale Raster kombinieren randlose Fotografie mit versetzten Bildgruppen, damit lange Seiten ihren Rhythmus behalten und nie eintönig wirken.',
+      'c3.h': 'Nahtlose Call-to-Actions', 'c3.p': 'Broschüren-Downloads und „Verfügbare Einheiten anfragen“ tauchen entlang der Seite immer wieder auf, und jede Reise endet in einem kurzen, eleganten Beratungsformular.'
+    },
+    ar: {
+      title: 'صفحات هبوط للعقارات الفاخرة — تصميم واجهات · ريم ديب',
+      kicker: 'صفحات هبوط · تصميم واجهات', htitle: 'العقارات الفاخرة',
+      'm.client': 'مطوّرون عقاريون في دبي', 'm.industry': 'العقارات الفاخرة', 'm.services': 'تصميم واجهات صفحات الهبوط', 'l.scope': 'النطاق', 'm.scope': '5 صفحات هبوط',
+      statement: 'صُمّمت لتحوّل أول تمرير إلى طلب معاينة.',
+      lead: 'مجموعة من صفحات الهبوط عالية التحويل لمشاريع فاخرة في دبي، منها نخلة جميرا ووسط مدينة دبي ودبي مارينا. تجمع كل صفحة بين صور بأسلوب تحريري وتسلسل بصري واضح وتخطيطات راقية ودعوات سلسة لاتخاذ إجراء — من تحميل الكتيّب إلى الاستفسار عن الوحدات — ليشعر المشتري بالفخامة منذ التمرير الأول.',
+      li1: 'المجموعة', li2: 'كل صفحة كاملة', li3: 'مصمّمة للتحويل',
+      st1: 'صفحات هبوط، لكل منها شخصيتها', st2: 'بكسل من التمرير صُمّمت قسماً قسماً', st3: 'نقاط تحويل في كل صفحة: كتيّب، استفسار، استشارة',
+      'ch1.title': 'المجموعة', 'ch1.text': 'خمسة مشاريع وخمس شخصيات — بلغة تصميم واحدة من الصور السخيّة والخطوط الأنيقة والمسافات الهادئة الواثقة.',
+      'ch2.eyebrow': '02 — كل صفحة كاملة', 'ch2.title': 'تصفّح المواقع بالتمرير',
+      p1: 'برج مستقبلي في الخليج التجاري. تبدأ الصفحة بالأرقام الأساسية ثم تأخذ المشتري عبر المزايا والمرافق وبرنامج البرج وصولاً إلى نموذج الاستشارة.',
+      p2: 'مجموعة نادرة من التحف المعمارية على الواجهة المائية. إيقاع تحريري من فصول تقودها الصور يعرّف بكل مسكن ونادي اليخوت وتجربة طعام استثنائية.',
+      p3: 'حياة على الشاطئ في الهلال الغربي لنخلة جميرا. إطلالات واسعة وأبرز مزايا المشروع ولوحة ألوان ساحلية ناعمة تقود بطبيعية إلى تحميل الكتيّب وطلب الاستشارة.',
+      p4: 'مساكن تحمل علامة فندقية في الصفوح، تُعرض ككتالوج فندقي — مجموعتا Signature و Atmosphere وحياة البنتهاوس، مع طريق مباشر للاستفسار في كل منها.',
+      p5: 'موقع لمحفظة مطوّر يجمع مشاريعه الرائدة — فندق ومساكن باكارات، ومساكن فور سيزونز الخاصة في مركز دبي المالي، وفلل أورورا — في قصة علامة واثقة واحدة.',
+      'ch3.title': 'مصمّمة للتحويل', 'ch3.text': 'الصفحات الجميلة ليست إلا نصف المهمة. كل تخطيط يقود المشتري إلى خطوة تالية واحدة، دون أن يبدو كعرض بيع أبداً.',
+      'c1.h': 'تسلسل بصري واضح', 'c1.p': 'الأرقام التي يسأل عنها المشتري أولاً — المساحة والوحدات وخطة الدفع وموعد التسليم — تأتي مباشرة تحت الواجهة، بأرقام كبيرة هادئة.',
+      'c2.h': 'تخطيطات راقية', 'c2.p': 'شبكات تحريرية تمزج الصور الكاملة بمجموعات صور متداخلة، فتحافظ الصفحات الطويلة على إيقاعها ولا تبدو مكررة.',
+      'c3.h': 'دعوات سلسة لاتخاذ إجراء', 'c3.p': 'تتكرر روابط تحميل الكتيّب و«اطلب الوحدات المتاحة» على طول الصفحة، وتنتهي كل رحلة بنموذج استشارة قصير وأنيق.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

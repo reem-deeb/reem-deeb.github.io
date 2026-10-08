@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROMOTE — Influencer Marketing Platform · Reem Deeb</title>
+<meta name="description" content="PROMOTE by Reem Deeb: UI/UX for an influencer marketing ecosystem — a creator mobile app and a business portal dashboard.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Montserrat:wght@600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f1f7f7; --fg: #0f2e2e; --muted: #86a9a9; --accent: #1f9a9d;
+    --f-brand: 'Poppins', 'IBM Plex Sans Arabic', sans-serif;
+    --f-body: 'Poppins', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: -.01em; --ch-transform: none;
+  }
+  .c-title { font-weight: 700; font-size: clamp(64px, 13vw, 240px); }
+  .c-statement, .ch-title, .flow-step h3 { font-weight: 600; letter-spacing: -.01em; }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(6, 30, 30, .85) 0%, rgba(6, 30, 30, .35) 45%, rgba(6, 30, 30, .1) 75%, rgba(6, 30, 30, .3) 100%); }
+  .ui-stat b { font-weight: 600; }
+  .stack-card .browser-bar { background: #e9eef0; }
+  .c-section.dark .ch-num { -webkit-text-stroke-color: rgba(255,255,255,.3); }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#55a8ae" aria-hidden="true"><span>PROMOTE</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Prompts/web/hero.jpg" srcset="../assets/Prompts/web/hero-m.jpg 1000w, ../assets/Prompts/web/hero.jpg 2400w" sizes="100vw" width="2400" height="1623" fetchpriority="high" alt="Content creator filming herself with a drink in a sunny café">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Influencer platform &amp; business dashboard</p>
+      <h1 class="c-title" dir="ltr" data-chars>Promote</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>PROMOTE</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Influencer marketing</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Mobile app &amp; dashboard UI/UX</dd></div>
+        <div><dt data-i18n="l.platforms">Platforms</dt><dd data-i18n="m.platforms">iOS, Android &amp; Web</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Where creators and local venues meet.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">PROMOTE is an end-to-end influencer marketing ecosystem. A mobile app lets bloggers and content creators discover local restaurants, apply for campaigns and manage their bookings; a web-based Business Portal lets owners publish promotions, review applications and run their campaign calendar. I designed both sides so that every step — for the creator and for the venue — is clear, quick and trustworthy.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">The creator journey</span><span>01</span></li>
+        <li><span data-i18n="li2">Every state, designed</span><span>02</span></li>
+        <li><span data-i18n="li3">Business portal</span><span>03</span></li>
+        <li><span data-i18n="li4">Community &amp; support</span><span>04</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="60" data-suffix="+">0</b><span data-i18n="st1">screens across mobile and web</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="2">0</b><span data-i18n="st2">connected products: the creator app and the Business Portal</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="5">0</b><span data-i18n="st3">steps from discovering a venue to getting rewarded</span></div>
+    </div>
+  </section>
+
+  <!-- 01 CREATOR JOURNEY: pinned phone, one screen per step -->
+  <section class="ui-flow" data-flow id="journey">
+    <div class="container flow-wrap">
+      <div>
+        <p class="eyebrow" data-i18n="ch1.eyebrow">01 — The creator journey</p>
+        <h2 class="ch-title" data-split data-i18n="ch1.title" style="margin-bottom: clamp(24px, 4vh, 44px)">From discovery to reward</h2>
+        <div class="flow-steps">
+          <span class="flow-rail" aria-hidden="true"><i></i></span>
+          <ol class="flow-list">
+            <li class="flow-step is-on"><small data-i18n="f1.k">Step 01</small><h3 data-i18n="f1.h">Discover</h3><p data-i18n="f1.p">Featured and nearby promotions in a list or on the map, filtered by what suits the creator’s audience.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/home.jpg" width="540" height="1034" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f2.k">Step 02</small><h3 data-i18n="f2.h">Apply</h3><p data-i18n="f2.p">Each promotion lays out the brief, the incentive and the content required. A few questions and a platform choice later, the application is in.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/promotion-details.jpg" width="540" height="1050" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f3.k">Step 03</small><h3 data-i18n="f3.h">Book</h3><p data-i18n="f3.p">Approved creators choose a date and time that suits the venue, then manage, reschedule or cancel from one place.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/date-selection.jpg" width="540" height="1034" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f4.k">Step 04</small><h3 data-i18n="f4.h">Visit &amp; redeem</h3><p data-i18n="f4.p">At the venue, a QR code confirms the booking with staff in seconds — no awkward explanations at the counter.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/ex1.jpg" width="540" height="1034" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f5.k">Step 05</small><h3 data-i18n="f5.h">Deliver &amp; earn</h3><p data-i18n="f5.p">Upload the content, follow its review, and watch bonus targets fill up as the views grow.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/my-bonus.jpg" width="540" height="1034" loading="lazy" alt=""></div></div></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="flow-device" aria-hidden="true">
+        <span class="flow-glow"></span>
+        <div class="phone"><div class="phone-screen">
+          <img class="flow-shot is-on" src="../assets/Prompts/web/home.jpg" width="540" height="1034" alt="">
+          <img class="flow-shot" src="../assets/Prompts/web/promotion-details.jpg" width="540" height="1050" alt="">
+          <img class="flow-shot" src="../assets/Prompts/web/date-selection.jpg" width="540" height="1034" alt="">
+          <img class="flow-shot" src="../assets/Prompts/web/ex1.jpg" width="540" height="1034" alt="">
+          <img class="flow-shot" src="../assets/Prompts/web/my-bonus.jpg" width="540" height="1034" alt="">
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 EVERY STATE: two rails of screens drifting in opposite directions -->
+  <section class="c-section" id="states">
+    <div class="container">
+      <header class="ch-head">
+        <span class="ch-num" aria-hidden="true">02</span>
+        <h2 class="ch-title" data-split data-i18n="ch2.title">Every state, designed</h2>
+        <p class="ch-text" data-fade data-i18n="ch2.text">Onboarding, filters, counter offers, late cancellations, missed visits, edits required and password resets — the unhappy paths are designed as carefully as the happy ones, so creators always know what happens next.</p>
+        <span class="ch-line"></span>
+      </header>
+    </div>
+    <div class="ui-rails" dir="ltr">
+      <div class="rail" data-dir="1"><div class="rail-track">
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/intro.jpg" width="540" height="1034" loading="lazy" alt="Intro screen"></div></div><figcaption>Intro</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/register.jpg" width="540" height="1034" loading="lazy" alt="Sign up screen"></div></div><figcaption>Sign up</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/select-location.jpg" width="540" height="1034" loading="lazy" alt="Location screen"></div></div><figcaption>Location</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/map-view.jpg" width="540" height="1034" loading="lazy" alt="Map view screen"></div></div><figcaption>Map view</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/filter.jpg" width="540" height="1034" loading="lazy" alt="Filters screen"></div></div><figcaption>Filters</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/questions.jpg" width="540" height="1034" loading="lazy" alt="Application questions screen"></div></div><figcaption>Application questions</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/choose-social-media-platform.jpg" width="540" height="1034" loading="lazy" alt="Choose platform screen"></div></div><figcaption>Choose platform</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/submitted.jpg" width="540" height="1034" loading="lazy" alt="Submitted screen"></div></div><figcaption>Submitted</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/pending-applications.jpg" width="540" height="1034" loading="lazy" alt="Pending screen"></div></div><figcaption>Pending</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/action-required.jpg" width="540" height="1034" loading="lazy" alt="Action required screen"></div></div><figcaption>Action required</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/active-bookings.jpg" width="540" height="1034" loading="lazy" alt="Active bookings screen"></div></div><figcaption>Active bookings</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/notifications.jpg" width="540" height="1034" loading="lazy" alt="Notifications screen"></div></div><figcaption>Notifications</figcaption></figure>
+
+      </div></div>
+      <div class="rail" data-dir="-1"><div class="rail-track">
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/manage-booking.jpg" width="540" height="1034" loading="lazy" alt="Manage booking screen"></div></div><figcaption>Manage booking</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/review-counter-offer.jpg" width="540" height="1034" loading="lazy" alt="Counter offer screen"></div></div><figcaption>Counter offer</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/attention.jpg" width="540" height="1034" loading="lazy" alt="Late cancellation screen"></div></div><figcaption>Late cancellation</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/cancellation.jpg" width="540" height="1034" loading="lazy" alt="Cancellation screen"></div></div><figcaption>Cancellation</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/did-not-attend.jpg" width="540" height="1034" loading="lazy" alt="Did not attend screen"></div></div><figcaption>Did not attend</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/confirm-upload.jpg" width="540" height="1034" loading="lazy" alt="Upload content screen"></div></div><figcaption>Upload content</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/completed-bookings-successful-promotions.jpg" width="540" height="1034" loading="lazy" alt="Successful screen"></div></div><figcaption>Successful</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/completed-bookings-edits-required.jpg" width="540" height="1034" loading="lazy" alt="Edits required screen"></div></div><figcaption>Edits required</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/referrals.jpg" width="540" height="1034" loading="lazy" alt="Referrals screen"></div></div><figcaption>Referrals</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/my-profile.jpg" width="540" height="1034" loading="lazy" alt="Profile screen"></div></div><figcaption>Profile</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/side-bar.jpg" width="540" height="1034" loading="lazy" alt="Menu screen"></div></div><figcaption>Menu</figcaption></figure>
+          <figure><div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/forget-password-email.jpg" width="540" height="1034" loading="lazy" alt="Password reset screen"></div></div><figcaption>Password reset</figcaption></figure>
+
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 03 BUSINESS PORTAL: stacked dashboards on a dark background -->
+  <section class="c-section container dark" id="portal" data-theme-bg="#0f2e2e" data-theme-fg="#eaf5f5">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">The Business Portal</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Venue owners publish promotions, review applications and counter offers, plan visits on a shared calendar and follow the results — with tokens and bonus incentives to boost their reach.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-stack">
+      <div class="stack-card"><div class="label"><span data-i18n="b1">Dashboard &amp; analytics</span><span dir="ltr">01</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/overview</span></div><img src="../assets/Prompts/web/overview.jpg" srcset="../assets/Prompts/web/overview-m.jpg 900w, ../assets/Prompts/web/overview.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="Business Portal overview with analytics"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="b2">Booking calendar</span><span dir="ltr">02</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/calendar</span></div><img src="../assets/Prompts/web/hooome.jpg" srcset="../assets/Prompts/web/hooome-m.jpg 900w, ../assets/Prompts/web/hooome.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="Booking calendar with influencer visits"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="b3">Campaign details</span><span dir="ltr">03</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/campaigns</span></div><img src="../assets/Prompts/web/campaigns-details.jpg" srcset="../assets/Prompts/web/campaigns-details-m.jpg 900w, ../assets/Prompts/web/campaigns-details.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="Campaign details page"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="b4">Applications</span><span dir="ltr">04</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/applications</span></div><img src="../assets/Prompts/web/all-applications.jpg" srcset="../assets/Prompts/web/all-applications-m.jpg 900w, ../assets/Prompts/web/all-applications.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="List of influencer applications"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="b5">Bonus incentives</span><span dir="ltr">05</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/bonus</span></div><img src="../assets/Prompts/web/bonus-incentives.jpg" srcset="../assets/Prompts/web/bonus-incentives-m.jpg 900w, ../assets/Prompts/web/bonus-incentives.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="Bonus incentives settings"></figure></div>
+      <div class="stack-card"><div class="label"><span data-i18n="b6">Token packages</span><span dir="ltr">06</span></div><figure class="c-fig browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">business.promote.app/tokens</span></div><img src="../assets/Prompts/web/token-packages.jpg" srcset="../assets/Prompts/web/token-packages-m.jpg 900w, ../assets/Prompts/web/token-packages.jpg 1600w" sizes="88vw" width="1600" height="1146" loading="lazy" alt="Token packages for boosting reach"></figure></div>
+    </div>
+  </section>
+
+  <!-- 04 COMMUNITY & SUPPORT: floating phones -->
+  <section class="c-section container" id="community">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Built for a community</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">Gemma, an AI influencer agent, answers questions inside the app; Influencer School teaches the craft through short videos; and referral codes reward creators and brands for growing the network.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ui-float" dir="ltr">
+      <div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/help-gemma.jpg" width="540" height="1034" loading="lazy" alt="Gemma, the AI influencer agent"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/influencer-school.jpg" width="540" height="1034" loading="lazy" alt="Influencer School video lessons"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/Prompts/web/referrals.jpg" width="540" height="1034" loading="lazy" alt="Referral codes for creators and brands"></div></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="coupons.html" data-transition data-wipe="#13261c" data-wipe-label="Coupons App" style="--f-next:'Montserrat', sans-serif">
+      <span class="next-title" dir="ltr" style="font-size: clamp(48px, 9vw, 170px)">Coupons App</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Coupons/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'PROMOTE — Influencer-Marketing-Plattform · Reem Deeb',
+      kicker: 'Influencer-Plattform &amp; Business-Dashboard',
+      'm.industry': 'Influencer-Marketing', 'm.services': 'UI/UX für App &amp; Dashboard', 'l.platforms': 'Plattformen', 'm.platforms': 'iOS, Android &amp; Web',
+      statement: 'Wo Creator und lokale Locations zusammenfinden.',
+      lead: 'PROMOTE ist ein durchgängiges Ökosystem für Influencer-Marketing. Eine mobile App lässt Blogger und Content Creators lokale Restaurants entdecken, sich für Kampagnen bewerben und Buchungen verwalten; ein webbasiertes Business-Portal lässt Inhaber Aktionen veröffentlichen, Bewerbungen prüfen und ihren Kampagnenkalender steuern. Ich habe beide Seiten so gestaltet, dass jeder Schritt – für Creator wie für Locations – klar, schnell und vertrauenswürdig ist.',
+      li1: 'Die Creator-Journey', li2: 'Jeder Zustand gestaltet', li3: 'Business-Portal', li4: 'Community &amp; Support',
+      st1: 'Screens für Mobile und Web', st2: 'verbundene Produkte: die Creator-App und das Business-Portal', st3: 'Schritte vom Entdecken einer Location bis zur Belohnung',
+      'ch1.eyebrow': '01 — Die Creator-Journey', 'ch1.title': 'Vom Entdecken zur Belohnung',
+      'f1.k': 'Schritt 01', 'f1.h': 'Entdecken', 'f1.p': 'Hervorgehobene und nahe Aktionen als Liste oder auf der Karte, gefiltert nach dem, was zur Zielgruppe des Creators passt.',
+      'f2.k': 'Schritt 02', 'f2.h': 'Bewerben', 'f2.p': 'Jede Aktion zeigt Briefing, Anreiz und geforderte Inhalte. Ein paar Fragen und eine Plattformwahl später ist die Bewerbung eingereicht.',
+      'f3.k': 'Schritt 03', 'f3.h': 'Buchen', 'f3.p': 'Angenommene Creator wählen Datum und Uhrzeit, die der Location passen, und verwalten, verschieben oder stornieren an einem Ort.',
+      'f4.k': 'Schritt 04', 'f4.h': 'Besuchen &amp; einlösen', 'f4.p': 'Vor Ort bestätigt ein QR-Code die Buchung beim Personal in Sekunden – ohne umständliche Erklärungen an der Theke.',
+      'f5.k': 'Schritt 05', 'f5.h': 'Liefern &amp; verdienen', 'f5.p': 'Inhalte hochladen, die Prüfung verfolgen und zusehen, wie sich Bonusziele mit wachsenden Views füllen.',
+      'ch2.title': 'Jeder Zustand gestaltet', 'ch2.text': 'Onboarding, Filter, Gegenangebote, kurzfristige Stornierungen, verpasste Besuche, nötige Änderungen und Passwort-Resets – die schwierigen Wege sind genauso sorgfältig gestaltet wie die einfachen, damit Creator immer wissen, was als Nächstes passiert.',
+      'ch3.title': 'Das Business-Portal', 'ch3.text': 'Inhaber veröffentlichen Aktionen, prüfen Bewerbungen und Gegenangebote, planen Besuche in einem gemeinsamen Kalender und verfolgen die Ergebnisse – mit Tokens und Bonusanreizen für mehr Reichweite.',
+      b1: 'Dashboard &amp; Analysen', b2: 'Buchungskalender', b3: 'Kampagnendetails', b4: 'Bewerbungen', b5: 'Bonusanreize', b6: 'Token-Pakete',
+      'ch4.title': 'Gemacht für eine Community', 'ch4.text': 'Gemma, eine KI-Influencer-Agentin, beantwortet Fragen direkt in der App; die Influencer School vermittelt das Handwerk in kurzen Videos; und Empfehlungscodes belohnen Creator und Marken, die das Netzwerk wachsen lassen.'
+    },
+    ar: {
+      title: 'بروموت — منصة تسويق عبر المؤثرين · ريم ديب',
+      kicker: 'منصة مؤثرين ولوحة تحكم للأعمال',
+      'm.industry': 'التسويق عبر المؤثرين', 'm.services': 'تصميم واجهات وتجربة التطبيق ولوحة التحكم', 'l.platforms': 'المنصات', 'm.platforms': 'iOS وأندرويد والويب',
+      statement: 'حيث يلتقي صنّاع المحتوى بالأماكن المحلية.',
+      lead: 'بروموت منظومة متكاملة للتسويق عبر المؤثرين. يتيح تطبيق الهاتف للمدوّنين وصنّاع المحتوى اكتشاف المطاعم المحلية والتقديم على الحملات وإدارة حجوزاتهم، بينما تتيح بوابة الأعمال على الويب لأصحاب الأماكن نشر العروض ومراجعة الطلبات وإدارة تقويم حملاتهم. صمّمتُ الجانبين لتكون كل خطوة — لصانع المحتوى وللمكان — واضحة وسريعة وجديرة بالثقة.',
+      li1: 'رحلة صانع المحتوى', li2: 'كل حالة مصمّمة', li3: 'بوابة الأعمال', li4: 'المجتمع والدعم',
+      st1: 'شاشة على الهاتف والويب', st2: 'منتجان متّصلان: تطبيق صنّاع المحتوى وبوابة الأعمال', st3: 'خطوات من اكتشاف المكان إلى الحصول على المكافأة',
+      'ch1.eyebrow': '01 — رحلة صانع المحتوى', 'ch1.title': 'من الاكتشاف إلى المكافأة',
+      'f1.k': 'الخطوة 01', 'f1.h': 'اكتشف', 'f1.p': 'عروض مميّزة وقريبة في قائمة أو على الخريطة، مصفّاة بحسب ما يناسب جمهور صانع المحتوى.',
+      'f2.k': 'الخطوة 02', 'f2.h': 'قدّم طلبك', 'f2.p': 'يعرض كل عرض المطلوب والحافز ونوع المحتوى. بضعة أسئلة واختيار المنصة، ويُرسل الطلب.',
+      'f3.k': 'الخطوة 03', 'f3.h': 'احجز', 'f3.p': 'يختار صانع المحتوى المقبول تاريخاً ووقتاً يناسبان المكان، ثم يدير الحجز أو يعيد جدولته أو يلغيه من مكان واحد.',
+      'f4.k': 'الخطوة 04', 'f4.h': 'زُر واستفد', 'f4.p': 'في المكان، يؤكّد رمز QR الحجز مع الموظفين خلال ثوانٍ — بلا شروحات محرجة عند الطاولة.',
+      'f5.k': 'الخطوة 05', 'f5.h': 'سلّم واربح', 'f5.p': 'ارفع المحتوى وتابع مراجعته وشاهد أهداف المكافآت تمتلئ مع ازدياد المشاهدات.',
+      'ch2.title': 'كل حالة مصمّمة', 'ch2.text': 'التسجيل والفلاتر والعروض المقابلة والإلغاء المتأخر والزيارات الفائتة والتعديلات المطلوبة وإعادة تعيين كلمة المرور — صُمّمت المسارات الصعبة بعناية المسارات السهلة نفسها، ليعرف صانع المحتوى دائماً ما سيحدث بعدها.',
+      'ch3.title': 'بوابة الأعمال', 'ch3.text': 'ينشر أصحاب الأماكن العروض ويراجعون الطلبات والعروض المقابلة ويخطّطون الزيارات في تقويم مشترك ويتابعون النتائج — مع الرموز وحوافز المكافآت لزيادة الانتشار.',
+      b1: 'لوحة التحكم والتحليلات', b2: 'تقويم الحجوزات', b3: 'تفاصيل الحملة', b4: 'الطلبات', b5: 'حوافز المكافآت', b6: 'باقات الرموز',
+      'ch4.title': 'مصمّم لمجتمع', 'ch4.text': 'جيما، وكيلة مؤثرين بالذكاء الاصطناعي، تجيب عن الأسئلة داخل التطبيق؛ وتعلّم مدرسة المؤثرين أسرار المهنة بفيديوهات قصيرة؛ وتكافئ رموز الإحالة صنّاع المحتوى والعلامات على توسيع الشبكة.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

@@ -171,6 +171,10 @@
   .lang button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
   html.intro .lang { visibility: hidden; }
 
+  /* ---------- Phones: fixed top bar + full-screen menu ---------- */
+  .mbar, .mmenu { display: none; }
+  html.intro .mbar { visibility: hidden; }
+
   /* Language switch reloads the page: fade out, then fade back in without the intro. */
   body.is-leaving { opacity: 0; transition: opacity .35s ease; }
   /* Curtain used when opening a case study */
@@ -485,15 +489,55 @@
   }
   @media (max-width: 767px) {
     :root { --gut: 6vw; --radius: 20px; }
-    .nav { top: auto; bottom: 20px; }
-    .nav a { padding: 11px 13px; font-size: 11px; }
-    .lang { top: 24px; }
-    .lang button { min-width: 34px; padding: 8px 9px; font-size: 11px; }
+    /* The pill nav and floating language switch give way to the top bar + hamburger menu */
+    .nav, .lang:not(.lang-m), .hero-logo { display: none; }
+    .mbar {
+      display: flex; position: fixed; top: 12px; left: 12px; right: 12px; z-index: 66; align-items: center; justify-content: space-between;
+      padding: 6px; padding-inline-start: 18px; border-radius: 999px;
+      background: rgba(255, 255, 255, .3); border: 1px solid rgba(255, 255, 255, .55);
+      backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      transition: background .5s var(--ease), border-color .5s var(--ease);
+    }
+    .mbar-logo { font: 400 14px/1 var(--f-logo); letter-spacing: .05em; color: #1b1b1b; transition: color .5s var(--ease); }
+    html.menu-open .mbar { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    html.menu-open .mbar-logo { color: #fff; }
+    .burger { position: relative; width: 44px; height: 44px; border-radius: 50%; background: #1b1b1b; }
+    .burger span { position: absolute; left: 13px; right: 13px; height: 2px; border-radius: 2px; background: #fff; transition: transform .6s var(--ease), top .6s var(--ease); }
+    .burger span:first-child { top: 17px; } .burger span:last-child { top: 25px; }
+    html.menu-open .burger { background: var(--orange); }
+    html.menu-open .burger span:first-child { top: 21px; transform: rotate(45deg); }
+    html.menu-open .burger span:last-child { top: 21px; transform: rotate(-45deg); }
+    .burger:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+    .mmenu {
+      display: flex; flex-direction: column; justify-content: space-between; position: fixed; inset: 0; z-index: 65;
+      padding: 120px 8vw 40px; background: #111; color: #fff; visibility: hidden;
+      clip-path: circle(0% at var(--cx, 90%) var(--cy, 40px));
+      transition: clip-path .9s var(--ease), visibility 0s linear .9s;
+    }
+    .mmenu.is-open { visibility: visible; clip-path: circle(150% at var(--cx, 90%) var(--cy, 40px)); transition: clip-path .9s var(--ease), visibility 0s; }
+    .mmenu-links { display: flex; flex-direction: column; gap: 6px; }
+    .mmenu-links a {
+      display: flex; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+      font: 400 clamp(36px, 11vw, 52px)/1.1 var(--f-body); opacity: 0; transform: translateY(40px);
+      transition: opacity .5s ease, transform .8s var(--ease), color .4s;
+    }
+    .mmenu-links a small { font: 500 12px/1 var(--f-head); letter-spacing: .12em; color: rgba(255,255,255,.45); }
+    .mmenu-links a.is-active { color: var(--orange); }
+    .mmenu.is-open .mmenu-links a { opacity: 1; transform: none; }
+    .mmenu.is-open .mmenu-links a:nth-child(1) { transition-delay: .2s; }
+    .mmenu.is-open .mmenu-links a:nth-child(2) { transition-delay: .27s; }
+    .mmenu.is-open .mmenu-links a:nth-child(3) { transition-delay: .34s; }
+    .mmenu.is-open .mmenu-links a:nth-child(4) { transition-delay: .41s; }
+    .mmenu-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; opacity: 0; transition: opacity .6s ease .45s; }
+    .mmenu.is-open .mmenu-foot { opacity: 1; }
+    .lang-m { position: static; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .lang-m button { color: rgba(255,255,255,.8); }
+    .lang-m button[aria-pressed="true"] { background: #fff; color: #111; }
+    .mmenu-mail { font: 500 14px/1 var(--f-head); color: rgba(255,255,255,.7); }
     .tab { padding: 13px 18px; font-size: 13px; gap: 8px; }
     .tab-ico { display: none; }
-    .tabs-dock { display: none; } /* no stacking on phones, so the header tabs are never covered */
+    .tabs-dock { bottom: 20px; } /* stays fixed at the bottom while browsing projects */
     .to-top { width: 50px; height: 50px; bottom: 84px; } /* sits above the bottom nav on phones */
-    .hero-logo { top: 32px; }
     .hero-headline { --fs: min(21vw, 15vh); top: 20vh; }
     .hero-bio { left: var(--gut); right: auto; bottom: 120px; }
     .hero-scroll { display: none; }
@@ -549,6 +593,28 @@
   <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
   <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
   <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+</div>
+
+<!-- Phones: a fixed top bar with a hamburger that opens a full-screen menu (replaces the pill nav) -->
+<div class="mbar">
+  <a class="mbar-logo" href="#home" dir="ltr">REEM DEEB</a>
+  <button class="burger" type="button" aria-expanded="false" aria-controls="mmenu" aria-label="Menu" data-i18n-aria="menu"><span></span><span></span></button>
+</div>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <nav class="mmenu-links" aria-label="Main">
+    <a href="#home" class="is-active"><small dir="ltr">01</small><span data-i18n="nav.home">Home</span></a>
+    <a href="#about"><small dir="ltr">02</small><span data-i18n="nav.about">About</span></a>
+    <a href="#work"><small dir="ltr">03</small><span data-i18n="nav.work">Portfolio</span></a>
+    <a href="#contact"><small dir="ltr">04</small><span data-i18n="nav.contact">Contact</span></a>
+  </nav>
+  <div class="mmenu-foot">
+    <div class="lang lang-m" role="group" aria-label="Language">
+      <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+      <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+      <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+    </div>
+    <a class="mmenu-mail" href="mailto:reem.deeb.96@outlook.com" dir="ltr">reem.deeb.96@outlook.com</a>
+  </div>
 </div>
 
 <!-- Floating category switch, shown while scrolling through the project cards (the header tabs get covered). -->
@@ -760,13 +826,13 @@
                 <div class="pt-index"><span class="chip">01 / 04</span><span class="chip">UI/UX</span></div>
                 <h3 class="pt-title" data-split>INTERNET.com</h3>
                 <p class="pt-sub" data-fade data-i18n="internet.sub">Brand Identity &amp; Web Interface</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/internet.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="internet.desc">Visual identity and UI showcase for INTERNET.com, a service empowering users with clean, memorable digital addresses. The logo design combines fluid geometric shapes with bold typography to convey seamless connectivity, accessibility, and modern professionalism across both digital and UI application.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View INTERNET.com project">
+            <a class="project-media" href="projects/internet.html" data-transition data-cursor="view" aria-label="View INTERNET.com project">
               <div class="media fb-plain"><div class="media-scale">
                 <img src="assets/UI-UX/internet.jpg" srcset="assets/UI-UX/internet-m.jpg 900w, assets/UI-UX/internet.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1363" height="661" alt="INTERNET.com logo next to a laptop showing the website" loading="lazy" onerror="this.style.display='none'">
               </div></div>
@@ -783,13 +849,13 @@
                 <div class="pt-index"><span class="chip">02 / 04</span><span class="chip">UI/UX</span></div>
                 <h3 class="pt-title" data-split data-i18n="realestate.title">Luxury Real Estate Landing Pages</h3>
                 <p class="pt-sub" data-fade data-i18n="realestate.sub">Landing Pages UI Design</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/realestate.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="realestate.desc">Designed a collection of high-converting landing pages tailored for luxury real estate developments in Dubai (including Palm Jumeirah, Downtown Dubai, and Dubai Marina). The designs prioritize clean visual hierarchy, sophisticated layout structures, and seamless call-to-action sections (such as brochure downloads and unit inquiries) to provide a premium user experience for prospective buyers.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Luxury Real Estate Landing Pages project">
+            <a class="project-media" href="projects/realestate.html" data-transition data-cursor="view" aria-label="View Luxury Real Estate Landing Pages project">
               <div class="media fb-plain"><div class="media-scale">
                 <img src="assets/UI-UX/realestate.jpg" srcset="assets/UI-UX/realestate-m.jpg 900w, assets/UI-UX/realestate.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="Collage of luxury real estate landing page designs" loading="lazy" onerror="this.style.display='none'">
               </div></div>
@@ -806,13 +872,13 @@
                 <div class="pt-index"><span class="chip">03 / 04</span><span class="chip">UI/UX</span></div>
                 <h3 class="pt-title" data-split>Promote</h3>
                 <p class="pt-sub" data-fade data-i18n="promote.sub">Influencer Marketing Platform &amp; Business Dashboard</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/promote.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="promote.desc">PROMOTE is an end-to-end influencer marketing ecosystem. The platform features a mobile app that allows bloggers and content creators to discover local restaurants, apply for marketing campaigns, and manage bookings. It also includes a web-based Business Portal dashboard for owners to publish promotions, review influencer applications, and manage campaign schedules seamlessly.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View PROMOTE project">
+            <a class="project-media" href="projects/promote.html" data-transition data-cursor="view" aria-label="View PROMOTE project">
               <div class="media fb-plain"><div class="media-scale">
                 <img src="assets/UI-UX/promote.jpg" srcset="assets/UI-UX/promote-m.jpg 900w, assets/UI-UX/promote.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="PROMOTE business dashboard on a laptop and mobile app screens" loading="lazy" onerror="this.style.display='none'">
               </div></div>
@@ -829,13 +895,13 @@
                 <div class="pt-index"><span class="chip">04 / 04</span><span class="chip">UI/UX</span></div>
                 <h3 class="pt-title" data-split data-i18n="coupons.title">Coupons App</h3>
                 <p class="pt-sub" data-fade data-i18n="coupons.sub">UI/UX Design &amp; Branding</p>
-                <a class="btn-pill" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="see">See project</span>
+                <a class="btn-pill" href="projects/coupons.html" data-transition data-magnetic><span data-i18n="see">See project</span>
                   <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
                 </a>
               </div>
               <p class="pt-desc" data-fade data-i18n="coupons.desc">Coupons App is a mobile application designed to help users easily discover, collect, and redeem discount deals and promo codes. I crafted a clean, user-friendly UI/UX design with a vibrant visual identity, focusing on seamless navigation from browsing categories to redeeming offers.</p>
             </div>
-            <a class="project-media" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-cursor="view" aria-label="View Coupons App project">
+            <a class="project-media" href="projects/coupons.html" data-transition data-cursor="view" aria-label="View Coupons App project">
               <div class="media fb-plain"><div class="media-scale">
                 <img src="assets/UI-UX/coupons.jpg" srcset="assets/UI-UX/coupons-m.jpg 900w, assets/UI-UX/coupons.jpg 1361w" sizes="(max-width: 767px) 92vw, 88vw" decoding="async" width="1361" height="661" alt="Coupons App screens on two phones" loading="lazy" onerror="this.style.display='none'">
               </div></div>
@@ -851,7 +917,7 @@
         <div class="container mw-wrap">
           <p class="eyebrow" data-i18n="more.eyebrow">More work</p>
           <h2 class="mw-title" data-split data-i18n="more.title">There's more where that came from.</h2>
-          <p class="mw-text" data-fade data-i18n="more.text">Explore my full portfolio of branding and UI/UX projects on Behance.</p>
+          <p class="mw-text" data-fade data-i18n="more.text">From logos and packaging to apps and dashboards — browse the full collection of branding and UI/UX projects, all in one place.</p>
           <a class="btn-pill btn-lg" href="https://www.behance.net/reem-deeb96" target="_blank" rel="noopener" data-magnetic><span data-i18n="more.cta">View all projects</span>
             <span class="arrow"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10 10 2M4 2h6v6"/></svg></span>
           </a>
@@ -941,12 +1007,13 @@
         'coupons.desc': 'Die Coupons App ist eine mobile Anwendung, mit der Nutzer Rabattangebote und Promo-Codes ganz einfach entdecken, sammeln und einlösen können. Ich habe ein klares, benutzerfreundliches UI/UX-Design mit einer lebendigen visuellen Identität entwickelt – mit Fokus auf eine nahtlose Navigation vom Stöbern in Kategorien bis zum Einlösen von Angeboten.',
         'more.eyebrow': 'Weitere Arbeiten',
         'more.title': 'Das ist noch nicht alles.',
-        'more.text': 'Entdecken Sie mein vollständiges Portfolio mit Branding- und UI/UX-Projekten auf Behance.',
+        'more.text': 'Von Logos und Verpackungen bis zu Apps und Dashboards – entdecken Sie die gesamte Sammlung meiner Branding- und UI/UX-Projekte an einem Ort.',
         'more.cta': 'Alle Projekte ansehen',
         'ct.label': 'Kontakt',
         'ct.title': 'Lust auf mehr?<br>Melden Sie sich.',
         'ct.top': 'Nach oben &uarr;',
-        toTop: 'Nach oben'
+        toTop: 'Nach oben',
+        menu: 'Menü'
       },
       ar: {
         title: 'ريم ديب — مصممة واجهات وتجربة مستخدم ومصممة جرافيك',
@@ -989,12 +1056,13 @@
         'coupons.desc': 'تطبيق الكوبونات تطبيق للهاتف المحمول يساعد المستخدمين على اكتشاف عروض الخصم والرموز الترويجية وجمعها واستخدامها بسهولة. صمّمتُ واجهة وتجربة استخدام واضحة وسهلة بهوية بصرية نابضة بالحياة، مع التركيز على تنقّل سلس من تصفّح الفئات إلى الاستفادة من العروض.',
         'more.eyebrow': 'المزيد من الأعمال',
         'more.title': 'وهناك المزيد.',
-        'more.text': 'اكتشف معرض أعمالي الكامل في الهوية البصرية وتصميم الواجهات على Behance.',
+        'more.text': 'من الشعارات والتغليف إلى التطبيقات ولوحات التحكم — تصفّح المجموعة الكاملة من مشاريع الهوية البصرية وتصميم الواجهات في مكان واحد.',
         'more.cta': 'عرض جميع المشاريع',
         'ct.label': 'تواصل',
         'ct.title': 'تريد المزيد؟<br>تواصل معي.',
         'ct.top': 'العودة للأعلى &uarr;',
-        toTop: 'العودة للأعلى'
+        toTop: 'العودة للأعلى',
+        menu: 'القائمة'
       }
     };
 
@@ -1164,6 +1232,38 @@
     });
   }
 
+  /* ---------- Phones: hamburger menu (the top bar stays fixed; the menu covers the page) ---------- */
+  function mobileMenu() {
+    const btn = $('.burger'), menu = $('#mmenu');
+    if (!btn || !menu) return;
+    const set = open => {
+      // The menu grows as a circle out of the button.
+      const r = btn.getBoundingClientRect();
+      menu.style.setProperty('--cx', (r.left + r.width / 2) + 'px');
+      menu.style.setProperty('--cy', (r.top + r.height / 2) + 'px');
+      menu.classList.toggle('is-open', open);
+      menu.setAttribute('aria-hidden', String(!open));
+      btn.setAttribute('aria-expanded', String(open));
+      html.classList.toggle('menu-open', open);
+      if (lenis) open ? lenis.stop() : lenis.start(); else document.body.style.overflow = open ? 'hidden' : '';
+      if (open) setTimeout(() => $('.mmenu-links a').focus({ preventScroll: true }), 350);
+    };
+    btn.addEventListener('click', () => set(!menu.classList.contains('is-open')));
+    // Close, then scroll: force the scroll since smooth scrolling was paused while the menu was open.
+    $$('.mmenu a').forEach(a => a.addEventListener('click', e => {
+      set(false);
+      const target = a.hash && document.querySelector(a.hash);
+      if (!target) return;
+      e.preventDefault();
+      scrollToEl(target, { force: true });
+    }));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) { set(false); btn.focus(); }
+    });
+    // Leaving phone width with the menu open would leave the page locked.
+    window.addEventListener('resize', () => { if (innerWidth >= 768 && menu.classList.contains('is-open')) set(false); });
+  }
+
   /* ---------- Back-to-top button: appears after the hero, its ring fills with scroll progress ---------- */
   function setupToTop() {
     const btn = $('.to-top'), bar = $('.tt-bar', btn), len = 2 * Math.PI * 26;
@@ -1186,6 +1286,7 @@
     }));
     setupTransitions();
     setupToTop();
+    mobileMenu();
     setupTabs();
     restoreScroll();
     return;
@@ -1207,7 +1308,7 @@
     gsap.set(bioWords, { yPercent: 110 });
     gsap.set('.hero-scroll', { autoAlpha: 0, y: 20 });
     gsap.set('.nav', { y: isMobile() ? 40 : -40, autoAlpha: 0, filter: 'blur(8px)' });
-    gsap.set('.lang', { y: -40, autoAlpha: 0, filter: 'blur(8px)' }); // always at the top, even on mobile
+    gsap.set('.lang, .mbar', { y: -40, autoAlpha: 0, filter: 'blur(8px)' }); // always at the top, even on mobile
     gsap.set('.pl-item', { yPercent: 110 });
 
     const heroImg = $('.hero-media img');
@@ -1240,7 +1341,7 @@
       .to('.hero-square', { scale: 1, rotate: 0, duration: 1, ease: 'back.out(2.2)' }, 3.65)
       .fromTo('.hero-script', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut' }, 3.5)
       .to('.hero-logo .c', { yPercent: 0, duration: 1.1, stagger: .03 }, 3.3)
-      .to('.nav, .lang', { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 1.3 }, 3.35)
+      .to('.nav, .lang, .mbar', { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 1.3 }, 3.35)
       .to(bioWords, { yPercent: 0, duration: 1.1, stagger: .018 }, 3.55)
       .to('.hero-scroll', { autoAlpha: 1, y: 0, duration: 1 }, 3.9)
       .add(() => {
@@ -1455,7 +1556,15 @@
       dockSTs.forEach(s => s.kill()); dockSTs = [];
       headTabs.style.visibility = '';
       gsap.set(dock, { autoAlpha: 0, yPercent: 0 });
-      if (innerWidth < 768) return; // phones: no stacking, header tabs are never covered
+      if (innerWidth < 768) {
+        // Phones: the switch stays fixed at the bottom while the project cards are on screen.
+        gsap.set(dock, { xPercent: -50, x: 0, y: 30, scale: 1, autoAlpha: 0 });
+        dockSTs.push(ScrollTrigger.create({
+          trigger: $('.group:not([hidden]) [data-panel]'), start: 'top 85%', endTrigger: '.more-work', end: 'top 85%',
+          onToggle: s => gsap.to(dock, { autoAlpha: s.isActive ? 1 : 0, y: s.isActive ? 0 : 30, duration: .5, ease: 'expo.out', overwrite: 'auto' })
+        }));
+        return;
+      }
       dockSTs.push(ScrollTrigger.create({
         trigger: $('.group:not([hidden]) [data-panel]'), start: 'top bottom', end: 'top 45%',
         onUpdate: s => placeDock(s.progress),
@@ -1507,7 +1616,7 @@
   /* ---------- Nav: hide on scroll down, active section, smooth anchors ---------- */
   function nav() {
     const navEl = $('.nav');
-    const links = $$('.nav a');
+    const links = $$('.nav a, .mmenu-links a');
     let hidden = false;
     if (lenis) lenis.on('scroll', ({ scroll, direction }) => {
       const shouldHide = !isMobile() && direction === 1 && scroll > 300;
@@ -1522,7 +1631,7 @@
         onToggle: s => { if (s.isActive) links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === id)); }
       });
     });
-    $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    $$('a[href^="#"]:not(.mmenu a)').forEach(a => a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
       if (!t) return;
       e.preventDefault();
@@ -1568,6 +1677,7 @@
   reveals();
   marquee();
   setupTabs();
+  mobileMenu();
   nav();
   cursor();
   setupTransitions();
