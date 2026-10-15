@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>META — Brand Identity · Reem Deeb</title>
+<meta name="description" content="META for Information Technology brand identity by Reem Deeb: logo concept, colour, typography, illustrations, stationery, website and mobile app.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Cinzel:wght@400;500&family=Exo+2:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #f3f5fa; --fg: #12234a; --muted: #8592ad; --accent: #1d57a9;
+    --f-brand: 'Exo 2', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .02em;
+  }
+  .c-title, .ch-title, .next-title { font-weight: 700; }
+  .c-statement { font-weight: 600; }
+  .ch-num { font-weight: 600; }
+  /* Blue overlay ties the hero photo to the brand colour */
+  .c-hero-media::after {
+    background:
+      linear-gradient(0deg, rgba(10, 32, 74, .9) 0%, rgba(10, 32, 74, .45) 40%, rgba(10, 32, 74, .1) 70%, rgba(10, 32, 74, .35) 100%);
+  }
+  .c-palette.quad { height: clamp(300px, 52vh, 520px); }
+  .c-fig.pad { --pad-bg: #fff; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#1d57a9" aria-hidden="true"><span>META</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Meta/web/hero.jpg" srcset="../assets/Meta/web/hero-m.jpg 1000w, ../assets/Meta/web/hero.jpg 2360w" sizes="100vw" width="2360" height="1574" fetchpriority="high" alt="Modern office with brick walls and desks of monitors showing code">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; brand identity</p>
+      <h1 class="c-title" dir="ltr" data-chars>META</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>META for Information Technology</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Information technology</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, illustration</dd></div>
+        <div><dt data-i18n="m.digitalK">Digital</dt><dd data-i18n="m.digital">Website design</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Technology, made clear and human.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">META is an information technology company that builds digital transformation solutions — from web programming and mobile applications to graphic design, artificial intelligence and hardware integration. The brand needed to look precise and capable, yet open and friendly enough to explain complex services to any client.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo concept</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour &amp; typography</span><span>02</span></li>
+        <li><span data-i18n="li3">Illustrations</span><span>03</span></li>
+        <li><span data-i18n="li4">Website</span><span>04</span></li>
+        <li><span data-i18n="li5">Brand applications</span><span>05</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/Meta/web/logo-blue.jpg" srcset="../assets/Meta/web/logo-blue-m.jpg 1000w, ../assets/Meta/web/logo-blue.jpg 1425w" sizes="88vw" width="1425" height="941" loading="lazy" alt="White META for information technology logo on a deep blue silk background">
+    </figure>
+  </section>
+
+  <!-- 01 CONCEPT -->
+  <section class="c-section container" id="concept">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Concept</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">Two sources shaped the logo: Morse code and the building blocks of the web. Short and long bars, like dots and dashes, form the letters, while the arrow-like M echoes the angle brackets of code.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Meta/web/concept.jpg" srcset="../assets/Meta/web/concept-m.jpg 1000w, ../assets/Meta/web/concept.jpg 2000w" sizes="88vw" width="2000" height="1049" loading="lazy" alt="META logo on blue with its two inspirations: Morse code and code elements">
+      <figcaption data-i18n="cap.concept">Logo concept</figcaption>
+    </figure>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Morse code</h3><p data-i18n="n1.p">Bars of different lengths spell out the E and the T, turning the wordmark into a signal — a quiet reference to communication, the heart of any IT company.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">Code elements</h3><p data-i18n="n2.p">The M is built from two chevrons that recall the &lt; /&gt; tags every web page is made of, giving the mark a clear sense of direction and progress.</p></div>
+    </div>
+    <div class="c-duo" style="margin-top: clamp(40px, 6vh, 72px); align-items: stretch">
+      <figure class="c-fig pad" data-reveal data-speed="3">
+        <img src="../assets/Meta/web/logo-color.jpg" width="645" height="303" loading="lazy" alt="Full-colour META logo in blue, orange and red">
+        <figcaption data-i18n="cap.colour">Full-colour logo</figcaption>
+      </figure>
+      <figure class="c-fig pad" data-reveal data-speed="-3">
+        <img src="../assets/Meta/web/clearspace.jpg" width="932" height="614" loading="lazy" alt="META logo construction with clear space marked around it">
+        <figcaption data-i18n="cap.space">Clear space</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 COLOUR & TYPE -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Colour &amp; Type</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">A dependable blue carries the brand, with orange and red as sharp signal colours taken straight from the logo. A warm yellow softens the system for illustrations and presentations.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette quad" role="list" aria-label="Colour palette">
+      <button class="swatch" role="listitem" type="button" data-hex="#1D57A9" style="--c:#1d57a9"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">META Blue</b><small dir="ltr">#1D57A9<br>RGB 29 · 87 · 169</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#E99A1C" style="--c:#e99a1c"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Signal Orange</b><small dir="ltr">#E99A1C<br>RGB 233 · 154 · 28</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#D7473A" style="--c:#d7473a"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Code Red</b><small dir="ltr">#D7473A<br>RGB 215 · 71 · 58</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#F0BD6E" style="--c:#f0bd6e; --t:#12234a"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Warm Yellow</b><small dir="ltr">#F0BD6E<br>RGB 240 · 189 · 110</small></button>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(20px, 3vw, 40px)">
+      <img src="../assets/Meta/web/type.jpg" srcset="../assets/Meta/web/type-m.jpg 1000w, ../assets/Meta/web/type.jpg 2000w" sizes="88vw" width="2000" height="1104" loading="lazy" alt="Typeface specimen in regular and light weights next to a large Hello">
+      <figcaption data-i18n="cap.type">Typography</figcaption>
+    </figure>
+  </section>
+
+  <!-- 03 ILLUSTRATIONS (page turns blue) -->
+  <section class="c-section container" id="illustration" data-theme-bg="#1d57a9" data-theme-fg="#ffffff">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Illustrations</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Loose ink lines and flat fills in the brand blue and warm yellow make technical services feel human and approachable — people at work, charts that come alive, ideas that click into place.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4"><img src="../assets/Meta/web/ill-1.jpg" srcset="../assets/Meta/web/ill-1-m.jpg 1000w, ../assets/Meta/web/ill-1.jpg 1956w" sizes="(max-width: 767px) 88vw, 43vw" width="1956" height="1956" loading="lazy" alt="Illustration of a person typing into a form with a sparkle"></figure>
+      <figure class="c-fig" data-reveal data-speed="-4"><img src="../assets/Meta/web/ill-2.jpg" srcset="../assets/Meta/web/ill-2-m.jpg 1000w, ../assets/Meta/web/ill-2.jpg 2000w" sizes="(max-width: 767px) 88vw, 43vw" width="2000" height="2000" loading="lazy" alt="Illustration of a person arranging charts on browser windows"></figure>
+    </div>
+    <figure class="c-fig c-full" data-reveal>
+      <img src="../assets/Meta/web/ill-3.jpg" srcset="../assets/Meta/web/ill-3-m.jpg 1000w, ../assets/Meta/web/ill-3.jpg 2000w" sizes="88vw" width="2000" height="1333" loading="lazy" alt="Illustration of a colourful team relaxing and sharing ideas together">
+    </figure>
+  </section>
+
+  <!-- 04 WEBSITE -->
+  <section class="c-section container" id="website">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Website</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">The website carries the identity online: a clean white layout, generous space and the brand blue for every call to action, introducing META’s services with a single, confident message.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Meta/web/desk.jpg" srcset="../assets/Meta/web/desk-m.jpg 1000w, ../assets/Meta/web/desk.jpg 2400w" sizes="88vw" width="2400" height="1800" loading="lazy" alt="META website home page, Welcome to Meta Solutions, on a desktop monitor in a bright workspace">
+      <figcaption data-i18n="cap.web">Home page</figcaption>
+    </figure>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="c-quote">
+    <img src="../assets/Meta/web/hero.jpg" srcset="../assets/Meta/web/hero-m.jpg 1000w, ../assets/Meta/web/hero.jpg 2360w" sizes="100vw" width="2360" height="1574" loading="lazy" alt="">
+    <p data-split data-i18n="quote">Every signal, clearly sent.</p>
+  </section>
+
+  <!-- 05 APPLICATIONS -->
+  <section class="c-section container" id="applications">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">05</span>
+      <h2 class="ch-title" data-split data-i18n="ch5.title">Applications</h2>
+      <p class="ch-text" data-fade data-i18n="ch5.text">On paper and in the office, the identity stays crisp and consistent: angled colour corners on the stationery echo the chevrons of the logo, while the mugs bring the brand blue into everyday work.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4" data-cursor="view">
+        <img src="../assets/Meta/web/stationery.jpg" srcset="../assets/Meta/web/stationery-m.jpg 1000w, ../assets/Meta/web/stationery.jpg 2000w" sizes="(max-width: 767px) 88vw, 43vw" width="2000" height="1433" loading="lazy" alt="META letterhead, envelope, folder and business cards">
+        <figcaption data-i18n="cap.stationery">Stationery</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal data-speed="-4" data-cursor="view">
+        <img src="../assets/Meta/web/mugs.jpg" srcset="../assets/Meta/web/mugs-m.jpg 1000w, ../assets/Meta/web/mugs.jpg 1998w" sizes="(max-width: 767px) 88vw, 43vw" width="1998" height="2300" loading="lazy" alt="Two white mugs with the META logo on a brand-blue background">
+        <figcaption data-i18n="cap.mugs">Mugs</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="omran.html" data-transition data-wipe="#1a1a1a" data-wipe-label="Omran Omeira" style="--f-next:'Cinzel', serif">
+      <span class="next-title" dir="ltr" style="font-size: clamp(40px, 8vw, 150px); font-weight: 400">Omran Omeira</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Omran/web/section1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'META — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Markenidentität',
+      'm.industry': 'Informationstechnologie', 'm.services': 'Logo, visuelle Identität, Illustration', 'm.digitalK': 'Digital', 'm.digital': 'Website-Design',
+      statement: 'Technologie – klar und menschlich.',
+      lead: 'META ist ein IT-Unternehmen, das Lösungen für die digitale Transformation entwickelt – von Webprogrammierung und mobilen Apps bis zu Grafikdesign, künstlicher Intelligenz und Hardware-Integration. Die Marke sollte präzise und kompetent wirken und zugleich offen und freundlich genug sein, um komplexe Leistungen jedem Kunden verständlich zu machen.',
+      li1: 'Logokonzept', li2: 'Farbe &amp; Typografie', li3: 'Illustrationen', li4: 'Website', li5: 'Markenanwendungen',
+      'cap.stationery': 'Geschäftsausstattung',
+      'ch1.title': 'Das Konzept',
+      'ch1.text': 'Zwei Quellen prägten das Logo: der Morsecode und die Bausteine des Webs. Kurze und lange Balken – wie Punkte und Striche – formen die Buchstaben, während das pfeilartige M an die spitzen Klammern im Code erinnert.',
+      'cap.concept': 'Logokonzept',
+      'n1.h': 'Morsecode', 'n1.p': 'Balken unterschiedlicher Länge bilden das E und das T und machen die Wortmarke zu einem Signal – ein leiser Verweis auf Kommunikation, das Herz jedes IT-Unternehmens.',
+      'n2.h': 'Code-Elemente', 'n2.p': 'Das M besteht aus zwei Winkeln, die an die &lt; /&gt;-Tags erinnern, aus denen jede Webseite besteht – das gibt dem Zeichen Richtung und Fortschritt.',
+      'cap.space': 'Schutzraum',
+      'ch2.title': 'Farbe &amp; Schrift',
+      'ch2.text': 'Ein verlässliches Blau trägt die Marke, Orange und Rot dienen als prägnante Signalfarben direkt aus dem Logo. Ein warmes Gelb macht das System für Illustrationen und Präsentationen weicher.',
+      c1: 'META-Blau', c2: 'Signalorange', c3: 'Code-Rot', c4: 'Warmes Gelb', 'cap.type': 'Typografie',
+      'ch3.title': 'Illustrationen',
+      'ch3.text': 'Lockere Tuschelinien und flächige Farben in Markenblau und warmem Gelb lassen technische Leistungen menschlich und nahbar wirken – Menschen bei der Arbeit, Diagramme, die lebendig werden, Ideen, die einrasten.',
+      'cap.colour': 'Vollfarbiges Logo', 'cap.web': 'Startseite', 'cap.mugs': 'Tassen',
+      'ch4.title': 'Website', 'ch4.text': 'Die Website trägt die Identität ins Netz: ein klares weißes Layout, viel Raum und das Markenblau für jede Handlungsaufforderung – META stellt seine Leistungen mit einer einzigen, selbstbewussten Botschaft vor.',
+      quote: 'Jedes Signal klar gesendet.',
+      'ch5.title': 'Anwendungen', 'ch5.text': 'Auf Papier und im Büro bleibt die Identität klar und einheitlich: abgeschrägte Farbecken auf der Geschäftsausstattung greifen die Winkel des Logos auf, die Tassen bringen das Markenblau in den Arbeitsalltag.'
+    },
+    ar: {
+      title: 'META — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية تجارية',
+      'm.industry': 'تقنية المعلومات', 'm.services': 'شعار، هوية بصرية، رسوم توضيحية', 'm.digitalK': 'رقمي', 'm.digital': 'تصميم موقع إلكتروني',
+      statement: 'تقنية واضحة وقريبة من الإنسان.',
+      lead: 'META شركة تقنية معلومات تقدّم حلول التحول الرقمي — من برمجة المواقع وتطبيقات الجوال إلى التصميم الجرافيكي والذكاء الاصطناعي وتكامل الأجهزة. احتاجت العلامة أن تبدو دقيقة ومتمكّنة، وفي الوقت نفسه منفتحة وودودة بما يكفي لتشرح الخدمات المعقدة لأي عميل.',
+      li1: 'فكرة الشعار', li2: 'الألوان والخطوط', li3: 'الرسوم التوضيحية', li4: 'الموقع الإلكتروني', li5: 'تطبيقات العلامة',
+      'cap.stationery': 'القرطاسية',
+      'ch1.title': 'الفكرة',
+      'ch1.text': 'استُلهم الشعار من مصدرين: شيفرة مورس وعناصر الويب. أشرطة قصيرة وطويلة — كالنقاط والشرطات — تشكّل الحروف، بينما يذكّر حرف M الشبيه بالسهم بأقواس الشيفرة البرمجية.',
+      'cap.concept': 'فكرة الشعار',
+      'n1.h': 'شيفرة مورس', 'n1.p': 'أشرطة بأطوال مختلفة تكوّن حرفي E و T، فتحوّل الشعار النصي إلى إشارة — في إحالة هادئة إلى التواصل، جوهر أي شركة تقنية.',
+      'n2.h': 'عناصر الشيفرة', 'n2.p': 'يتكوّن حرف M من زاويتين تذكّران بوسوم &lt; /&gt; التي تُبنى منها كل صفحة ويب، ما يمنح العلامة إحساساً واضحاً بالاتجاه والتقدّم.',
+      'cap.space': 'المساحة الآمنة',
+      'ch2.title': 'الألوان والخطوط',
+      'ch2.text': 'أزرق موثوق يحمل العلامة، مع البرتقالي والأحمر كلوني إشارة حادّين مأخوذين مباشرة من الشعار. ويليّن أصفر دافئ النظام في الرسوم التوضيحية والعروض التقديمية.',
+      c1: 'أزرق META', c2: 'برتقالي الإشارة', c3: 'أحمر الشيفرة', c4: 'أصفر دافئ', 'cap.type': 'الخطوط',
+      'ch3.title': 'الرسوم التوضيحية',
+      'ch3.text': 'خطوط حبر حرّة وألوان مسطّحة بالأزرق والأصفر الدافئ تجعل الخدمات التقنية إنسانية وقريبة — أشخاص يعملون، ورسوم بيانية تنبض بالحياة، وأفكار تجد مكانها.',
+      'cap.colour': 'الشعار بالألوان الكاملة', 'cap.web': 'الصفحة الرئيسية', 'cap.mugs': 'الأكواب',
+      'ch4.title': 'الموقع الإلكتروني', 'ch4.text': 'ينقل الموقع الهوية إلى العالم الرقمي: تصميم أبيض نظيف ومساحات رحبة والأزرق المميز لكل دعوة إلى الإجراء، ليقدّم خدمات META برسالة واحدة واثقة.',
+      quote: 'كل إشارة تصل بوضوح.',
+      'ch5.title': 'التطبيقات', 'ch5.text': 'على الورق وفي المكتب تبقى الهوية واضحة ومتّسقة: زوايا ملوّنة مائلة في القرطاسية تستعيد زوايا الشعار، والأكواب تحمل الأزرق المميز إلى العمل اليومي.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

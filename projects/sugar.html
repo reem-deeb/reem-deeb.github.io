@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugar Judy — Brand Identity · Reem Deeb</title>
+<meta name="description" content="Sugar Judy nails &amp; beauty brand identity by Reem Deeb: script logo, teal palette, studio signage, products and packaging.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Andika:wght@400;700&family=Great+Vibes&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #fbf7f5; --fg: #40302f; --muted: #b4a39e; --accent: #329c92;
+    --f-brand: 'Quicksand', 'IBM Plex Sans Arabic', sans-serif;
+    --f-script: 'Great Vibes', 'IBM Plex Sans Arabic', cursive;
+    --title-track: 0; --ch-transform: none;
+  }
+  /* Script for the big names, a soft rounded sans for everything else */
+  .c-title { font: 400 clamp(72px, 13vw, 250px)/1 var(--f-script); text-transform: none; letter-spacing: 0; padding-bottom: .12em; }
+  .ch-title { font-weight: 500; letter-spacing: -.01em; }
+  .c-statement { font-weight: 500; letter-spacing: -.01em; }
+  .c-statement em { font: 400 1.2em/1 var(--f-script); font-style: normal; color: var(--accent); }
+  .page-wipe span { font-family: var(--f-script); text-transform: none; letter-spacing: 0; font-size: clamp(44px, 6vw, 96px); }
+  .c-hero-media::after {
+    background:
+      linear-gradient(0deg, rgba(48, 34, 33, .86) 0%, rgba(48, 34, 33, .45) 40%, rgba(48, 34, 33, .08) 70%, rgba(48, 34, 33, .3) 100%);
+  }
+  .c-fig.pad { --pad-bg: #fff; --pad-w: 640px; }
+  .swatch.light { box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); }
+  .c-palette.quad { height: clamp(300px, 52vh, 520px); }
+  html[lang="ar"] .c-statement em { font-family: inherit; font-size: 1em; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#329c92" aria-hidden="true"><span>Sugar Judy</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Sugar/web/section1.jpg" srcset="../assets/Sugar/web/section1-m.jpg 1000w, ../assets/Sugar/web/section1.jpg 2400w" sizes="100vw" width="2400" height="1768" fetchpriority="high" alt="Manicure in progress on a soft towel, with nail tools and a UV lamp">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; brand identity</p>
+      <h1 class="c-title" dir="ltr" data-chars>Sugar Judy</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Sugar Judy</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Nails &amp; beauty studio</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, packaging</dd></div>
+        <div><dt data-i18n="m.moodK">Mood</dt><dd data-i18n="m.mood">Personal, fresh, polished</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">A little sweetness in every detail.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Sugar Judy is a nail and beauty studio where every appointment is a small moment of self-care. The identity had to feel personal and light-hearted, yet clean and professional — as fresh and polished as a new manicure.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo &amp; concept</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour &amp; illustration</span><span>02</span></li>
+        <li><span data-i18n="li3">In the studio</span><span>03</span></li>
+        <li><span data-i18n="li4">Products &amp; packaging</span><span>04</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/Sugar/web/feature.jpg" srcset="../assets/Sugar/web/feature-m.jpg 1000w, ../assets/Sugar/web/feature.jpg 2000w" sizes="88vw" width="2000" height="1324" loading="lazy" alt="Sugar Judy logo with soft teal shapes over a manicure in progress">
+    </figure>
+  </section>
+
+  <!-- 01 LOGO -->
+  <section class="c-section container" id="logo">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Logo</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The idea began with two simple elements: a delicate, line-drawn hand and a soft teal dot, like a fresh drop of polish. Flowing script for “Sugar” sits over the dot, with “Judy” tucked in as a personal signature and “nails &amp; beauty” set in a light, open sans.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig pad" data-reveal>
+      <img src="../assets/Sugar/web/concept.jpg" width="644" height="149" loading="lazy" alt="Concept sketch: a line-drawn hand and a teal dot">
+      <figcaption data-i18n="cap.concept">Concept</figcaption>
+    </figure>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(20px, 3vw, 40px)">
+      <img src="../assets/Sugar/web/logo.jpg" srcset="../assets/Sugar/web/logo-m.jpg 1000w, ../assets/Sugar/web/logo.jpg 2000w" sizes="88vw" width="2000" height="1124" loading="lazy" alt="Sugar Judy nails &amp; beauty logo on a white card beside a green leaf">
+      <figcaption data-i18n="cap.logo">The final logo</figcaption>
+    </figure>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Hand &amp; dot</h3><p data-i18n="n1.p">The hand stands for care and craftsmanship; the teal dot is the drop of colour that finishes every treatment.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">A personal signature</h3><p data-i18n="n2.p">Script lettering makes the name feel handwritten and friendly, like a personal note to every client.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 COLOUR & ILLUSTRATION -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Colour &amp; illustration</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">A fresh teal gives the brand its signature, softened by a sugared blush taken from the polish itself. A warm cocoa ink keeps the lettering readable, and plenty of white keeps everything clean and hygienic.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette quad" role="list" aria-label="Colour palette">
+      <button class="swatch" role="listitem" type="button" data-hex="#329C92" style="--c:#329c92"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Teal</b><small dir="ltr">#329C92<br>RGB 50 · 156 · 146</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#F2D8D9" style="--c:#f2d8d9; --t:#40302f"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Sugar Blush</b><small dir="ltr">#F2D8D9<br>RGB 242 · 216 · 217</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#40302F" style="--c:#40302f"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Cocoa Ink</b><small dir="ltr">#40302F<br>RGB 64 · 48 · 47</small></button>
+      <button class="swatch light" role="listitem" type="button" data-hex="#FFFFFF" style="--c:#ffffff; --t:#40302f"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">White</b><small dir="ltr">#FFFFFF<br>RGB 255 · 255 · 255</small></button>
+    </div>
+    <div class="c-duo" style="margin-top: clamp(40px, 7vh, 90px)">
+      <figure class="c-fig pad" data-reveal style="--pad-w: 300px">
+        <img src="../assets/Sugar/web/branch.jpg" width="416" height="693" loading="lazy" alt="Teal botanical branch illustration">
+        <figcaption data-i18n="cap.branch">Brand illustration</figcaption>
+      </figure>
+      <div class="c-aside" data-fade>
+        <h3 data-i18n="n3.h">A branch of teal</h3>
+        <p data-i18n="n3.p">A light botanical branch in the brand teal adds movement around photos and packaging. It grows from the same fine line as the hand in the logo, so every graphic feels part of one family.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 IN THE STUDIO (page turns teal) -->
+  <section class="c-section container" id="studio" data-theme-bg="#2e8f86" data-theme-fg="#ffffff">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">In the studio</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">On white walls the logo becomes a soft focal point — just enough colour to feel welcoming in a bright, calm space made for relaxing.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Sugar/web/wall.jpg" srcset="../assets/Sugar/web/wall-m.jpg 1000w, ../assets/Sugar/web/wall.jpg 2000w" sizes="88vw" width="2000" height="909" loading="lazy" alt="Sugar Judy logo on a sunlit wall beside serum bottles and dried flowers">
+      <figcaption data-i18n="cap.wall">Studio wall</figcaption>
+    </figure>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4" data-cursor="view" style="max-width: 480px; justify-self: center">
+        <img src="../assets/Sugar/web/hands.jpg" width="633" height="1018" loading="lazy" alt="Freshly manicured nude nails resting on soft white fur">
+      </figure>
+      <div class="c-aside" data-fade>
+        <h3 data-i18n="n4.h">Care you can see</h3>
+        <p data-i18n="n4.p">Photography stays soft, bright and close-up: clean hands, natural light and gentle textures that show the result clients come for.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PRODUCTS: pinned horizontal gallery, background follows each slide -->
+  <section class="c-hscroll" style="background:#f2d8d9; color:#40302f">
+    <div class="h-inner">
+      <div class="container h-head">
+        <h2 class="ch-title" data-split data-i18n="h.title">Products &amp; packaging</h2>
+        <span class="h-count" dir="ltr">01 / 03</span>
+      </div>
+      <div class="h-track">
+        <div class="h-slide" data-color="#f2d8d9" data-ink="#40302f"><figure class="c-fig"><img src="../assets/Sugar/web/polish.jpg" srcset="../assets/Sugar/web/polish-m.jpg 1000w, ../assets/Sugar/web/polish.jpg 2000w" sizes="(max-width: 767px) 88vw, 64vw" width="2000" height="1263" loading="lazy" alt="Three pink nail polish bottles with Sugar Judy labels"></figure><p data-i18n="s2">Nail polish</p></div>
+        <div class="h-slide" data-color="#329c92" data-ink="#ffffff"><figure class="c-fig"><img src="../assets/Sugar/web/jar.jpg" srcset="../assets/Sugar/web/jar-m.jpg 1000w, ../assets/Sugar/web/jar.jpg 1422w" sizes="(max-width: 767px) 88vw, 64vw" width="1422" height="712" loading="lazy" alt="Hand holding a frosted cream jar with the Sugar Judy logo"></figure><p data-i18n="s3">Hand cream</p></div>
+        <div class="h-slide" data-color="#e7ece8" data-ink="#40302f"><figure class="c-fig"><img src="../assets/Sugar/web/bags.jpg" width="1060" height="715" loading="lazy" alt="White and sage shopping bags with the Sugar Judy logo"></figure><p data-i18n="cap.bags">Shopping bags</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="yamor.html" data-transition data-wipe="#2f3f33" data-wipe-label="YAMOR" style="--f-next:'Aboreto', serif">
+      <span class="next-title" dir="ltr">Yamor</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Yamor/web/1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Sugar Judy — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Markenidentität',
+      'm.industry': 'Nagel- &amp; Beautystudio', 'm.services': 'Logo, visuelle Identität, Verpackung', 'm.moodK': 'Stimmung', 'm.mood': 'Persönlich, frisch, gepflegt',
+      statement: 'Ein wenig Süße in jedem Detail.',
+      lead: 'Sugar Judy ist ein Nagel- und Beautystudio, in dem jeder Termin ein kleiner Moment der Selbstfürsorge ist. Die Identität sollte persönlich und unbeschwert wirken und zugleich sauber und professionell – so frisch und gepflegt wie eine neue Maniküre.',
+      li1: 'Logo &amp; Konzept', li2: 'Farbe &amp; Illustration', li3: 'Im Studio', li4: 'Produkte &amp; Verpackung',
+      'ch1.title': 'Das Logo',
+      'ch1.text': 'Die Idee begann mit zwei einfachen Elementen: einer zarten, gezeichneten Hand und einem sanften Petrol-Punkt, wie ein frischer Tropfen Nagellack. Die fließende Schreibschrift für „Sugar“ liegt über dem Punkt, „Judy“ ist als persönliche Signatur eingebettet, und „nails &amp; beauty“ steht in einer leichten, offenen Groteskschrift.',
+      'cap.concept': 'Konzept', 'cap.branch': 'Markenillustration', 'cap.logo': 'Das finale Logo', 'cap.wall': 'Studiowand',
+      'n1.h': 'Hand &amp; Punkt', 'n1.p': 'Die Hand steht für Pflege und Handwerk, der Petrol-Punkt für den Farbtropfen, der jede Behandlung vollendet.',
+      'n2.h': 'Eine persönliche Signatur', 'n2.p': 'Die Schreibschrift lässt den Namen handgeschrieben und freundlich wirken – wie eine persönliche Notiz an jede Kundin.',
+      'n3.h': 'Ein Zweig in Petrol', 'n3.p': 'Ein leichter botanischer Zweig im Markenpetrol bringt Bewegung rund um Fotos und Verpackungen. Er wächst aus derselben feinen Linie wie die Hand im Logo, sodass jede Grafik zur selben Familie gehört.',
+      'n4.h': 'Pflege, die man sieht', 'n4.p': 'Die Fotografie bleibt weich, hell und nah: gepflegte Hände, natürliches Licht und sanfte Texturen, die das Ergebnis zeigen, für das Kundinnen kommen.',
+      'ch2.title': 'Farbe &amp; Illustration',
+      'ch2.text': 'Ein frisches Petrol gibt der Marke ihre Handschrift, gemildert durch ein zartes Rosé, das direkt aus dem Nagellack stammt. Ein warmes Kakaobraun hält die Schrift gut lesbar, und viel Weiß sorgt für einen sauberen, hygienischen Eindruck.',
+      c1: 'Petrol', c2: 'Zuckerrosé', c3: 'Kakao-Tinte', c4: 'Weiß',
+      'ch3.title': 'Im Studio',
+      'ch3.text': 'Auf weißen Wänden wird das Logo zu einem sanften Blickfang – gerade so viel Farbe, dass der helle, ruhige Raum zum Entspannen einladend wirkt.',
+      'cap.studio': 'Maniküreplatz', 'cap.chair': 'Behandlungsraum', 'cap.bags': 'Einkaufstaschen',
+      'h.title': 'Produkte &amp; Verpackung', s1: 'Seren', s2: 'Nagellack', s3: 'Handcreme'
+    },
+    ar: {
+      title: 'Sugar Judy — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية تجارية',
+      'm.industry': 'استوديو أظافر وتجميل', 'm.services': 'شعار، هوية بصرية، تغليف', 'm.moodK': 'الطابع', 'm.mood': 'شخصي، منعش، أنيق',
+      statement: 'لمسة حلوة في كل تفصيل.',
+      lead: 'Sugar Judy استوديو للأظافر والتجميل، يجعل كل موعد لحظة صغيرة من العناية بالنفس. كان على الهوية أن تبدو شخصية ومرحة، وفي الوقت نفسه نظيفة واحترافية — منعشة وأنيقة كطلاء أظافر جديد.',
+      li1: 'الشعار والفكرة', li2: 'الألوان والرسوم', li3: 'داخل الاستوديو', li4: 'المنتجات والتغليف',
+      'ch1.title': 'الشعار',
+      'ch1.text': 'بدأت الفكرة بعنصرين بسيطين: يد مرسومة بخط رقيق ونقطة فيروزية ناعمة كقطرة طلاء طازجة. يأتي اسم «Sugar» بخط يدوي انسيابي فوق النقطة، و«Judy» كتوقيع شخصي، بينما تُكتب عبارة «nails &amp; beauty» بخط خفيف ومنفتح.',
+      'cap.concept': 'الفكرة', 'cap.branch': 'رسم توضيحي للعلامة', 'cap.logo': 'الشعار النهائي', 'cap.wall': 'جدار الاستوديو',
+      'n1.h': 'اليد والنقطة', 'n1.p': 'ترمز اليد إلى العناية والحرفية، والنقطة الفيروزية إلى قطرة اللون التي تُكمل كل جلسة.',
+      'n2.h': 'توقيع شخصي', 'n2.p': 'يجعل الخط اليدوي الاسم يبدو مكتوباً باليد وودوداً، كرسالة شخصية لكل عميلة.',
+      'n3.h': 'غصن فيروزي', 'n3.p': 'غصن نباتي خفيف بلون العلامة الفيروزي يضيف حركة حول الصور والتغليف، وينبت من الخط الرفيع نفسه الذي رُسمت به اليد في الشعار، فتبدو كل الرسوم عائلة واحدة.',
+      'n4.h': 'عناية تُرى', 'n4.p': 'يبقى التصوير ناعماً ومضيئاً وقريباً: أيدٍ معتنى بها، وضوء طبيعي، وملامس ناعمة تُظهر النتيجة التي تأتي العميلات من أجلها.',
+      'ch2.title': 'الألوان والرسوم',
+      'ch2.text': 'فيروزي منعش يمنح العلامة توقيعها، يليّنه وردي سكّري مأخوذ من الطلاء نفسه. ويحافظ بني الكاكاو الدافئ على وضوح الكتابة، بينما يضفي الأبيض الوفير إحساساً بالنظافة والعناية.',
+      c1: 'فيروزي', c2: 'وردي سكّري', c3: 'حبر الكاكاو', c4: 'أبيض',
+      'ch3.title': 'داخل الاستوديو',
+      'ch3.text': 'على الجدران البيضاء يصبح الشعار نقطة جذب ناعمة — لون بقدر يكفي ليجعل المساحة المضيئة الهادئة مرحِّبة ومريحة.',
+      'cap.studio': 'ركن العناية بالأظافر', 'cap.chair': 'غرفة العلاج', 'cap.bags': 'أكياس التسوق',
+      'h.title': 'المنتجات والتغليف', s1: 'السيرومات', s2: 'طلاء الأظافر', s3: 'كريم اليدين'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

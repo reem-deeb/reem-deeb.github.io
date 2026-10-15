@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — Reem Deeb</title>
+<meta name="description" content="Every branding and UI/UX project by Reem Deeb in one place: case studies and further work.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600;800&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #101010; --fg: #f2efea; --muted: #7c776f; --accent: #e8792b;
+    --f-brand: 'Andika', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: -.03em; --ch-transform: none;
+  }
+  .c-title { font: 800 clamp(64px, 12vw, 230px)/.9 'Inter', 'IBM Plex Sans Arabic', sans-serif; letter-spacing: -.035em; }
+  .c-hero { background: #0b0b0b; }
+  .c-hero-media::after { background: radial-gradient(ellipse at 50% 60%, rgba(11,11,11,.35), rgba(11,11,11,.9) 75%), linear-gradient(0deg, rgba(11,11,11,.95), rgba(11,11,11,0) 55%); }
+
+  /* Hero: a tilted wall of every project, drifting in alternating directions */
+  .hero-art { position: absolute; inset: 0; overflow: hidden; }
+  .ha-wall { position: absolute; inset: -30% -20%; display: flex; flex-direction: column; justify-content: center; gap: 1.6vw; transform: rotate(-9deg); }
+  .ha-row { display: flex; gap: 1.6vw; width: max-content; animation: haLeft 80s linear infinite; }
+  .ha-row:nth-child(2) { animation-name: haRight; animation-duration: 95s; }
+  .ha-row:nth-child(3) { animation-duration: 70s; }
+  /* (more specific than case.css’s full-bleed hero image rule) */
+  .c-hero-media .ha-row img { position: static; inset: auto; flex: none; width: clamp(220px, 24vw, 420px); height: auto; aspect-ratio: 2.06; object-fit: cover; border-radius: 14px; opacity: .75; }
+  @keyframes haLeft { to { transform: translateX(-50%); } }
+  @keyframes haRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  @media (prefers-reduced-motion: reduce) { .ha-row { animation: none; } }
+
+  /* ---------- The project wheel ---------- */
+  .ring-sec { position: relative; overflow: hidden; }
+  .ring-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; padding-top: clamp(80px, 12vh, 130px); }
+  .filters { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+  .filter { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; font: 600 13px/1 var(--f-head); letter-spacing: .05em; text-transform: uppercase; color: rgba(255,255,255,.7); transition: background .45s var(--ease), color .45s var(--ease); }
+  .filter small { font: 700 10px/1 var(--f-head); padding: 4px 6px; border-radius: 999px; background: rgba(255,255,255,.12); }
+  .filter:hover { color: #fff; }
+  .filter[aria-pressed="true"] { background: #fff; color: #111; }
+  .filter[aria-pressed="true"] small { background: var(--accent); color: #fff; }
+  .filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ring-stage { position: relative; height: 78vh; perspective: 1800px; }
+  .ring { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+  .ring-card {
+    --w: clamp(300px, 34vw, 560px);
+    position: absolute; left: calc(var(--w) / -2); top: calc(var(--w) / -4.12); width: var(--w); aspect-ratio: 2.06;
+    border-radius: 18px; overflow: hidden; background: #1b1b1b; box-shadow: 0 30px 70px rgba(0,0,0,.45);
+    transform-origin: 50% 50%; will-change: transform, opacity; text-align: start; color: #fff;
+  }
+  .ring-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1s var(--ease); }
+  .ring-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.65), transparent 50%); opacity: 0; transition: opacity .5s; }
+  .ring-card .rc-meta { position: absolute; left: 18px; right: 18px; bottom: 14px; z-index: 1; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; opacity: 0; transform: translateY(10px); transition: opacity .5s, transform .6s var(--ease); }
+  .ring-card .rc-meta b { font: 600 clamp(16px, 1.3vw, 22px)/1.2 var(--f-head); }
+  .ring-card .rc-meta small { font: 600 11px/1 var(--f-head); letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+  .ring-card.is-front::after, .ring-card.is-front .rc-meta { opacity: 1; transform: none; }
+  .ring-card.is-front:hover img { transform: scale(1.05); }
+  .ring-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .ring-cap { display: flex; justify-content: center; align-items: center; gap: 18px; padding-bottom: 50px; font: 500 12px/1 var(--f-head); letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  .ring-cap b { color: #fff; font-weight: 600; }
+  .ring-cap i { width: 40px; height: 1px; background: rgba(255,255,255,.3); }
+
+  /* ---------- Index of every project ---------- */
+  .ix-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.14); }
+  .ix-group { margin: clamp(40px, 6vh, 70px) 0 14px; font: 600 12px/1 var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  .ix-row {
+    position: relative; display: grid; grid-template-columns: 70px 1fr auto auto; align-items: baseline; gap: 20px; width: 100%;
+    padding: clamp(16px, 2.4vh, 26px) 0; border-bottom: 1px solid rgba(255,255,255,.14); text-align: start; color: var(--fg);
+  }
+  .ix-row::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); transform: scaleY(0); transform-origin: 50% 100%; transition: transform .6s var(--ease); }
+  .ix-n { font: 500 12px/1 var(--f-head); letter-spacing: .1em; color: rgba(255,255,255,.45); }
+  .ix-name { font: 400 clamp(28px, 4vw, 64px)/1.05 var(--f-brand); transition: transform .7s var(--ease), color .4s; }
+  .ix-cat, .ix-type { font: 500 12px/1 var(--f-head); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); white-space: nowrap; }
+  .ix-type { padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); }
+  .ix-row.is-case .ix-type { color: #fff; border-color: var(--accent); }
+  .ix-row:hover .ix-name, .ix-row:focus-visible .ix-name { transform: translateX(18px); color: var(--accent); }
+  html[dir="rtl"] .ix-row:hover .ix-name, html[dir="rtl"] .ix-row:focus-visible .ix-name { transform: translateX(-18px); }
+  .ix-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .ix-preview { position: fixed; top: 0; left: 0; z-index: 70; width: 360px; aspect-ratio: 2.06; margin: -88px 0 0 -180px; border-radius: 16px; overflow: hidden; pointer-events: none; opacity: 0; transform: scale(.6); box-shadow: 0 30px 60px rgba(0,0,0,.5); }
+  .ix-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---------- Viewer (lightbox) ---------- */
+  .lb { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: clamp(16px, 4vw, 60px); }
+  .lb[hidden] { display: none; }
+  .lb-backdrop { position: absolute; inset: 0; background: rgba(8,8,8,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .lb-panel { position: relative; width: min(1180px, 100%); max-height: 100%; display: grid; grid-template-columns: 1.5fr 1fr; gap: 0; overflow: hidden; border-radius: 24px; background: #171717; color: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.6); }
+  .lb-fig { position: relative; margin: 0; overflow: hidden; background: #0d0d0d; min-height: 320px; }
+  .lb-fig img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .lb-info { display: flex; flex-direction: column; padding: clamp(26px, 3vw, 48px); }
+  .lb-cat { margin: 0 0 14px; font: 600 12px/1 var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  .lb-info h2 { margin: 0; font: 400 clamp(30px, 3vw, 48px)/1.08 var(--f-brand); }
+  .lb-sub { margin: 10px 0 0; font-size: 15px; color: rgba(255,255,255,.6); }
+  .lb-desc { margin: 24px 0 0; font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.85); }
+  .lb-case { align-self: flex-start; display: inline-flex; gap: 8px; margin-top: 26px; padding: 14px 22px; border-radius: 999px; background: var(--accent); color: #fff; font: 600 12px/1 var(--f-head); letter-spacing: .1em; text-transform: uppercase; transition: background .4s var(--ease), color .4s var(--ease); }
+  .lb-case:hover { background: #fff; color: #111; }
+  .lb-case[hidden] { display: none; }
+  .lb-case:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .lb-nav { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 30px; font: 500 12px/1 var(--f-head); letter-spacing: .14em; color: rgba(255,255,255,.55); }
+  .lb-btn { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); color: #fff; transition: background .4s var(--ease), border-color .4s; }
+  .lb-btn:hover { background: var(--accent); border-color: var(--accent); }
+  .lb-btn svg { width: 16px; height: 16px; }
+  html[dir="rtl"] .lb-btn.lb-dir svg { transform: scaleX(-1); }
+  .lb-close { position: absolute; top: 16px; right: 16px; z-index: 2; background: rgba(0,0,0,.5); }
+  html[dir="rtl"] .lb-close { right: auto; left: 16px; }
+  .lb-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 767px) {
+    /* Phones: the wheel becomes a swipeable row */
+    .ring-stage { height: auto; perspective: none; padding: 30px 0 10px; }
+    .ring { position: static; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 6vw 20px; transform: none !important; scrollbar-width: none; }
+    .ring::-webkit-scrollbar { display: none; }
+    .ring-card { --w: 82vw; position: relative; left: auto; top: auto; flex: none; scroll-snap-align: center; transform: none !important; opacity: 1 !important; }
+    .ring-card[hidden] { display: none; }
+    .ring-card::after, .ring-card .rc-meta { opacity: 1; transform: none; }
+    .ring-cap { display: none; }
+    .filters { width: 100%; justify-content: space-between; }
+    .filter { padding: 10px 12px; font-size: 12px; gap: 6px; }
+    .ix-row { grid-template-columns: 40px 1fr; row-gap: 10px; }
+    .ix-cat, .ix-type { grid-column: 2; justify-self: start; }
+    .ix-preview { display: none; }
+    .lb-panel { grid-template-columns: 1fr; max-height: 92vh; overflow-y: auto; }
+    .lb-fig { min-height: 0; aspect-ratio: 2.06; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#111111" aria-hidden="true"><span data-i18n="htitle">All Projects</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="back">Home</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <div class="hero-art ha" aria-hidden="true">
+        <div class="ha-wall" id="haWall"></div>
+      </div>
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Archive · Branding &amp; UI/UX</p>
+      <h1 class="c-title" data-chars data-i18n="htitle">All Projects</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="m1">Projects</dt><dd dir="ltr">17</dd></div>
+        <div><dt data-i18n="m2">Branding</dt><dd dir="ltr">08</dd></div>
+        <div><dt>UI/UX</dt><dd dir="ltr">09</dd></div>
+        <div><dt data-i18n="m4">Case studies</dt><dd dir="ltr">11</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- 01 THE WHEEL: further projects on a 3D ring that turns as you scroll -->
+  <section class="ring-sec" id="wheel" aria-labelledby="wheelTitle">
+    <div class="container ring-head">
+      <div>
+        <p class="eyebrow" data-i18n="w.eyebrow">01 — Further work</p>
+        <h2 class="ch-title" id="wheelTitle" data-split data-i18n="w.title">Turn the wheel</h2>
+      </div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true"><span data-i18n="f.all">All</span><small dir="ltr">10</small></button>
+        <button class="filter" type="button" data-filter="branding" aria-pressed="false"><span data-i18n="f.branding">Branding</span><small dir="ltr">05</small></button>
+        <button class="filter" type="button" data-filter="uiux" aria-pressed="false"><span>UI/UX</span><small dir="ltr">05</small></button>
+      </div>
+    </div>
+    <div class="ring-stage">
+      <div class="ring" id="ring"></div>
+    </div>
+    <p class="ring-cap" aria-live="polite"><b id="ringName">—</b><i></i><span id="ringCount" dir="ltr">01 / 10</span></p>
+  </section>
+
+  <!-- 02 INDEX: every project, case studies included -->
+  <section class="c-section container" id="index">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="i.title">The complete index</h2>
+      <p class="ch-text" data-fade data-i18n="i.text">Every project in one list. Case studies open their full story; the others open a quick view.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div id="ixGroups"></div>
+    <div class="ix-preview" aria-hidden="true"><img id="ixImg" src="../assets/thumbs/yamor.jpg" alt=""></div>
+  </section>
+
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="n.eyebrow">Back to</p>
+    <a href="../index.html#work" data-transition data-back data-wipe="#0e0e0e" data-wipe-label="Selected Work">
+      <span class="next-title" data-i18n="n.title" style="text-transform:none; font-family: var(--f-brand); font-size: clamp(48px, 9vw, 170px)">Selected Work</span>
+    </a>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<!-- Viewer for projects without a full case study -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <div class="lb-backdrop" data-close></div>
+  <div class="lb-panel">
+    <figure class="lb-fig"><img id="lbImg" src="" alt=""></figure>
+    <div class="lb-info">
+      <p class="lb-cat" id="lbCat"></p>
+      <h2 id="lbTitle"></h2>
+      <p class="lb-sub" id="lbSub"></p>
+      <p class="lb-desc" id="lbDesc"></p>
+      <a class="lb-case" id="lbCase" href="#" data-transition hidden><span></span> <span aria-hidden="true">&rarr;</span></a>
+      <div class="lb-nav">
+        <button class="lb-btn lb-dir" type="button" id="lbPrev" aria-label="Previous project" data-i18n-aria="lb.prev"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button>
+        <span id="lbCount" dir="ltr">01 / 10</span>
+        <button class="lb-btn lb-dir" type="button" id="lbNext" aria-label="Next project" data-i18n-aria="lb.next"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      </div>
+    </div>
+    <button class="lb-btn lb-close" type="button" data-close aria-label="Close" data-i18n-aria="lb.close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+  </div>
+</div>
+
+<script>
+  /* Projects shown on this page. Rendered before case.js so its text reveals and transitions pick them up. */
+  window.ARCHIVE = (() => {
+    const lang = document.documentElement.lang;
+    const L = o => (o && (o[lang] || o.en)) || '';
+    const CAT = { branding: { en: 'Branding', de: 'Branding', ar: 'هوية بصرية' }, uiux: { en: 'UI/UX', de: 'UI/UX', ar: 'UI/UX' } };
+    const UI = {
+      quick: { en: 'Quick view', de: 'Kurzansicht', ar: 'عرض سريع' },
+      caseStudy: { en: 'Case study ↗', de: 'Fallstudie ↗', ar: 'دراسة حالة ↗' },
+      viewCase: { en: 'View case study', de: 'Fallstudie ansehen', ar: 'عرض دراسة الحالة' }
+    };
+    // Projects without a full case study: open in the viewer.
+    const further = [
+      { id: 'an', name: 'AN Beauty Salon', cat: 'branding', href: 'an.html', wipe: '#5f3330',
+        sub: { en: 'Logo & brand identity · Beauty salon', de: 'Logo & Markenidentität · Beautysalon', ar: 'شعار وهوية تجارية · صالون تجميل' },
+        desc: { en: 'An elegant monogram that intertwines the letters A and N with fine, fashion-inspired strokes, set on soft, warm neutrals that feel calm and luxurious.',
+                de: 'Ein elegantes Monogramm, das die Buchstaben A und N mit feinen, modeinspirierten Linien verschlingt – auf sanften, warmen Naturtönen, die ruhig und luxuriös wirken.',
+                ar: 'مونوغرام أنيق يشابك الحرفين A و N بخطوط رفيعة مستوحاة من عالم الموضة، على درجات محايدة دافئة توحي بالهدوء والفخامة.' } },
+      { id: 'meta', name: 'META', cat: 'branding', href: 'meta.html', wipe: '#1d57a9',
+        sub: { en: 'Logo & brand identity · IT company', de: 'Logo & Markenidentität · IT-Unternehmen', ar: 'شعار وهوية تجارية · شركة تقنية معلومات' },
+        desc: { en: 'Bold geometric letterforms in a confident blue, orange and red palette signal clarity, structure and technical know-how for an information technology company.',
+                de: 'Kräftige geometrische Buchstaben in einer selbstbewussten Palette aus Blau, Orange und Rot stehen für Klarheit, Struktur und technisches Know-how eines IT-Unternehmens.',
+                ar: 'أحرف هندسية جريئة بلوحة واثقة من الأزرق والبرتقالي والأحمر تعبّر عن الوضوح والتنظيم والخبرة التقنية لشركة تقنية معلومات.' } },
+      { id: 'omran-omeira', name: 'Omran Omeira', cat: 'branding', href: 'omran.html', wipe: '#1a1a1a',
+        sub: { en: 'Logo & brand identity · Barbershop', de: 'Logo & Markenidentität · Barbershop', ar: 'شعار وهوية تجارية · صالون حلاقة' },
+        desc: { en: 'A diamond and crossed scissors framed by a sunburst bring classic grooming craft and a premium touch together in one crisp, monochrome mark.',
+                de: 'Ein Diamant und gekreuzte Scheren unter einem Strahlenkranz verbinden klassisches Barbierhandwerk mit einem Premium-Anspruch – in einem klaren, monochromen Zeichen.',
+                ar: 'ماسة ومقصّان متقاطعان تحت هالة من الأشعة يجمعان حرفة الحلاقة الكلاسيكية مع لمسة فاخرة في علامة واضحة أحادية اللون.' } },
+      { id: 'sugar-judy', name: 'Sugar Judy', cat: 'branding', href: 'sugar.html', wipe: '#329c92',
+        sub: { en: 'Logo & brand identity · Nails & beauty', de: 'Logo & Markenidentität · Nails & Beauty', ar: 'شعار وهوية تجارية · أظافر وتجميل' },
+        desc: { en: 'Flowing script lettering, a delicate hand and a soft teal accent give this nail and beauty studio a personal, playful and polished signature.',
+                de: 'Fließende Schreibschrift, eine zarte Hand und ein sanfter Petrol-Akzent geben diesem Nagel- und Beautystudio eine persönliche, verspielte und gepflegte Handschrift.',
+                ar: 'خط يدوي انسيابي ويد رقيقة ولمسة فيروزية ناعمة تمنح استوديو الأظافر والتجميل هذا توقيعاً شخصياً مرحاً وأنيقاً.' } },
+      { id: 'oona', name: 'OONA Tech', cat: 'branding',
+        sub: { en: 'Logo & brand identity · Tech company', de: 'Logo & Markenidentität · Technologieunternehmen', ar: 'شعار وهوية تجارية · شركة تقنية' },
+        desc: { en: 'A sleek logo and digital identity with futuristic typography and a space-inspired aesthetic that reflects innovation, momentum and high-tech expertise.',
+                de: 'Ein elegantes Logo und eine digitale Identität mit futuristischer Typografie und einer vom Weltraum inspirierten Ästhetik, die Innovation, Dynamik und Technik-Expertise widerspiegelt.',
+                ar: 'شعار أنيق وهوية رقمية بطباعة مستقبلية وجمالية مستوحاة من الفضاء تعكس الابتكار والزخم والخبرة التقنية.' } },
+      { id: 'asae', name: 'ASAE', cat: 'uiux',
+        sub: { en: 'Website design · Humanitarian non-profit', de: 'Website-Design · Humanitäre Non-Profit-Organisation', ar: 'تصميم موقع · منظمة إنسانية غير ربحية' },
+        desc: { en: 'A website for the Association of Syrian Alawites in Europe, a humanitarian and social non-profit. A dignified, archival look puts people and their stories first, with clear paths to news, events and donations.',
+                de: 'Eine Website für die Vereinigung syrischer Alawiten in Europa, eine humanitäre und soziale Non-Profit-Organisation. Ein würdevoller, archivischer Look stellt Menschen und ihre Geschichten in den Mittelpunkt – mit klaren Wegen zu News, Events und Spenden.',
+                ar: 'موقع لجمعية العلويين السوريين في أوروبا، وهي منظمة إنسانية واجتماعية غير ربحية. مظهر وقور بطابع أرشيفي يضع الناس وقصصهم أولاً، مع مسارات واضحة للأخبار والفعاليات والتبرعات.' } },
+      { id: 'beauty-gate', name: 'Beauty Gate', cat: 'uiux',
+        sub: { en: 'Website UI · Beauty & wellness platform', de: 'Website-UI · Beauty- & Wellness-Plattform', ar: 'واجهة موقع · منصة جمال وعافية' },
+        desc: { en: '“Beauty & wellness, redefined”: warm neutrals, editorial portraits and a calm layout make it easy to discover recommended treatments and book with confidence.',
+                de: '„Beauty & Wellness, neu gedacht“: warme Naturtöne, editoriale Porträts und ein ruhiges Layout machen es leicht, empfohlene Behandlungen zu entdecken und sicher zu buchen.',
+                ar: '«الجمال والعافية بمفهوم جديد»: درجات دافئة وصور بأسلوب تحريري وتخطيط هادئ تسهّل اكتشاف العلاجات الموصى بها والحجز بثقة.' } },
+      { id: 'home-kitchen', name: 'Home Kitchen', cat: 'uiux',
+        sub: { en: 'Mobile app UI · Recipes by expert chefs', de: 'App-UI · Rezepte von Profiköchen', ar: 'واجهة تطبيق · وصفات من طهاة محترفين' },
+        desc: { en: 'An app for the best recipes from expert chefs. Trending dishes, categories and chef profiles sit in a warm, appetising interface built for cooking on the go.',
+                de: 'Eine App für die besten Rezepte von Profiköchen. Trendgerichte, Kategorien und Kochprofile in einem warmen, appetitlichen Interface – gemacht fürs Kochen unterwegs.',
+                ar: 'تطبيق لأفضل الوصفات من طهاة محترفين. أطباق رائجة وفئات وملفات للطهاة في واجهة دافئة وشهية مصمّمة للطبخ في أي مكان.' } },
+      { id: 'ibs', name: 'IBS Foundation', cat: 'uiux',
+        sub: { en: 'Website design & UI/UX', de: 'Website-Design & UI/UX', ar: 'تصميم موقع وتجربة مستخدم' },
+        desc: { en: 'A modern, user-friendly website for IBS Foundation, an educational and non-profit organisation. The design focuses on clear information architecture, effortless navigation and an inviting aesthetic that highlights campus life, events, publications and donation opportunities.',
+                de: 'Eine moderne, benutzerfreundliche Website für die IBS Foundation, eine gemeinnützige Bildungsorganisation. Im Fokus stehen eine klare Informationsarchitektur, mühelose Navigation und eine einladende Ästhetik, die Campusleben, Veranstaltungen, Publikationen und Spendenmöglichkeiten hervorhebt.',
+                ar: 'موقع حديث وسهل الاستخدام لمؤسسة IBS، وهي منظمة تعليمية غير ربحية. يركّز التصميم على بنية معلومات واضحة وتنقّل سلس وجمالية جذابة تبرز الحياة الجامعية والفعاليات والمنشورات وفرص التبرع.' } },
+      { id: 'project-management', name: 'Project Management', cat: 'uiux',
+        sub: { en: 'Mobile app UI · Construction projects', de: 'App-UI · Bauprojekte', ar: 'واجهة تطبيق · مشاريع إنشائية' },
+        desc: { en: 'An app for managing construction projects: buildings, tasks, files, followers and timelines tracked in one clear, status-driven interface.',
+                de: 'Eine App zur Steuerung von Bauprojekten: Gebäude, Aufgaben, Dateien, Beteiligte und Zeitpläne in einer klaren, statusorientierten Oberfläche.',
+                ar: 'تطبيق لإدارة المشاريع الإنشائية: المباني والمهام والملفات والمتابعون والجداول الزمنية في واجهة واضحة قائمة على الحالة.' } }
+    ];
+    // Projects with a full case study: link to their page.
+    const featured = [
+      { id: 'yamor', name: 'YAMOR', cat: 'branding', href: 'yamor.html', wipe: '#2f3f33' },
+      { id: 'bloom', name: 'Bloom & Beyond', cat: 'branding', href: 'bloom.html', wipe: '#b5a48b' },
+      { id: 'boundless', name: 'Boundless Box', cat: 'branding', href: 'boundless.html', wipe: '#2f6f5c' },
+      { id: 'internet', name: 'INTERNET.com', cat: 'uiux', href: 'internet.html', wipe: '#6c6cf2' },
+      { id: 'realestate', name: { en: 'Luxury Real Estate', de: 'Luxusimmobilien', ar: 'العقارات الفاخرة' }, cat: 'uiux', href: 'realestate.html', wipe: '#c79762' },
+      { id: 'promote', name: 'PROMOTE', cat: 'uiux', href: 'promote.html', wipe: '#55a8ae' },
+      { id: 'coupons', name: { en: 'Coupons App', de: 'Coupons App', ar: 'تطبيق الكوبونات' }, cat: 'uiux', href: 'coupons.html', wipe: '#13261c' }
+    ];
+    const nm = p => typeof p.name === 'string' ? p.name : L(p.name);
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+    // Hero wall: three rows of every project thumbnail, each row doubled for a seamless loop.
+    const all = [...featured, ...further].map(p => p.id);
+    const row = ids => { const imgs = ids.map(id => `<img src="../assets/thumbs/${id}.jpg" alt="" loading="eager">`).join(''); return `<div class="ha-row">${imgs}${imgs}</div>`; };
+    document.getElementById('haWall').innerHTML = row(all.slice(0, 6)) + row(all.slice(6, 12)) + row(all.slice(11));
+
+    // Wheel cards
+    document.getElementById('ring').innerHTML = further.map((p, i) =>
+      `<button class="ring-card" type="button" data-i="${i}" data-cat="${p.cat}" aria-label="${esc(p.name)}">
+        <img src="../assets/More/${p.id}-m.jpg" srcset="../assets/More/${p.id}-m.jpg 900w, ../assets/More/${p.id}.jpg 1800w" sizes="(max-width: 767px) 82vw, 34vw" alt="">
+        <span class="rc-meta"><b dir="auto">${esc(p.name)}</b><small>${L(CAT[p.cat])}</small></span>
+      </button>`).join('');
+
+    // Index, grouped by category; case studies first in each group.
+    const rows = (cat, start) => {
+      const list = [...featured.filter(p => p.cat === cat), ...further.filter(p => p.cat === cat)];
+      return list.map((p, k) => {
+        const n = String(start + k).padStart(2, '0');
+        const inner = `<span class="ix-n" dir="ltr">${n}</span><span class="ix-name" dir="auto">${esc(nm(p))}</span><span class="ix-cat">${L(CAT[p.cat])}</span>`;
+        return p.href
+          ? `<li><a class="ix-row is-case" href="${p.href}" data-transition data-wipe="${p.wipe}" data-wipe-label="${esc(nm(p))}" data-thumb="${p.id}">${inner}<span class="ix-type">${L(UI.caseStudy)}</span></a></li>`
+          : `<li><button class="ix-row" type="button" data-open="${further.indexOf(p)}" data-thumb="${p.id}">${inner}<span class="ix-type">${L(UI.quick)}</span></button></li>`;
+      }).join('');
+    };
+    const nb = featured.filter(p => p.cat === 'branding').length + further.filter(p => p.cat === 'branding').length;
+    document.getElementById('ixGroups').innerHTML =
+      `<p class="ix-group">${L(CAT.branding)}</p><ul class="ix-list">${rows('branding', 1)}</ul>` +
+      `<p class="ix-group">${L(CAT.uiux)}</p><ul class="ix-list">${rows('uiux', nb + 1)}</ul>`;
+
+    return { further, L, CAT, nm, UI };
+  })();
+
+  window.CASE_I18N = {
+    de: {
+      title: 'Alle Projekte — Reem Deeb', back: 'Start',
+      kicker: 'Archiv · Branding &amp; UI/UX', htitle: 'Alle Projekte', m1: 'Projekte', m2: 'Branding', m4: 'Fallstudien',
+      'w.eyebrow': '01 — Weitere Arbeiten', 'w.title': 'Dreh das Rad', 'f.all': 'Alle', 'f.branding': 'Branding',
+      'i.title': 'Der vollständige Index', 'i.text': 'Alle Projekte in einer Liste. Fallstudien öffnen ihre ganze Geschichte, die übrigen eine Kurzansicht.',
+      'n.eyebrow': 'Zurück zu', 'n.title': 'Ausgewählte Arbeiten',
+      'lb.prev': 'Vorheriges Projekt', 'lb.next': 'Nächstes Projekt', 'lb.close': 'Schließen'
+    },
+    ar: {
+      title: 'جميع المشاريع — ريم ديب', back: 'الرئيسية',
+      kicker: 'الأرشيف · هوية بصرية وتصميم واجهات', htitle: 'جميع المشاريع', m1: 'المشاريع', m2: 'هوية بصرية', m4: 'دراسات الحالة',
+      'w.eyebrow': '01 — أعمال أخرى', 'w.title': 'أدِر العجلة', 'f.all': 'الكل', 'f.branding': 'هوية بصرية',
+      'i.title': 'الفهرس الكامل', 'i.text': 'كل المشاريع في قائمة واحدة. دراسات الحالة تفتح قصتها الكاملة، والبقية تفتح عرضاً سريعاً.',
+      'n.eyebrow': 'العودة إلى', 'n.title': 'أعمال مختارة',
+      'lb.prev': 'المشروع السابق', 'lb.next': 'المشروع التالي', 'lb.close': 'إغلاق'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="archive.js"></script>
+</body>
+</html>

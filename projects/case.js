@@ -42,6 +42,89 @@
     });
   });
 
+  /* ---------- Site navigation: the homepage menu, on every project page ---------- */
+  const NAV = {
+    en: { home: 'Home', about: 'About', work: 'Portfolio', contact: 'Contact', all: 'See all projects', menu: 'Menu', close: 'Close', cs: 'Full case study' },
+    de: { home: 'Start', about: 'Über mich', work: 'Portfolio', contact: 'Kontakt', all: 'Alle Projekte ansehen', menu: 'Menü', close: 'Schließen', cs: 'Ausführliche Fallstudie' },
+    ar: { home: 'الرئيسية', about: 'نبذة عني', work: 'أعمالي', contact: 'تواصل', all: 'عرض جميع المشاريع', menu: 'القائمة', close: 'إغلاق', cs: 'دراسة حالة كاملة' }
+  }[html.lang] || {};
+  const PROJECTS = {
+    branding: [
+      ['yamor.html', 'YAMOR', '#2f3f33'], ['bloom.html', 'Bloom & Beyond', '#b5a48b'], ['boundless.html', 'Boundless Box', '#2f6f5c'],
+      ['an.html', 'AN Beauty Salon', '#5f3330'], ['meta.html', 'META', '#1d57a9'], ['omran.html', 'Omran Omeira', '#1a1a1a'],
+      ['sugar.html', 'Sugar Judy', '#329c92'], ['archive.html#oona', 'OONA Tech', '#111111', 1]
+    ],
+    uiux: [
+      ['internet.html', 'INTERNET.com', '#6c6cf2'], ['realestate.html', 'Luxury Real Estate', '#c79762'], ['promote.html', 'PROMOTE', '#55a8ae'],
+      ['coupons.html', 'Coupons App', '#13261c'], ['archive.html#asae', 'ASAE', '#111111', 1], ['archive.html#beauty-gate', 'Beauty Gate', '#111111', 1],
+      ['archive.html#home-kitchen', 'Home Kitchen', '#111111', 1], ['archive.html#ibs', 'IBS Foundation', '#111111', 1],
+      ['archive.html#project-management', 'Project Management', '#111111', 1]
+    ]
+  };
+  const caseNav = $('.case-nav');
+  if (caseNav) {
+    const here = location.pathname.split('/').pop();
+    const esc = s => s.replace(/&/g, '&amp;');
+    const list = key => PROJECTS[key].map(([href, name, wipe, quick], i) =>
+      `<li style="--d:${i}"><a class="sn-item${href === here ? ' is-here' : ''}" href="${href}" data-transition data-wipe="${wipe}" data-wipe-label="${esc(name)}"${href === here ? ' aria-current="page"' : ''}>` +
+      `<span class="mi-n" dir="ltr">${String(i + 1).padStart(2, '0')}</span><span class="mi-name" dir="ltr">${esc(name)}</span>${quick ? '' : '<i class="mi-dot" aria-hidden="true"></i>'}</a></li>`).join('');
+    const panel = `
+      <div class="sn-grid">
+        <div><p class="sn-k">${t('tabs.branding', html.lang === 'de' ? 'Branding' : html.lang === 'ar' ? 'هوية بصرية' : 'Branding')}<small dir="ltr">${PROJECTS.branding.length}</small></p><ul>${list('branding')}</ul></div>
+        <div><p class="sn-k">UI/UX<small dir="ltr">${PROJECTS.uiux.length}</small></p><ul>${list('uiux')}</ul></div>
+      </div>
+      <div class="sn-foot"><span><i class="mi-dot" aria-hidden="true"></i>${NAV.cs}</span><a href="archive.html" data-transition data-wipe="#111111">${NAV.all} <span aria-hidden="true">&rarr;</span></a></div>`;
+    const back = (hash, label) => `<a href="../index.html#${hash}" data-transition data-wipe="#0e0e0e">${label}</a>`;
+    const nav = document.createElement('nav');
+    nav.className = 'site-nav';
+    nav.setAttribute('aria-label', 'Main');
+    nav.innerHTML = `
+      <div class="sn-pill">
+        ${back('home', NAV.home)}${back('about', NAV.about)}
+        <button type="button" class="sn-work is-active" aria-expanded="false" aria-controls="snPanel">${NAV.work}<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        ${back('contact', NAV.contact)}
+      </div>
+      <div class="sn-panel" id="snPanel">${panel}</div>`;
+    const logo = $('.case-logo', caseNav);
+    caseNav.insertBefore(nav, logo ? logo.nextSibling : null);
+    if (logo) logo.remove();
+
+    // Phones: one Menu button opens a full-screen sheet with the same links.
+    const mbtn = document.createElement('button');
+    mbtn.type = 'button'; mbtn.className = 'pill sn-menu'; mbtn.setAttribute('aria-expanded', 'false'); mbtn.setAttribute('aria-controls', 'snSheet');
+    mbtn.innerHTML = `<span class="sn-bars" aria-hidden="true"><i></i><i></i></span><span>${NAV.menu}</span>`;
+    caseNav.insertBefore(mbtn, $('.lang', caseNav));
+    const sheet = document.createElement('div');
+    sheet.className = 'sn-sheet'; sheet.id = 'snSheet';
+    sheet.innerHTML = `<div class="sn-sheet-in">
+      <div class="sn-sheet-links">${back('home', NAV.home)}${back('about', NAV.about)}${back('contact', NAV.contact)}</div>
+      <p class="sn-sheet-k">${NAV.work}</p>${panel}</div>`;
+    document.body.appendChild(sheet);
+
+    const btn = $('.sn-work', nav), pnl = $('.sn-panel', nav);
+    let tm;
+    const setOpen = open => { clearTimeout(tm); pnl.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); };
+    const closeSoon = () => { clearTimeout(tm); tm = setTimeout(() => setOpen(false), 220); };
+    btn.addEventListener('click', () => setOpen(!pnl.classList.contains('is-open')));
+    [btn, pnl].forEach(el => { el.addEventListener('mouseenter', () => { if (finePointer) setOpen(true); }); el.addEventListener('mouseleave', closeSoon); });
+    nav.addEventListener('focusout', e => { if (!nav.contains(e.relatedTarget)) setOpen(false); });
+    const setSheet = open => {
+      html.classList.toggle('sheet-open', open); mbtn.setAttribute('aria-expanded', String(open));
+      $('span:last-child', mbtn).textContent = open ? NAV.close : NAV.menu;
+      if (window.__lenis) open ? window.__lenis.stop() : window.__lenis.start();
+    };
+    mbtn.addEventListener('click', () => setSheet(!html.classList.contains('sheet-open')));
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (pnl.classList.contains('is-open')) { setOpen(false); btn.focus(); }
+      if (html.classList.contains('sheet-open')) { setSheet(false); mbtn.focus(); }
+    });
+  }
+
+  // The fixed top bar turns solid once the page has scrolled.
+  const solidNav = () => html.classList.toggle('nav-solid', scrollY > 80);
+  addEventListener('scroll', solidNav, { passive: true }); solidNav();
+
   /* ---------- Page transitions ---------- */
   const wipe = $('.page-wipe');
   function leave(href, color, label) {

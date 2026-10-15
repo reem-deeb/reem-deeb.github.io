@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AN Beauty Salon — Brand Identity · Reem Deeb</title>
+<meta name="description" content="AN Beauty Salon brand identity by Reem Deeb: monogram logo, warm neutral palette, packaging and brand touchpoints for a luxury wig and hair extension salon.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Exo+2:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #f6f0e8; --fg: #3b2624; --muted: #a58f84; --accent: #b0786f;
+    --f-brand: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+    --title-track: .06em;
+  }
+  .c-title { font-size: clamp(48px, 8.4vw, 168px); font-weight: 500; }
+  .ch-title, .c-statement { font-weight: 500; }
+  .c-statement em { font-style: italic; }
+  /* Warm overlay on the pale sculptural hero so the white title stands out */
+  .c-hero-media::after {
+    background:
+      linear-gradient(0deg, rgba(59, 38, 36, .88) 0%, rgba(59, 38, 36, .5) 38%, rgba(59, 38, 36, .12) 70%, rgba(59, 38, 36, .35) 100%),
+      rgba(59, 38, 36, .18);
+  }
+  .c-quote::after { background: rgba(59, 38, 36, .5); }
+  .c-palette.quad { height: clamp(300px, 52vh, 520px); }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#5f3330" aria-hidden="true"><span>AN Beauty</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/AN/web/section1.jpg" srcset="../assets/AN/web/section1-m.jpg 1000w, ../assets/AN/web/section1.jpg 1774w" sizes="100vw" width="1774" height="1376" fetchpriority="high" alt="Soft cream sculptural corridor with flowing walls and a wooden bench">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; brand identity</p>
+      <h1 class="c-title" dir="ltr" data-chars>AN Beauty</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>AN Beauty Salon</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Beauty &amp; hair care</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, packaging</dd></div>
+        <div><dt data-i18n="m.focusK">Focus</dt><dd data-i18n="m.focus">Luxury wigs &amp; human-hair extensions</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Quiet luxury, crafted strand by strand.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">AN Beauty Salon specialises in luxury wigs and hair extensions made from 100% human hair. The identity had to feel as soft and refined as the product itself — calm, feminine and quietly confident, so every client feels she is in expert hands from the very first touchpoint.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Monogram logo</span><span>01</span></li>
+        <li><span data-i18n="li2">Colour palette</span><span>02</span></li>
+        <li><span data-i18n="li3">Packaging</span><span>03</span></li>
+        <li><span data-i18n="li4">Brand touchpoints</span><span>04</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/AN/web/logo.jpg" srcset="../assets/AN/web/logo-m.jpg 1000w, ../assets/AN/web/logo.jpg 2000w" sizes="88vw" width="2000" height="1484" loading="lazy" alt="AN Beauty Salon monogram with the line Luxury wig and hair extensions, human hair, on warm sand">
+    </figure>
+  </section>
+
+  <!-- 01 MONOGRAM -->
+  <section class="c-section container" id="logo">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Monogram</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The letters A and N are drawn as one flowing gesture: a fine, fashion-inspired stroke that recalls a single strand of hair. Framed by the words “Beauty Salon” on a circular path, the mark works as a signature in print and as a seal on packaging.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4">
+        <img src="../assets/AN/web/boxes.jpg" width="736" height="954" loading="lazy" alt="Stacked blush, rose and cocoa boxes with the AN monogram">
+        <figcaption data-i18n="cap.boxes">The monogram as a seal</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal data-speed="-4">
+        <img src="../assets/AN/web/gift.jpg" width="735" height="705" loading="lazy" alt="Sand-coloured gift boxes tied with a dark brown ribbon, embossed with the AN monogram">
+        <figcaption data-i18n="cap.gift">Gift boxes</figcaption>
+      </figure>
+    </div>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Fine &amp; feminine</h3><p data-i18n="n1.p">High-contrast strokes and generous curves borrow from couture labels, giving the salon an elegance that feels personal rather than corporate.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">One mark, many sizes</h3><p data-i18n="n2.p">The circular lock-up reads clearly as a small stamp on a soap box, while the monogram alone holds its own on bottles, cups and fabric.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 COLOUR -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Colour</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">A palette taken from skin, silk and natural hair: warm sand and cream as the calm base, blush for softness, and a deep cocoa that grounds the brand and lends it a premium weight.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette quad" role="list" aria-label="Colour palette">
+      <button class="swatch" role="listitem" type="button" data-hex="#ECD9BB" style="--c:#ecd9bb; --t:#3b2624"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Sand</b><small dir="ltr">#ECD9BB<br>RGB 236 · 217 · 187</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#EBE2C3" style="--c:#ebe2c3; --t:#3b2624"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Cream</b><small dir="ltr">#EBE2C3<br>RGB 235 · 226 · 195</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#CCA9A5" style="--c:#cca9a5; --t:#3b2624"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Blush</b><small dir="ltr">#CCA9A5<br>RGB 204 · 169 · 165</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#5F3330" style="--c:#5f3330"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Cocoa</b><small dir="ltr">#5F3330<br>RGB 95 · 51 · 48</small></button>
+    </div>
+    <div class="c-trio even" style="margin-top: clamp(20px, 3vw, 40px)">
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/die-cream.jpg" srcset="../assets/AN/web/die-cream-m.jpg 1000w, ../assets/AN/web/die-cream.jpg 1280w" sizes="(max-width: 767px) 44vw, 29vw" width="1280" height="1280" loading="lazy" alt="Cream soap box dieline with the AN monogram"></figure>
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/die-pink.jpg" srcset="../assets/AN/web/die-pink-m.jpg 1000w, ../assets/AN/web/die-pink.jpg 1280w" sizes="(max-width: 767px) 44vw, 29vw" width="1280" height="1280" loading="lazy" alt="Blush soap box dieline with the AN monogram"></figure>
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/die-brown.jpg" srcset="../assets/AN/web/die-brown-m.jpg 1000w, ../assets/AN/web/die-brown.jpg 1280w" sizes="(max-width: 767px) 88vw, 29vw" width="1280" height="1280" loading="lazy" alt="Cocoa soap box dieline with the AN monogram"><figcaption data-i18n="cap.dies">Soap box dielines</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="c-quote">
+    <img src="../assets/AN/web/sofa.jpg" srcset="../assets/AN/web/sofa-m.jpg 1000w, ../assets/AN/web/sofa.jpg 1280w" sizes="100vw" width="1280" height="1280" loading="lazy" alt="Light living room with a linen sofa and an AN cushion">
+    <p data-split data-i18n="quote">Soft by nature, luxurious by design.</p>
+  </section>
+
+  <!-- 03 PACKAGING (page turns cocoa) -->
+  <section class="c-section container" id="packaging" data-theme-bg="#3e2725" data-theme-fg="#f4ebdf">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Packaging</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Serums, toner mists, argan oil and soaps share one calm system: cream and taupe containers, a centred monogram and light, airy type — a range that looks as cared-for as the hair it treats.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-trio">
+      <figure class="c-fig" data-reveal data-cursor="view"><img src="../assets/AN/web/dropper.jpg" width="736" height="1104" loading="lazy" alt="Serum dropper bottle and cream jar on a wooden slice"></figure>
+      <figure class="c-fig" data-reveal data-cursor="view"><img src="../assets/AN/web/serum-box.jpg" width="736" height="1104" loading="lazy" alt="Hand holding a textured serum box with the AN monogram"></figure>
+      <figure class="c-fig" data-reveal data-cursor="view"><img src="../assets/AN/web/argan.jpg" width="564" height="846" loading="lazy" alt="Argan oil serum bottles in a soft taupe finish"></figure>
+    </div>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4" data-cursor="view">
+        <img src="../assets/AN/web/serums.jpg" width="736" height="736" loading="lazy" alt="Natural serum, cream and toner mist floating on rippled water">
+        <figcaption data-i18n="cap.care">Skin care</figcaption>
+      </figure>
+      <figure class="c-fig" data-reveal data-speed="-4" data-cursor="view">
+        <img src="../assets/AN/web/hands.jpg" srcset="../assets/AN/web/hands-m.jpg 1000w, ../assets/AN/web/hands.jpg 1124w" sizes="(max-width: 767px) 88vw, 43vw" width="1124" height="1456" loading="lazy" alt="Two hands presenting argan oil serum pump bottles">
+        <figcaption data-i18n="cap.hair">Hair care</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 04 TOUCHPOINTS -->
+  <section class="c-section container" id="touchpoints">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Touchpoints</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">From staff uniforms to cushions and takeaway cups, the monogram appears in small, considered doses — present enough to be remembered, never loud enough to compete with the client.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-trio">
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/uniform.jpg" width="663" height="996" loading="lazy" alt="Stylist wearing a taupe uniform with the AN monogram"><figcaption data-i18n="cap.uniform">Uniform</figcaption></figure>
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/pillow.jpg" width="981" height="1280" loading="lazy" alt="Cushion with a flowing line pattern and the AN monogram"><figcaption data-i18n="cap.pattern">Pattern</figcaption></figure>
+      <figure class="c-fig" data-reveal><img src="../assets/AN/web/cup.jpg" width="854" height="1280" loading="lazy" alt="Takeaway coffee cup with the AN monogram"><figcaption data-i18n="cap.cup">Coffee cup</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="meta.html" data-transition data-wipe="#1d57a9" data-wipe-label="META" style="--f-next:'Exo 2', sans-serif">
+      <span class="next-title" dir="ltr">META</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Meta/web/stationery-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'AN Beauty Salon — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Markenidentität',
+      'm.industry': 'Beauty &amp; Haarpflege', 'm.services': 'Logo, visuelle Identität, Verpackung', 'm.focusK': 'Schwerpunkt', 'm.focus': 'Luxusperücken &amp; Echthaar-Extensions',
+      statement: 'Stiller Luxus, Strähne für Strähne gefertigt.',
+      lead: 'AN Beauty Salon ist auf luxuriöse Perücken und Haarverlängerungen aus 100 % Echthaar spezialisiert. Die Identität sollte sich so weich und edel anfühlen wie das Produkt selbst – ruhig, feminin und mit leiser Selbstsicherheit, damit sich jede Kundin vom ersten Kontakt an in besten Händen fühlt.',
+      li1: 'Monogramm-Logo', li2: 'Farbpalette', li3: 'Verpackung', li4: 'Markenauftritt',
+      'ch1.title': 'Das Monogramm',
+      'ch1.text': 'Die Buchstaben A und N entstehen in einer einzigen fließenden Bewegung: ein feiner, von der Mode inspirierter Strich, der an eine einzelne Haarsträhne erinnert. Eingefasst von den Worten „Beauty Salon“ auf einer Kreisbahn wirkt das Zeichen als Signatur im Druck und als Siegel auf der Verpackung.',
+      'cap.boxes': 'Das Monogramm als Siegel', 'cap.gift': 'Geschenkboxen',
+      'n1.h': 'Fein &amp; feminin', 'n1.p': 'Kontrastreiche Striche und großzügige Rundungen sind von Couture-Labels inspiriert und verleihen dem Salon eine Eleganz, die persönlich statt unternehmerisch wirkt.',
+      'n2.h': 'Ein Zeichen, viele Größen', 'n2.p': 'Die kreisförmige Anordnung bleibt als kleiner Stempel auf einer Seifenschachtel lesbar, während das Monogramm allein auf Flaschen, Bechern und Stoffen bestehen kann.',
+      'ch2.title': 'Farbe',
+      'ch2.text': 'Eine Palette aus Haut, Seide und Naturhaar: warmes Sand und Creme als ruhige Basis, Blush für Weichheit und ein tiefes Kakaobraun, das der Marke Halt und ein hochwertiges Gewicht gibt.',
+      c1: 'Sand', c2: 'Creme', c3: 'Blush', c4: 'Kakao', 'cap.dies': 'Stanzformen der Seifenverpackung',
+      quote: 'Von Natur aus weich, durch Design luxuriös.',
+      'ch3.title': 'Verpackung',
+      'ch3.text': 'Seren, Gesichtssprays, Arganöl und Seifen folgen einem ruhigen System: cremefarbene und taupefarbene Behälter, ein zentriertes Monogramm und leichte, luftige Typografie – eine Serie, die so gepflegt aussieht wie das Haar, das sie pflegt.',
+      'cap.care': 'Hautpflege', 'cap.hair': 'Haarpflege',
+      'ch4.title': 'Berührungspunkte',
+      'ch4.text': 'Von der Arbeitskleidung über Kissen bis zum Coffee-to-go-Becher erscheint das Monogramm in kleinen, bewussten Dosen – präsent genug, um in Erinnerung zu bleiben, aber nie so laut, dass es mit der Kundin konkurriert.',
+      'cap.uniform': 'Arbeitskleidung', 'cap.pattern': 'Muster', 'cap.cup': 'Kaffeebecher'
+    },
+    ar: {
+      title: 'صالون AN للتجميل — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية تجارية',
+      'm.industry': 'التجميل والعناية بالشعر', 'm.services': 'شعار، هوية بصرية، تغليف', 'm.focusK': 'التخصص', 'm.focus': 'باروكات فاخرة ووصلات شعر طبيعي',
+      statement: 'فخامة هادئة، تُصنع خصلةً خصلة.',
+      lead: 'يتخصص صالون AN للتجميل في الباروكات الفاخرة ووصلات الشعر المصنوعة من شعر طبيعي ١٠٠٪. كان على الهوية أن تبدو ناعمة وراقية كالمنتج نفسه — هادئة وأنثوية وواثقة بهدوء، لتشعر كل عميلة منذ اللحظة الأولى أنها بين أيدٍ خبيرة.',
+      li1: 'شعار المونوغرام', li2: 'لوحة الألوان', li3: 'التغليف', li4: 'نقاط التواصل مع العلامة',
+      'ch1.title': 'المونوغرام',
+      'ch1.text': 'رُسم الحرفان A و N بحركة واحدة انسيابية: خط رفيع مستوحى من عالم الموضة يذكّر بخصلة شعر واحدة. وتحيط به عبارة «Beauty Salon» على مسار دائري، فيعمل الشعار توقيعاً في المطبوعات وختماً على التغليف.',
+      'cap.boxes': 'المونوغرام كختم', 'cap.gift': 'علب الهدايا',
+      'n1.h': 'رقيق وأنثوي', 'n1.p': 'خطوط عالية التباين ومنحنيات سخيّة مستوحاة من دور الأزياء الراقية تمنح الصالون أناقة شخصية بعيدة عن الطابع المؤسسي.',
+      'n2.h': 'علامة واحدة بمقاسات متعددة', 'n2.p': 'يبقى التكوين الدائري واضحاً كختم صغير على علبة صابون، بينما يحافظ المونوغرام وحده على حضوره على العبوات والأكواب والأقمشة.',
+      'ch2.title': 'الألوان',
+      'ch2.text': 'لوحة مستوحاة من البشرة والحرير والشعر الطبيعي: الرملي والكريمي الدافئان كقاعدة هادئة، والوردي الناعم للرقة، وبني الكاكاو العميق الذي يمنح العلامة ثباتاً وثقلاً فاخراً.',
+      c1: 'رملي', c2: 'كريمي', c3: 'وردي ناعم', c4: 'كاكاو', 'cap.dies': 'قوالب علب الصابون',
+      quote: 'ناعمة بطبيعتها، فاخرة بتصميمها.',
+      'ch3.title': 'التغليف',
+      'ch3.text': 'السيرومات وبخاخات التونر وزيت الأرغان والصابون تتبع نظاماً هادئاً واحداً: عبوات بلون الكريم والتوب، ومونوغرام في المنتصف، وخطوط خفيفة — مجموعة تبدو معتنى بها بقدر الشعر الذي تعتني به.',
+      'cap.care': 'العناية بالبشرة', 'cap.hair': 'العناية بالشعر',
+      'ch4.title': 'نقاط التواصل',
+      'ch4.text': 'من أزياء الموظفات إلى الوسائد وأكواب القهوة، يظهر المونوغرام بجرعات صغيرة ومدروسة — حاضراً بما يكفي ليُتذكَّر، دون أن يعلو صوته على العميلة.',
+      'cap.uniform': 'الزي الموحد', 'cap.pattern': 'النقش', 'cap.cup': 'كوب القهوة'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>

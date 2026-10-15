@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omran Omeira — Brand Identity · Reem Deeb</title>
+<meta name="description" content="Omran Omeira barbershop brand identity by Reem Deeb: diamond and scissors logo concept, monochrome palette and art direction.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Cinzel:wght@400;500&family=Great+Vibes&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<style>
+  :root {
+    --bg: #121212; --fg: #ececec; --muted: #6f6f6f; --accent: #b08d57;
+    --f-brand: 'Cinzel', 'IBM Plex Sans Arabic', serif;
+    --title-track: .04em;
+  }
+  .c-title { font-size: clamp(46px, 8.6vw, 170px); }
+  /* Light top bar on the dark page */
+  .pill, .lang { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.28); color: #f2f2f2; }
+  .lang button { color: #e6e6e6; }
+  .pill:hover, .lang button[aria-pressed="true"] { background: #f2f2f2; color: #111; }
+  html.nav-solid .pill, html.nav-solid .lang { background: rgba(24, 24, 24, .9); border-color: rgba(255,255,255,.16); }
+  html.nav-solid .pill:hover { background: #f2f2f2; }
+  .c-hero-media::after {
+    background: linear-gradient(0deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.1) 70%, rgba(0,0,0,.4) 100%);
+  }
+  .c-fig.pad { --pad-bg: #0b0b0b; padding: clamp(28px, 4vw, 60px); }
+  .swatch.dark { box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  .c-palette.quad { height: clamp(300px, 52vh, 520px); }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#1a1a1a" aria-hidden="true"><span>Omran Omeira</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/Omran/web/section1.jpg" srcset="../assets/Omran/web/section1-m.jpg 1000w, ../assets/Omran/web/section1.jpg 1536w" sizes="100vw" width="1536" height="924" fetchpriority="high" style="--hero-pos: 50% 35%" alt="Black and white portrait of a barber holding his scissors up to the light">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Logo &amp; brand identity</p>
+      <h1 class="c-title" dir="ltr" data-chars>Omran Omeira</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Omran Omeira</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Barbershop &amp; men’s grooming</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, visual identity, art direction</dd></div>
+        <div><dt data-i18n="m.styleK">Style</dt><dd data-i18n="m.style">Monochrome, classic, premium</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Precision, polished to a shine.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Omran Omeira is a men’s barbershop built on classic craft: sharp cuts, careful shaves and an unhurried ritual. The identity pairs the barber’s essential tool with a symbol of value, presenting every visit as a premium experience — confident, masculine and timeless.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Logo concept</span><span>01</span></li>
+        <li><span data-i18n="li2">Monochrome palette</span><span>02</span></li>
+        <li><span data-i18n="li3">Brand in use</span><span>03</span></li>
+      </ul>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/Omran/web/shop.jpg" srcset="../assets/Omran/web/shop-m.jpg 1000w, ../assets/Omran/web/shop.jpg 2000w" sizes="88vw" width="2000" height="1414" loading="lazy" alt="Barbershop interior with leather chairs and the Omran Omeira logo in white">
+    </figure>
+  </section>
+
+  <!-- 01 CONCEPT -->
+  <section class="c-section container" id="concept">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The Concept</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">Crossed scissors rise into a diamond crowned with a sunburst. The scissors stand for the craft, the diamond for the premium experience, and the rays for the confidence every client leaves with.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig pad" data-reveal data-cursor="view">
+      <img src="../assets/Omran/web/concept.jpg" srcset="../assets/Omran/web/concept-m.jpg 1000w, ../assets/Omran/web/concept.jpg 2000w" sizes="88vw" width="2000" height="495" loading="lazy" alt="Three versions of the Omran Omeira logo: white, grey and silver">
+      <figcaption data-i18n="cap.concept">Logo versions</figcaption>
+    </figure>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Scissors &amp; diamond</h3><p data-i18n="n1.p">The blades form the base of the diamond, so tool and gem read as one shape — skill and value, held together in a single mark.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">Three finishes</h3><p data-i18n="n2.p">White, grey and a polished silver gradient let the logo sit on dark walls, mirrors, signage and print without ever losing its edge.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 PALETTE -->
+  <section class="c-section container" id="colour">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Monochrome</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">No colour, only contrast. A palette of deep black, charcoal and steel lets the gleam of metal and the texture of leather, wood and skin do the talking.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="c-palette quad" role="list" aria-label="Colour palette">
+      <button class="swatch dark" role="listitem" type="button" data-hex="#0B0B0B" style="--c:#0b0b0b"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Jet</b><small dir="ltr">#0B0B0B<br>RGB 11 · 11 · 11</small></button>
+      <button class="swatch dark" role="listitem" type="button" data-hex="#2B2B2B" style="--c:#2b2b2b"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Charcoal</b><small dir="ltr">#2B2B2B<br>RGB 43 · 43 · 43</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#A7A7A7" style="--c:#a7a7a7; --t:#111"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Steel</b><small dir="ltr">#A7A7A7<br>RGB 167 · 167 · 167</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#F2F2F2" style="--c:#f2f2f2; --t:#111"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Chalk</b><small dir="ltr">#F2F2F2<br>RGB 242 · 242 · 242</small></button>
+    </div>
+  </section>
+
+  <!-- 03 BRAND IN USE -->
+  <section class="c-section container" id="applications">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Brand in use</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">From the business card to the shop itself, the mark is used sparingly and always in silver or white on black — a quiet signature that matches the craft behind the chair.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/Omran/web/card.jpg" srcset="../assets/Omran/web/card-m.jpg 1000w, ../assets/Omran/web/card.jpg 1920w" sizes="88vw" width="1920" height="1233" loading="lazy" alt="Dark Omran Omeira business card resting on a wooden bowl beside a straight razor">
+      <figcaption data-i18n="cap.card">Business card</figcaption>
+    </figure>
+    <div class="c-duo offset">
+      <figure class="c-fig" data-reveal data-speed="4" data-cursor="view" style="max-width: 420px; justify-self: center">
+        <img src="../assets/Omran/web/barber.jpg" width="395" height="493" loading="lazy" alt="Barber with a cap and glasses cutting a client’s hair">
+        <figcaption data-i18n="cap.craft">The craft</figcaption>
+      </figure>
+      <div class="c-aside" data-fade>
+        <h3 data-i18n="n3.h">A ritual, not a routine</h3>
+        <p data-i18n="n3.p">Black-and-white photography keeps the focus on hands, tools and texture. It is the visual rule of the brand: no colour, no noise, only the moment of precision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="c-quote">
+    <img src="../assets/Omran/web/triptych.jpg" srcset="../assets/Omran/web/triptych-m.jpg 1000w, ../assets/Omran/web/triptych.jpg 1920w" sizes="100vw" width="1920" height="1357" loading="lazy" alt="">
+    <p data-split data-i18n="quote">Sharp lines. Steady hands.</p>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="sugar.html" data-transition data-wipe="#329c92" data-wipe-label="Sugar Judy" style="--f-next:'Great Vibes', cursive">
+      <span class="next-title" dir="ltr" style="text-transform: none; letter-spacing: 0">Sugar Judy</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Sugar/web/section1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Omran Omeira — Markenidentität · Reem Deeb',
+      kicker: 'Logo &amp; Markenidentität',
+      'm.industry': 'Barbershop &amp; Herrenpflege', 'm.services': 'Logo, visuelle Identität, Art Direction', 'm.styleK': 'Stil', 'm.style': 'Monochrom, klassisch, hochwertig',
+      statement: 'Präzision, auf Hochglanz poliert.',
+      lead: 'Omran Omeira ist ein Barbershop für Herren, der auf klassischem Handwerk aufbaut: präzise Schnitte, sorgfältige Rasuren und ein Ritual ohne Eile. Die Identität verbindet das wichtigste Werkzeug des Barbiers mit einem Symbol für Wert und macht jeden Besuch zu einem Premium-Erlebnis – selbstbewusst, maskulin und zeitlos.',
+      li1: 'Logokonzept', li2: 'Monochrome Palette', li3: 'Markenauftritt',
+      'ch1.title': 'Das Konzept',
+      'ch1.text': 'Gekreuzte Scheren wachsen zu einem Diamanten, gekrönt von einem Strahlenkranz. Die Scheren stehen für das Handwerk, der Diamant für das Premium-Erlebnis und die Strahlen für das Selbstbewusstsein, mit dem jeder Kunde den Laden verlässt.',
+      'cap.concept': 'Logovarianten',
+      'n1.h': 'Schere &amp; Diamant', 'n1.p': 'Die Klingen bilden die Basis des Diamanten, sodass Werkzeug und Edelstein als eine Form gelesen werden – Können und Wert in einem einzigen Zeichen.',
+      'n2.h': 'Drei Ausführungen', 'n2.p': 'Weiß, Grau und ein polierter Silberverlauf lassen das Logo auf dunklen Wänden, Spiegeln, Schildern und im Druck bestehen, ohne an Schärfe zu verlieren.',
+      'ch2.title': 'Monochrom',
+      'ch2.text': 'Keine Farbe, nur Kontrast. Eine Palette aus tiefem Schwarz, Anthrazit und Stahl überlässt dem Glanz des Metalls und der Textur von Leder, Holz und Haut das Wort.',
+      c1: 'Tiefschwarz', c2: 'Anthrazit', c3: 'Stahl', c4: 'Kreide',
+      'ch3.title': 'Markenauftritt', 'ch3.text': 'Von der Visitenkarte bis zum Laden selbst wird das Zeichen sparsam eingesetzt – immer in Silber oder Weiß auf Schwarz, eine leise Signatur, die zum Handwerk am Stuhl passt.',
+      'cap.card': 'Visitenkarte', 'cap.craft': 'Das Handwerk',
+      'n3.h': 'Ein Ritual, keine Routine', 'n3.p': 'Schwarzweißfotografie lenkt den Blick auf Hände, Werkzeuge und Texturen. Das ist die visuelle Regel der Marke: keine Farbe, kein Lärm, nur der Moment der Präzision.',
+      quote: 'Klare Linien. Ruhige Hände.'
+    },
+    ar: {
+      title: 'عمران عميرة — هوية تجارية · ريم ديب',
+      kicker: 'شعار وهوية تجارية',
+      'm.industry': 'صالون حلاقة وعناية رجالية', 'm.services': 'شعار، هوية بصرية، إدارة فنية', 'm.styleK': 'الأسلوب', 'm.style': 'أحادي اللون، كلاسيكي، فاخر',
+      statement: 'دقّة مصقولة حتى اللمعان.',
+      lead: 'عمران عميرة صالون حلاقة رجالي قائم على الحرفة الكلاسيكية: قصّات دقيقة وحلاقة متأنية وطقس لا عجلة فيه. تجمع الهوية بين أداة الحلاق الأساسية ورمزٍ للقيمة، لتقدّم كل زيارة كتجربة فاخرة — واثقة ورجولية وخالدة.',
+      li1: 'فكرة الشعار', li2: 'لوحة أحادية اللون', li3: 'العلامة قيد الاستخدام',
+      'ch1.title': 'الفكرة',
+      'ch1.text': 'مقصّان متقاطعان يرتفعان ليشكّلا ماسة تعلوها هالة من الأشعة. يرمز المقص إلى الحرفة، والماسة إلى التجربة الفاخرة، والأشعة إلى الثقة التي يغادر بها كل عميل.',
+      'cap.concept': 'نسخ الشعار',
+      'n1.h': 'المقص والماسة', 'n1.p': 'تشكّل الشفرتان قاعدة الماسة، فتُقرأ الأداة والجوهرة كشكل واحد — المهارة والقيمة في علامة واحدة.',
+      'n2.h': 'ثلاث معالجات', 'n2.p': 'الأبيض والرمادي وتدرّج فضي مصقول تتيح للشعار الظهور على الجدران الداكنة والمرايا واللافتات والمطبوعات دون أن يفقد حدّته.',
+      'ch2.title': 'أحادي اللون',
+      'ch2.text': 'لا ألوان، بل تباين فقط. لوحة من الأسود العميق والفحمي والفولاذي تترك لبريق المعدن وملمس الجلد والخشب والبشرة أن تتحدث.',
+      c1: 'أسود حالك', c2: 'فحمي', c3: 'فولاذي', c4: 'طباشيري',
+      'ch3.title': 'العلامة قيد الاستخدام', 'ch3.text': 'من بطاقة العمل إلى الصالون نفسه، تُستخدم العلامة باقتصاد ودائماً بالفضي أو الأبيض على الأسود — توقيع هادئ ينسجم مع الحرفة خلف الكرسي.',
+      'cap.card': 'بطاقة العمل', 'cap.craft': 'الحرفة',
+      'n3.h': 'طقس لا روتين', 'n3.p': 'يُبقي التصوير بالأبيض والأسود التركيز على الأيدي والأدوات والملمس. هذه هي القاعدة البصرية للعلامة: لا ألوان ولا ضجيج، فقط لحظة الدقة.',
+      quote: 'خطوط حادّة. أيدٍ ثابتة.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+</body>
+</html>
