@@ -167,6 +167,78 @@ html[dir="rtl"] .ss-marks li { padding: 14px 44px 14px 0; }
 .ui-steps b { display: block; font: 600 15px/1.3 var(--f-head); }
 .ui-steps span { display: block; margin-top: 6px; font-size: 13px; line-height: 1.5; opacity: .7; }
 
+/* ---------- Tree diagram (user flow / information architecture), built in HTML ---------- */
+.ux-tree-wrap { overflow-x: auto; padding: clamp(28px, 5vw, 64px) 0 10px; -webkit-overflow-scrolling: touch; }
+.ux-tree { --line: color-mix(in srgb, var(--accent) 70%, transparent); --gap: 26px; width: max-content; min-width: 100%; display: flex; justify-content: center; }
+.ux-tree ul { position: relative; display: flex; justify-content: center; margin: 0; padding: var(--gap) 0 0; }
+.ux-tree > ul { padding-top: 0; }
+.ux-tree li { position: relative; display: flex; flex-direction: column; align-items: center; padding: var(--gap) 7px 0; list-style: none; }
+.ux-tree > ul > li { padding-top: 0; }
+.ux-tree li::before, .ux-tree li::after { content: ''; position: absolute; top: 0; right: 50%; width: 50%; height: var(--gap); border-top: 1.5px dashed var(--line); }
+.ux-tree li::after { right: auto; left: 50%; border-left: 1.5px dashed var(--line); }
+.ux-tree li:only-child::before, .ux-tree li:only-child::after { display: none; }
+.ux-tree li:only-child { padding-top: 0; }
+.ux-tree li:first-child::before, .ux-tree li:last-child::after { border: 0 none; }
+.ux-tree li:last-child::before { border-right: 1.5px dashed var(--line); border-radius: 0 8px 0 0; }
+.ux-tree li:first-child::after { border-radius: 8px 0 0 0; }
+.ux-tree ul ul::before { content: ''; position: absolute; top: 0; left: 50%; height: var(--gap); border-left: 1.5px dashed var(--line); }
+.ux-tree > ul > li:only-child { padding-top: 0; }
+.ux-node {
+  position: relative; z-index: 1; display: inline-block; padding: 12px 18px; border-radius: 10px; white-space: nowrap;
+  background: var(--node-bg, #fff); color: var(--node-fg, #141414); font: 500 14px/1.2 var(--f-head);
+  box-shadow: 0 8px 22px rgba(0,0,0,.12);
+}
+.ux-node.is-root { background: var(--accent); color: var(--node-root-fg, #fff); }
+.ux-node::after { content: ''; position: absolute; left: 50%; top: -4px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--accent); }
+.ux-tree > ul > li > .ux-node::after { display: none; }
+
+/* ---------- Point lists (problems, needs), sprint timeline, personas, testing ---------- */
+.ux-points { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); margin: 0; padding: 0; list-style: none; counter-reset: p; }
+.ux-points li { position: relative; padding: clamp(22px, 2.4vw, 34px); border-radius: 20px; background: color-mix(in srgb, var(--page-fg) 5%, transparent); font-size: 16px; line-height: 1.6; }
+.ux-points li::before { counter-increment: p; content: counter(p, decimal-leading-zero); display: block; margin-bottom: 28px; font: 600 12px/1 var(--f-head); letter-spacing: .14em; color: var(--accent); }
+.ux-points li::after { content: ''; position: absolute; top: clamp(22px, 2.4vw, 34px); inset-inline-end: clamp(22px, 2.4vw, 34px); border: 7px solid transparent; border-inline-start: 11px solid var(--accent); border-inline-end-width: 0; }
+
+.ux-sprint { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 34px); margin: clamp(30px, 5vh, 56px) 0 0; padding: 0; list-style: none; }
+.ux-sprint::before { content: ''; position: absolute; left: 0; right: 0; top: 74px; height: 1px; background: color-mix(in srgb, var(--page-fg) 30%, transparent); transform-origin: 0 50%; transform: scaleX(var(--draw, 1)); }
+html[dir="rtl"] .ux-sprint::before { transform-origin: 100% 50%; }
+.ux-sprint li { position: relative; }
+.ux-sprint svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; color: var(--accent); }
+.ux-sprint li i { display: block; width: 16px; height: 16px; margin: 22px 0 22px; border-radius: 50%; background: var(--page-fg); box-shadow: 0 0 0 6px color-mix(in srgb, var(--page-fg) 12%, transparent); }
+.ux-sprint b { display: block; font: 600 18px/1.2 var(--f-head); }
+.ux-sprint span { display: block; margin-top: 10px; font-size: 14px; line-height: 1.65; color: color-mix(in srgb, var(--page-fg) 72%, transparent); }
+
+.ux-persona { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: clamp(16px, 2.4vw, 32px); align-items: start; }
+.ux-persona + .ux-persona { margin-top: clamp(24px, 4vh, 48px); }
+.ux-persona figure { margin: 0; }
+.ux-persona figure img { width: 100%; height: auto; border-radius: 18px; }
+.ux-persona dl { margin: 14px 0 0; padding: 18px 20px; border-radius: 16px; background: color-mix(in srgb, var(--page-fg) 5%, transparent); }
+.ux-persona dl h3 { margin: 0 0 12px; font: 600 18px/1.2 var(--f-head); }
+.ux-persona dl div { display: flex; gap: 12px; padding: 4px 0; font-size: 15px; }
+.ux-persona dt { min-width: 74px; color: color-mix(in srgb, var(--page-fg) 55%, transparent); }
+.ux-persona dd { margin: 0; }
+.ux-persona-card { padding: clamp(24px, 3vw, 44px); border-radius: 22px; background: color-mix(in srgb, var(--page-fg) 5%, transparent); }
+.ux-persona-card h4 { margin: 0 0 8px; font: 600 16px/1.3 var(--f-head); color: var(--accent); }
+.ux-persona-card h4:not(:first-child) { margin-top: 24px; }
+.ux-persona-card p { margin: 0 0 8px; font-size: 15px; line-height: 1.7; color: color-mix(in srgb, var(--page-fg) 80%, transparent); }
+
+.ux-test { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 70px); margin-top: clamp(30px, 5vh, 60px); }
+.ux-test h3 { margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--accent); font: 600 18px/1.2 var(--f-head); }
+.ux-test ul { margin: 0; padding: 0; list-style: none; }
+.ux-test li { position: relative; padding: 12px 0 12px 22px; border-bottom: 1px solid color-mix(in srgb, var(--page-fg) 12%, transparent); font-size: 16px; line-height: 1.55; }
+html[dir="rtl"] .ux-test li { padding: 12px 22px 12px 0; }
+.ux-test li::before { content: ''; position: absolute; inset-inline-start: 0; top: 21px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* Row of transparent device images (wireframes, screens) */
+.ux-row { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: clamp(12px, 2vw, 30px); align-items: end; }
+.ux-row figure { margin: 0; }
+.ux-row img { width: 100%; height: auto; display: block; }
+.ux-row figcaption { margin-top: 10px; text-align: center; font: 500 11px/1.3 var(--f-head); letter-spacing: .1em; text-transform: uppercase; color: color-mix(in srgb, var(--page-fg) 60%, transparent); }
+.ux-row + .ux-row { margin-top: clamp(24px, 4vh, 50px); }
+
+/* About block: text with an illustration beside it */
+.ux-about { display: grid; grid-template-columns: 1.3fr .9fr; gap: clamp(24px, 5vw, 90px); align-items: center; }
+.ux-about img { width: 100%; height: auto; border-radius: var(--radius); }
+
 /* ---------- Phones / small screens: no pinning, native scrolling instead ---------- */
 @media (max-width: 1100px) { .vw-mini { display: none; } .vw-wrap { grid-template-columns: minmax(230px, .8fr) 1.7fr; } }
 @media (max-width: 1024px) { .ui-steps { grid-template-columns: repeat(3, 1fr); } }
@@ -201,4 +273,14 @@ html[dir="rtl"] .ss-marks li { padding: 14px 44px 14px 0; }
   .ui-float .phone:nth-child(2) { --pw: 34vw; }
   .ui-trio { grid-template-columns: 1fr; }
   .ui-steps { grid-template-columns: 1fr 1fr; }
+  .ux-points, .ux-test, .ux-about { grid-template-columns: 1fr; }
+  .ux-sprint { grid-template-columns: 1fr; gap: 26px; }
+  .ux-sprint::before { display: none; }
+  .ux-sprint li i { display: none; }
+  .ux-persona { grid-template-columns: 1fr; }
+  .ux-persona figure { max-width: 260px; }
+  .ux-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ux-node { padding: 10px 13px; font-size: 12px; }
+  .ux-tree { --gap: 20px; }
 }
+@media (min-width: 768px) and (max-width: 1024px) { .ux-sprint { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 40px; } .ux-sprint::before { display: none; } }

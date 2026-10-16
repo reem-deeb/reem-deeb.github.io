@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Kitchen — Mobile App UI/UX · Reem Deeb</title>
+<meta name="description" content="Home Kitchen app by Reem Deeb: a marketplace for home-cooked meals from certified chefs, with a customer app and a chef version — branding, user flow, wireframes and UI.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #151515; --fg: #f4f1e8; --muted: #8b8473; --accent: #f8c62f;
+    --f-brand: 'Poppins', 'IBM Plex Sans Arabic', sans-serif;
+    --f-body: 'Poppins', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: -.01em; --ch-transform: none;
+  }
+  .c-title { font-weight: 600; text-transform: none; }
+  .c-statement, .ch-title { font-weight: 600; }
+  .ch-num { -webkit-text-stroke-color: rgba(248, 198, 47, .5); }
+  .pill, .lang { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.26); color: #f4f1e8; }
+  .lang button { color: #e6e3da; }
+  .pill:hover, .lang button[aria-pressed="true"] { background: #f8c62f; color: #151515; }
+  html.nav-solid .pill { color: #1d1d1d; }
+  html.nav-solid .lang button { color: #2a2a2a; }
+  html.nav-solid .lang button[aria-pressed="true"] { color: #151515; }
+  /* App screens are taller than the default phone frame */
+  .phone-screen { aspect-ratio: 462 / 1033; }
+
+  /* Hero: dark stage, yellow shapes, the logo and two floating phones */
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.45) 40%, rgba(10,10,10,.08) 70%, rgba(10,10,10,.3) 100%); }
+
+  .hk-brand { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(16px, 2.4vw, 36px); align-items: stretch; }
+  .hk-logo-panel { display: grid; place-items: center; min-height: 420px; border-radius: var(--radius); background: #f8c62f; }
+  .hk-logo-panel img { width: min(46%, 240px); height: auto; filter: brightness(0) invert(.08); }
+  .hk-brand .c-palette { height: auto; min-height: 420px; }
+  .ux-tree { --node-bg: #fff; --node-fg: #151515; --node-root-fg: #151515; }
+  .hk-wire { margin: 0; padding: clamp(20px, 3vw, 50px); border-radius: var(--radius); background: #1f1f1f; }
+  .hk-wire img { width: 100%; height: auto; display: block; }
+  .ui-float .phone { --pw: clamp(160px, 16vw, 240px); }
+  .ui-float .phone:nth-child(2) { --pw: clamp(180px, 18vw, 270px); }
+  @media (max-width: 767px) { .hk-brand { grid-template-columns: 1fr; } .hk-logo-panel { min-height: 260px; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#e0ad16" aria-hidden="true"><span>Home Kitchen</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/HomeKitchen/web/hero.jpg" srcset="../assets/HomeKitchen/web/hero-m.jpg 1000w, ../assets/HomeKitchen/web/hero.jpg 2400w" sizes="100vw" width="2400" height="1725" fetchpriority="high" style="--hero-pos: 40% 50%" alt="Phone showing the Home Kitchen home screen on a table lit by red, orange and green light">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Mobile app UI/UX &amp; branding</p>
+      <h1 class="c-title" dir="ltr" data-chars>Home Kitchen</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Home Kitchen</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Food &amp; delivery</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Logo, user flow, wireframes, app UI</dd></div>
+        <div><dt data-i18n="l.apps">Apps</dt><dd data-i18n="m.apps">Customer &amp; chef versions</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Real home cooking, from certified chefs near you.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Home Kitchen is a marketplace for home-cooked food. Customers follow certified home chefs, browse their dishes by category and order for delivery or pick-up — or pre-order a meal for a chosen day and time. Chefs get their own version of the app to publish dishes, set delivery options and manage incoming orders.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Brand</span><span>01</span></li>
+        <li><span data-i18n="li2">User flow</span><span>02</span></li>
+        <li><span data-i18n="li3">Wireframes</span><span>03</span></li>
+        <li><span data-i18n="li4">Customer journey</span><span>04</span></li>
+        <li><span data-i18n="li5">Chef version</span><span>05</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="2">0</b><span data-i18n="st1">apps in one system: for customers and for chefs</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="25">0</b><span data-i18n="st2">screens designed, from splash to order tracking</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="3">0</b><span data-i18n="st3">steps to check out: address, payment, done</span></div>
+    </div>
+    <div class="ux-row" style="--n:2; max-width: 620px; margin: clamp(56px, 9vh, 110px) auto 0" dir="ltr">
+      <figure data-speed="4"><img src="../assets/HomeKitchen/web/mock-intro.png" width="560" height="1054" loading="lazy" alt="Intro screen on an iPhone"></figure>
+      <figure data-speed="-4"><img src="../assets/HomeKitchen/web/mock-home.png" width="560" height="1056" loading="lazy" alt="Home screen on an iPhone"></figure>
+    </div>
+  </section>
+
+  <!-- 01 BRAND -->
+  <section class="c-section container" id="brand">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">A house with a ladle</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The logo draws a house whose chimney is a ladle, with steam rising from the bowl: cooking that happens at home. A warm, appetising yellow carries the brand, with a red accent reserved for prices and offers.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="hk-brand">
+      <div class="hk-logo-panel" data-reveal data-cursor="view"><img src="../assets/HomeKitchen/web/logo.png" width="453" height="546" loading="lazy" alt="Home Kitchen logo: a house with a ladle and rising steam"></div>
+      <div class="c-palette" role="list" aria-label="Colour palette">
+        <button class="swatch" role="listitem" type="button" data-hex="#F8C62F" style="--c:#f8c62f; --t:#151515"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Saffron</b><small dir="ltr">#F8C62F</small></button>
+        <button class="swatch" role="listitem" type="button" data-hex="#EE5A45" style="--c:#ee5a45"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Chilli</b><small dir="ltr">#EE5A45</small></button>
+        <button class="swatch" role="listitem" type="button" data-hex="#FFFFFF" style="--c:#ffffff; --t:#151515"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Plate</b><small dir="ltr">#FFFFFF</small></button>
+        <button class="swatch" role="listitem" type="button" data-hex="#1B1B1B" style="--c:#1b1b1b; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14)"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Cast iron</b><small dir="ltr">#1B1B1B</small></button>
+      </div>
+    </div>
+    <div class="ui-float" style="margin-top: clamp(50px, 8vh, 90px)" dir="ltr">
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/splash.jpg" width="462" height="1033" loading="lazy" alt="Splash screen with the logo over a hand-drawn kitchen pattern"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/intro.jpg" width="474" height="1045" loading="lazy" alt="Intro screen: certified chef, register as user or as chef"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/signup.jpg" width="462" height="1033" loading="lazy" alt="Create account screen"></div></div>
+    </div>
+  </section>
+
+  <!-- 02 USER FLOW -->
+  <section class="c-section container" id="flow">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">User flow</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">Three roads lead from the home screen — chefs, orders and search — and all of them end in the same short path to checkout and delivery.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ux-tree-wrap">
+      <div class="ux-tree" dir="ltr">
+        <ul><li><span class="ux-node is-root" data-i18n="uf.reg">Registration</span>
+          <ul><li><span class="ux-node is-root" data-i18n="uf.home">Home</span>
+            <ul>
+              <li><span class="ux-node" data-i18n="uf.chefs">Chefs</span>
+                <ul><li><span class="ux-node" data-i18n="uf.meal">Meal details</span></li><li><span class="ux-node" data-i18n="uf.chef">Chef info</span></li></ul></li>
+              <li><span class="ux-node" data-i18n="uf.orders">Orders</span>
+                <ul><li><span class="ux-node" data-i18n="uf.order">Order details</span></li></ul></li>
+              <li><span class="ux-node" data-i18n="uf.search">Search by meal / chef</span>
+                <ul><li><span class="ux-node" data-i18n="uf.list">Meals list</span>
+                  <ul><li><span class="ux-node" data-i18n="uf.meal">Meal details</span>
+                    <ul><li><span class="ux-node" data-i18n="uf.cart">Cart</span>
+                      <ul><li><span class="ux-node" data-i18n="uf.details">Details</span>
+                        <ul><li><span class="ux-node" data-i18n="uf.checkout">Checkout</span>
+                          <ul><li><span class="ux-node is-root" data-i18n="uf.delivery">Delivery</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li>
+            </ul>
+          </li></ul>
+        </li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 WIREFRAMES -->
+  <section class="c-section container" id="wireframes">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Wireframes</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Grey boxes first: the key screens were laid out in low fidelity to test the flow before any food photography went in.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="hk-wire" data-reveal data-cursor="view"><img src="../assets/HomeKitchen/web/wireframes.png" width="2000" height="1176" loading="lazy" alt="Low-fidelity wireframes of the category, chefs, home and dessert screens"></figure>
+  </section>
+
+  <!-- 04 CUSTOMER JOURNEY: pinned flow -->
+  <section class="ui-flow" data-flow id="journey">
+    <div class="container flow-wrap">
+      <div>
+        <p class="eyebrow" data-i18n="ch4.eyebrow">04 — The customer journey</p>
+        <h2 class="ch-title" data-split data-i18n="ch4.title" style="margin-bottom: clamp(24px, 4vh, 44px)">From craving to doorstep</h2>
+        <div class="flow-steps">
+          <span class="flow-rail" aria-hidden="true"><i></i></span>
+          <ol class="flow-list">
+            <li class="flow-step is-on"><small data-i18n="f1.k">Step 01</small><h3 data-i18n="f1.h">Sign in</h3><p data-i18n="f1.p">A light login over a hand-drawn kitchen pattern, with Google and Facebook one tap away.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/login.jpg" width="462" height="884" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f2.k">Step 02</small><h3 data-i18n="f2.h">Discover</h3><p data-i18n="f2.p">The best chefs, food categories and trending dishes on one scrolling home screen.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/home.jpg" width="463" height="1233" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f3.k">Step 03</small><h3 data-i18n="f3.h">Meet the chef</h3><p data-i18n="f3.p">Every chef has a profile with followers, a short bio and their menu, sorted by cuisine.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/chef-details.jpg" width="462" height="1033" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f4.k">Step 04</small><h3 data-i18n="f4.h">Choose a meal</h3><p data-i18n="f4.p">Ingredients, delivery time and add-ons — plus a date and time picker for pre-orders.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/meal-1.jpg" width="462" height="1081" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f5.k">Step 05</small><h3 data-i18n="f5.h">Cart</h3><p data-i18n="f5.p">Quantities, subtotal and delivery fee, then a choice: pick it up or have it delivered.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/cart.jpg" width="462" height="1033" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f6.k">Step 06</small><h3 data-i18n="f6.h">Address &amp; payment</h3><p data-i18n="f6.p">A three-step checkout keeps it calm: saved addresses first, then cash on delivery or card.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/checkout-2.jpg" width="462" height="1033" loading="lazy" alt=""></div></div></div></li>
+            <li class="flow-step"><small data-i18n="f7.k">Step 07</small><h3 data-i18n="f7.h">Order placed</h3><p data-i18n="f7.p">A friendly confirmation with the order number — and the order can be tracked right away.</p>
+              <div class="flow-inline"><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/checkout-3.jpg" width="462" height="1033" loading="lazy" alt=""></div></div></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="flow-device" aria-hidden="true">
+        <span class="flow-glow"></span>
+        <div class="phone"><div class="phone-screen">
+          <img class="flow-shot is-on" src="../assets/HomeKitchen/web/login.jpg" width="462" height="884" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/home.jpg" width="463" height="1233" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/chef-details.jpg" width="462" height="1033" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/meal-1.jpg" width="462" height="1081" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/cart.jpg" width="462" height="1033" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/checkout-2.jpg" width="462" height="1033" alt="">
+          <img class="flow-shot" src="../assets/HomeKitchen/web/checkout-3.jpg" width="462" height="1033" alt="">
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CHEF VERSION -->
+  <section class="c-section container" id="chef" data-theme-bg="#f8c62f" data-theme-fg="#151515">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">05</span>
+      <h2 class="ch-title" data-split data-i18n="ch5.title">The chef version</h2>
+      <p class="ch-text" data-fade data-i18n="ch5.text">The same app, turned around for the people behind the stove: chefs run their profile, publish dishes with prices and delivery options, and follow every order from pending to on the way.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ui-float" dir="ltr">
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-account.jpg" width="540" height="1211" loading="lazy" alt="Chef account with profile and dishes"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-item.jpg" width="540" height="1677" loading="lazy" alt="Add item form with price, delivery and pre-order options"></div></div>
+      <div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-orders.jpg" width="540" height="1211" loading="lazy" alt="Chef orders with status"></div></div>
+    </div>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">Publish in minutes</h3><p data-i18n="n1.p">One form covers a dish’s photo, price, description, delivery time, add-ons and allergens — and whether it can be pre-ordered.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">Orders at a glance</h3><p data-i18n="n2.p">Active and previous orders are split into two tabs, each with a clear status: pending, processing or on the way.</p></div>
+    </div>
+  </section>
+
+  <!-- EVERY SCREEN: rails -->
+  <section class="c-section" id="screens" style="padding-bottom: clamp(40px, 8vh, 90px)">
+    <div class="container">
+      <header class="ch-head">
+        <span class="ch-num" aria-hidden="true">06</span>
+        <h2 class="ch-title" data-split data-i18n="ch6.title">Every screen</h2>
+        <p class="ch-text" data-fade data-i18n="ch6.text">Customer screens on the top row, the chef version below — scroll faster and they move faster.</p>
+        <span class="ch-line"></span>
+      </header>
+    </div>
+    <div class="ui-rails" dir="ltr">
+      <div class="rail" data-dir="1"><div class="rail-track">
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/chefs.jpg" width="462" height="1033" loading="lazy" alt="All chefs"></div></div><figcaption>All chefs</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/category.jpg" width="462" height="1033" loading="lazy" alt="Category items"></div></div><figcaption>Category</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/meal-2.jpg" width="463" height="1134" loading="lazy" alt="Meal details with delivery options"></div></div><figcaption>Meal details</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/checkout-1.jpg" width="462" height="1033" loading="lazy" alt="Checkout: delivery address"></div></div><figcaption>Checkout</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/pickup.jpg" width="462" height="1033" loading="lazy" alt="Pick-up location on a map"></div></div><figcaption>Pick-up</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/orders.jpg" width="462" height="1033" loading="lazy" alt="Orders"></div></div><figcaption>Orders</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/order-details.jpg" width="462" height="1033" loading="lazy" alt="Order details"></div></div><figcaption>Order details</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/wishlist.jpg" width="462" height="1033" loading="lazy" alt="Wishlist"></div></div><figcaption>Wishlist</figcaption></figure>
+      </div></div>
+      <div class="rail" data-dir="-1"><div class="rail-track">
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-categories.jpg" width="540" height="1211" loading="lazy" alt="Chef categories"></div></div><figcaption>Chef · Categories</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-details.jpg" width="540" height="1211" loading="lazy" alt="Chef category details"></div></div><figcaption>Chef · Dishes</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-order.jpg" width="540" height="1211" loading="lazy" alt="Chef order details"></div></div><figcaption>Chef · Order</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-edit.jpg" width="540" height="1211" loading="lazy" alt="Edit chef profile"></div></div><figcaption>Chef · Edit profile</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-account.jpg" width="540" height="1211" loading="lazy" alt="Chef account"></div></div><figcaption>Chef · Account</figcaption></figure>
+        <figure><div class="phone"><div class="phone-screen"><img src="../assets/HomeKitchen/web/c-orders.jpg" width="540" height="1211" loading="lazy" alt="Chef orders"></div></div><figcaption>Chef · Orders</figcaption></figure>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="ibs.html" data-transition data-wipe="#4f8a5b" data-wipe-label="IBS Foundation" style="--f-next:'Merriweather', serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-size: clamp(44px, 8.5vw, 160px)">IBS Foundation</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/IBS/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Home Kitchen — App-UI/UX · Reem Deeb',
+      kicker: 'App-UI/UX &amp; Branding',
+      'm.industry': 'Essen &amp; Lieferung', 'm.services': 'Logo, User Flow, Wireframes, App-UI', 'l.apps': 'Apps', 'm.apps': 'Kunden- &amp; Koch-Version',
+      statement: 'Echte Hausmannskost, von zertifizierten Köchen in deiner Nähe.',
+      lead: 'Home Kitchen ist ein Marktplatz für hausgemachtes Essen. Kundinnen und Kunden folgen zertifizierten Hobbyköchen, stöbern in Gerichten nach Kategorien und bestellen zur Lieferung oder Abholung – oder bestellen ein Gericht für einen gewählten Tag und eine Uhrzeit vor. Köche erhalten eine eigene App-Version, um Gerichte zu veröffentlichen, Lieferoptionen festzulegen und Bestellungen zu verwalten.',
+      li1: 'Marke', li2: 'User Flow', li3: 'Wireframes', li4: 'Customer Journey', li5: 'Koch-Version',
+      st1: 'Apps in einem System: für Kunden und für Köche', st2: 'gestaltete Screens, vom Splash bis zur Bestellverfolgung', st3: 'Schritte zur Kasse: Adresse, Zahlung, fertig',
+      'ch1.title': 'Ein Haus mit Schöpfkelle', 'ch1.text': 'Das Logo zeichnet ein Haus, dessen Schornstein eine Schöpfkelle ist, aus der Dampf aufsteigt: Kochen, das zu Hause passiert. Ein warmes, appetitliches Gelb trägt die Marke, ein rotes Akzent ist Preisen und Angeboten vorbehalten.',
+      c1: 'Safran', c2: 'Chili', c3: 'Teller', c4: 'Gusseisen',
+      'ch2.title': 'User Flow', 'ch2.text': 'Drei Wege führen vom Startbildschirm aus – Köche, Bestellungen und Suche – und alle enden im selben kurzen Weg zu Kasse und Lieferung.',
+      'uf.reg': 'Registrierung', 'uf.home': 'Start', 'uf.chefs': 'Köche', 'uf.meal': 'Gericht', 'uf.chef': 'Koch-Profil', 'uf.orders': 'Bestellungen', 'uf.order': 'Bestelldetails',
+      'uf.search': 'Suche nach Gericht / Koch', 'uf.list': 'Gerichtsliste', 'uf.cart': 'Warenkorb', 'uf.details': 'Details', 'uf.checkout': 'Kasse', 'uf.delivery': 'Lieferung',
+      'ch3.title': 'Wireframes', 'ch3.text': 'Zuerst graue Kästen: Die wichtigsten Screens wurden in Low Fidelity angelegt, um den Ablauf zu testen, bevor Food-Fotos dazukamen.',
+      'ch4.eyebrow': '04 — Die Customer Journey', 'ch4.title': 'Vom Appetit bis an die Haustür',
+      'f1.k': 'Schritt 01', 'f1.h': 'Anmelden', 'f1.p': 'Ein leichter Login über einem gezeichneten Küchenmuster, Google und Facebook nur einen Tipp entfernt.',
+      'f2.k': 'Schritt 02', 'f2.h': 'Entdecken', 'f2.p': 'Die besten Köche, Kategorien und angesagte Gerichte auf einem Startbildschirm.',
+      'f3.k': 'Schritt 03', 'f3.h': 'Den Koch kennenlernen', 'f3.p': 'Jeder Koch hat ein Profil mit Followern, kurzer Bio und seiner Speisekarte, sortiert nach Küche.',
+      'f4.k': 'Schritt 04', 'f4.h': 'Ein Gericht wählen', 'f4.p': 'Zutaten, Lieferzeit und Extras – dazu eine Datums- und Zeitauswahl für Vorbestellungen.',
+      'f5.k': 'Schritt 05', 'f5.h': 'Warenkorb', 'f5.p': 'Mengen, Zwischensumme und Liefergebühr, dann die Wahl: abholen oder liefern lassen.',
+      'f6.k': 'Schritt 06', 'f6.h': 'Adresse &amp; Zahlung', 'f6.p': 'Ein dreistufiger Checkout hält es ruhig: zuerst gespeicherte Adressen, dann Barzahlung oder Karte.',
+      'f7.k': 'Schritt 07', 'f7.h': 'Bestellt', 'f7.p': 'Eine freundliche Bestätigung mit Bestellnummer – und die Bestellung lässt sich sofort verfolgen.',
+      'ch5.title': 'Die Koch-Version', 'ch5.text': 'Dieselbe App, umgedreht für die Menschen am Herd: Köche pflegen ihr Profil, veröffentlichen Gerichte mit Preisen und Lieferoptionen und verfolgen jede Bestellung von „ausstehend“ bis „unterwegs“.',
+      'n1.h': 'In Minuten veröffentlicht', 'n1.p': 'Ein Formular erfasst Foto, Preis, Beschreibung, Lieferzeit, Extras und Allergene eines Gerichts – und ob es vorbestellt werden kann.',
+      'n2.h': 'Bestellungen auf einen Blick', 'n2.p': 'Aktive und frühere Bestellungen liegen in zwei Tabs, jeweils mit klarem Status: ausstehend, in Bearbeitung oder unterwegs.',
+      'ch6.title': 'Alle Screens', 'ch6.text': 'Oben die Kunden-Screens, darunter die Koch-Version – je schneller du scrollst, desto schneller laufen sie.'
+    },
+    ar: {
+      title: 'Home Kitchen — تصميم واجهات تطبيق · ريم ديب',
+      kicker: 'تصميم واجهات التطبيق والهوية',
+      'm.industry': 'الطعام والتوصيل', 'm.services': 'شعار، مسار المستخدم، مخططات، واجهات التطبيق', 'l.apps': 'التطبيقات', 'm.apps': 'نسخة للعميل وأخرى للطاهي',
+      statement: 'طبخ منزلي حقيقي، من طهاة معتمدين بالقرب منك.',
+      lead: 'Home Kitchen سوق للطعام المنزلي. يتابع العملاء طهاة منزليين معتمدين، ويتصفّحون أطباقهم حسب الفئات، ويطلبون للتوصيل أو الاستلام — أو يحجزون وجبة مسبقاً ليوم ووقت يختارونه. وللطهاة نسختهم الخاصة من التطبيق لنشر الأطباق وتحديد خيارات التوصيل وإدارة الطلبات.',
+      li1: 'الهوية', li2: 'مسار المستخدم', li3: 'المخططات الأولية', li4: 'رحلة العميل', li5: 'نسخة الطاهي',
+      st1: 'تطبيقان في نظام واحد: للعملاء وللطهاة', st2: 'شاشة مصمّمة، من شاشة البداية إلى تتبّع الطلب', st3: 'خطوات للدفع: العنوان، الدفع، تمّ',
+      'ch1.title': 'بيت ومغرفة', 'ch1.text': 'يرسم الشعار بيتاً مدخنته مغرفة يتصاعد منها البخار: طبخ يحدث في البيت. يحمل الأصفر الدافئ الشهي العلامة، بينما يُخصَّص الأحمر للأسعار والعروض.',
+      c1: 'زعفراني', c2: 'فلفلي', c3: 'أبيض الطبق', c4: 'حديد الطهي',
+      'ch2.title': 'مسار المستخدم', 'ch2.text': 'ثلاثة طرق تنطلق من الشاشة الرئيسية — الطهاة والطلبات والبحث — وكلها تنتهي بالمسار القصير نفسه إلى الدفع والتوصيل.',
+      'uf.reg': 'التسجيل', 'uf.home': 'الرئيسية', 'uf.chefs': 'الطهاة', 'uf.meal': 'تفاصيل الوجبة', 'uf.chef': 'معلومات الطاهي', 'uf.orders': 'الطلبات', 'uf.order': 'تفاصيل الطلب',
+      'uf.search': 'البحث عن وجبة / طاهٍ', 'uf.list': 'قائمة الوجبات', 'uf.cart': 'السلة', 'uf.details': 'التفاصيل', 'uf.checkout': 'الدفع', 'uf.delivery': 'التوصيل',
+      'ch3.title': 'المخططات الأولية', 'ch3.text': 'المربعات الرمادية أولاً: رُسمت الشاشات الأساسية بدقة منخفضة لاختبار المسار قبل إضافة صور الطعام.',
+      'ch4.eyebrow': '04 — رحلة العميل', 'ch4.title': 'من الشهية إلى باب البيت',
+      'f1.k': 'الخطوة 01', 'f1.h': 'تسجيل الدخول', 'f1.p': 'تسجيل دخول خفيف فوق نقش مطبخ مرسوم باليد، مع Google وFacebook على بُعد نقرة.',
+      'f2.k': 'الخطوة 02', 'f2.h': 'الاكتشاف', 'f2.p': 'أفضل الطهاة وفئات الطعام والأطباق الرائجة في شاشة رئيسية واحدة.',
+      'f3.k': 'الخطوة 03', 'f3.h': 'تعرّف إلى الطاهي', 'f3.p': 'لكل طاهٍ صفحة تضم متابعيه ونبذة قصيرة وقائمة أطباقه مرتّبة حسب المطبخ.',
+      'f4.k': 'الخطوة 04', 'f4.h': 'اختر وجبة', 'f4.p': 'المكوّنات ووقت التوصيل والإضافات — مع اختيار التاريخ والوقت للطلبات المسبقة.',
+      'f5.k': 'الخطوة 05', 'f5.h': 'السلة', 'f5.p': 'الكميات والمجموع ورسوم التوصيل، ثم الاختيار: الاستلام أو التوصيل.',
+      'f6.k': 'الخطوة 06', 'f6.h': 'العنوان والدفع', 'f6.p': 'دفع من ثلاث خطوات يبقي الأمر هادئاً: العناوين المحفوظة أولاً، ثم الدفع نقداً أو بالبطاقة.',
+      'f7.k': 'الخطوة 07', 'f7.h': 'تمّ الطلب', 'f7.p': 'تأكيد ودود مع رقم الطلب — ويمكن تتبّعه فوراً.',
+      'ch5.title': 'نسخة الطاهي', 'ch5.text': 'التطبيق نفسه، مقلوباً لمن يقفون خلف الموقد: يدير الطهاة صفحاتهم، وينشرون الأطباق بأسعارها وخيارات توصيلها، ويتابعون كل طلب من «قيد الانتظار» إلى «في الطريق».',
+      'n1.h': 'النشر في دقائق', 'n1.p': 'نموذج واحد يضم صورة الطبق وسعره ووصفه ووقت توصيله وإضافاته ومسبّبات الحساسية — وإمكانية طلبه مسبقاً.',
+      'n2.h': 'الطلبات بلمحة', 'n2.p': 'الطلبات النشطة والسابقة في تبويبين، لكل منها حالة واضحة: قيد الانتظار، أو قيد التحضير، أو في الطريق.',
+      'ch6.title': 'كل الشاشات', 'ch6.text': 'شاشات العميل في الصف العلوي ونسخة الطاهي في الأسفل — كلما مرّرت أسرع، تحرّكت أسرع.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

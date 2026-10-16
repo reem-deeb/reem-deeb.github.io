@@ -18,7 +18,7 @@
     const end = parseFloat(el.dataset.count), o = { v: 0 }, suffix = el.dataset.suffix || '';
     ScrollTrigger.create({
       trigger: el, start: 'top 90%', once: true,
-      onEnter: () => gsap.to(o, { v: end, duration: reduce ? 0 : 1.8, ease: 'power3.out', onUpdate: () => { el.textContent = Math.round(o.v) + suffix; } })
+      onEnter: () => gsap.to(o, { v: end, duration: reduce ? 0 : 1.8, ease: 'power3.out', onUpdate: () => { const v = Math.round(o.v); el.textContent = (end >= 10000 ? v.toLocaleString('en-US') : v) + suffix; } })
     });
   });
 
@@ -163,6 +163,27 @@
   if (!reduce) $$('[data-tilt]').forEach(el => gsap.fromTo(el,
     { rotateX: 26, y: 110, scale: .92, autoAlpha: .3 },
     { rotateX: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 35%', scrub: true } }));
+
+  /* ---------- Diagrams and research blocks: elements arrive in sequence ---------- */
+  if (!reduce) {
+    // Tree diagrams grow from the root down, level by level.
+    $$('.ux-tree').forEach(tree => {
+      const nodes = $$('.ux-node', tree).sort((a, b) => $$('ul', tree).filter(u => u.contains(a)).length - $$('ul', tree).filter(u => u.contains(b)).length);
+      gsap.from(nodes, { y: 18, scale: .86, autoAlpha: 0, duration: .9, ease: 'expo.out', stagger: .06, scrollTrigger: { trigger: tree, start: 'top 82%' } });
+    });
+    $$('.ux-points, .ux-test, .ux-row').forEach(list => gsap.from([...list.children], {
+      y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: list, start: 'top 85%' }
+    }));
+    // Sprint timeline: the line draws across, then each phase drops onto it.
+    $$('.ux-sprint').forEach(sp => {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: sp, start: 'top 80%' } });
+      tl.fromTo(sp, { '--draw': 0 }, { '--draw': 1, duration: 1.4, ease: 'expo.inOut' })
+        .from($$('li', sp), { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: .12 }, .3);
+    });
+    $$('.ux-persona').forEach(p => gsap.timeline({ scrollTrigger: { trigger: p, start: 'top 80%' } })
+      .from($('figure', p), { xPercent: document.documentElement.dir === 'rtl' ? 12 : -12, autoAlpha: 0, duration: 1.2, ease: 'expo.out' })
+      .from($$('.ux-persona-card > *', p), { y: 20, autoAlpha: 0, duration: .9, ease: 'expo.out', stagger: .05 }, .15));
+  }
 
   // Pins created here must be measured in page order before everything else.
   ScrollTrigger.sort();

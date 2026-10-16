@@ -28,6 +28,7 @@ html.lenis, html.lenis body { height: auto; }
 /* Split-text masks */
 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
 .wi, .c { display: inline-block; will-change: transform; }
+.cw { display: inline-block; white-space: nowrap; }
 html[lang="ar"] .w { padding-block: .2em .28em; margin-block: -.2em -.28em; }
 html[lang="ar"] [data-i18n], html[lang="ar"] [data-i18n] * { letter-spacing: 0 !important; }
 

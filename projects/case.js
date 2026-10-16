@@ -56,9 +56,8 @@
     ],
     uiux: [
       ['internet.html', 'INTERNET.com', '#6c6cf2'], ['realestate.html', 'Luxury Real Estate', '#c79762'], ['promote.html', 'PROMOTE', '#55a8ae'],
-      ['coupons.html', 'Coupons App', '#13261c'], ['archive.html#asae', 'ASAE', '#111111', 1], ['archive.html#beauty-gate', 'Beauty Gate', '#111111', 1],
-      ['archive.html#home-kitchen', 'Home Kitchen', '#111111', 1], ['archive.html#ibs', 'IBS Foundation', '#111111', 1],
-      ['archive.html#project-management', 'Project Management', '#111111', 1]
+      ['coupons.html', 'Coupons App', '#13261c'], ['beauty-gate.html', 'Beauty Gate', '#9b7f68'], ['home-kitchen.html', 'Home Kitchen', '#e0ad16'],
+      ['ibs.html', 'IBS Foundation', '#4f8a5b'], ['project-management.html', 'Project Management', '#2f7cc4'], ['asae.html', 'ASAE', '#6e1a2c']
     ]
   };
   const caseNav = $('.case-nav');
@@ -208,9 +207,17 @@
     walk(el);
     return $$('.wi', el);
   }
+  // Letters are grouped per word so a long title only wraps between words.
+  // Arabic letters must stay joined, so there each whole word animates as one piece.
   function splitChars(el) {
-    const text = el.textContent; el.textContent = '';
-    [...text].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch === ' ' ? ' ' : ch; el.appendChild(c); });
+    const text = el.textContent.trim(); el.textContent = '';
+    const joined = /[\u0600-\u06FF]/.test(text);
+    text.split(/\s+/).forEach((word, i) => {
+      if (i) el.appendChild(document.createTextNode(' '));
+      const w = document.createElement('span'); w.className = 'cw';
+      (joined ? [word] : [...word]).forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.appendChild(c); });
+      el.appendChild(w);
+    });
     return $$('.c', el);
   }
   $$('[data-chars]').forEach(splitChars);

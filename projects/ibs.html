@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBS Foundation — Website &amp; App UI/UX · Reem Deeb</title>
+<meta name="description" content="IBS Foundation by Reem Deeb: website and mobile app for students and researchers — from wireframes to the final design.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Kumbh+Sans:wght@600;700&family=Merriweather:wght@400;700&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f4f6f2; --fg: #1e2b22; --muted: #8a9a8e; --accent: #4f8a5b;
+    --f-brand: 'Merriweather', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: 0; --ch-transform: none;
+  }
+  .c-title { text-transform: none; font-weight: 700; font-size: clamp(52px, 9vw, 170px); }
+  .ch-title, .c-statement { font-weight: 700; letter-spacing: -.01em; }
+  .ch-num { -webkit-text-stroke-color: rgba(79, 138, 91, .45); }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(15, 35, 22, .9) 0%, rgba(15, 35, 22, .45) 40%, rgba(15, 35, 22, .08) 70%, rgba(15, 35, 22, .3) 100%); }
+  .ibs-about h2 { margin: 0 0 22px; font: 700 clamp(34px, 3.6vw, 60px)/1.1 var(--f-brand); color: var(--accent); }
+  .ibs-about p { margin: 0; font-size: clamp(17px, 1.25vw, 21px); line-height: 1.75; color: color-mix(in srgb, var(--page-fg) 72%, transparent); }
+  .ibs-about figure { margin: 0; }
+  .ibs-laptops { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(16px, 3vw, 50px); align-items: end; }
+  .ui-stat b span { display: inline; margin: 0; font: inherit; color: inherit; }
+  @media (max-width: 767px) { .ibs-laptops { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#4f8a5b" aria-hidden="true"><span>IBS Foundation</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/IBS/web/hero.jpg" srcset="../assets/IBS/web/hero-m.jpg 1000w, ../assets/IBS/web/hero.jpg 1500w" sizes="100vw" width="1500" height="1000" fetchpriority="high" style="--hero-pos: 50% 40%" alt="Group of students walking and laughing in front of a university building">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Website &amp; mobile app UI/UX</p>
+      <h1 class="c-title" dir="ltr" data-chars>IBS Foundation</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>IBS Foundation</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Education &amp; research</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Wireframes, web &amp; app UI</dd></div>
+        <div><dt data-i18n="l.platforms">Platforms</dt><dd data-i18n="m.platforms">Web, iOS &amp; Android</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Reliable research, made personal.</p>
+    <div class="ux-about ibs-about" style="margin-top: clamp(56px, 9vh, 110px)">
+      <div data-fade>
+        <h2 data-i18n="about.h">About the project</h2>
+        <p data-i18n="about.p">The IBS site is a free platform for students, researchers and others in academia to find and read reliable research papers in their field. This AI-powered site simplifies and optimises literature reading by building a personalised reading library based on each person’s interests. It keeps users on top of the latest academic research, with access to the most relevant scholarly articles, scientific journals, open-access papers and peer-reviewed work.</p>
+      </div>
+      <figure data-reveal><img src="../assets/IBS/web/ill-pencil.jpg" width="753" height="1091" loading="lazy" alt="Illustration of a cheerful student holding a giant green pencil above his head"></figure>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr">+<span data-count="1500">0</span></b><span data-i18n="st1">international students</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr">+<span data-count="50">0</span></b><span data-i18n="st2">different majors</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr">+<span data-count="3000">0</span></b><span data-i18n="st3">students from every nationality in the network</span></div>
+    </div>
+  </section>
+
+  <!-- 01 WEBSITE: wireframe vs final, scrolling in a browser -->
+  <section class="ui-viewer" data-viewer data-theme-bg="#1d2a21" data-theme-fg="#eef3ee">
+    <div class="container vw-wrap">
+      <div class="vw-side">
+        <p class="eyebrow" data-i18n="ch1.eyebrow">01 — The website</p>
+        <h2 class="ch-title" data-split data-i18n="ch1.title">From grey boxes to green campus</h2>
+        <div class="vw-tabs" role="tablist" aria-label="Website versions">
+          <button class="vw-tab" type="button" role="tab" aria-selected="true" data-url="ibs-foundation.org — wireframe"><small>01</small> <span data-i18n="t1">Wireframe</span></button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="ibs-foundation.org"><small>02</small> <span data-i18n="t2">Final design</span></button>
+        </div>
+        <div class="vw-info">
+          <div class="vw-page-info is-on">
+            <h3 data-i18n="w1.h">Structure first</h3>
+            <p data-i18n="w1.p">The wireframe fixed the order of the home page: a welcoming hero, the foundation’s story, events, the latest publications, key numbers and partner networks — before any image or colour.</p>
+            <ul class="vw-facts"><li data-i18n="w1.f1">Information hierarchy</li><li data-i18n="w1.f2">Content blocks</li><li data-i18n="w1.f3">Navigation</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 data-i18n="w2.h">The final page</h3>
+            <p data-i18n="w2.p">Campus photography, a calm green palette and a classic serif give the foundation an academic, trustworthy voice, with clear paths to events, promotions, publications and donations.</p>
+            <ul class="vw-facts"><li data-i18n="w2.f1">Events &amp; seminars</li><li data-i18n="w2.f2">Publications</li><li data-i18n="w2.f3">Donations</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="browser vw-browser" data-cursor="view">
+        <div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">ibs-foundation.org — wireframe</span></div>
+        <div class="browser-view vw-view">
+          <img class="vw-shot is-on" src="../assets/IBS/web/page-wire.jpg" srcset="../assets/IBS/web/page-wire-m.jpg 600w, ../assets/IBS/web/page-wire.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="5108" alt="IBS Foundation home page wireframe, full length">
+          <img class="vw-shot" src="../assets/IBS/web/page-final.jpg" srcset="../assets/IBS/web/page-final-m.jpg 600w, ../assets/IBS/web/page-final.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="5108" loading="lazy" alt="IBS Foundation home page final design, full length">
+        </div>
+        <span class="ui-thumb" aria-hidden="true"><i></i></span>
+      </div>
+      <div aria-hidden="true">
+        <div class="vw-mini">
+          <img class="is-on" src="../assets/IBS/web/page-wire-m.jpg" alt=""><img src="../assets/IBS/web/page-final-m.jpg" alt="">
+          <span class="vw-mini-frame"></span>
+        </div>
+        <div class="vw-count" dir="ltr"><b>01</b><span>/ 02</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 ON SCREEN -->
+  <section class="c-section container" id="screens">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Welcome to IBS</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">Two hero directions for the home page: students on campus among the trees, and a portrait of the community framed by the brand’s vertical bars.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ibs-laptops ui-tilt">
+      <figure class="ui-raw" data-tilt><img src="../assets/IBS/web/laptop-1.jpg" srcset="../assets/IBS/web/laptop-1-m.jpg 900w, ../assets/IBS/web/laptop-1.jpg 1600w" sizes="(max-width: 767px) 92vw, 46vw" width="1600" height="899" loading="lazy" alt="IBS Foundation website on a laptop: students walking on campus"></figure>
+      <figure class="ui-raw" data-tilt><img src="../assets/IBS/web/laptop-2.jpg" srcset="../assets/IBS/web/laptop-2-m.jpg 900w, ../assets/IBS/web/laptop-2.jpg 1618w" sizes="(max-width: 767px) 92vw, 44vw" width="1618" height="1021" loading="lazy" alt="IBS Foundation website on a laptop: smiling students behind vertical bars"></figure>
+    </div>
+  </section>
+
+  <!-- 03 APP -->
+  <section class="c-section container" id="app">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">The app in your pocket</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">The mobile app brings the foundation’s numbers, services, events, news and publications into a simple four-tab layout, with a chat button always within reach.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ux-row" style="--n:4">
+      <figure><img src="../assets/IBS/web/phone-1.jpg" width="600" height="1143" loading="lazy" alt="App home: key numbers, services and gallery"><figcaption data-i18n="a1">Home</figcaption></figure>
+      <figure><img src="../assets/IBS/web/phone-4.jpg" width="600" height="1144" loading="lazy" alt="App home: welcome, networks and publications"><figcaption data-i18n="a2">Publications</figcaption></figure>
+      <figure><img src="../assets/IBS/web/phone-3.jpg" width="600" height="1144" loading="lazy" alt="App events: seminar, workshop and talent forum"><figcaption data-i18n="a3">Events</figcaption></figure>
+      <figure><img src="../assets/IBS/web/phone-2.jpg" width="600" height="1142" loading="lazy" alt="App news feed"><figcaption data-i18n="a4">News</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="c-section container">
+    <div class="ux-about ibs-about" style="grid-template-columns: .8fr 1.2fr">
+      <figure data-reveal><img src="../assets/IBS/web/ill-point.jpg" width="771" height="587" loading="lazy" alt="Illustration of a man pointing at a purple phone"></figure>
+      <div data-fade>
+        <h2 data-i18n="end.h">Research that finds you</h2>
+        <p data-i18n="end.p">Whether on a laptop in the library or on a phone between lectures, IBS keeps the newest seminars, papers and opportunities just one tap away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="project-management.html" data-transition data-wipe="#2f7cc4" data-wipe-label="Project Management" style="--f-next:'Kumbh Sans', sans-serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-weight:700; font-size: clamp(40px, 7.5vw, 140px)">Project Management</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/ProjectManagement/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'IBS Foundation — Website- &amp; App-UI/UX · Reem Deeb',
+      kicker: 'Website- &amp; App-UI/UX',
+      'm.industry': 'Bildung &amp; Forschung', 'm.services': 'Wireframes, Web- &amp; App-UI', 'l.platforms': 'Plattformen', 'm.platforms': 'Web, iOS &amp; Android',
+      statement: 'Verlässliche Forschung, persönlich zugeschnitten.',
+      'about.h': 'Über das Projekt',
+      'about.p': 'Die IBS-Website ist eine kostenlose Plattform, auf der Studierende, Forschende und andere Akademiker verlässliche Fachartikel ihres Gebiets finden und lesen. Die KI-gestützte Seite vereinfacht und optimiert das Lesen von Fachliteratur, indem sie eine persönliche Leseliste nach den eigenen Interessen anlegt. So bleibt man über die neueste Forschung auf dem Laufenden – mit Zugang zu den relevantesten wissenschaftlichen Artikeln, Fachzeitschriften, Open-Access-Beiträgen und begutachteten Arbeiten.',
+      st1: 'internationale Studierende', st2: 'verschiedene Studienfächer', st3: 'Studierende aller Nationalitäten im Netzwerk',
+      'ch1.eyebrow': '01 — Die Website', 'ch1.title': 'Von grauen Kästen zum grünen Campus', t1: 'Wireframe', t2: 'Finales Design',
+      'w1.h': 'Zuerst die Struktur', 'w1.p': 'Das Wireframe legte die Reihenfolge der Startseite fest: ein einladender Hero, die Geschichte der Stiftung, Veranstaltungen, neueste Publikationen, Kennzahlen und Partnernetzwerke – noch ohne Bild und Farbe.',
+      'w1.f1': 'Informationshierarchie', 'w1.f2': 'Inhaltsblöcke', 'w1.f3': 'Navigation',
+      'w2.h': 'Die finale Seite', 'w2.p': 'Campus-Fotografie, eine ruhige grüne Palette und eine klassische Serifenschrift geben der Stiftung eine akademische, vertrauenswürdige Stimme – mit klaren Wegen zu Veranstaltungen, Aktionen, Publikationen und Spenden.',
+      'w2.f1': 'Veranstaltungen &amp; Seminare', 'w2.f2': 'Publikationen', 'w2.f3': 'Spenden',
+      'ch2.title': 'Willkommen bei IBS', 'ch2.text': 'Zwei Hero-Varianten für die Startseite: Studierende auf dem Campus zwischen Bäumen und ein Porträt der Gemeinschaft, gerahmt von den vertikalen Balken der Marke.',
+      'ch3.title': 'Die App für die Hosentasche', 'ch3.text': 'Die App bringt Kennzahlen, Services, Veranstaltungen, News und Publikationen der Stiftung in ein einfaches Layout mit vier Tabs – der Chat-Button ist immer in Reichweite.',
+      a1: 'Start', a2: 'Publikationen', a3: 'Veranstaltungen', a4: 'News',
+      'end.h': 'Forschung, die dich findet', 'end.p': 'Ob am Laptop in der Bibliothek oder am Handy zwischen zwei Vorlesungen: IBS hält die neuesten Seminare, Artikel und Chancen nur einen Tipp entfernt.'
+    },
+    ar: {
+      title: 'IBS Foundation — تصميم موقع وتطبيق · ريم ديب',
+      kicker: 'تصميم واجهات الموقع والتطبيق',
+      'm.industry': 'التعليم والبحث العلمي', 'm.services': 'مخططات أولية، واجهات الويب والتطبيق', 'l.platforms': 'المنصات', 'm.platforms': 'الويب وiOS وأندرويد',
+      statement: 'بحث موثوق، مصمّم على مقاسك.',
+      'about.h': 'عن المشروع',
+      'about.p': 'موقع IBS منصة مجانية للطلاب والباحثين وكل المهتمين بالحقل الأكاديمي للعثور على أوراق بحثية موثوقة في مجالهم وقراءتها. يعتمد الموقع على الذكاء الاصطناعي لتبسيط قراءة الأبحاث وتحسينها عبر إنشاء مكتبة قراءة شخصية بحسب اهتمامات كل مستخدم، ليبقى على اطلاع بأحدث الأبحاث الأكاديمية مع الوصول إلى أهم المقالات العلمية والمجلات المحكّمة والأوراق المفتوحة.',
+      st1: 'طالب دولي', st2: 'تخصّصاً مختلفاً', st3: 'طالب من جنسيات متعددة في الشبكة',
+      'ch1.eyebrow': '01 — الموقع الإلكتروني', 'ch1.title': 'من المربعات الرمادية إلى الحرم الأخضر', t1: 'المخطط الأولي', t2: 'التصميم النهائي',
+      'w1.h': 'البنية أولاً', 'w1.p': 'ثبّت المخطط الأولي ترتيب الصفحة الرئيسية: واجهة ترحيبية، وقصة المؤسسة، والفعاليات، وأحدث المنشورات، والأرقام الرئيسية، وشبكات الشركاء — قبل أي صورة أو لون.',
+      'w1.f1': 'تسلسل المعلومات', 'w1.f2': 'كتل المحتوى', 'w1.f3': 'التنقّل',
+      'w2.h': 'الصفحة النهائية', 'w2.p': 'صور الحرم الجامعي ولوحة خضراء هادئة وخط كلاسيكي بتذييل تمنح المؤسسة صوتاً أكاديمياً جديراً بالثقة، مع مسارات واضحة إلى الفعاليات والعروض والمنشورات والتبرعات.',
+      'w2.f1': 'الفعاليات والندوات', 'w2.f2': 'المنشورات', 'w2.f3': 'التبرعات',
+      'ch2.title': 'أهلاً بك في IBS', 'ch2.text': 'اتجاهان لواجهة الصفحة الرئيسية: طلاب في الحرم الجامعي بين الأشجار، وصورة جماعية للمجتمع تؤطّرها الأشرطة العمودية للعلامة.',
+      'ch3.title': 'التطبيق في جيبك', 'ch3.text': 'يجمع التطبيق أرقام المؤسسة وخدماتها وفعالياتها وأخبارها ومنشوراتها في تصميم بسيط من أربعة تبويبات، مع زر محادثة في متناول اليد دائماً.',
+      a1: 'الرئيسية', a2: 'المنشورات', a3: 'الفعاليات', a4: 'الأخبار',
+      'end.h': 'أبحاث تصل إليك', 'end.p': 'سواء على الحاسوب في المكتبة أو على الهاتف بين المحاضرات، يبقي IBS أحدث الندوات والأوراق والفرص على بُعد نقرة واحدة.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

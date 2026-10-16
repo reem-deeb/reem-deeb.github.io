@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construction Project Management — UI/UX Case Study · Reem Deeb</title>
+<meta name="description" content="Construction Project Management app by Reem Deeb: research, sprint design, user personas, information architecture, wireframes, major screens and usability testing.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Kumbh+Sans:wght@400;500;600;700&family=Michroma&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f4f7fb; --fg: #1c2229; --muted: #8b97a6; --accent: #3a8fd8;
+    --f-brand: 'Kumbh Sans', 'IBM Plex Sans Arabic', sans-serif;
+    --f-body: 'Kumbh Sans', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: 0; --ch-transform: none;
+  }
+  .c-title { font-size: clamp(48px, 8vw, 150px); font-weight: 700; text-transform: none; white-space: normal; max-width: 12ch; line-height: .95; }
+  .c-statement, .ch-title { font-weight: 600; }
+  .ch-num { -webkit-text-stroke-color: rgba(58, 143, 216, .45); }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(14, 40, 70, .92) 0%, rgba(14, 40, 70, .5) 40%, rgba(14, 40, 70, .05) 70%, rgba(14, 40, 70, .2) 100%); }
+  .pm-yellow { color: #ffd93b; }
+  .ux-tree { --node-bg: #cfe5f8; --node-fg: #1c4f7c; }
+  #sprint .ux-sprint li i { background: #ffd93b; box-shadow: 0 0 0 6px rgba(255, 217, 59, .18); }
+  .flow-device.raw { aspect-ratio: 760 / 1367; }
+  .pm-logo { width: min(420px, 70%); height: auto; margin: 0 auto; display: block; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#2f7cc4" aria-hidden="true"><span>Project Management</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/ProjectManagement/web/hero-photo.jpg" srcset="../assets/ProjectManagement/web/hero-photo-m.jpg 1000w, ../assets/ProjectManagement/web/hero-photo.jpg 2400w" sizes="100vw" width="2400" height="1801" fetchpriority="high" style="--hero-pos: 60% 50%" alt="Person at a desk holding a phone with the Project Management app open">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Mobile app · UI/UX case study</p>
+      <h1 class="c-title" data-chars data-i18n="htitle">Construction Project Management</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd data-i18n="m.client">Construction company</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Construction &amp; project delivery</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">UX research, information architecture, UI design</dd></div>
+        <div><dt data-i18n="l.platform">Platform</dt><dd data-i18n="m.platform">iOS &amp; Android</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Every task, every hour, every person — in one place.</p>
+    <div class="c-intro-grid">
+      <div data-fade>
+        <p class="c-lead" data-i18n="lead">The app helps construction teams manage projects, speed up their work and communicate better. Managers create tasks and assign people to them; everyone who joins a project sees its tasks and records when they start and finish. At any moment you can see who is working on what — and how long each task took.</p>
+        <p class="c-lead" style="margin-top: 18px; opacity: .8" data-i18n="lead2">Built-in reports show how much time the project and each task took, and how many hours every team member worked in a chosen period.</p>
+      </div>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Creating projects &amp; tasks</span><span>01</span></li>
+        <li><span data-i18n="li2">Assigning tasks to people</span><span>02</span></li>
+        <li><span data-i18n="li3">Starting &amp; finishing work</span><span>03</span></li>
+        <li><span data-i18n="li4">Logging working hours</span><span>04</span></li>
+        <li><span data-i18n="li5">Charts &amp; time reports per member</span><span>05</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="5">0</b><span data-i18n="st1">phases of a design sprint, from empathy to testing</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="2">0</b><span data-i18n="st2">user personas: the manager and the builder</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="8">0</b><span data-i18n="st3">major screens, from projects to the timeline</span></div>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/ProjectManagement/web/hero.jpg" srcset="../assets/ProjectManagement/web/hero-m.jpg 1000w, ../assets/ProjectManagement/web/hero.jpg 2400w" sizes="88vw" width="2400" height="1662" loading="lazy" alt="Project Management app screens tilted over a blue background with the app logo">
+    </figure>
+  </section>
+
+  <!-- 01 PROBLEMS -->
+  <section class="c-section container" id="problems">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">The main problems</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">Conversations with managers and builders pointed to the same three gaps in how construction work was organised.</p>
+      <span class="ch-line"></span>
+    </header>
+    <ul class="ux-points">
+      <li data-i18n="pr1">There is no organisation among those in charge of the work, and no professional communication between the workers.</li>
+      <li data-i18n="pr2">No one knows how far the workers have got with the tasks assigned to them.</li>
+      <li data-i18n="pr3">Files needed for the work cannot be organised, and not everyone has access to them.</li>
+    </ul>
+  </section>
+
+  <!-- 02 SPRINT (page turns dark) -->
+  <section class="c-section container" id="sprint" data-theme-bg="#1c2229" data-theme-fg="#f2f5f8">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Sprint design</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">The project followed a five-step design sprint, keeping the users at the centre from the first interview to the final test.</p>
+      <span class="ch-line"></span>
+    </header>
+    <ol class="ux-sprint">
+      <li><svg viewBox="0 0 32 32"><path d="M10 28v-5c-3-1-5-4-5-8a10 10 0 0 1 20 0c0 2-1 3-2 4l1 4h-3v5"/><path d="M13 13c1-2 4-2 5 0 1-2 4-1 4 1 0 3-4 5-4 5s-5-2-5-6Z"/></svg><i></i><b data-i18n="sp1.b">Empathize</b><span data-i18n="sp1.s">Understanding the users and their problems, to build a process completely centred on their needs.</span></li>
+      <li><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 10v12M10 16h12"/></svg><i></i><b data-i18n="sp2.b">Define</b><span data-i18n="sp2.s">Defining the main outlines of the software and its purpose, and how they shape the design and architecture.</span></li>
+      <li><svg viewBox="0 0 32 32"><path d="M12 24h8M13 28h6M16 4a8 8 0 0 0-5 14c1 1 1 2 1 3h8c0-1 0-2 1-3a8 8 0 0 0-5-14Z"/></svg><i></i><b data-i18n="sp3.b">Ideate</b><span data-i18n="sp3.s">Turning the outlines into ideas that can be achieved in both design and development.</span></li>
+      <li><svg viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="2"/><path d="M5 11h22M10 16h6M10 20h12M19 15h3v3h-3z"/></svg><i></i><b data-i18n="sp4.b">Prototype</b><span data-i18n="sp4.s">The first working prototype, built in high fidelity and ready for a user demo.</span></li>
+      <li><svg viewBox="0 0 32 32"><path d="M6 12 11 5h10l5 7-10 15Z"/><path d="M6 12h20M13 12l3 15 3-15M11 5l2 7M21 5l-2 7"/></svg><i></i><b data-i18n="sp5.b">Test</b><span data-i18n="sp5.s">The prototype goes to user testing, so it can be refined before it is sent to development.</span></li>
+    </ol>
+  </section>
+
+  <!-- 03 USER NEEDS -->
+  <section class="c-section container" id="needs">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">User needs</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Turned around, the problems became three clear needs for the app to answer.</p>
+      <span class="ch-line"></span>
+    </header>
+    <ul class="ux-points">
+      <li data-i18n="nd1">Organise projects and tasks for everyone working in the company.</li>
+      <li data-i18n="nd2">Let managers upload every file a project needs, and decide who can access it.</li>
+      <li data-i18n="nd3">Add as many projects and tasks as managers want — and an unlimited number of employees, each with their position.</li>
+    </ul>
+  </section>
+
+  <!-- 04 PERSONAS -->
+  <section class="c-section container" id="personas">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">User personas</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">Two people represent the two sides of every construction project: the one who plans the work and the one who builds it.</p>
+      <span class="ch-line"></span>
+    </header>
+    <article class="ux-persona">
+      <figure>
+        <img src="../assets/ProjectManagement/web/persona-1.jpg" width="690" height="816" loading="lazy" alt="Portrait of a man with glasses and a beard">
+        <dl><h3 dir="ltr">Esther Howard</h3>
+          <div><dt data-i18n="pa.age">Age</dt><dd>35</dd></div>
+          <div><dt data-i18n="pa.status">Status</dt><dd data-i18n="p1.status">Married</dd></div>
+          <div><dt data-i18n="pa.pos">Position</dt><dd data-i18n="p1.pos">Manager</dd></div>
+        </dl>
+      </figure>
+      <div class="ux-persona-card">
+        <h4 data-i18n="pa.bio">Bio</h4>
+        <p data-i18n="p1.bio">A project manager at the company for five years, with a Master’s degree in Business Administration from the United States.</p>
+        <h4 data-i18n="pa.goals">Goals</h4>
+        <p data-i18n="p1.g1">Organise projects, explain them professionally and assign them to workers.</p>
+        <p data-i18n="p1.g2">Add employees easily, with their private and important information.</p>
+        <p data-i18n="p1.g3">Know how quickly each employee completes tasks — and where and why delays happen.</p>
+        <h4 data-i18n="pa.problem">Problem statement</h4>
+        <p data-i18n="p1.pb">He cannot organise workers and tasks well, cannot see what they have achieved, and when there is a delay he does not know the reason. His primary goal is effective organisation.</p>
+      </div>
+    </article>
+    <article class="ux-persona">
+      <figure>
+        <img src="../assets/ProjectManagement/web/persona-2.jpg" width="690" height="816" loading="lazy" alt="Portrait of a smiling man with blue glasses in a workshop">
+        <dl><h3 dir="ltr">Jenny Wilson</h3>
+          <div><dt data-i18n="pa.age">Age</dt><dd>25</dd></div>
+          <div><dt data-i18n="pa.status">Status</dt><dd data-i18n="p2.status">Single</dd></div>
+          <div><dt data-i18n="pa.pos">Position</dt><dd data-i18n="p2.pos">Builder</dd></div>
+        </dl>
+      </figure>
+      <div class="ux-persona-card">
+        <h4 data-i18n="pa.bio">Bio</h4>
+        <p data-i18n="p2.bio">A construction worker who has been with the company for more than two years. He works in the construction workshops and leads many other workers.</p>
+        <h4 data-i18n="pa.goals">Goals</h4>
+        <p data-i18n="p2.g1">Know the tasks assigned to him without having to ask the manager.</p>
+        <p data-i18n="p2.g2">Access every required file easily, in the same place as the tasks.</p>
+        <h4 data-i18n="pa.problem">Problem statement</h4>
+        <p data-i18n="p2.pb">When a worker is delayed it causes chaos, because no one knows where the delay comes from — and he has to go to the manager to find out the latest developments.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 05 INFORMATION ARCHITECTURE -->
+  <section class="c-section container" id="architecture">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">05</span>
+      <h2 class="ch-title" data-split data-i18n="ch5.title">Information architecture</h2>
+      <p class="ch-text" data-fade data-i18n="ch5.text">Everything branches from one homepage: five main areas, with project details opening into tasks, logs and contacts.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ux-tree-wrap">
+      <div class="ux-tree" dir="ltr">
+        <ul><li><span class="ux-node is-root" data-i18n="ia.login">Login / Sign up</span>
+          <ul><li><span class="ux-node is-root" data-i18n="ia.home">Homepage</span>
+            <ul>
+              <li><span class="ux-node" data-i18n="ia.add">Add project</span></li>
+              <li><span class="ux-node" data-i18n="ia.tree">Project tree</span><ul><li><span class="ux-node" data-i18n="ia.status">Project status</span></li></ul></li>
+              <li><span class="ux-node" data-i18n="ia.dash">Dashboard</span><ul><li><span class="ux-node" data-i18n="ia.miles">Project milestones</span></li></ul></li>
+              <li><span class="ux-node" data-i18n="ia.sched">Schedule</span><ul><li><span class="ux-node" data-i18n="ia.time">Timeline</span></li></ul></li>
+              <li><span class="ux-node" data-i18n="ia.details">Project details</span>
+                <ul><li><span class="ux-node" data-i18n="ia.tasks">Tasks</span>
+                  <ul><li><span class="ux-node" data-i18n="ia.logs">Logs</span>
+                    <ul><li><span class="ux-node" data-i18n="ia.addtask">Add task</span>
+                      <ul><li><span class="ux-node" data-i18n="ia.contacts">Contacts</span>
+                        <ul><li><span class="ux-node" data-i18n="ia.cadd">Add</span></li><li><span class="ux-node" data-i18n="ia.cdel">Delete</span></li></ul>
+                      </li></ul>
+                    </li></ul>
+                  </li></ul>
+                </li></ul>
+              </li>
+            </ul>
+          </li></ul>
+        </li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 WIREFRAMES -->
+  <section class="c-section container" id="wireframes">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">06</span>
+      <h2 class="ch-title" data-split data-i18n="ch6.title">Wireframes</h2>
+      <p class="ch-text" data-fade data-i18n="ch6.text">Low-fidelity layouts fixed the structure of every key screen before any colour or detail was added.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ux-row" style="--n:4">
+      <figure><img src="../assets/ProjectManagement/web/wire-2.png" width="700" height="1256" loading="lazy" alt="Wireframe: projects list"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-1.png" width="700" height="1583" loading="lazy" alt="Wireframe: project details"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-3.png" width="700" height="1357" loading="lazy" alt="Wireframe: followers and tasks"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-4.png" width="700" height="1215" loading="lazy" alt="Wireframe: dashboard"></figure>
+    </div>
+    <div class="ux-row" style="--n:4">
+      <figure><img src="../assets/ProjectManagement/web/wire-6.png" width="700" height="1170" loading="lazy" alt="Wireframe: contacts"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-5.png" width="700" height="1144" loading="lazy" alt="Wireframe: add sub-task form"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-7.png" width="700" height="1199" loading="lazy" alt="Wireframe: schedule"></figure>
+      <figure><img src="../assets/ProjectManagement/web/wire-8.png" width="700" height="1196" loading="lazy" alt="Wireframe: timeline"></figure>
+    </div>
+  </section>
+
+  <!-- 07 MAJOR SCREENS: pinned flow -->
+  <section class="ui-flow" data-flow id="screens">
+    <div class="container flow-wrap">
+      <div>
+        <p class="eyebrow" data-i18n="ch7.eyebrow">07 — Major screens</p>
+        <h2 class="ch-title" data-split data-i18n="ch7.title" style="margin-bottom: clamp(24px, 4vh, 44px)">From the project list to the timeline</h2>
+        <div class="flow-steps">
+          <span class="flow-rail" aria-hidden="true"><i></i></span>
+          <ol class="flow-list">
+            <li class="flow-step is-on"><small data-i18n="f.k1">Screen 01</small><h3 data-i18n="f1.h">Projects</h3><p data-i18n="f1.p">Every project as a card: client, dates, task progress and status, with overdue days flagged in red.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-projects.png" width="760" height="1367" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k2">Screen 02</small><h3 data-i18n="f2.h">Project details</h3><p data-i18n="f2.p">Owner, type, buildings, status and dates — plus project files, NOC documents and the people following it.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-project.png" width="760" height="1720" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k3">Screen 03</small><h3 data-i18n="f3.h">Tasks &amp; logs</h3><p data-i18n="f3.p">A live activity log shows who added which task and when, so no one has to ask the manager for updates.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-logs.png" width="760" height="1472" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k4">Screen 04</small><h3 data-i18n="f4.h">Dashboard</h3><p data-i18n="f4.p">Time elapsed versus remaining, project duration and key dates, at a glance.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-dashboard.png" width="760" height="1352" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k5">Screen 05</small><h3 data-i18n="f5.h">Contacts</h3><p data-i18n="f5.p">The whole team with their roles, ready to add to a project or a task.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-contacts.png" width="760" height="1270" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k6">Screen 06</small><h3 data-i18n="f6.h">Add a sub-task</h3><p data-i18n="f6.p">A short form: owner, status, role, dates and a colour label, with a switch for major tasks.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-subtask.png" width="760" height="1243" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k7">Screen 07</small><h3 data-i18n="f7.h">Schedule</h3><p data-i18n="f7.p">Tasks laid out by month and day, each with its progress and the people on it.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-schedule.png" width="760" height="1300" loading="lazy" alt=""></div></li>
+            <li class="flow-step"><small data-i18n="f.k8">Screen 08</small><h3 data-i18n="f8.h">Timeline</h3><p data-i18n="f8.p">A weekly view that shows how work overlaps across the team, day by day.</p>
+              <div class="flow-inline raw"><img src="../assets/ProjectManagement/web/screen-timeline.png" width="760" height="1298" loading="lazy" alt=""></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="flow-device raw" aria-hidden="true">
+        <span class="flow-glow"></span>
+        <img class="flow-shot is-on" src="../assets/ProjectManagement/web/screen-projects.png" width="760" height="1367" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-project.png" width="760" height="1720" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-logs.png" width="760" height="1472" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-dashboard.png" width="760" height="1352" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-contacts.png" width="760" height="1270" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-subtask.png" width="760" height="1243" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-schedule.png" width="760" height="1300" alt="">
+        <img class="flow-shot" src="../assets/ProjectManagement/web/screen-timeline.png" width="760" height="1298" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 USABILITY TESTING -->
+  <section class="c-section container" id="testing">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">08</span>
+      <h2 class="ch-title" data-split data-i18n="ch8.title">Usability testing</h2>
+      <p class="ch-text" data-fade data-i18n="ch8.text">I tested the prototype with users from the target group. They used the app with ease and liked the design, and their feedback shaped the next round of improvements.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="ux-test">
+      <div><h3 data-i18n="t.a">Requested features</h3>
+        <ul><li data-i18n="t.a1">A calculator inside the app, as an additional feature.</li><li data-i18n="t.a2">A conversation feature so workers can talk to each other.</li></ul></div>
+      <div><h3 data-i18n="t.b">Pain points &amp; feedback</h3>
+        <ul><li data-i18n="t.b1">The schedule is good, but needs more detail.</li><li data-i18n="t.b2">Users were happy with the interaction.</li><li data-i18n="t.b3">Users also liked the clean design.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="c-quote" style="background:#2f7cc4">
+    <img src="../assets/ProjectManagement/web/hero-photo.jpg" srcset="../assets/ProjectManagement/web/hero-photo-m.jpg 1000w, ../assets/ProjectManagement/web/hero-photo.jpg 2400w" sizes="100vw" width="2400" height="1801" loading="lazy" alt="" style="opacity:.35">
+    <p data-split data-i18n="quote">Less chasing. More building.</p>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="asae.html" data-transition data-wipe="#6e1a2c" data-wipe-label="ASAE" style="--f-next:'Playfair Display', serif">
+      <span class="next-title" dir="ltr" style="font-weight:600">ASAE</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/ASAE/web/hero-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Bauprojektmanagement — UI/UX-Fallstudie · Reem Deeb',
+      kicker: 'Mobile App · UI/UX-Fallstudie', htitle: 'Bauprojekt-Management',
+      'm.client': 'Bauunternehmen', 'm.industry': 'Bau &amp; Projektabwicklung', 'm.services': 'UX-Research, Informationsarchitektur, UI-Design', 'l.platform': 'Plattform', 'm.platform': 'iOS &amp; Android',
+      statement: 'Jede Aufgabe, jede Stunde, jede Person – an einem Ort.',
+      lead: 'Die App hilft Bauteams, Projekte zu steuern, schneller zu arbeiten und besser zu kommunizieren. Manager erstellen Aufgaben und weisen Personen zu; alle Projektbeteiligten sehen die Aufgaben und erfassen Beginn und Ende. Jederzeit ist sichtbar, wer woran arbeitet – und wie lange jede Aufgabe gedauert hat.',
+      lead2: 'Integrierte Berichte zeigen, wie viel Zeit das Projekt und jede Aufgabe beansprucht haben und wie viele Stunden jedes Teammitglied im gewählten Zeitraum gearbeitet hat.',
+      li1: 'Projekte &amp; Aufgaben anlegen', li2: 'Aufgaben Personen zuweisen', li3: 'Arbeit starten &amp; abschließen', li4: 'Arbeitsstunden erfassen', li5: 'Diagramme &amp; Zeitberichte pro Mitglied',
+      st1: 'Phasen eines Design-Sprints, von Empathie bis Test', st2: 'Personas: der Manager und der Bauarbeiter', st3: 'Haupt-Screens, von Projekten bis zur Zeitleiste',
+      'ch1.title': 'Die Hauptprobleme', 'ch1.text': 'Gespräche mit Managern und Bauarbeitern zeigten immer wieder dieselben drei Lücken in der Organisation der Bauarbeit.',
+      pr1: 'Unter den Verantwortlichen gibt es keine Organisation und zwischen den Arbeitern keine professionelle Kommunikation.',
+      pr2: 'Niemand weiß, wie weit die Arbeiter mit den ihnen zugewiesenen Aufgaben sind.',
+      pr3: 'Benötigte Dateien lassen sich nicht ordnen, und nicht alle haben Zugriff darauf.',
+      'ch2.title': 'Design-Sprint', 'ch2.text': 'Das Projekt folgte einem fünfstufigen Design-Sprint, bei dem die Nutzer vom ersten Interview bis zum letzten Test im Mittelpunkt standen.',
+      'sp1.b': 'Verstehen', 'sp1.s': 'Die Nutzer und ihre Probleme verstehen, um einen Prozess zu entwickeln, der ganz auf ihre Bedürfnisse ausgerichtet ist.',
+      'sp2.b': 'Definieren', 'sp2.s': 'Die Grundzüge der Software und ihren Zweck festlegen – und wie sie Design und Architektur prägen.',
+      'sp3.b': 'Ideen finden', 'sp3.s': 'Die Grundzüge in Ideen übersetzen, die sich in Design und Entwicklung umsetzen lassen.',
+      'sp4.b': 'Prototyp', 'sp4.s': 'Der erste funktionsfähige Prototyp, in High Fidelity und bereit für eine Nutzer-Demo.',
+      'sp5.b': 'Testen', 'sp5.s': 'Der Prototyp geht in den Nutzertest, damit er vor der Entwicklung verfeinert werden kann.',
+      'ch3.title': 'Nutzerbedürfnisse', 'ch3.text': 'Umgekehrt betrachtet wurden die Probleme zu drei klaren Bedürfnissen, die die App erfüllen muss.',
+      nd1: 'Projekte und Aufgaben für alle Mitarbeitenden des Unternehmens organisieren.',
+      nd2: 'Managern ermöglichen, alle Projektdateien hochzuladen und festzulegen, wer darauf zugreifen darf.',
+      nd3: 'Beliebig viele Projekte und Aufgaben anlegen – und unbegrenzt viele Mitarbeitende, jeweils mit ihrer Position.',
+      'ch4.title': 'Personas', 'ch4.text': 'Zwei Menschen stehen für die beiden Seiten jedes Bauprojekts: die Person, die die Arbeit plant, und die Person, die baut.',
+      'pa.age': 'Alter', 'pa.status': 'Familienstand', 'pa.pos': 'Position', 'pa.bio': 'Profil', 'pa.goals': 'Ziele', 'pa.problem': 'Problem',
+      'p1.status': 'Verheiratet', 'p1.pos': 'Manager', 'p1.bio': 'Seit fünf Jahren Projektmanager im Unternehmen, mit einem Master in Betriebswirtschaft aus den USA.',
+      'p1.g1': 'Projekte organisieren, professionell erklären und den Arbeitern zuweisen.', 'p1.g2': 'Mitarbeitende einfach anlegen, mit ihren persönlichen und wichtigen Informationen.', 'p1.g3': 'Wissen, wie schnell jeder Aufgaben erledigt – und wo und warum Verzögerungen entstehen.',
+      'p1.pb': 'Er kann Arbeiter und Aufgaben nicht gut organisieren, sieht nicht, was erreicht wurde, und kennt bei Verzögerungen den Grund nicht. Sein wichtigstes Ziel ist eine wirksame Organisation.',
+      'p2.status': 'Ledig', 'p2.pos': 'Bauarbeiter', 'p2.bio': 'Ein Bauarbeiter, der seit mehr als zwei Jahren im Unternehmen ist. Er arbeitet in den Werkstätten und leitet viele andere Arbeiter.',
+      'p2.g1': 'Seine Aufgaben kennen, ohne beim Manager nachfragen zu müssen.', 'p2.g2': 'Alle benötigten Dateien einfach finden – am selben Ort wie die Aufgaben.',
+      'p2.pb': 'Verzögert sich ein Arbeiter, entsteht Chaos, weil niemand weiß, woher die Verzögerung kommt – und er muss zum Manager gehen, um den neuesten Stand zu erfahren.',
+      'ch5.title': 'Informationsarchitektur', 'ch5.text': 'Alles geht von einer Startseite aus: fünf Hauptbereiche, wobei sich die Projektdetails in Aufgaben, Logs und Kontakte verzweigen.',
+      'ia.login': 'Login / Registrierung', 'ia.home': 'Startseite', 'ia.add': 'Projekt anlegen', 'ia.tree': 'Projektbaum', 'ia.status': 'Projektstatus', 'ia.dash': 'Dashboard', 'ia.miles': 'Meilensteine',
+      'ia.sched': 'Zeitplan', 'ia.time': 'Zeitleiste', 'ia.details': 'Projektdetails', 'ia.tasks': 'Aufgaben', 'ia.logs': 'Logs', 'ia.addtask': 'Aufgabe anlegen', 'ia.contacts': 'Kontakte', 'ia.cadd': 'Hinzufügen', 'ia.cdel': 'Löschen',
+      'ch6.title': 'Wireframes', 'ch6.text': 'Low-Fidelity-Layouts legten die Struktur jedes wichtigen Screens fest, bevor Farbe oder Details hinzukamen.',
+      'ch7.eyebrow': '07 — Haupt-Screens', 'ch7.title': 'Von der Projektliste zur Zeitleiste',
+      'f.k1': 'Screen 01', 'f.k2': 'Screen 02', 'f.k3': 'Screen 03', 'f.k4': 'Screen 04', 'f.k5': 'Screen 05', 'f.k6': 'Screen 06', 'f.k7': 'Screen 07', 'f.k8': 'Screen 08',
+      'f1.h': 'Projekte', 'f1.p': 'Jedes Projekt als Karte: Kunde, Termine, Aufgabenfortschritt und Status – überfällige Tage rot markiert.',
+      'f2.h': 'Projektdetails', 'f2.p': 'Eigentümer, Typ, Gebäude, Status und Termine – dazu Projektdateien, NOC-Dokumente und alle, die dem Projekt folgen.',
+      'f3.h': 'Aufgaben &amp; Logs', 'f3.p': 'Ein Live-Protokoll zeigt, wer welche Aufgabe wann angelegt hat – niemand muss mehr beim Manager nachfragen.',
+      'f4.h': 'Dashboard', 'f4.p': 'Verstrichene und verbleibende Zeit, Projektdauer und wichtige Termine auf einen Blick.',
+      'f5.h': 'Kontakte', 'f5.p': 'Das ganze Team mit seinen Rollen, bereit für Projekte und Aufgaben.',
+      'f6.h': 'Unteraufgabe anlegen', 'f6.p': 'Ein kurzes Formular: Verantwortliche, Status, Rolle, Termine und ein Farblabel, mit Schalter für Hauptaufgaben.',
+      'f7.h': 'Zeitplan', 'f7.p': 'Aufgaben nach Monat und Tag, jeweils mit Fortschritt und beteiligten Personen.',
+      'f8.h': 'Zeitleiste', 'f8.p': 'Eine Wochenansicht, die zeigt, wie sich die Arbeit im Team Tag für Tag überschneidet.',
+      'ch8.title': 'Usability-Test', 'ch8.text': 'Ich habe den Prototyp mit Nutzern aus der Zielgruppe getestet. Sie kamen mühelos mit der App zurecht und mochten das Design; ihr Feedback prägte die nächste Verbesserungsrunde.',
+      't.a': 'Gewünschte Funktionen', 't.a1': 'Ein Taschenrechner in der App als Zusatzfunktion.', 't.a2': 'Eine Chatfunktion, damit Arbeiter miteinander sprechen können.',
+      't.b': 'Schwachstellen &amp; Feedback', 't.b1': 'Der Zeitplan ist gut, braucht aber mehr Details.', 't.b2': 'Die Nutzer waren mit der Interaktion zufrieden.', 't.b3': 'Auch das klare Design kam gut an.',
+      quote: 'Weniger hinterherlaufen. Mehr bauen.'
+    },
+    ar: {
+      title: 'إدارة مشاريع البناء — دراسة حالة UI/UX · ريم ديب',
+      kicker: 'تطبيق جوال · دراسة حالة UI/UX', htitle: 'إدارة مشاريع البناء',
+      'm.client': 'شركة مقاولات', 'm.industry': 'البناء وتنفيذ المشاريع', 'm.services': 'بحث تجربة المستخدم، هيكلة المعلومات، تصميم الواجهات', 'l.platform': 'المنصة', 'm.platform': 'iOS وأندرويد',
+      statement: 'كل مهمة، وكل ساعة، وكل شخص — في مكان واحد.',
+      lead: 'يساعد التطبيق فرق البناء على إدارة المشاريع وتسريع العمل وتحسين التواصل. ينشئ المديرون المهام ويكلّفون الأشخاص بها، ويرى كل من ينضم إلى المشروع مهامه ويسجّل وقت البدء والانتهاء. وفي أي لحظة يمكن معرفة من يعمل على ماذا — وكم استغرقت كل مهمة.',
+      lead2: 'تُظهر التقارير المدمجة الوقت الذي استغرقه المشروع وكل مهمة، وعدد الساعات التي عملها كل عضو في الفريق خلال فترة محددة.',
+      li1: 'إنشاء المشاريع والمهام', li2: 'تكليف الأشخاص بالمهام', li3: 'بدء العمل وإنهاؤه', li4: 'تسجيل ساعات العمل', li5: 'رسوم بيانية وتقارير وقت لكل عضو',
+      st1: 'مراحل للتصميم السريع، من التعاطف إلى الاختبار', st2: 'شخصيتان للمستخدم: المدير والعامل', st3: 'شاشات رئيسية، من المشاريع إلى الخط الزمني',
+      'ch1.title': 'المشكلات الرئيسية', 'ch1.text': 'كشفت المحادثات مع المديرين والعمال عن الفجوات الثلاث نفسها في تنظيم أعمال البناء.',
+      pr1: 'لا يوجد تنظيم بين المسؤولين عن العمل، ولا تواصل احترافي بين العمال.',
+      pr2: 'لا أحد يعرف إلى أين وصل العمال في المهام الموكلة إليهم.',
+      pr3: 'يتعذّر تنظيم الملفات اللازمة للعمل، ولا يملك الجميع صلاحية الوصول إليها.',
+      'ch2.title': 'التصميم السريع', 'ch2.text': 'اتّبع المشروع خمس مراحل للتصميم السريع، مع إبقاء المستخدمين في المركز من أول مقابلة حتى آخر اختبار.',
+      'sp1.b': 'التعاطف', 'sp1.s': 'فهم المستخدمين ومشكلاتهم، لبناء عملية تتمحور بالكامل حول احتياجاتهم.',
+      'sp2.b': 'التحديد', 'sp2.s': 'تحديد الخطوط العريضة للبرنامج والغاية منه، وكيف تنعكس على التصميم والبنية.',
+      'sp3.b': 'توليد الأفكار', 'sp3.s': 'تحويل الخطوط العريضة إلى أفكار قابلة للتنفيذ في التصميم والتطوير.',
+      'sp4.b': 'النموذج الأولي', 'sp4.s': 'أول نموذج أولي يعمل، بدقة عالية وجاهز للعرض على المستخدمين.',
+      'sp5.b': 'الاختبار', 'sp5.s': 'يُرسل النموذج إلى اختبار المستخدمين ليُحسَّن قبل إرساله إلى التطوير.',
+      'ch3.title': 'احتياجات المستخدم', 'ch3.text': 'عند قلبها، تحوّلت المشكلات إلى ثلاث احتياجات واضحة على التطبيق أن يلبّيها.',
+      nd1: 'تنظيم المشاريع والمهام لكل العاملين في الشركة.',
+      nd2: 'تمكين المديرين من رفع كل ملفات المشروع وتحديد من يمكنه الوصول إليها.',
+      nd3: 'إضافة ما يشاء المديرون من مشاريع ومهام — وعدد غير محدود من الموظفين مع مناصبهم.',
+      'ch4.title': 'شخصيات المستخدمين', 'ch4.text': 'شخصان يمثّلان طرفي كل مشروع بناء: من يخطّط للعمل ومن ينفّذه.',
+      'pa.age': 'العمر', 'pa.status': 'الحالة', 'pa.pos': 'المنصب', 'pa.bio': 'نبذة', 'pa.goals': 'الأهداف', 'pa.problem': 'المشكلة',
+      'p1.status': 'متزوج', 'p1.pos': 'مدير', 'p1.bio': 'مدير مشاريع في الشركة منذ خمس سنوات، يحمل ماجستير في إدارة الأعمال من الولايات المتحدة.',
+      'p1.g1': 'تنظيم المشاريع وشرحها باحترافية وتكليف العمال بها.', 'p1.g2': 'إضافة الموظفين بسهولة مع معلوماتهم الخاصة والمهمة.', 'p1.g3': 'معرفة سرعة إنجاز كل موظف لمهامه — وأين ولماذا تحدث التأخيرات.',
+      'p1.pb': 'لا يستطيع تنظيم العمال والمهام جيداً، ولا يعرف ما أنجزوه، وعند حدوث تأخير لا يعرف سببه. هدفه الأول هو التنظيم الفعّال.',
+      'p2.status': 'أعزب', 'p2.pos': 'عامل بناء', 'p2.bio': 'عامل بناء في الشركة منذ أكثر من عامين، يعمل في ورش البناء ويقود عدداً كبيراً من العمال.',
+      'p2.g1': 'معرفة المهام الموكلة إليه دون الرجوع إلى المدير.', 'p2.g2': 'الوصول إلى كل الملفات المطلوبة بسهولة ومن المكان نفسه الذي توجد فيه المهام.',
+      'p2.pb': 'عندما يتأخر أحد العمال تحدث فوضى كبيرة، لأن أحداً لا يعرف مصدر التأخير — فيضطر للذهاب إلى المدير لمعرفة آخر المستجدات.',
+      'ch5.title': 'هيكلة المعلومات', 'ch5.text': 'يتفرّع كل شيء من صفحة رئيسية واحدة: خمسة أقسام رئيسية، وتنفتح تفاصيل المشروع على المهام والسجلات وجهات الاتصال.',
+      'ia.login': 'تسجيل الدخول / إنشاء حساب', 'ia.home': 'الصفحة الرئيسية', 'ia.add': 'إضافة مشروع', 'ia.tree': 'شجرة المشاريع', 'ia.status': 'حالة المشاريع', 'ia.dash': 'لوحة التحكم', 'ia.miles': 'مراحل المشروع',
+      'ia.sched': 'الجدول', 'ia.time': 'الخط الزمني', 'ia.details': 'تفاصيل المشروع', 'ia.tasks': 'المهام', 'ia.logs': 'السجلات', 'ia.addtask': 'إضافة مهمة', 'ia.contacts': 'جهات الاتصال', 'ia.cadd': 'إضافة', 'ia.cdel': 'حذف',
+      'ch6.title': 'المخططات الأولية', 'ch6.text': 'ثبّتت المخططات منخفضة الدقة بنية كل شاشة رئيسية قبل إضافة أي لون أو تفاصيل.',
+      'ch7.eyebrow': '07 — الشاشات الرئيسية', 'ch7.title': 'من قائمة المشاريع إلى الخط الزمني',
+      'f.k1': 'الشاشة 01', 'f.k2': 'الشاشة 02', 'f.k3': 'الشاشة 03', 'f.k4': 'الشاشة 04', 'f.k5': 'الشاشة 05', 'f.k6': 'الشاشة 06', 'f.k7': 'الشاشة 07', 'f.k8': 'الشاشة 08',
+      'f1.h': 'المشاريع', 'f1.p': 'كل مشروع في بطاقة: العميل والتواريخ وتقدّم المهام والحالة، مع إبراز أيام التأخير بالأحمر.',
+      'f2.h': 'تفاصيل المشروع', 'f2.p': 'المالك والنوع والمباني والحالة والتواريخ — إضافة إلى ملفات المشروع ووثائق عدم الممانعة ومتابعيه.',
+      'f3.h': 'المهام والسجلات', 'f3.p': 'سجل نشاط مباشر يوضّح من أضاف أي مهمة ومتى، فلا حاجة لسؤال المدير عن المستجدات.',
+      'f4.h': 'لوحة التحكم', 'f4.p': 'الوقت المنقضي مقابل المتبقي، ومدة المشروع وتواريخه المهمة بلمحة واحدة.',
+      'f5.h': 'جهات الاتصال', 'f5.p': 'الفريق كاملاً مع أدواره، جاهزاً للإضافة إلى مشروع أو مهمة.',
+      'f6.h': 'إضافة مهمة فرعية', 'f6.p': 'نموذج قصير: المسؤول والحالة والدور والتواريخ ولون تصنيفي، مع مفتاح للمهام الرئيسية.',
+      'f7.h': 'الجدول', 'f7.p': 'المهام موزّعة حسب الشهر واليوم، لكل منها تقدّمها والأشخاص العاملون عليها.',
+      'f8.h': 'الخط الزمني', 'f8.p': 'عرض أسبوعي يبيّن كيف يتداخل العمل بين أفراد الفريق يوماً بيوم.',
+      'ch8.title': 'اختبار قابلية الاستخدام', 'ch8.text': 'اختبرتُ النموذج الأولي مع مستخدمين من الفئة المستهدفة. استخدموا التطبيق بسهولة وأحبّوا التصميم، وشكّلت ملاحظاتهم الجولة التالية من التحسينات.',
+      't.a': 'ميزات مطلوبة', 't.a1': 'آلة حاسبة داخل التطبيق كميزة إضافية.', 't.a2': 'ميزة محادثة ليتواصل العمال فيما بينهم.',
+      't.b': 'نقاط الضعف والملاحظات', 't.b1': 'ميزة الجدول جيدة لكنها تحتاج إلى مزيد من التفاصيل.', 't.b2': 'كان المستخدمون راضين عن التفاعل.', 't.b3': 'كما أعجبهم التصميم النظيف.',
+      quote: 'ملاحقة أقل. بناء أكثر.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

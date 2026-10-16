@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Gate — Website UI/UX · Reem Deeb</title>
+<meta name="description" content="Beauty Gate by Reem Deeb: a booking website for beauty salons and spas — home page, salon details, a three-step booking flow and sign-in.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f7f3ee; --fg: #2b2420; --muted: #a8968a; --accent: #9b7f68;
+    --f-brand: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .01em; --ch-transform: none;
+  }
+  .c-title { text-transform: none; font-weight: 600; font-size: clamp(64px, 12vw, 230px); }
+  .ch-title, .c-statement { font-weight: 600; }
+  .c-statement em { font-style: italic; color: var(--accent); }
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(40, 28, 20, .88) 0%, rgba(40, 28, 20, .42) 42%, rgba(40, 28, 20, .08) 72%, rgba(40, 28, 20, .3) 100%); }
+  .h-slide .c-fig { background: #fff; }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#9b7f68" aria-hidden="true"><span>Beauty Gate</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/BeautyGate/web/hero.jpg" srcset="../assets/BeautyGate/web/hero-m.jpg 1000w, ../assets/BeautyGate/web/hero.jpg 1500w" sizes="100vw" width="1500" height="1001" fetchpriority="high" style="--hero-pos: 55% 45%" alt="Woman relaxing during a head massage in a candle-lit spa">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Website UI/UX · Booking platform</p>
+      <h1 class="c-title" dir="ltr" data-chars>Beauty Gate</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd>Beauty Gate</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Beauty, spa &amp; wellness</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Web UI/UX, booking flow</dd></div>
+        <div><dt data-i18n="l.users">Users</dt><dd data-i18n="m.users">Customers &amp; salon owners</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">Beauty &amp; wellness, booked in a few calm steps.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">Beauty Gate brings beauty salons and spas together on one website. Visitors discover recommended and trending places, compare services and prices, read real reviews and meet the specialists — then book a treatment with the professional and time slot that suit them. Salon owners get their own business account to present their space and services.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Home page</span><span>01</span></li>
+        <li><span data-i18n="li2">Salon details</span><span>02</span></li>
+        <li><span data-i18n="li3">Booking flow</span><span>03</span></li>
+        <li><span data-i18n="li4">Sign in</span><span>04</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:3">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="3">0</b><span data-i18n="st1">booking steps: service, professional, time</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="6">0</b><span data-i18n="st2">treatment categories, from hair and make-up to massage</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="2">0</b><span data-i18n="st3">kinds of account: customers and businesses</span></div>
+    </div>
+    <figure class="c-fig c-full" data-reveal data-cursor="view" style="margin-top: clamp(56px, 9vh, 110px)">
+      <img src="../assets/BeautyGate/web/ipad.jpg" srcset="../assets/BeautyGate/web/ipad-m.jpg 1000w, ../assets/BeautyGate/web/ipad.jpg 2000w" sizes="88vw" width="2000" height="1334" loading="lazy" alt="Beauty Gate home page on a tablet resting on a leather folder among flowers">
+    </figure>
+  </section>
+
+  <!-- 01 THE WEBSITE: two full pages scrolling in a browser -->
+  <section class="ui-viewer" data-viewer data-theme-bg="#2b2420" data-theme-fg="#f5eee6">
+    <div class="container vw-wrap">
+      <div class="vw-side">
+        <p class="eyebrow" data-i18n="ch1.eyebrow">01 — The website</p>
+        <h2 class="ch-title" data-split data-i18n="ch1.title">Scroll through the pages</h2>
+        <div class="vw-tabs" role="tablist" aria-label="Pages">
+          <button class="vw-tab" type="button" role="tab" aria-selected="true" data-url="beautygate.com"><small>01</small> <span data-i18n="t1">Home</span></button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="beautygate.com/salon/deluxe-room"><small>02</small> <span data-i18n="t2">Salon details</span></button>
+        </div>
+        <div class="vw-info">
+          <div class="vw-page-info is-on">
+            <h3 data-i18n="w1.h">Beauty &amp; wellness, redefined</h3>
+            <p data-i18n="w1.p">A soft, editorial home page: a search-led hero, recommended and trending salons, customer stories and a download banner for the app — all in warm taupe and cream.</p>
+            <ul class="vw-facts"><li data-i18n="w1.f1">Search &amp; discover</li><li data-i18n="w1.f2">Trending salons</li><li data-i18n="w1.f3">Reviews</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 data-i18n="w2.h">Everything about one salon</h3>
+            <p data-i18n="w2.p">Photos, location and rating up top, then every service with its price and duration, the experienced specialists and the reviews — with one clear button to book.</p>
+            <ul class="vw-facts"><li data-i18n="w2.f1">Services &amp; prices</li><li data-i18n="w2.f2">Specialists</li><li data-i18n="w2.f3">Book now</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="browser vw-browser" data-cursor="view">
+        <div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">beautygate.com</span></div>
+        <div class="browser-view vw-view">
+          <img class="vw-shot is-on" src="../assets/BeautyGate/web/page-home.jpg" srcset="../assets/BeautyGate/web/page-home-m.jpg 600w, ../assets/BeautyGate/web/page-home.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="4354" alt="Beauty Gate home page, full length">
+          <img class="vw-shot" src="../assets/BeautyGate/web/page-details.jpg" srcset="../assets/BeautyGate/web/page-details-m.jpg 600w, ../assets/BeautyGate/web/page-details.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="3409" loading="lazy" alt="Beauty Gate salon details page, full length">
+        </div>
+        <span class="ui-thumb" aria-hidden="true"><i></i></span>
+      </div>
+      <div aria-hidden="true">
+        <div class="vw-mini">
+          <img class="is-on" src="../assets/BeautyGate/web/page-home-m.jpg" alt=""><img src="../assets/BeautyGate/web/page-details-m.jpg" alt="">
+          <span class="vw-mini-frame"></span>
+        </div>
+        <div class="vw-count" dir="ltr"><b>01</b><span>/ 02</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 BOOKING: pinned horizontal gallery -->
+  <section class="c-hscroll" style="background:#efe6dc; color:#2b2420">
+    <div class="h-inner">
+      <div class="container h-head">
+        <h2 class="ch-title" data-split data-i18n="h.title">Booking in three steps</h2>
+        <span class="h-count" dir="ltr">01 / 03</span>
+      </div>
+      <div class="h-track">
+        <div class="h-slide" data-color="#efe6dc" data-ink="#2b2420"><figure class="c-fig"><img src="../assets/BeautyGate/web/booking-1.jpg" srcset="../assets/BeautyGate/web/booking-1-m.jpg 1000w, ../assets/BeautyGate/web/booking-1.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1484" loading="lazy" alt="Booking step 1: choose services, with a running total"></figure><p data-i18n="s1">01 · Choose your services</p></div>
+        <div class="h-slide" data-color="#e3d3c3" data-ink="#2b2420"><figure class="c-fig"><img src="../assets/BeautyGate/web/booking-2.jpg" srcset="../assets/BeautyGate/web/booking-2-m.jpg 1000w, ../assets/BeautyGate/web/booking-2.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1484" loading="lazy" alt="Booking step 2: choose a professional"></figure><p data-i18n="s2">02 · Pick a professional</p></div>
+        <div class="h-slide" data-color="#9b7f68" data-ink="#ffffff"><figure class="c-fig"><img src="../assets/BeautyGate/web/booking-3.jpg" srcset="../assets/BeautyGate/web/booking-3-m.jpg 1000w, ../assets/BeautyGate/web/booking-3.jpg 1800w" sizes="(max-width: 767px) 88vw, 64vw" width="1800" height="1484" loading="lazy" alt="Booking step 3: select a date and time"></figure><p data-i18n="s3">03 · Select date &amp; time</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 BOOKING DETAILS + SIGN IN -->
+  <section class="c-section container" id="signin">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">03</span>
+      <h2 class="ch-title" data-split data-i18n="ch3.title">Nice to see you again</h2>
+      <p class="ch-text" data-fade data-i18n="ch3.text">Signing in is split in two: a calm photograph on one side, a short form on the other — with Google sign-in for customers and a separate path for business accounts.</p>
+      <span class="ch-line"></span>
+    </header>
+    <figure class="c-fig c-full" data-reveal data-cursor="view">
+      <img src="../assets/BeautyGate/web/signin.jpg" srcset="../assets/BeautyGate/web/signin-m.jpg 1000w, ../assets/BeautyGate/web/signin.jpg 2000w" sizes="88vw" width="2000" height="1250" loading="lazy" alt="Beauty Gate sign-in page with a photo of a woman working on a laptop">
+    </figure>
+    <div class="c-note">
+      <div data-fade><h3 data-i18n="n1.h">A summary that follows you</h3><p data-i18n="n1.p">Throughout booking, a card on the right keeps the salon, chosen services and total in view, so there are no surprises at the end.</p></div>
+      <div data-fade><h3 data-i18n="n2.h">Clear progress</h3><p data-i18n="n2.p">Breadcrumbs — services, professional, time, confirm — show exactly where you are and let you step back at any point.</p></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="home-kitchen.html" data-transition data-wipe="#e0ad16" data-wipe-label="Home Kitchen" style="--f-next:'Poppins', sans-serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-weight:600; font-size: clamp(44px, 8.5vw, 160px)">Home Kitchen</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/HomeKitchen/web/home.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'Beauty Gate — Website-UI/UX · Reem Deeb',
+      kicker: 'Website-UI/UX · Buchungsplattform',
+      'm.industry': 'Beauty, Spa &amp; Wellness', 'm.services': 'Web-UI/UX, Buchungsablauf', 'l.users': 'Nutzer', 'm.users': 'Kundinnen &amp; Salonbetreiber',
+      statement: 'Beauty &amp; Wellness, in wenigen ruhigen Schritten gebucht.',
+      lead: 'Beauty Gate bringt Beautysalons und Spas auf einer Website zusammen. Besucherinnen entdecken empfohlene und angesagte Orte, vergleichen Leistungen und Preise, lesen echte Bewertungen und lernen die Spezialistinnen kennen – und buchen dann eine Behandlung mit der passenden Fachkraft und Uhrzeit. Salonbetreiber erhalten ein eigenes Business-Konto, um ihre Räume und Leistungen zu präsentieren.',
+      li1: 'Startseite', li2: 'Salondetails', li3: 'Buchungsablauf', li4: 'Anmeldung',
+      st1: 'Buchungsschritte: Leistung, Fachkraft, Uhrzeit', st2: 'Behandlungskategorien, von Haar und Make-up bis Massage', st3: 'Kontoarten: Kundinnen und Unternehmen',
+      'ch1.eyebrow': '01 — Die Website', 'ch1.title': 'Durch die Seiten scrollen', t1: 'Startseite', t2: 'Salondetails',
+      'w1.h': 'Beauty &amp; Wellness, neu gedacht', 'w1.p': 'Eine weiche, redaktionelle Startseite: ein Hero mit Suche, empfohlene und angesagte Salons, Kundenstimmen und ein Banner für die App – alles in warmem Taupe und Creme.',
+      'w1.f1': 'Suchen &amp; entdecken', 'w1.f2': 'Angesagte Salons', 'w1.f3': 'Bewertungen',
+      'w2.h': 'Alles über einen Salon', 'w2.p': 'Fotos, Standort und Bewertung oben, darunter jede Leistung mit Preis und Dauer, die erfahrenen Spezialistinnen und die Bewertungen – mit einem klaren Button zum Buchen.',
+      'w2.f1': 'Leistungen &amp; Preise', 'w2.f2': 'Spezialistinnen', 'w2.f3': 'Jetzt buchen',
+      'h.title': 'Buchen in drei Schritten', s1: '01 · Leistungen wählen', s2: '02 · Fachkraft auswählen', s3: '03 · Datum &amp; Uhrzeit',
+      'ch3.title': 'Schön, dich wiederzusehen', 'ch3.text': 'Die Anmeldung ist zweigeteilt: auf der einen Seite ein ruhiges Foto, auf der anderen ein kurzes Formular – mit Google-Login für Kundinnen und einem eigenen Weg für Business-Konten.',
+      'n1.h': 'Eine Übersicht, die mitgeht', 'n1.p': 'Während der Buchung zeigt eine Karte rechts Salon, gewählte Leistungen und Gesamtpreis – so gibt es am Ende keine Überraschungen.',
+      'n2.h': 'Klarer Fortschritt', 'n2.p': 'Eine Brotkrumen-Navigation – Leistungen, Fachkraft, Uhrzeit, Bestätigung – zeigt genau, wo man steht, und erlaubt jederzeit einen Schritt zurück.'
+    },
+    ar: {
+      title: 'Beauty Gate — تصميم واجهات موقع · ريم ديب',
+      kicker: 'تصميم واجهات موقع · منصة حجز',
+      'm.industry': 'التجميل والسبا والعافية', 'm.services': 'تصميم واجهات الويب، مسار الحجز', 'l.users': 'المستخدمون', 'm.users': 'العملاء وأصحاب الصالونات',
+      statement: 'الجمال والعافية، بحجز من خطوات قليلة وهادئة.',
+      lead: 'يجمع Beauty Gate صالونات التجميل ومراكز السبا في موقع واحد. يكتشف الزوّار الأماكن الموصى بها والرائجة، ويقارنون الخدمات والأسعار، ويقرؤون تقييمات حقيقية ويتعرّفون إلى المختصّين — ثم يحجزون جلستهم مع المختصّ والموعد المناسبين. ولأصحاب الصالونات حساب أعمال خاص لعرض مساحاتهم وخدماتهم.',
+      li1: 'الصفحة الرئيسية', li2: 'تفاصيل الصالون', li3: 'مسار الحجز', li4: 'تسجيل الدخول',
+      st1: 'خطوات للحجز: الخدمة، المختصّ، الموعد', st2: 'فئات علاجية، من الشعر والمكياج إلى التدليك', st3: 'نوعان من الحسابات: للعملاء وللأعمال',
+      'ch1.eyebrow': '01 — الموقع الإلكتروني', 'ch1.title': 'تصفّح الصفحات', t1: 'الرئيسية', t2: 'تفاصيل الصالون',
+      'w1.h': 'الجمال والعافية بمفهوم جديد', 'w1.p': 'صفحة رئيسية ناعمة بطابع تحريري: واجهة يقودها البحث، وصالونات موصى بها ورائجة، وآراء العملاء، ولافتة لتحميل التطبيق — كلها بدرجات التوب والكريمي الدافئة.',
+      'w1.f1': 'ابحث واكتشف', 'w1.f2': 'الصالونات الرائجة', 'w1.f3': 'التقييمات',
+      'w2.h': 'كل شيء عن صالون واحد', 'w2.p': 'الصور والموقع والتقييم في الأعلى، ثم كل خدمة بسعرها ومدّتها، والمختصّون ذوو الخبرة، والتقييمات — مع زر واضح للحجز.',
+      'w2.f1': 'الخدمات والأسعار', 'w2.f2': 'المختصّون', 'w2.f3': 'احجز الآن',
+      'h.title': 'الحجز في ثلاث خطوات', s1: '01 · اختر خدماتك', s2: '02 · اختر المختصّ', s3: '03 · حدّد التاريخ والوقت',
+      'ch3.title': 'سعداء برؤيتك مجدداً', 'ch3.text': 'ينقسم تسجيل الدخول إلى قسمين: صورة هادئة في جهة ونموذج قصير في الأخرى — مع تسجيل الدخول عبر Google للعملاء ومسار منفصل لحسابات الأعمال.',
+      'n1.h': 'ملخّص يرافقك', 'n1.p': 'طوال الحجز تبقي بطاقة جانبية الصالون والخدمات المختارة والمجموع أمامك، فلا مفاجآت في النهاية.',
+      'n2.h': 'تقدّم واضح', 'n2.p': 'مسار التنقّل — الخدمات، المختصّ، الوقت، التأكيد — يوضّح أين أنت بالضبط ويتيح العودة خطوة في أي وقت.'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

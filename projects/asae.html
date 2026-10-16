@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASAE — Website UI/UX · Reem Deeb</title>
+<meta name="description" content="ASAE by Reem Deeb: website for the Association of Syrian Alawites in Europe, a humanitarian and social non-profit — home, story, membership, donation and contact pages.">
+<script>
+  (() => {
+    const h = document.documentElement;
+    let saved = null, switched = null;
+    try { saved = localStorage.getItem('lang'); switched = sessionStorage.getItem('caseY'); } catch (e) {}
+    const lang = ['en', 'de', 'ar'].includes(saved) ? saved : 'en';
+    h.lang = lang; h.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    h.classList.add('js');
+    if (switched !== null) h.classList.add('lang-switch');
+    else if (!matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('entering');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Andika:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;600&family=Michroma&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="ui.css">
+<style>
+  :root {
+    --bg: #f6f3ee; --fg: #23201f; --muted: #a2948c; --accent: #6e1a2c;
+    --f-brand: 'Playfair Display', 'IBM Plex Sans Arabic', serif;
+    --f-body: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+    --title-track: .02em; --ch-transform: none;
+  }
+  .c-title { font-weight: 600; }
+  .ch-title, .c-statement { font-weight: 600; }
+  .c-statement em { font-style: italic; color: var(--accent); }
+  .ch-num { -webkit-text-stroke-color: rgba(110, 26, 44, .4); }
+  /* The archive photo fades to white on the left: darken it so the title reads */
+  .c-hero-media::after { background: linear-gradient(0deg, rgba(40, 14, 20, .9) 0%, rgba(40, 14, 20, .5) 40%, rgba(40, 14, 20, .25) 70%, rgba(40, 14, 20, .45) 100%); }
+  .ux-points li b { display: block; margin-bottom: 10px; font: 600 clamp(20px, 1.7vw, 26px)/1.2 var(--f-brand); }
+  .ux-points li small { display: block; margin-bottom: 8px; font: 600 11px/1 var(--f-head); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .ux-points li:nth-child(2)::after { border-inline-start-color: #5f8f68; }
+  .asae-quote { margin: clamp(56px, 9vh, 110px) auto 0; max-width: 30ch; text-align: center; font: 500 italic clamp(28px, 3.2vw, 52px)/1.25 var(--f-brand); color: var(--accent); }
+  .asae-story { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); margin-top: clamp(40px, 6vh, 70px); }
+  .asae-story article { padding: clamp(22px, 2.4vw, 34px); border-top: 3px solid var(--accent); border-radius: 0 0 18px 18px; background: color-mix(in srgb, var(--page-fg) 5%, transparent); }
+  .asae-story small { font: 600 12px/1 var(--f-head); letter-spacing: .06em; color: var(--accent); }
+  .asae-story h3 { margin: 12px 0 10px; font: 600 20px/1.25 var(--f-brand); }
+  .asae-story p { margin: 0; font-size: 15px; line-height: 1.7; color: color-mix(in srgb, var(--page-fg) 76%, transparent); }
+  .asae-duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 36px); align-items: start; }
+  .asae-duo .browser-view img { width: 100%; height: auto; display: block; }
+  .asae-duo figcaption { margin-top: 14px; }
+  @media (max-width: 767px) { .asae-story, .asae-duo { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span data-i18n="ui.view">View</span></div>
+<div class="page-wipe" style="--wipe:#6e1a2c" aria-hidden="true"><span>ASAE</span></div>
+<div class="toast" role="status" aria-live="polite"></div>
+<button class="to-top" type="button" aria-label="Back to top" data-i18n-aria="ui.toTop">
+  <svg class="tt-ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="tt-bar" cx="28" cy="28" r="26"/></svg>
+  <span class="tt-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span>
+</button>
+
+<header class="case-nav">
+  <a class="pill back" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" data-magnetic>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+    <span data-i18n="ui.back">All work</span>
+  </a>
+  <a class="case-logo" href="../index.html" data-transition data-back data-tab="uiux" data-wipe="#0e0e0e" dir="ltr">REEM DEEB</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+    <button type="button" data-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="c-hero-media">
+      <img src="../assets/ASAE/web/hero.jpg" srcset="../assets/ASAE/web/hero-m.jpg 1000w, ../assets/ASAE/web/hero.jpg 2400w" sizes="100vw" width="2400" height="1370" fetchpriority="high" style="--hero-pos: 70% 40%" alt="Archive photograph of a rural community of women, men and children">
+    </div>
+    <div class="c-hero-ui">
+      <p class="c-kicker" data-i18n="kicker">Website UI/UX · Humanitarian non-profit</p>
+      <h1 class="c-title" dir="ltr" data-chars>ASAE</h1>
+      <dl class="c-meta">
+        <div><dt data-i18n="ui.client">Client</dt><dd data-i18n="m.client">Association of Syrian Alawites in Europe</dd></div>
+        <div><dt data-i18n="ui.industry">Industry</dt><dd data-i18n="m.industry">Humanitarian &amp; social non-profit</dd></div>
+        <div><dt data-i18n="ui.services">Services</dt><dd data-i18n="m.services">Website UI/UX, content structure</dd></div>
+        <div><dt data-i18n="l.pages">Pages</dt><dd data-i18n="m.pages">Home, story, membership, donation, contact</dd></div>
+      </dl>
+    </div>
+    <div class="c-scroll" aria-hidden="true"><i></i><span data-i18n="ui.scroll">Scroll</span></div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="c-section container">
+    <p class="eyebrow" data-i18n="ui.overview">Overview</p>
+    <p class="c-statement" data-fill data-i18n="statement">A present community — and now, a voice to represent it.</p>
+    <div class="c-intro-grid">
+      <p class="c-lead" data-fade data-i18n="lead">ASAE unites the talents and resources of the Syrian Alawite community within one organised body. It works to foster integration into European society, to showcase the community’s intellectual, scientific and economic contribution, to champion women’s leadership and to protect and empower children. The website had to carry that mission with dignity: warm archival photography, a deep burgundy and a classic serif that let people and their stories speak first.</p>
+      <ul class="c-list" data-fade>
+        <li><span data-i18n="li1">Mission, vision &amp; values</span><span>01</span></li>
+        <li><span data-i18n="li2">Our story</span><span>02</span></li>
+        <li><span data-i18n="li3">The website</span><span>03</span></li>
+        <li><span data-i18n="li4">Donation &amp; contact</span><span>04</span></li>
+      </ul>
+    </div>
+    <div class="ui-stats" style="--n:4">
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="150" data-suffix="+">0</b><span data-i18n="st1">people reached</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="9">0</b><span data-i18n="st2">active circles</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="333">0</b><span data-i18n="st3">children supported</span></div>
+      <div class="ui-stat" data-fade><b dir="ltr" data-count="40000">0</b><span data-i18n="st4">in funds distributed</span></div>
+    </div>
+  </section>
+
+  <!-- 01 MISSION, VISION, VALUES -->
+  <section class="c-section container" id="foundation">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">01</span>
+      <h2 class="ch-title" data-split data-i18n="ch1.title">Mission, vision &amp; values</h2>
+      <p class="ch-text" data-fade data-i18n="ch1.text">The home page introduces the association through three promises, each marked by a coloured rule and a simple line icon.</p>
+      <span class="ch-line"></span>
+    </header>
+    <ul class="ux-points">
+      <li><small data-i18n="v1.k">Our mission</small><b data-i18n="v1.h">Bridging communities</b><span data-i18n="v1.p">A future where the Alawite community is a vibrant, integrated part of European society — bridging a rich cultural heritage and a modern future in which young people lead with confidence.</span></li>
+      <li><small data-i18n="v2.k">Our vision</small><b data-i18n="v2.h">Empowering lives</b><span data-i18n="v2.p">Supporting those in need through solidarity, humanitarian aid and shared knowledge, so every individual has the resources and support to build a dignified life.</span></li>
+      <li><small data-i18n="v3.k">Our values</small><b data-i18n="v3.h">Integrity &amp; unity</b><span data-i18n="v3.p">Solidarity with those in hardship and full integrity in every humanitarian effort — celebrating cultural identity while building belonging in Europe.</span></li>
+    </ul>
+  </section>
+
+  <!-- 02 STORY -->
+  <section class="c-section container" id="story" data-theme-bg="#2a1a1e" data-theme-fg="#f4ece6">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">02</span>
+      <h2 class="ch-title" data-split data-i18n="ch2.title">Our story</h2>
+      <p class="ch-text" data-fade data-i18n="ch2.text">The About page tells how ASAE was born — from a gap between a deep cultural belonging and an absence of representation, told as a short timeline.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="asae-story">
+      <article data-fade><small data-i18n="s1.k">February 6, 2023</small><h3 data-i18n="s1.h">The earthquake that changed everything</h3><p data-i18n="s1.p">The earthquake revealed not only the scale of destruction but a deeper reality: in many affected areas, people were left without an adequate response.</p></article>
+      <article data-fade><small data-i18n="s2.k">The spontaneous movement</small><h3 data-i18n="s2.h">From pain to purpose</h3><p data-i18n="s2.p">Individuals, brought together by pain and responsibility, collected donations and delivered them through a safe, trusted network.</p></article>
+      <article data-fade><small data-i18n="s3.k">A new awareness</small><h3 data-i18n="s3.h">The beginning of an institution</h3><p data-i18n="s3.p">Individual efforts, however sincere, stay limited without an organised framework — and so the association took shape.</p></article>
+    </div>
+    <p class="asae-quote" data-fade data-i18n="quote">“Not to redefine identity, but to present it as it truly is.”</p>
+  </section>
+
+  <!-- 03 THE WEBSITE: three pages scrolling in a browser -->
+  <section class="ui-viewer" data-viewer>
+    <div class="container vw-wrap">
+      <div class="vw-side">
+        <p class="eyebrow" data-i18n="ch3.eyebrow">03 — The website</p>
+        <h2 class="ch-title" data-split data-i18n="ch3.title">Scroll through the pages</h2>
+        <div class="vw-tabs" role="tablist" aria-label="Pages">
+          <button class="vw-tab" type="button" role="tab" aria-selected="true" data-url="asae-europe.org"><small>01</small> <span data-i18n="t1">Home</span></button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="asae-europe.org/about"><small>02</small> <span data-i18n="t2">Our story</span></button>
+          <button class="vw-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-url="asae-europe.org/membership"><small>03</small> <span data-i18n="t3">Membership</span></button>
+        </div>
+        <div class="vw-info">
+          <div class="vw-page-info is-on">
+            <h3 data-i18n="w1.h">A dignified welcome</h3>
+            <p data-i18n="w1.p">An archive photograph fades into the page beside the association’s name. Below: who we are, the mission, vision and values, the services, and the impact in numbers.</p>
+            <ul class="vw-facts"><li data-i18n="w1.f1">Who we are</li><li data-i18n="w1.f2">Services</li><li data-i18n="w1.f3">Impact</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 data-i18n="w2.h">An identity in a distorted mirror</h3>
+            <p data-i18n="w2.p">A long-form story page: an editorial introduction and pull quote on one side, the milestones of the association on cards beside it.</p>
+            <ul class="vw-facts"><li data-i18n="w2.f1">Editorial layout</li><li data-i18n="w2.f2">Timeline cards</li><li data-i18n="w2.f3">Pull quote</li></ul>
+          </div>
+          <div class="vw-page-info">
+            <h3 data-i18n="w3.h">Join the association</h3>
+            <p data-i18n="w3.p">A friendly illustration, the membership form and payment options in one short page — with direct bank details and PayPal for those who want to give.</p>
+            <ul class="vw-facts"><li data-i18n="w3.f1">Membership form</li><li data-i18n="w3.f2">Bank transfer</li><li data-i18n="w3.f3">PayPal</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="browser vw-browser" data-cursor="view">
+        <div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">asae-europe.org</span></div>
+        <div class="browser-view vw-view">
+          <img class="vw-shot is-on" src="../assets/ASAE/web/page-home.jpg" srcset="../assets/ASAE/web/page-home-m.jpg 600w, ../assets/ASAE/web/page-home.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="2917" alt="ASAE home page, full length">
+          <img class="vw-shot" src="../assets/ASAE/web/page-about.jpg" srcset="../assets/ASAE/web/page-about-m.jpg 600w, ../assets/ASAE/web/page-about.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="2821" loading="lazy" alt="ASAE about page, full length">
+          <img class="vw-shot" src="../assets/ASAE/web/page-member.jpg" srcset="../assets/ASAE/web/page-member-m.jpg 600w, ../assets/ASAE/web/page-member.jpg 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="1510" loading="lazy" alt="ASAE membership page, full length">
+        </div>
+        <span class="ui-thumb" aria-hidden="true"><i></i></span>
+      </div>
+      <div aria-hidden="true">
+        <div class="vw-mini">
+          <img class="is-on" src="../assets/ASAE/web/page-home-m.jpg" alt=""><img src="../assets/ASAE/web/page-about-m.jpg" alt=""><img src="../assets/ASAE/web/page-member-m.jpg" alt="">
+          <span class="vw-mini-frame"></span>
+        </div>
+        <div class="vw-count" dir="ltr"><b>01</b><span>/ 03</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 DONATION & CONTACT -->
+  <section class="c-section container" id="donate">
+    <header class="ch-head">
+      <span class="ch-num" aria-hidden="true">04</span>
+      <h2 class="ch-title" data-split data-i18n="ch4.title">Giving &amp; getting in touch</h2>
+      <p class="ch-text" data-fade data-i18n="ch4.text">Donating is never more than one click away: the burgundy Donate button sits in every header and leads to a calm page with bank details and PayPal. Contact options are just as clear — call, email or visit.</p>
+      <span class="ch-line"></span>
+    </header>
+    <div class="asae-duo">
+      <figure class="ui-raw" data-reveal data-speed="3">
+        <div class="browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">asae-europe.org/donation</span></div>
+          <div class="browser-view"><img src="../assets/ASAE/web/donation.jpg" srcset="../assets/ASAE/web/donation-m.jpg 1000w, ../assets/ASAE/web/donation.jpg 1800w" sizes="(max-width: 767px) 92vw, 43vw" width="1800" height="1300" loading="lazy" alt="ASAE donation page with bank transfer details and PayPal"></div></div>
+        <figcaption class="eyebrow" data-i18n="cap.donate">Donation</figcaption>
+      </figure>
+      <figure class="ui-raw" data-reveal data-speed="-3">
+        <div class="browser"><div class="browser-bar" dir="ltr"><i></i><i></i><i></i><span class="browser-url">asae-europe.org/contact</span></div>
+          <div class="browser-view"><img src="../assets/ASAE/web/contact.jpg" srcset="../assets/ASAE/web/contact-m.jpg 1000w, ../assets/ASAE/web/contact.jpg 1800w" sizes="(max-width: 767px) 92vw, 43vw" width="1800" height="1402" loading="lazy" alt="ASAE contact page with phone, email and location cards"></div></div>
+        <figcaption class="eyebrow" data-i18n="cap.contact">Contact</figcaption>
+      </figure>
+    </div>
+    <div class="c-palette" role="list" aria-label="Colour palette" style="height: clamp(220px, 34vh, 340px); margin-top: clamp(40px, 7vh, 80px)">
+      <button class="swatch" role="listitem" type="button" data-hex="#6E1A2C" style="--c:#6e1a2c"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c1">Burgundy</b><small dir="ltr">#6E1A2C</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#5F8F68" style="--c:#5f8f68"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c2">Olive</b><small dir="ltr">#5F8F68</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#F3EFE7" style="--c:#f3efe7; --t:#23201f; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08)"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c3">Parchment</b><small dir="ltr">#F3EFE7</small></button>
+      <button class="swatch" role="listitem" type="button" data-hex="#23201F" style="--c:#23201f"><span class="copy" data-i18n="ui.copy">Click to copy</span><b data-i18n="c4">Ink</b><small dir="ltr">#23201F</small></button>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="c-next container">
+    <p class="eyebrow" data-i18n="ui.next">Next project</p>
+    <a href="internet.html" data-transition data-wipe="#6c6cf2" data-wipe-label="INTERNET.com" style="--f-next:'Alfa Slab One', serif">
+      <span class="next-title" dir="ltr" style="text-transform:none; font-size: clamp(44px, 8.5vw, 160px)">INTERNET.com</span>
+    </a>
+    <div class="next-preview" aria-hidden="true"><img src="../assets/Internet/web/1-m.jpg" alt=""></div>
+  </section>
+</main>
+
+<footer class="c-foot">
+  <span dir="ltr">&copy; 2026 Reem Deeb</span>
+  <a href="mailto:reem.deeb.96@outlook.com" data-i18n="ui.contact">Have a project in mind? Get in touch</a>
+  <a href="#top" onclick="event.preventDefault(); scrollTo({top:0,behavior:'smooth'})" data-i18n="ui.top">Back to top &uarr;</a>
+</footer>
+
+<script>
+  window.CASE_I18N = {
+    de: {
+      title: 'ASAE — Website-UI/UX · Reem Deeb',
+      kicker: 'Website-UI/UX · Humanitäre Non-Profit-Organisation',
+      'm.client': 'Vereinigung syrischer Alawiten in Europa', 'm.industry': 'Humanitäre &amp; soziale Non-Profit-Organisation', 'm.services': 'Website-UI/UX, Inhaltsstruktur', 'l.pages': 'Seiten', 'm.pages': 'Start, Geschichte, Mitgliedschaft, Spenden, Kontakt',
+      statement: 'Eine präsente Gemeinschaft – und jetzt eine Stimme, die sie vertritt.',
+      lead: 'ASAE bündelt die Talente und Ressourcen der syrisch-alawitischen Gemeinschaft in einer organisierten Vereinigung. Sie fördert die Integration in die europäische Gesellschaft, macht den intellektuellen, wissenschaftlichen und wirtschaftlichen Beitrag der Gemeinschaft sichtbar, stärkt Frauen in Führungsrollen und schützt und fördert Kinder. Die Website sollte diese Mission mit Würde tragen: warme Archivfotografie, ein tiefes Burgunderrot und eine klassische Serifenschrift, die Menschen und ihre Geschichten zuerst sprechen lassen.',
+      li1: 'Mission, Vision &amp; Werte', li2: 'Unsere Geschichte', li3: 'Die Website', li4: 'Spenden &amp; Kontakt',
+      st1: 'erreichte Menschen', st2: 'aktive Kreise', st3: 'unterstützte Kinder', st4: 'verteilte Mittel',
+      'ch1.title': 'Mission, Vision &amp; Werte', 'ch1.text': 'Die Startseite stellt die Vereinigung über drei Versprechen vor, jeweils mit einer farbigen Linie und einem schlichten Linien-Icon.',
+      'v1.k': 'Unsere Mission', 'v1.h': 'Gemeinschaften verbinden', 'v1.p': 'Eine Zukunft, in der die alawitische Gemeinschaft ein lebendiger, integrierter Teil der europäischen Gesellschaft ist – als Brücke zwischen reichem kulturellem Erbe und einer modernen Zukunft, in der junge Menschen selbstbewusst vorangehen.',
+      'v2.k': 'Unsere Vision', 'v2.h': 'Leben stärken', 'v2.p': 'Bedürftige durch Solidarität, humanitäre Hilfe und geteiltes Wissen unterstützen, damit jeder Mensch die Mittel und den Rückhalt für ein würdevolles Leben hat.',
+      'v3.k': 'Unsere Werte', 'v3.h': 'Integrität &amp; Einheit', 'v3.p': 'Solidarität mit Menschen in Not und volle Integrität in jedem humanitären Einsatz – die eigene Kultur feiern und zugleich Zugehörigkeit in Europa schaffen.',
+      'ch2.title': 'Unsere Geschichte', 'ch2.text': 'Die Über-uns-Seite erzählt, wie ASAE entstand – aus einer Lücke zwischen tiefer kultureller Zugehörigkeit und fehlender Vertretung, erzählt als kurze Zeitleiste.',
+      's1.k': '6. Februar 2023', 's1.h': 'Das Erdbeben, das alles veränderte', 's1.p': 'Das Erdbeben zeigte nicht nur das Ausmaß der Zerstörung, sondern eine tiefere Realität: In vielen betroffenen Gebieten blieben Menschen ohne angemessene Hilfe.',
+      's2.k': 'Die spontane Bewegung', 's2.h': 'Vom Schmerz zum Ziel', 's2.p': 'Menschen, verbunden durch Schmerz und Verantwortung, sammelten Spenden und brachten sie über ein sicheres, vertrauenswürdiges Netzwerk ans Ziel.',
+      's3.k': 'Ein neues Bewusstsein', 's3.h': 'Der Beginn einer Institution', 's3.p': 'Einzelne Bemühungen, so aufrichtig sie sind, bleiben ohne organisierten Rahmen begrenzt – und so nahm die Vereinigung Gestalt an.',
+      quote: '„Nicht um Identität neu zu definieren, sondern um sie so zu zeigen, wie sie wirklich ist.“',
+      'ch3.eyebrow': '03 — Die Website', 'ch3.title': 'Durch die Seiten scrollen', t1: 'Start', t2: 'Unsere Geschichte', t3: 'Mitgliedschaft',
+      'w1.h': 'Ein würdevoller Empfang', 'w1.p': 'Ein Archivfoto verblasst neben dem Namen der Vereinigung in die Seite. Darunter: wer wir sind, Mission, Vision und Werte, die Angebote und die Wirkung in Zahlen.',
+      'w1.f1': 'Wer wir sind', 'w1.f2': 'Angebote', 'w1.f3': 'Wirkung',
+      'w2.h': 'Eine Identität im verzerrten Spiegel', 'w2.p': 'Eine erzählende Seite: eine redaktionelle Einleitung mit Zitat auf der einen Seite, die Meilensteine der Vereinigung als Karten daneben.',
+      'w2.f1': 'Redaktionelles Layout', 'w2.f2': 'Zeitleisten-Karten', 'w2.f3': 'Zitat',
+      'w3.h': 'Der Vereinigung beitreten', 'w3.p': 'Eine freundliche Illustration, das Mitgliedsformular und Zahlungsoptionen auf einer kurzen Seite – mit Bankdaten und PayPal für alle, die spenden möchten.',
+      'w3.f1': 'Mitgliedsformular', 'w3.f2': 'Überweisung', 'w3.f3': 'PayPal',
+      'ch4.title': 'Spenden &amp; Kontakt', 'ch4.text': 'Spenden ist nie mehr als einen Klick entfernt: Der burgunderrote Spenden-Button steht in jedem Header und führt zu einer ruhigen Seite mit Bankdaten und PayPal. Auch der Kontakt ist klar: anrufen, schreiben oder vorbeikommen.',
+      'cap.donate': 'Spenden', 'cap.contact': 'Kontakt', c1: 'Burgunder', c2: 'Oliv', c3: 'Pergament', c4: 'Tinte'
+    },
+    ar: {
+      title: 'ASAE — تصميم واجهات موقع · ريم ديب',
+      kicker: 'تصميم واجهات موقع · منظمة إنسانية غير ربحية',
+      'm.client': 'جمعية العلويين السوريين في أوروبا', 'm.industry': 'منظمة إنسانية واجتماعية غير ربحية', 'm.services': 'تصميم واجهات الموقع، هيكلة المحتوى', 'l.pages': 'الصفحات', 'm.pages': 'الرئيسية، قصتنا، العضوية، التبرع، التواصل',
+      statement: 'مجتمع حاضر — وأخيراً، صوت يمثّله.',
+      lead: 'تجمع ASAE مواهب المجتمع العلوي السوري وموارده ضمن إطار منظّم واحد، وتعمل على تعزيز الاندماج في المجتمع الأوروبي، وإبراز الإسهام الفكري والعلمي والاقتصادي للمجتمع، ودعم قيادة المرأة، وحماية الأطفال وتمكينهم. وكان على الموقع أن يحمل هذه الرسالة بوقار: صور أرشيفية دافئة، ولون عنابي عميق، وخط كلاسيكي بتذييل يترك للناس وقصصهم أن تتحدث أولاً.',
+      li1: 'الرسالة والرؤية والقيم', li2: 'قصتنا', li3: 'الموقع الإلكتروني', li4: 'التبرع والتواصل',
+      st1: 'شخص وصلنا إليه', st2: 'حلقات نشطة', st3: 'طفلاً تلقّى الدعم', st4: 'من الأموال الموزّعة',
+      'ch1.title': 'الرسالة والرؤية والقيم', 'ch1.text': 'تقدّم الصفحة الرئيسية الجمعية من خلال ثلاثة وعود، لكل منها خط ملوّن وأيقونة خطية بسيطة.',
+      'v1.k': 'رسالتنا', 'v1.h': 'بناء الجسور بين المجتمعات', 'v1.p': 'مستقبل يكون فيه المجتمع العلوي جزءاً حيوياً ومندمجاً من المجتمع الأوروبي — جسراً بين إرث ثقافي غني ومستقبل حديث يقوده الشباب بثقة.',
+      'v2.k': 'رؤيتنا', 'v2.h': 'تمكين الحياة', 'v2.p': 'دعم المحتاجين من خلال التضامن والمساعدات الإنسانية والمعرفة المشتركة، ليملك كل فرد الموارد والسند لبناء حياة كريمة.',
+      'v3.k': 'قيمنا', 'v3.h': 'النزاهة والوحدة', 'v3.p': 'التضامن مع من يمرّون بالشدائد والنزاهة التامة في كل عمل إنساني — مع الاحتفاء بالهوية الثقافية وبناء الانتماء في أوروبا.',
+      'ch2.title': 'قصتنا', 'ch2.text': 'تروي صفحة «من نحن» كيف وُلدت ASAE — من فجوة بين انتماء ثقافي عميق وغياب التمثيل، في خط زمني قصير.',
+      's1.k': '6 شباط 2023', 's1.h': 'الزلزال الذي غيّر كل شيء', 's1.p': 'لم يكشف الزلزال حجم الدمار فحسب، بل واقعاً أعمق: في مناطق متضرّرة كثيرة بقي الناس دون استجابة كافية.',
+      's2.k': 'الحراك العفوي', 's2.h': 'من الألم إلى الهدف', 's2.p': 'أفراد جمعهم الألم والمسؤولية، جمعوا التبرعات وأوصلوها عبر شبكة آمنة وموثوقة.',
+      's3.k': 'وعي جديد', 's3.h': 'بداية مؤسسة', 's3.p': 'الجهود الفردية، مهما كانت صادقة، تبقى محدودة دون إطار منظّم — ومن هنا تشكّلت الجمعية.',
+      quote: '«ليس لإعادة تعريف الهوية، بل لتقديمها كما هي حقاً.»',
+      'ch3.eyebrow': '03 — الموقع الإلكتروني', 'ch3.title': 'تصفّح الصفحات', t1: 'الرئيسية', t2: 'قصتنا', t3: 'العضوية',
+      'w1.h': 'ترحيب وقور', 'w1.p': 'صورة أرشيفية تتلاشى في الصفحة إلى جانب اسم الجمعية. وتحتها: من نحن، والرسالة والرؤية والقيم، والخدمات، والأثر بالأرقام.',
+      'w1.f1': 'من نحن', 'w1.f2': 'الخدمات', 'w1.f3': 'الأثر',
+      'w2.h': 'هوية في مرآة مشوّهة', 'w2.p': 'صفحة سردية: مقدمة تحريرية مع اقتباس بارز في جهة، ومحطات الجمعية على بطاقات بجانبها.',
+      'w2.f1': 'تصميم تحريري', 'w2.f2': 'بطاقات الخط الزمني', 'w2.f3': 'اقتباس بارز',
+      'w3.h': 'انضم إلى الجمعية', 'w3.p': 'رسم توضيحي ودود، ونموذج العضوية، وخيارات الدفع في صفحة قصيرة — مع بيانات الحساب المصرفي وPayPal لمن يرغب في التبرع.',
+      'w3.f1': 'نموذج العضوية', 'w3.f2': 'تحويل مصرفي', 'w3.f3': 'PayPal',
+      'ch4.title': 'التبرع والتواصل', 'ch4.text': 'التبرع لا يبعد أكثر من نقرة: زر «تبرّع» العنابي حاضر في كل ترويسة ويقود إلى صفحة هادئة ببيانات الحساب وPayPal. وخيارات التواصل واضحة بالقدر نفسه — اتصال أو بريد أو زيارة.',
+      'cap.donate': 'التبرع', 'cap.contact': 'التواصل', c1: 'عنابي', c2: 'زيتوني', c3: 'ورقي', c4: 'حبري'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="case.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>
